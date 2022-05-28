@@ -1,0 +1,87 @@
+.pretty_container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 5px;
+    padding: 5px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+#close_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+
+#returns_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+#classification_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+#boundaries_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+#prcurve_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+#roccurve_chart {
+    border-radius: 8px;
+    flex: 5;
+    position: relative;
+}
+
+.mini_container {
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 10px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+
+.info_container {
+    background-color: #f9f9f9;
+    margin: 5px;
+    padding: 5px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.custom-tabs {
+    border-top-left-radius: 3px;
+    background-color: #f9f9f9;
+    padding: 0px 24px;
+    border-bottom: 1px solid #d6d6d6;
+    width: 50%;
+}
+
+#R2 {
+    flex: 1;
+}
+
+#RMSE {
+    flex: 1;
+}
+
+#MPD {
+    flex: 1;
+}
+
+#MGD {
+    flex: 1;
+}

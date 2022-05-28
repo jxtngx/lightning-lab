@@ -1,0 +1,41 @@
+# BASE [DO NOT DELETE]
+pytorch-lightning
+lightning-grid
+# FUNDAMENTAL ML
+scikit-learn
+# TEXT
+lightning-transformers
+torchtext
+# VISION
+torchvision
+# AUDIO
+torchaudio
+# LIGHTNING ECOSYSTEM
+lightning-bolts
+lightning-flash
+# VS CODE TENSORBOARD SUPPORT
+torch-tb-profiler
+# PLOTTING AND SYMBOLIC MATH
+plotly
+matplotlib
+sympy
+# FORMMATING, LINTING, TESTING, STATIC TYPE CHECKING, COVERAGE
+black
+flake8
+pytest
+mypy
+coverage
+# TQDM SUPPORT IN NOTEBOOKS
+ipywidgets
+# PLOTLY DASH APPS
+dash
+dash-bootstrap-components
+gunicorn
+# DOC TOOLS, MARKDOWN SUPPORT, THEMES
+sphinx
+myst-parser
+sphinx_rtd_theme
+pydata-sphinx-theme
+pt-lightning-sphinx-theme @ https://github.com/PyTorchLightning/lightning_sphinx_theme/archive/master.zip
+# PIN PROTOBUF TO 3.20 TO AVOID 4.12 ERRORS IN CI/CD
+protobuf==3.20.1

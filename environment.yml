@@ -1,0 +1,36 @@
+name: lightning-pod
+channels:
+  - defaults
+dependencies:
+  - python=3.9.12
+  - pip
+  - sentencepiece
+  - tokenizers
+  - pip:
+      - black
+      - coverage
+      - flake8
+      - ipywidgets
+      - lightning-bolts
+      - lightning-flash
+      - lightning-grid
+      - lightning-transformers
+      - matplotlib
+      - mypy
+      - plotly
+      - pytest
+      - pytorch-lightning
+      - scikit-learn
+      - torchaudio
+      - torchtext
+      - torchvision
+      - torch-tb-profiler
+      - dash
+      - dash-bootstrap-components
+      - gunicorn
+      - sphinx
+      - myst-parser
+      - sphinx_rtd_theme
+      - pydata-sphinx-theme
+      - pt-lightning-sphinx-theme @ https://github.com/PyTorchLightning/lightning_sphinx_theme/archive/master.zip
+      - protobuf==3.20.1

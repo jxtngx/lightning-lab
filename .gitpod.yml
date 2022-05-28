@@ -1,0 +1,11 @@
+tasks:
+  - name: install dependencies
+    init: |
+      pip3 install -r requirements.txt
+      pip3 install -e .
+    command: python3 lightning_pod/pipeline/dataloader.py
+
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-toolsai.jupyter
