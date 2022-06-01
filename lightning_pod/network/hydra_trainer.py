@@ -13,7 +13,7 @@ PODPATH = NETWORKPATH.parents[0]
 PROJECTPATH = NETWORKPATH.parents[1]
 
 
-@hydra.main(config_path=NETWORKPATH, config_name="hydra_config.yaml")
+@hydra.main(config_name="hydra_config")
 def main(cfg):
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
