@@ -7,8 +7,8 @@ A template environment and system architecture for [Lightning](https://www.pytor
 ![](https://img.shields.io/badge/PyTorch_Lightning-Ecosystem-informational?style=flat&logo=pytorchlightning&logoColor=white&color=2bbc8a)
 ![](https://img.shields.io/badge/Grid.ai-Cloud_Compute-informational?style=flat&logo=grid.ai&logoColor=white&color=2bbc8a)
 
-[![codecov](https://codecov.io/gh/JustinGoheen/lightning-app/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-app)
-![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-app.svg?style=shield)
+<!-- [![codecov](https://codecov.io/gh/JustinGoheen/lightning-app/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-app)
+![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-app.svg?style=shield) -->
 
 Refer to the [wiki](https://github.com/JustinGoheen/lightning-app/wiki) for additional information and guides.
 
