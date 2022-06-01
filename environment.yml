@@ -1,8 +1,8 @@
-name: lightning-pod
+name: lightning-apps
 channels:
   - defaults
 dependencies:
-  - python=3.9.12
+  - python=3.8
   - pip
   - sentencepiece
   - tokenizers
