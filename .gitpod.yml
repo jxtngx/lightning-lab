@@ -3,7 +3,7 @@ tasks:
     init: |
       pip3 install -r requirements.txt
       pip3 install -e .
-    command: python3 lightning_pod/pipeline/dataloader.py
+      bash install_beta.sh
 
 vscode:
   extensions:

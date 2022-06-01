@@ -31,16 +31,16 @@
     },
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
-		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"ms-toolsai.jupyter",
-		"redhat.vscode-yaml",
-		"bierner.github-markdown-preview",
-		"eamodio.gitlens",
-		"GitHub.vscode-pull-request-github",
-		"ms-azuretools.vscode-docker",
-		"ms-vscode.makefile-tools"
-	],
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "redhat.vscode-yaml",
+        "bierner.github-markdown-preview",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.makefile-tools"
+    ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
@@ -51,5 +51,8 @@
         "git": "latest",
         "git-lfs": "latest"
     },
-    "postCreateCommand": "pip3 install -e ."
+    "postCreateCommand": [
+        "pip3 install -e .",
+        "bash install_beta.sh"
+    ]
 }
