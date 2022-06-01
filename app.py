@@ -10,7 +10,7 @@ from dash_app import NAVBAR, BODY
 DATAPATH = os.path.join("data", "cache")
 
 
-class LitDash(L.LightningWork):
+class DashWorker(L.LightningWork):
     def run(self):
         app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
         # server = app.server
@@ -24,10 +24,10 @@ class LitDash(L.LightningWork):
         app.run_server(host=self.host, port=self.port)
 
 
-class LitApp(L.LightningFlow):
+class DashFlow(L.LightningFlow):
     def __init__(self):
         super().__init__()
-        self.lit_dash = LitDash(parallel=True)
+        self.lit_dash = DashWorker(parallel=True)
 
     def run(self):
         self.lit_dash.run()
@@ -37,4 +37,4 @@ class LitApp(L.LightningFlow):
         return tab1
 
 
-app = L.LightningApp(LitApp())
+app = L.LightningApp(DashFlow())
