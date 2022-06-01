@@ -3,7 +3,6 @@ tasks:
     init: |
       pip3 install -r requirements.txt
       pip3 install -e .
-      bash install_beta.sh
 
 vscode:
   extensions:

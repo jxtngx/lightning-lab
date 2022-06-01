@@ -51,8 +51,5 @@
         "git": "latest",
         "git-lfs": "latest"
     },
-    "postCreateCommand": [
-        "pip3 install -e .",
-        "bash install_beta.sh"
-    ]
+    "postCreateCommand": "pip3 install -e ."
 }
