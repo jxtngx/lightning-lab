@@ -116,6 +116,9 @@ class LitModel(pl.LightningModule):
         loss = F.mse_loss(x_hat, x)
         self.log(f"{prefix}_loss", loss)
 
+    def predict_step(self, batch, batch_idx, dataloader_idx=0):
+        return self(batch)
+
     def configure_optimizers(self):
         optimizer = optim.Adam(self.parameters(), lr=1e-3)
         return optimizer
