@@ -40,8 +40,8 @@ if __name__ == "__main__":
     # SET TRAINER
     # https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html
     trainer = Trainer(
-        max_epochs=5,
-        limit_train_batches=0.10,  # use only x% of training samples
+        max_epochs=10,
+        limit_train_batches=1.0,  # use only x% of training samples; 1.0  is 100% of batch
         accelerator="auto",
         devices="auto",
         deterministic=True,  # for reproducibility
