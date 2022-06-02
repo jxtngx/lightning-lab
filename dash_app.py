@@ -40,25 +40,9 @@ def rightside_figure(prediction_image):
 
 
 #### DATA ####
-datamodule = LitDataModule()
-datamodule.prepare_data()
-datamodule.setup()
-val_dataloader = datamodule.val_dataloader()
-
-#### MODEL ####
-checkpoint = "models/checkpoints/model.ckpt"
-model = LitModel.load_from_checkpoint(checkpoint_path=checkpoint)
-model.eval()
-
-#### TRAINER ####
-trainer = Trainer(enable_progress_bar=False)
-
-#### PREDICTIONS ####
-# predictions = trainer.predict(model, datamodule.val_dataloader())
-sample_idx = 0
-ground_truth = val_dataloader.dataset[sample_idx][0]
-with torch.no_grad():
-    prediction = model(ground_truth)
+predictions = torch.load("data/predictions/predictions.pt")
+ground_truths = torch.load("data/training_split/val.pt")
+sample_idx = 10
 
 
 #### APP LAYOUT ####
@@ -109,7 +93,7 @@ SIDEBAR = dbc.Col(
 
 GROUNDTRUTH = dcc.Graph(
     id="leftside_figure",
-    figure=leftside_figure(ground_truth),
+    figure=leftside_figure(ground_truths[sample_idx][0]),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
@@ -119,7 +103,7 @@ GROUNDTRUTH = dcc.Graph(
 
 PREDICTIONS = dcc.Graph(
     id="rightside_figure",
-    figure=rightside_figure(prediction),
+    figure=rightside_figure(predictions[sample_idx][0]),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
