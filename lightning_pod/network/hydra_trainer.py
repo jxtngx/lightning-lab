@@ -1,6 +1,8 @@
 import os
+import torch
 import hydra
 from pathlib import Path
+from torch.utils.data import TensorDataset
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
@@ -99,6 +101,14 @@ def main(cfg):
     modelpath = os.path.join(pretrained_dir, "model.onnx")
     input_sample = datamodule.train_data.dataset[0][0]
     model.to_onnx(modelpath, input_sample=input_sample, export_params=True)
+    # PREDICT
+    predictions = trainer.predict(model, datamodule.val_dataloader())
+    # EXPORT PREDICTIONS
+    predictions = torch.vstack(predictions)
+    predictions = TensorDataset(predictions)
+    predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
+    prediction_fname = os.path.join(predictions_dir, "predictions.pt")
+    torch.save(predictions, prediction_fname)
 
 
 if __name__ == "__main__":
