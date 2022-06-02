@@ -42,8 +42,8 @@ if __name__ == "__main__":
     # SET TRAINER
     # https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html
     trainer = Trainer(
-        max_epochs=10,
-        min_epochs=5,
+        max_epochs=100,
+        min_epochs=20,
         limit_train_batches=1.0,  # use only x% of training samples; 1.0  is 100% of batch
         accelerator="auto",
         devices="auto",
@@ -113,3 +113,11 @@ if __name__ == "__main__":
     predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
     prediction_fname = os.path.join(predictions_dir, "predictions.pt")
     torch.save(predictions, prediction_fname)
+    # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
+    split_dir = os.path.join(PROJECTPATH, "data", "training_split")
+    train_split_fname = os.path.join(split_dir, "train.pt")
+    test_split_fname = os.path.join(split_dir, "test.pt")
+    val_split_fname = os.path.join(split_dir, "val.pt")
+    torch.save(datamodule.train_data, train_split_fname)
+    torch.save(datamodule.test_data, test_split_fname)
+    torch.save(datamodule.val_data, val_split_fname)
