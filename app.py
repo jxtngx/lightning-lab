@@ -7,9 +7,6 @@ from dash import html
 from dash_app import NAVBAR, BODY
 
 
-DATAPATH = os.path.join("data", "cache")
-
-
 class DashWorker(L.LightningWork):
     def run(self):
         app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])

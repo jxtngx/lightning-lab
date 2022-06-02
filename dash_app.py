@@ -1,18 +1,15 @@
 import os
 import dash
-import lightning as L
+import torch
 import dash_bootstrap_components as dbc
-import plotly.graph_objects as go  # leave for additional plotting components
 import plotly.express as px
 from dash import html
 from dash import dcc
-from dash.dependencies import Input, Output  # leave for callbacks
 from torchmetrics import Precision, Recall, F1Score, Accuracy
-from torchvision import transforms
+from pytorch_lightning import Trainer
 from lightning_pod.network.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
 
-DATAPATH = os.path.join("data", "cache")
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -28,26 +25,43 @@ def scores_report(y_true, y_predict):
     return scores
 
 
-def leftside_figure(dataset):
+def leftside_figure(ground_truth_image):
     """creates the ground truth image"""
-    fig = px.imshow(dataset[0][0].view(28, 28))
+    fig = px.imshow(ground_truth_image.view(28, 28))
     fig.update_layout(title=dict(text="Ground Truth"))
     return fig
 
 
-def rightside_figure(dataset):
+def rightside_figure(prediction_image):
     """creates the decoded image"""
-    fig = px.imshow(dataset[0][0].view(28, 28))
+    fig = px.imshow(prediction_image.view(28, 28))
     fig.update_layout(title=dict(text="Decoded"))
     return fig
 
 
-# DATA
-dataset = LitDataModule().dataset
-dataset = dataset(DATAPATH, download=True, transform=transforms.ToTensor())
+#### DATA ####
+datamodule = LitDataModule()
+datamodule.prepare_data()
+datamodule.setup()
+val_dataloader = datamodule.val_dataloader()
+
+#### MODEL ####
+checkpoint = "models/checkpoints/model.ckpt"
+model = LitModel.load_from_checkpoint(checkpoint_path=checkpoint)
+model.eval()
+
+#### TRAINER ####
+trainer = Trainer(enable_progress_bar=False)
+
+#### PREDICTIONS ####
+# predictions = trainer.predict(model, datamodule.val_dataloader())
+sample_idx = 0
+ground_truth = val_dataloader.dataset[sample_idx][0]
+with torch.no_grad():
+    prediction = model(ground_truth)
+
 
 #### APP LAYOUT ####
-
 NAVBAR = dbc.NavbarSimple(
     brand="MNIST Encoder-Decoder",
     color="#792ee5",
@@ -95,7 +109,7 @@ SIDEBAR = dbc.Col(
 
 GROUNDTRUTH = dcc.Graph(
     id="leftside_figure",
-    figure=leftside_figure(dataset),
+    figure=leftside_figure(ground_truth),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
@@ -105,7 +119,7 @@ GROUNDTRUTH = dcc.Graph(
 
 PREDICTIONS = dcc.Graph(
     id="rightside_figure",
-    figure=rightside_figure(dataset),
+    figure=rightside_figure(prediction),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
