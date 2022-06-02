@@ -3,7 +3,7 @@ import hydra
 from pathlib import Path
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.profiler import SimpleProfiler
+from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.network.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
@@ -20,7 +20,7 @@ def main(cfg):
     logger = TensorBoardLogger(logs_dir, name="lightning_logs")
     # SET PROFILER
     profile_dir = os.path.join(logs_dir, "profiler")
-    profiler = SimpleProfiler(dirpath=profile_dir, filename="profiler", extended=True)
+    profiler = PyTorchProfiler(dirpath=profile_dir, filename="profiler")
     # SET CHECKPOINT CALLBACK
     chkpt_dir = os.path.join(PROJECTPATH, "models", "checkpoints")
     checkpoint_callback = ModelCheckpoint(dirpath=chkpt_dir, filename="model")

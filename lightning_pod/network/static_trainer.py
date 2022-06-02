@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.profiler import SimpleProfiler
+from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.network.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # SET PROFILER
     # https://pytorch-lightning.readthedocs.io/en/latest/api/pytorch_lightning.profiler.SimpleProfiler.html#simpleprofiler
     profile_dir = os.path.join(logs_dir, "profiler")
-    profiler = SimpleProfiler(dirpath=profile_dir, filename="profiler", extended=True)
+    profiler = PyTorchProfiler(dirpath=profile_dir, filename="profiler")
     # SET CHECKPOINT CALLBACK
     # https://pytorch-lightning.readthedocs.io/en/latest/api/pytorch_lightning.callbacks.ModelCheckpoint.html#modelcheckpoint
     chkpt_dir = os.path.join(PROJECTPATH, "models", "checkpoints")
@@ -41,6 +41,7 @@ if __name__ == "__main__":
     # https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html
     trainer = Trainer(
         max_epochs=10,
+        min_epochs=5,
         limit_train_batches=1.0,  # use only x% of training samples; 1.0  is 100% of batch
         accelerator="auto",
         devices="auto",
@@ -67,7 +68,6 @@ if __name__ == "__main__":
         check_val_every_n_epoch=1,
         fast_dev_run=False,
         accumulate_grad_batches=None,
-        min_epochs=None,
         max_steps=-1,
         min_steps=None,
         max_time=None,
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         replace_sampler_ddp=True,
         detect_anomaly=False,
         auto_scale_batch_size=False,
-        amp_backend="negative",  # amp is "automatic mixed precision"
+        amp_backend="native",  # amp is "automatic mixed precision"
         amp_level=None,
         move_metrics_to_cpu=False,
         multiple_trainloader_mode="max_size_cycle",
