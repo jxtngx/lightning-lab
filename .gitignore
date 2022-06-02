@@ -139,9 +139,4 @@ dmypy.json
 data/cache/*
 
 # profiler, logger logs, model checkpoints, production models
-logs/profiler/*.txt
-logs/lightning_logs/version*
-models/checkpoints/*.ckpt
-models/production/*.pt
-models/production/*.onnx
 outputs/
