@@ -15,7 +15,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 
-def scores_report(y_true, y_predict):
+def scores_collection(y_true, y_predict):
     scores = {
         "Precision": Precision(y_true, y_predict),
         "Recall": Recall(y_true, y_predict),
