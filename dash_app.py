@@ -40,8 +40,10 @@ def rightside_figure(prediction_image):
 
 
 #### DATA ####
-predictions = torch.load("data/predictions/predictions.pt")
-ground_truths = torch.load("data/training_split/val.pt")
+predictions_fname = os.path.join("data", "predictions", "predictions.pt")
+predictions = torch.load(predictions_fname)
+ground_truths_fname = os.path.join("data", "training_split", "val.pt")
+ground_truths = torch.load(ground_truths_fname)
 sample_idx = 10
 
 
