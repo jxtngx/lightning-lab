@@ -117,10 +117,10 @@ SCORES = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Precision", style={"font-weight": "bold"}),
+                        html.P("Metric 1", style={"font-weight": "bold"}),
                         html.H6(0.01, id="precision-score", style={"font-size": "80%"}),
                     ],
-                    id="R2",
+                    id="metric_1",
                     className="mini_container",
                 )
             ]
@@ -129,10 +129,10 @@ SCORES = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Recall", style={"font-weight": "bold"}),
+                        html.P("Metric 2", style={"font-weight": "bold"}),
                         html.H6(0.01, id="recall-score", style={"font-size": "80%"}),
                     ],
-                    id="RMSE",
+                    id="metric_2",
                     className="mini_container",
                 )
             ]
@@ -141,10 +141,10 @@ SCORES = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("F1", style={"font-weight": "bold"}),
+                        html.P("Metric 3", style={"font-weight": "bold"}),
                         html.H6(0.01, id="f1-score", style={"font-size": "80%"}),
                     ],
-                    id="MPD",
+                    id="metric_3",
                     className="mini_container",
                 )
             ]
@@ -153,10 +153,10 @@ SCORES = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Accuracy", style={"font-weight": "bold"}),
+                        html.P("Metric 4", style={"font-weight": "bold"}),
                         html.H6(0.01, id="accuracy-score", style={"font-size": "80%"}),
                     ],
-                    id="MGD",
+                    id="metric_4",
                     className="mini_container",
                 )
             ]
