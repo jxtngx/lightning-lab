@@ -133,10 +133,10 @@ dmypy.json
 
 # VS Code
 *.code-workspace
-.vscode/*
+.vscode
 
-# data
-data/cache/*
+# PyCharm
+.idea
 
 # profiler, logger logs, model checkpoints, production models
 outputs/
