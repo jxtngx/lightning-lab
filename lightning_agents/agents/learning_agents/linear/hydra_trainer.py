@@ -1,4 +1,5 @@
 import os
+import errno
 import torch
 import hydra
 from pathlib import Path
@@ -7,12 +8,29 @@ from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_agents import LinearEncoderDecoder as LitModel
-from lightning_agents import LitDataModule
+from lightning_agents.pipeline.datamodule import LitDataModule
+from lightning_agents.agents.learning_agents.linear.module import (
+    LinearEncoderDecoder as LitModel,
+)
 
-NETWORKPATH = Path(__file__).parent
-PODPATH = NETWORKPATH.parents[0]
-PROJECTPATH = NETWORKPATH.parents[1]
+
+def create_target_path(filepath, target_directory):
+    sep = os.path.sep
+    real_path = os.path.realpath(filepath).split(sep)
+    real_path = list(reversed(real_path))
+    if target_directory in real_path:
+        target_path_idx = real_path.index(target_directory) - 1
+        target_path = filepath.parents[target_path_idx]
+        return target_path
+    else:
+        raise NotADirectoryError(
+            errno.ENOENT, os.strerror(errno.ENOENT), target_directory
+        )
+
+
+# SET PATHS
+NETWORKPATH = Path(__file__)
+PROJECTPATH = create_target_path(NETWORKPATH, "lightning-app")
 
 
 @hydra.main(config_name="hydra_config")
