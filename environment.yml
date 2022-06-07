@@ -17,6 +17,7 @@ dependencies:
       - lightning-transformers
       - matplotlib
       - mypy
+      - optuna
       - plotly
       - pytest
       - pytorch-lightning

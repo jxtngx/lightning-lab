@@ -13,6 +13,8 @@ torchaudio
 # LIGHTNING ECOSYSTEM
 lightning-bolts
 lightning-flash
+# HYPERPARAMETER TUNING
+optuna
 # VS CODE TENSORBOARD SUPPORT
 torch-tb-profiler
 # PLOTTING AND SYMBOLIC MATH
