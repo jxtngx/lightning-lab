@@ -7,8 +7,8 @@ from dash import html
 from dash import dcc
 from torchmetrics import Precision, Recall, F1Score, Accuracy
 from pytorch_lightning import Trainer
-from lightning_pod.network.module import LitModel
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_agents.linear.network.module import LitModel
+from lightning_agents.pipeline.datamodule import LitDataModule
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])

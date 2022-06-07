@@ -7,8 +7,8 @@ from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_pod.network.module import LitModel
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_agents import LinearEncoderDecoder as LitModel
+from lightning_agents import LitDataModule
 
 NETWORKPATH = Path(__file__).parent
 PODPATH = NETWORKPATH.parents[0]

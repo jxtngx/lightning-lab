@@ -4,7 +4,7 @@ from pathlib import Path
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
-from lightning_pod.pipeline.dataset import LitDataset
+from lightning_agents.pipeline.dataset import LitDataset
 
 NETWORKPATH = Path(__file__).parent
 PODPATH = NETWORKPATH.parents[0]

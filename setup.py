@@ -2,9 +2,9 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(
-    name="lightning-pod",
+    name="lightning-agents",
     version="0.0.1",
-    description="A template for PyTorch Lightning and Grid projects ",
+    description="for local, editable installs of the directory learning_agents",
     url="https://github.com/JustinGoheen/lightning-pod",
     author="Justin Goheen",
     license="Apache 2.0",

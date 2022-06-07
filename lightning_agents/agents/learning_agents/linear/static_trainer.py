@@ -6,8 +6,8 @@ from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_pod.network.module import LitModel
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_agents.linear.network.module import LitModel
+from lightning_agents.pipeline.datamodule import LitDataModule
 
 
 if __name__ == "__main__":

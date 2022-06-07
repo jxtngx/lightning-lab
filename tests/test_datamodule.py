@@ -1,7 +1,7 @@
 import os
 import torch
 from pathlib import Path
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_agents.pipeline.datamodule import LitDataModule
 
 
 def test_module_not_abstract():

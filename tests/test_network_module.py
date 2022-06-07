@@ -1,5 +1,11 @@
 import torch
-from lightning_pod.network.module import LitModel, Encoder, Decoder
+from lightning_agents.agents.learning_agents.linear.module import (
+    Encoder,
+    Decoder,
+)
+from lightning_agents.agents.learning_agents.linear.module import (
+    LinearEncoderDecoder as LitModel,
+)
 
 
 def test_module_not_abstract():
