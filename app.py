@@ -4,7 +4,7 @@ import lightning as L
 import dash
 import dash_bootstrap_components as dbc
 from dash import html
-from dash_app import NAVBAR, BODY
+from components.ui import NAVBAR, BODY
 
 
 class DashWorker(L.LightningWork):
