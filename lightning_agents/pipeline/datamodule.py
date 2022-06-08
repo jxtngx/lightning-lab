@@ -1,4 +1,5 @@
 import os
+import errno
 import multiprocessing
 from pathlib import Path
 from pytorch_lightning import LightningDataModule
@@ -6,9 +7,23 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from lightning_agents.pipeline.dataset import LitDataset
 
-NETWORKPATH = Path(__file__).parent
-PODPATH = NETWORKPATH.parents[0]
-PROJECTPATH = NETWORKPATH.parents[1]
+
+def create_target_path(filepath, target_directory):
+    sep = os.path.sep
+    real_path = os.path.realpath(filepath).split(sep)
+    real_path = list(reversed(real_path))
+    if target_directory in real_path:
+        target_path_idx = real_path.index(target_directory) - 1
+        target_path = filepath.parents[target_path_idx]
+        return target_path
+    else:
+        raise NotADirectoryError(
+            errno.ENOENT, os.strerror(errno.ENOENT), target_directory
+        )
+
+
+filepath = Path(__file__)
+PROJECTPATH = create_target_path(filepath, "lightning-app")
 NUMWORKERS = int(multiprocessing.cpu_count() // 2)
 
 
