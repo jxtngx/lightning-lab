@@ -4,7 +4,7 @@ import lightning as L
 import dash
 import dash_bootstrap_components as dbc
 from dash import html
-from components.ui import NAVBAR, BODY
+from components.ui import NavBar, Body
 
 
 class DashWorker(L.LightningWork):
@@ -13,9 +13,9 @@ class DashWorker(L.LightningWork):
         # server = app.server
         app.layout = html.Div(
             [
-                NAVBAR,
+                NavBar,
                 html.Br(),  # hacky way to create space between header (navbar) and body
-                BODY,
+                Body,
             ]
         )
         app.run_server(host=self.host, port=self.port)

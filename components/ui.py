@@ -7,7 +7,9 @@ from dash import html
 from dash import dcc
 from torchmetrics import Precision, Recall, F1Score, Accuracy
 from pytorch_lightning import Trainer
-from lightning_agents.linear.network.module import LitModel
+from lightning_agents.agents.learning_agents.linear.module import (
+    LinearEncoderDecoder as LitModel,
+)
 from lightning_agents.pipeline.datamodule import LitDataModule
 
 
@@ -48,14 +50,14 @@ sample_idx = 10
 
 
 #### APP LAYOUT ####
-NAVBAR = dbc.NavbarSimple(
+NavBar = dbc.NavbarSimple(
     brand="MNIST Encoder-Decoder",
     color="#792ee5",
     dark=True,
     fluid=True,
 )
 
-MODEL_CARD = dbc.Card(
+ModelCard = dbc.Card(
     dbc.CardBody(
         [
             html.H4(f"Model Card", id="model_name", className="card-text"),
@@ -88,12 +90,12 @@ MODEL_CARD = dbc.Card(
     className="pretty_container",
 )
 
-SIDEBAR = dbc.Col(
-    [MODEL_CARD],
+SideBar = dbc.Col(
+    [ModelCard],
     width=3,
 )
 
-GROUNDTRUTH = dcc.Graph(
+GroundTruth = dcc.Graph(
     id="leftside_figure",
     figure=leftside_figure(ground_truths[sample_idx][0]),
     config={
@@ -103,7 +105,7 @@ GROUNDTRUTH = dcc.Graph(
     },
 )
 
-PREDICTIONS = dcc.Graph(
+Predictions = dcc.Graph(
     id="rightside_figure",
     figure=rightside_figure(predictions[sample_idx][0]),
     config={
@@ -113,7 +115,7 @@ PREDICTIONS = dcc.Graph(
     },
 )
 
-SCORES = dbc.Row(
+Metrics = dbc.Row(
     [
         dbc.Col(
             [
@@ -167,20 +169,20 @@ SCORES = dbc.Row(
     id="scores_card",
 )
 
-MAIN_AREA = dbc.Col(
+MainArea = dbc.Col(
     [
-        SCORES,
+        Metrics,
         dbc.Row(
             [
-                dbc.Col([GROUNDTRUTH], className="pretty_container", width=5),
-                dbc.Col([PREDICTIONS], className="pretty_container", width=5),
+                dbc.Col([GroundTruth], className="pretty_container", width=5),
+                dbc.Col([Predictions], className="pretty_container", width=5),
             ],
             justify="center",
         ),
     ]
 )
 
-BODY = dbc.Container([dbc.Row([SIDEBAR, MAIN_AREA])], fluid=True)
+Body = dbc.Container([dbc.Row([SideBar, MainArea])], fluid=True)
 
 
 if __name__ == "__main__":
