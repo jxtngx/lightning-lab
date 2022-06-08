@@ -16,7 +16,7 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Build HTML
         run: |
-          sphinx-apidoc -f -o docs/source lightning_pod/
+          sphinx-apidoc -f -o docs/source lightning_agents/
           cd docs
           make html
       - name: Upload artifacts
