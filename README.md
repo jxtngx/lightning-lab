@@ -10,7 +10,6 @@ A template environment and system architecture for [Lightning](https://www.pytor
 <!-- [![codecov](https://codecov.io/gh/JustinGoheen/lightning-app/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-app)
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-app.svg?style=shield) -->
 
-Refer to the [wiki](https://github.com/JustinGoheen/lightning-app/wiki) for additional information and guides.
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-app)
 
