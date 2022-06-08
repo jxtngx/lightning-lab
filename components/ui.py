@@ -41,7 +41,7 @@ predictions_fname = os.path.join("data", "predictions", "predictions.pt")
 predictions = torch.load(predictions_fname)
 ground_truths_fname = os.path.join("data", "training_split", "val.pt")
 ground_truths = torch.load(ground_truths_fname)
-sample_idx = 10
+sample_idx = 1
 
 
 #### APP LAYOUT ####
@@ -161,19 +161,22 @@ Metrics = dbc.Row(
             ]
         ),
     ],
+    justify="center",
     id="metrics_card",
+)
+
+Graphs = dbc.Row(
+    [
+        dbc.Col([GroundTruth], className="pretty_container", width=5),
+        dbc.Col([Predictions], className="pretty_container", width=5),
+    ],
+    justify="center",
 )
 
 MainArea = dbc.Col(
     [
         Metrics,
-        dbc.Row(
-            [
-                dbc.Col([GroundTruth], className="pretty_container", width=5),
-                dbc.Col([Predictions], className="pretty_container", width=5),
-            ],
-            justify="center",
-        ),
+        Graphs,
     ]
 )
 
