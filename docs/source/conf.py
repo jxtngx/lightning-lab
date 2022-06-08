@@ -18,7 +18,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "Lightning Pod"
+project = "Lightning App"
 copyright = "2022, Justin Goheen"
 author = "Justin Goheen"
 

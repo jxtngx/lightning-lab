@@ -1,5 +1,5 @@
-lightning\_pod package
-======================
+lightning\_agents package
+=========================
 
 Subpackages
 -----------
@@ -7,13 +7,13 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   lightning_pod.network
-   lightning_pod.pipeline
+   lightning_agents.agents
+   lightning_agents.pipeline
 
 Module contents
 ---------------
 
-.. automodule:: lightning_pod
+.. automodule:: lightning_agents
    :members:
    :undoc-members:
    :show-inheritance:
