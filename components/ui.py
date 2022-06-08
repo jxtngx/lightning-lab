@@ -6,11 +6,6 @@ import plotly.express as px
 from dash import html
 from dash import dcc
 from torchmetrics import Precision, Recall, F1Score, Accuracy
-from pytorch_lightning import Trainer
-from lightning_agents.agents.learning_agents.linear.module import (
-    LinearEncoderDecoder as LitModel,
-)
-from lightning_agents.pipeline.datamodule import LitDataModule
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
