@@ -17,14 +17,14 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 
-def scores_collection(y_true, y_predict):
-    scores = {
+def metrics_collection(y_true, y_predict):
+    metrics = {
         "Precision": Precision(y_true, y_predict),
         "Recall": Recall(y_true, y_predict),
         "F1": F1Score(y_true, y_predict),
         "Accuracy": Accuracy(y_true, y_predict),
     }
-    return scores
+    return metrics
 
 
 def leftside_figure(ground_truth_image):
@@ -166,7 +166,7 @@ Metrics = dbc.Row(
             ]
         ),
     ],
-    id="scores_card",
+    id="metrics_card",
 )
 
 MainArea = dbc.Col(
