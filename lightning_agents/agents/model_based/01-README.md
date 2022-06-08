@@ -1,2 +1,0 @@
-A module for agents of a particular type. Refer to the section `Classes of intelligent agents` of the [Intelligent agent](https://en.wikipedia.org/wiki/Intelligent_agent) wikipedia page or
-in chapter 2 of Russell and Norvig's 4th edition of `Artificial Intelligence: A Modern Approach`.
