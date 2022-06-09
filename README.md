@@ -18,17 +18,15 @@ A template environment and system architecture for [Lightning](https://www.pytor
 </div>
 
 ## Overview
-The project on the `main` branch only shows a static Dash app, displaying a prediction result saved during a local training process.
+The project on the `main` branch is a basic, static Dash app - shown below. The branch `alt-app/basic-dash` shows the same app sans CI/CD and docs assets.
 
-Extensions of this version will be created on separate branches, with the prefix "alt-app/" for the branch i.e. the next iteration of this example is called ["alt-app/predict-from-checkpoint"](https://github.com/JustinGoheen/lightning-app/tree/alt-app/predict-from-checkpoint). As the name implies, this version will show users how to load a model from a checkpoint and predict on new data.
-
-Current Lightning App (deployed to cloud) is shown below:
+Extensions of the basic version will be created on separate branches, with the prefix `alt-app/` followed by a short description of the app's learning point e.g. `alt-app/predict-from-checkpoint`, `alt-app/single-dash-callback`, `alt-app/multiple-dash-callbacks`, or `alt-app/scheduled-predictions` etc.
 
 ![](assets/sample_app.png)
 
 ## Potential roadblocks
 
-I am not sure if the Dash [callbacks](https://dash.plotly.com/basic-callbacks) will "talk" to the Lightning Flow/Work state to update the UI as intended (as it should if using Dash only).
+None for now.
 
 ## Additional features:
 - Once Lightning becomes generally available, users will be able to open a reproducible environment in either Gitpod or GitHub CodeSpaces.
