@@ -1,8 +1,7 @@
-# market classification app
-import os
 import lightning as L
 import dash
 import dash_bootstrap_components as dbc
+
 from dash import html
 from components.ui import NavBar, Body
 
