@@ -24,7 +24,7 @@ Extensions of this version will be created on separate branches, with the prefix
 
 Current Lightning App (deployed to cloud) is shown below:
 
-![](https://github.com/JustinGoheen/lightning-pod/blob/main/assets/sample_app.png)
+![](assets/sample_app.png)
 
 ## Potential roadblocks
 
