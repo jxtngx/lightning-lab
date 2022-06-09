@@ -7,17 +7,18 @@
     box-shadow: 2px 2px 2px lightgrey;
 }
 
-.mini-container {
-    border-radius: 5px;
+.metric-container {
+    border-radius: 8px;
     background-color: #f9f9f9;
     margin: 10px;
-    padding: 15px;
+    padding: 10px;
     position: relative;
     box-shadow: 2px 2px 2px lightgrey;
 }
 
 
-.info-container {
+.model-card-container {
+    border-radius: 8px;
     background-color: #f9f9f9;
     margin: 5px;
     padding: 5px;
@@ -25,31 +26,37 @@
     box-shadow: 2px 2px 2px lightgrey;
 }
 
-.custom-tabs {
-    border-top-left-radius: 3px;
-    background-color: #f9f9f9;
-    padding: 0px 24px;
-    border-bottom: 1px solid #d6d6d6;
-    width: 50%;
+.metric-card-text {
+    margin: 0px;
+    padding: 0px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray
 }
 
-.modelcard-text {
+.model-card-text {
     margin: 0px;
     padding: 1.5px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray
 }
 
-#R2 {
-    flex: 1;
+.card-title {
+    margin: 0px;
+    padding: 0px;
+    font-family: Ucityweb, sans-serif;
+    font-weight: normal;
 }
 
-#RMSE {
-    flex: 1;
+.app-title {
+    font-family: Montserrat, sans-serif
 }
 
-#MPD {
-    flex: 1;
+#left-fig .modebar {
+    left: 30%;
+    margin-top: 10px;
 }
 
-#MGD {
-    flex: 1;
+#right-fig .modebar {
+    left: 30%;
+    margin-top: 10px;
 }

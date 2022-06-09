@@ -14,26 +14,22 @@ server = app.server
 
 
 def metrics_collection(y_true, y_predict):
-    metrics = {
-        "Precision": Precision(y_true, y_predict),
-        "Recall": Recall(y_true, y_predict),
-        "F1": F1Score(y_true, y_predict),
-        "Accuracy": Accuracy(y_true, y_predict),
-    }
-    return metrics
+    pass
 
 
-def leftside_figure(ground_truth_image):
+def create_figure(ground_truth_image, title_text):
     """creates the ground truth image"""
     fig = px.imshow(ground_truth_image.view(28, 28))
-    fig.update_layout(title=dict(text="Ground Truth"))
-    return fig
-
-
-def rightside_figure(prediction_image):
-    """creates the decoded image"""
-    fig = px.imshow(prediction_image.view(28, 28))
-    fig.update_layout(title=dict(text="Decoded"))
+    fig.update_layout(
+        title=dict(
+            text=title_text,
+            font_family="Ucityweb, sans-serif",
+            font=dict(size=24),
+            y=0.05,
+            yanchor="bottom",
+            x=0.5,
+        )
+    )
     return fig
 
 
@@ -47,39 +43,40 @@ sample_idx = 10
 
 #### APP LAYOUT ####
 NavBar = dbc.NavbarSimple(
-    brand="MNIST Encoder-Decoder",
+    brand="Application Name",
     color="#792ee5",
     dark=True,
     fluid=True,
+    className="app-title",
 )
 
 ModelCard = dbc.Card(
     dbc.CardBody(
         [
-            html.H1(f"Model Card", id="model_name", className="card-title"),
+            html.H1(f"Model Card", id="model_card", className="card-title"),
             html.P(
-                f"Some Model Info: {0}",
-                id="modelcard_1",
-                className="modelcard-text",
+                f"Model Info 1: {'lorem ipsum dolor sit'}",
+                id="model_info_1",
+                className="model-card-text",
             ),
             html.P(
-                f"Some Model Info: {0}",
-                id="modelcard_2",
-                className="modelcard-text",
+                f"Model Info 2: {'lorem ipsum dolor sit'}",
+                id="model_info_2",
+                className="model-card-text",
             ),
             html.P(
-                f"Some Model Info: {0}",
-                id="modelcard_3",
-                className="modelcard-text",
+                f"Model Info 3: {'lorem ipsum dolor sit'}",
+                id="model_info_3",
+                className="model-card-text",
             ),
             html.P(
-                f"Some Model Info: {0}",
-                id="modelcard_4",
-                className="modelcard-text",
+                f"Model Info 4: {'lorem ipsum dolor sit'}",
+                id="model_info_4",
+                className="model-card-text",
             ),
         ]
     ),
-    className="info-container",
+    className="model-card-container",
 )
 
 SideBar = dbc.Col(
@@ -88,8 +85,8 @@ SideBar = dbc.Col(
 )
 
 GroundTruth = dcc.Graph(
-    id="leftside_figure",
-    figure=leftside_figure(ground_truths[sample_idx][0]),
+    id="left-fig",
+    figure=create_figure(ground_truths[sample_idx][0], "Ground Truth"),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
@@ -98,8 +95,8 @@ GroundTruth = dcc.Graph(
 )
 
 Predictions = dcc.Graph(
-    id="rightside_figure",
-    figure=rightside_figure(predictions[sample_idx][0]),
+    id="right-fig",
+    figure=create_figure(predictions[sample_idx][0], "Decoded"),
     config={
         "responsive": True,  # dynamically resizes Graph with browser winder
         "displayModeBar": True,  # always show the Graph tools
@@ -113,57 +110,63 @@ Metrics = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.H4("Metric 1", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="metric_1_text"),
+                        html.H4("Metric 1", className="card-title"),
+                        html.P(0.01, id="metric_1_text", className="metric-card-text"),
                     ],
                     id="metric_1_card",
-                    className="mini-container",
+                    className="metric-container",
                 )
-            ]
+            ],
+            width=3,
         ),
         dbc.Col(
             [
                 dbc.Card(
                     [
-                        html.H4("Metric 2", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="metric_2_text"),
+                        html.H4("Metric 2", className="card-title"),
+                        html.P(0.01, id="metric_2_text", className="metric-card-text"),
                     ],
                     id="metric_2_card",
-                    className="mini-container",
+                    className="metric-container",
                 )
-            ]
+            ],
+            width=3,
         ),
         dbc.Col(
             [
                 dbc.Card(
                     [
-                        html.H4("Metric 3", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="metric_3_text"),
+                        html.H4("Metric 3", className="card-title"),
+                        html.P(0.01, id="metric_3_text", className="metric-card-text"),
                     ],
                     id="metric_3_card",
-                    className="mini-container",
+                    className="metric-container",
                 )
-            ]
+            ],
+            width=3,
         ),
         dbc.Col(
             [
                 dbc.Card(
                     [
-                        html.H4("Metric 4", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="metric_4_text"),
+                        html.H4("Metric 4", className="card-title"),
+                        html.P(0.01, id="metric_4_text", className="metric-card-text"),
                     ],
                     id="metric_4_card",
-                    className="mini-container",
+                    className="metric-container",
                 )
-            ]
+            ],
+            width=3,
         ),
     ],
-    id="scores_card",
+    id="metrics",
+    justify="center",
 )
 
 Graphs = dbc.Row(
     [
         dbc.Col([GroundTruth], className="pretty-container", width=5),
+        dbc.Col(width=1),
         dbc.Col([Predictions], className="pretty-container", width=5),
     ],
     justify="center",
