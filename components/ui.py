@@ -3,6 +3,7 @@ import dash
 import torch
 import dash_bootstrap_components as dbc
 import plotly.express as px
+
 from dash import html
 from dash import dcc
 from torchmetrics import Precision, Recall, F1Score, Accuracy
@@ -41,7 +42,7 @@ predictions_fname = os.path.join("data", "predictions", "predictions.pt")
 predictions = torch.load(predictions_fname)
 ground_truths_fname = os.path.join("data", "training_split", "val.pt")
 ground_truths = torch.load(ground_truths_fname)
-sample_idx = 1
+sample_idx = 10
 
 
 #### APP LAYOUT ####
@@ -55,34 +56,30 @@ NavBar = dbc.NavbarSimple(
 ModelCard = dbc.Card(
     dbc.CardBody(
         [
-            html.H4(f"Model Card", id="model_name", className="card-text"),
+            html.H1(f"Model Card", id="model_name", className="card-title"),
             html.P(
                 f"Some Model Info: {0}",
                 id="modelcard_1",
-                className="card-text",
-                style={"font-size": "80%"},
+                className="modelcard-text",
             ),
             html.P(
                 f"Some Model Info: {0}",
                 id="modelcard_2",
-                className="card-text",
-                style={"font-size": "80%"},
+                className="modelcard-text",
             ),
             html.P(
                 f"Some Model Info: {0}",
                 id="modelcard_3",
-                className="card-text",
-                style={"font-size": "80%"},
+                className="modelcard-text",
             ),
             html.P(
                 f"Some Model Info: {0}",
                 id="modelcard_4",
-                className="card-text",
-                style={"font-size": "80%"},
+                className="modelcard-text",
             ),
         ]
     ),
-    className="pretty_container",
+    className="info-container",
 )
 
 SideBar = dbc.Col(
@@ -116,11 +113,11 @@ Metrics = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Metric 1", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="precision-score", style={"font-size": "80%"}),
+                        html.H4("Metric 1", style={"font-weight": "bold"}),
+                        html.H6(0.01, id="metric_1_text"),
                     ],
-                    id="metric_1",
-                    className="mini_container",
+                    id="metric_1_card",
+                    className="mini-container",
                 )
             ]
         ),
@@ -128,11 +125,11 @@ Metrics = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Metric 2", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="recall-score", style={"font-size": "80%"}),
+                        html.H4("Metric 2", style={"font-weight": "bold"}),
+                        html.H6(0.01, id="metric_2_text"),
                     ],
-                    id="metric_2",
-                    className="mini_container",
+                    id="metric_2_card",
+                    className="mini-container",
                 )
             ]
         ),
@@ -140,11 +137,11 @@ Metrics = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Metric 3", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="f1-score", style={"font-size": "80%"}),
+                        html.H4("Metric 3", style={"font-weight": "bold"}),
+                        html.H6(0.01, id="metric_3_text"),
                     ],
-                    id="metric_3",
-                    className="mini_container",
+                    id="metric_3_card",
+                    className="mini-container",
                 )
             ]
         ),
@@ -152,35 +149,38 @@ Metrics = dbc.Row(
             [
                 dbc.Card(
                     [
-                        html.P("Metric 4", style={"font-weight": "bold"}),
-                        html.H6(0.01, id="accuracy-score", style={"font-size": "80%"}),
+                        html.H4("Metric 4", style={"font-weight": "bold"}),
+                        html.H6(0.01, id="metric_4_text"),
                     ],
-                    id="metric_4",
-                    className="mini_container",
+                    id="metric_4_card",
+                    className="mini-container",
                 )
             ]
         ),
     ],
-    justify="center",
-    id="metrics_card",
+    id="scores_card",
 )
 
 Graphs = dbc.Row(
     [
-        dbc.Col([GroundTruth], className="pretty_container", width=5),
-        dbc.Col([Predictions], className="pretty_container", width=5),
+        dbc.Col([GroundTruth], className="pretty-container", width=5),
+        dbc.Col([Predictions], className="pretty-container", width=5),
     ],
     justify="center",
 )
 
-MainArea = dbc.Col(
-    [
-        Metrics,
-        Graphs,
-    ]
-)
+MainArea = dbc.Col([Metrics, Graphs])
 
 Body = dbc.Container([dbc.Row([SideBar, MainArea])], fluid=True)
+
+#### PASS LAYOUT TO DASH ####
+app.layout = html.Div(
+    [
+        NavBar,
+        html.Br(),  # hacky way to create space between header (navbar) and body
+        Body,
+    ]
+)
 
 
 if __name__ == "__main__":
