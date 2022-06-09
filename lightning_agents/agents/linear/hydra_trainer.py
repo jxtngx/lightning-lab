@@ -29,8 +29,8 @@ def create_target_path(filepath, target_directory):
 
 
 # SET PATHS
-NETWORKPATH = Path(__file__)
-PROJECTPATH = create_target_path(NETWORKPATH, "lightning-app")
+filepath = Path(__file__)
+PROJECTPATH = create_target_path(filepath, "lightning-app")
 
 
 @hydra.main(config_name="hydra_config")
