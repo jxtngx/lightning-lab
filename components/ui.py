@@ -1,12 +1,11 @@
 import os
 import dash
 import torch
-import dash_bootstrap_components as dbc
 import plotly.express as px
+import dash_bootstrap_components as dbc
 
 from dash import html
 from dash import dcc
-from torchmetrics import Precision, Recall, F1Score, Accuracy
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
