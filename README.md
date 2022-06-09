@@ -24,7 +24,7 @@ Extensions of this version will be created on separate branches, with the prefix
 
 Current Lightning App (deployed to cloud) is shown below:
 
-<img width="1505" alt="Screen Shot 2022-06-03 at 9 21 47 AM" src="https://user-images.githubusercontent.com/26209687/171926909-022c4ae8-9574-4cd4-b381-a42cf495dbc8.png">
+![](https://github.com/JustinGoheen/lightning-pod/blob/main/assets/sample_app.png)
 
 ## Potential roadblocks
 
