@@ -18,9 +18,12 @@ A template environment and system architecture for [Lightning](https://www.pytor
 </div>
 
 ## Overview
-The project on the `main` branch is a basic, static Dash app - shown below. The branch `alt-app/basic-dash` shows the same app sans CI/CD and docs assets.
+The project on the `main` branch is a Dash app with a single callback.
 
-Extensions of the basic version will be created on separate branches, with the prefix `alt-app/` followed by a short description of the app's learning point e.g. `alt-app/predict-from-checkpoint`, `alt-app/single-dash-callback`, `alt-app/multiple-dash-callbacks`, or `alt-app/scheduled-predictions` etc.
+Additional apps are on separate branches with the prefix `alt-app/` followed by a short description of the app's learning point e.g. `alt-app/predict-from-checkpoint`, `alt-app/multiple-dash-callbacks`, or `alt-app/scheduled-predictions` etc.
+
+
+App UI preview:
 
 ![](assets/sample_app.png)
 
@@ -29,6 +32,6 @@ Extensions of the basic version will be created on separate branches, with the p
 None for now.
 
 ## Additional features:
-- Once Lightning becomes generally available, users will be able to open a reproducible environment in either Gitpod or GitHub CodeSpaces.
+- Once Lightning Apps becomes generally available, users will be able to open a reproducible environment in either Gitpod or GitHub CodeSpaces.
 - Users are able to view example training logs and PyTorch profiler logs in TensorBoard from within the Gitpod Workspace or CodeSpace.
 - Users can reference the lightning-pod [wiki](https://github.com/JustinGoheen/lightning-pod/wiki) for additional information and guides.
