@@ -168,7 +168,6 @@ GroundTruth = dcc.Graph(
         "responsive": True,
         "displayModeBar": True,
         "displaylogo": False,
-        "autosizeable": False,
     },
 )
 
