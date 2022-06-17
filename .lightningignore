@@ -133,10 +133,29 @@ dmypy.json
 
 # VS Code
 *.code-workspace
-.vscode
+.vscode/
 
 # PyCharm
-.idea
+.idea/
 
 # profiler, logger logs, model checkpoints, production models
 outputs/
+
+# tests
+*tests
+
+# research notebooks
+notebooks/
+
+# logs and profilers
+logs/
+
+# CICD
+.circleci/
+.devcontainer/
+.github/
+.deepsource/
+.git/
+
+# doc
+docs/
