@@ -1,4 +1,5 @@
 # BASE [DO NOT DELETE]
+lightning
 pytorch-lightning
 lightning-grid
 # FUNDAMENTAL ML
