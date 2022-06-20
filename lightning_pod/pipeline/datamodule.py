@@ -1,0 +1,76 @@
+import os
+import errno
+import multiprocessing
+from pathlib import Path
+from pytorch_lightning import LightningDataModule
+from torch.utils.data import Dataset, DataLoader, random_split
+from torchvision import transforms
+from lightning_pod.pipeline.dataset import LitDataset
+
+
+def create_target_path(filepath, target_directory):
+    sep = os.path.sep
+    real_path = os.path.realpath(filepath).split(sep)
+    real_path = list(reversed(real_path))
+    if target_directory in real_path:
+        target_path_idx = real_path.index(target_directory) - 1
+        target_path = filepath.parents[target_path_idx]
+        return target_path
+    else:
+        raise NotADirectoryError(
+            errno.ENOENT, os.strerror(errno.ENOENT), target_directory
+        )
+
+
+filepath = Path(__file__)
+PROJECTPATH = create_target_path(filepath, "lightning-app")
+NUMWORKERS = int(multiprocessing.cpu_count() // 2)
+
+
+class LitDataModule(LightningDataModule):
+    def __init__(
+        self,
+        dataset: Dataset = LitDataset,
+        data_dir: str = "data",
+        split: bool = True,
+        train_size: float = 0.8,
+        num_workers: int = NUMWORKERS,
+        transforms=transforms.ToTensor(),
+    ):
+        super().__init__()
+        self.data_dir = os.path.join(PROJECTPATH, data_dir, "cache")
+        self.dataset = dataset
+        self.split = split
+        self.train_size = train_size
+        self.num_workers = num_workers
+        self.transforms = transforms
+
+    def prepare_data(self):
+        self.dataset(self.data_dir, download=True)
+
+    def setup(self, stage=None):
+        if stage == "fit" or stage is None:
+            full_dataset = self.dataset(
+                self.data_dir, train=True, transform=self.transforms
+            )
+            train_size = int(len(full_dataset) * self.train_size)
+            test_size = len(full_dataset) - train_size
+            self.train_data, self.val_data = random_split(
+                full_dataset, lengths=[train_size, test_size]
+            )
+        if stage == "test" or stage is None:
+            self.test_data = self.dataset(
+                self.data_dir, train=False, transform=self.transforms
+            )
+
+    # def teardown(self):
+    #     pass
+
+    def train_dataloader(self):
+        return DataLoader(self.train_data, num_workers=self.num_workers)
+
+    def test_dataloader(self):
+        return DataLoader(self.test_data, num_workers=self.num_workers)
+
+    def val_dataloader(self):
+        return DataLoader(self.val_data, num_workers=self.num_workers)

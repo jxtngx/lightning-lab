@@ -1,4 +1,4 @@
-name: lightning-app
+name: lightning-os
 channels:
   - defaults
 dependencies:

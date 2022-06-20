@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 from dash import dcc, html, dash_table
 from pytorch_lightning.utilities.model_summary import ModelSummary
-from lightning_agents.agents.linear.module import LinearEncoderDecoder
+from lightning_pod.agents.linear.module import LinearEncoderDecoder
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
