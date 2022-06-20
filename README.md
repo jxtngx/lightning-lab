@@ -11,7 +11,7 @@
 
 # Overview
 
-This project is a template Python environment, tooling, and system architecture for [Lightning](https://www.pytorchlightning.ai/) OS that culminates with a Plotly Dash [UI](https://01g5ym5thgarst5xzx1vd6mqfa.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+This project is a template Python environment, tooling, and system architecture for [Lightning](https://www.pytorchlightning.ai/) OS that culminates with a Plotly Dash [UI](https://01g616ckjfxjv7me6hp48symat.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
 ## Using the Template
 
