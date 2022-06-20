@@ -9,11 +9,6 @@ A template environment and system architecture for [Lightning](https://www.pytor
 
 </div>
 
-## Overview
-The project on the `main` branch is a Dash app with a single callback.
-
-Additional apps are on separate branches with the prefix `alt-app/` followed by a short description of the app's learning point e.g. `alt-app/predict-from-checkpoint`, `alt-app/multiple-dash-callbacks`, or `alt-app/scheduled-predictions` etc.
-
 
 App UI preview:
 
