@@ -142,7 +142,7 @@ dmypy.json
 outputs/
 
 # tests
-*tests
+tests/
 
 # research notebooks
 notebooks/
