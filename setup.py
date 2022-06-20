@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(
-    name="lightning-agents",
+    name="lightning-pod",
     version="0.0.1",
     description="for local, editable installs of the lightning_agents module",
     url="https://github.com/JustinGoheen/lightning-pod",
