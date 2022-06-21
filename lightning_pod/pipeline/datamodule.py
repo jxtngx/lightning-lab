@@ -23,7 +23,7 @@ def create_target_path(filepath, target_directory):
 
 
 filepath = Path(__file__)
-PROJECTPATH = create_target_path(filepath, "lightning-app")
+PROJECTPATH = create_target_path(filepath, "hello-lightning")
 NUMWORKERS = int(multiprocessing.cpu_count() // 2)
 
 
