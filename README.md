@@ -56,7 +56,7 @@ For software engineers in need of deep learning know-how, NYU's Alfredo Canziani
 
 ## Additional Resources
 
-Aside from the above, I've written a [wiki](https://github.com/JustinGoheen/lightning-pod/wiki) to help guide individuals through some of the concepts and tooling discussed below.
+Aside from the above, I've started a [wiki](https://justingoheen.github.io/lightning-engineer/) to help guide individuals through some of the concepts and tooling discussed below.
 
 # Tooling
 
