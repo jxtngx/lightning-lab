@@ -1,9 +1,9 @@
 import torch
-from lightning_pod.agents.linear.module import (
+from lightning_pod.agents.module import (
     Encoder,
     Decoder,
 )
-from lightning_pod.agents.linear.module import (
+from lightning_pod.agents.module import (
     LinearEncoderDecoder as LitModel,
 )
 
