@@ -12,12 +12,12 @@ from lightning_pod.pipeline.datamodule import LitDataModule
 from lightning_pod.agents.module import (
     LinearEncoderDecoder as LitModel,
 )
-from lightning_pod.utils import paths
+from lightning_pod.utils.paths import create_target_path
 
 
 # SET PATHS
 filepath = Path(__file__)
-PROJECTPATH = paths(filepath, "lightning-app")
+PROJECTPATH = create_target_path(filepath, "hello-lightning")
 
 
 @hydra.main(config_name="hydra_config")

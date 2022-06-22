@@ -11,14 +11,14 @@ from lightning_pod.pipeline.datamodule import LitDataModule
 from lightning_pod.agents.module import (
     LinearEncoderDecoder as LitModel,
 )
-from lightning_pod.utils import paths
+from lightning_pod.utils.paths import create_target_path
 
 
 if __name__ == "__main__":
 
     # SET PATHS
     filepath = Path(__file__)
-    PROJECTPATH = paths(filepath, "lightning-app")
+    PROJECTPATH = create_target_path(filepath, "hello-lightning")
     # SET LOGGER
     # https://pytorch-lightning.readthedocs.io/en/latest/api/pytorch_lightning.loggers.tensorboard.html#tensorboard
     logs_dir = os.path.join(PROJECTPATH, "logs")
