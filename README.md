@@ -17,6 +17,23 @@ This project is a template Python environment, tooling, and system architecture 
 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine.
 
+### Prepping for Use
+A [python script](https://github.com/JustinGoheen/hello-lightning/blob/main/lightning_pod/utils/teardown.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
+
+In terminal, run:
+
+```sh
+cd {{ path to clone }}
+{{ activate python environment }}
+python lightning_pod/utils/teardown.py
+```
+
+This will enable running a new Trainer with:
+
+```
+python lightning_pod/agents/static_trainer.py
+```
+
 ## Viewing the App Locally
 
 Once the repo has been cloned, the app can be viewed locally by running the following in terminal (assumes conda environment manager):
