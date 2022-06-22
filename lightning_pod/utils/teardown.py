@@ -9,7 +9,6 @@ project_root_path = create_target_path(filepath, "hello-lightning")
 
 do_not_delete = "01-README.md"
 
-
 target_dirs = [
     os.path.join(project_root_path, "models", "checkpoints"),
     os.path.join(project_root_path, "models", "production"),
