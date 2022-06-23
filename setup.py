@@ -1,6 +1,11 @@
 from setuptools import setup
 from setuptools import find_packages
 
+console_scripts = """
+[console_scripts]
+lightning-pod=lightning_pod.cli.lightningpod_cli:main
+"""
+
 setup(
     name="lightning-pod",
     version="0.0.1",
@@ -15,4 +20,5 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3.10",
     ],
+    entry_points=console_scripts,
 )

@@ -14,8 +14,7 @@ from lightning_pod.agents.module import (
 from lightning_pod.utils.paths import create_target_path
 
 
-if __name__ == "__main__":
-
+def main():
     # SET PATHS
     filepath = Path(__file__)
     PROJECTPATH = create_target_path(filepath, "hello-lightning")
@@ -124,3 +123,7 @@ if __name__ == "__main__":
     torch.save(datamodule.train_data, train_split_fname)
     torch.save(datamodule.test_data, test_split_fname)
     torch.save(datamodule.val_data, val_split_fname)
+
+
+if __name__ == "__main__":
+    main()
