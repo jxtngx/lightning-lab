@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 console_scripts = """
 [console_scripts]
-lightning-pod=lightning_pod.cli.lightningpod_cli:main
+lightning-pod=lightning_pod.cli.pod_cli:main
 """
 
 setup(
