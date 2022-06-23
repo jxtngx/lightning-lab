@@ -18,20 +18,25 @@ This project is a template Python environment, tooling, and system architecture 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine.
 
 ### Prepping for Use
-A [python script](https://github.com/JustinGoheen/hello-lightning/blob/main/lightning_pod/utils/teardown.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
+A basic [CLI](https://github.com/JustinGoheen/hello-lightning/blob/main/lightning_pod/cli/lightningpod_cli.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
 
 In terminal, run:
 
 ```sh
 cd {{ path to clone }}
 {{ activate python environment }}
-python lightning_pod/utils/teardown.py
+pip install lightning
+pip install -e .
+lightning-pod teardown
 ```
+> miniconda is not installing lightning from pip when added to the enviroment.yml; hence the `pip install lightning` that follows the environment activation 
+
+> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran only once. 
 
 This will enable running a new Trainer with:
 
 ```
-python lightning_pod/agents/static_trainer.py
+lightning-pod static-trainer
 ```
 
 ## Viewing the App Locally
