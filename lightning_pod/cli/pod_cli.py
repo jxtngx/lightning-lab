@@ -1,18 +1,25 @@
 import click
 from lightning_pod.utils import teardown
+from lightning_pod.utils.new import make_new
 from lightning_pod.agents import static_trainer
 
 
 @click.group()
-def main():
+def cli():
     pass
 
 
-@main.command("teardown")
+@cli.command("teardown")
 def _teardown():
     teardown.main()
 
 
-@main.command("static-trainer")
+@cli.command("static-trainer")
 def _static_trainer():
     static_trainer.main()
+
+
+@cli.command("make-new")
+def _new():
+    teardown.main()
+    make_new.main()

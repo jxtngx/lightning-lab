@@ -3,9 +3,7 @@ from lightning_pod.agents.module import (
     Encoder,
     Decoder,
 )
-from lightning_pod.agents.module import (
-    LinearEncoderDecoder as LitModel,
-)
+from lightning_pod.agents.module import LitModel
 
 
 def test_module_not_abstract():

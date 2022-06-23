@@ -2,11 +2,12 @@ import os
 import shutil
 from lightning_pod.utils.paths import create_target_path
 from pathlib import Path
+from lightning_pod.conf import PROJECT_NAME
 
 
 def main():
     filepath = Path(__file__)
-    project_root_path = create_target_path(filepath, "hello-lightning")
+    project_root_path = create_target_path(filepath, PROJECT_NAME)
 
     do_not_delete = "01-README.md"
 

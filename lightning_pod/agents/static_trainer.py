@@ -8,16 +8,15 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.pipeline.datamodule import LitDataModule
-from lightning_pod.agents.module import (
-    LinearEncoderDecoder as LitModel,
-)
+from lightning_pod.agents.module import LitModel
 from lightning_pod.utils.paths import create_target_path
+from lightning_pod.conf import PROJECT_NAME
 
 
 def main():
     # SET PATHS
     filepath = Path(__file__)
-    PROJECTPATH = create_target_path(filepath, "hello-lightning")
+    PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
     # SET LOGGER
     # https://pytorch-lightning.readthedocs.io/en/latest/api/pytorch_lightning.loggers.tensorboard.html#tensorboard
     logs_dir = os.path.join(PROJECTPATH, "logs")
