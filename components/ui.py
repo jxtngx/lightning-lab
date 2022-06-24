@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 from dash import dcc, html, dash_table
 from pytorch_lightning.utilities.model_summary import ModelSummary
-from lightning_pod.agents.module import LinearEncoderDecoder
+from lightning_pod.agents.module import LitModel
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -90,8 +90,11 @@ for i in range(len(ground_truths)):
         break
 
 ## model summary ##
-chkpt_fname = os.path.join("models", "checkpoints", "model-v1.ckpt")
-model = LinearEncoderDecoder.load_from_checkpoint(chkpt_fname)
+chkptdir = os.path.join("models", "checkpoints")
+avialable_checkpoints = os.listdir(chkptdir)
+latest_checkpoint = avialable_checkpoints[0]
+chkpt_fname = os.path.join("models", "checkpoints", latest_checkpoint)
+model = LitModel.load_from_checkpoint(chkpt_fname)
 summary = ModelSummary(model)
 model_layers, model_params = make_model_summary(summary)
 

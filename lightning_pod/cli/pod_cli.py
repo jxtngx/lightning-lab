@@ -1,18 +1,28 @@
+import os
 import click
 from lightning_pod.utils import teardown
-from lightning_pod.agents import static_trainer
+from lightning_pod.utils import build
+from lightning_pod.agents import trainer
+from lightning_pod.conf import PROJECT_NAME
 
 
 @click.group()
-def main():
+def cli():
     pass
 
 
-@main.command("teardown")
+@cli.command("teardown")
 def _teardown():
     teardown.main()
 
 
-@main.command("static-trainer")
+@cli.command("run_trainer")
 def _static_trainer():
-    static_trainer.main()
+    trainer = os.path.join("lightning_pod", "agents", "trainer.py")
+    os.system(f"python3 {trainer}")
+
+
+@cli.command("seed_new_pod")
+def _new():
+    teardown.main()
+    build.main()

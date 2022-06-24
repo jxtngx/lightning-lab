@@ -1,1 +1,1 @@
-model checkpoints will be pushed here during training
+checkpoints will get pushed to this directory
