@@ -10,16 +10,11 @@
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JustinGoheen/lightning-pod)
-
-[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
-
-
 </div>
 
 # Overview
 
-This project is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g616ckjfxjv7me6hp48symat.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+This project is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
 ## Using the Template
 
@@ -115,7 +110,28 @@ Azure Pipelines, pre-commit, and mergify are not used in this project repo.
 
 This repo uses a GitHub Action for GitHub CodeQL security analysis; this action is the default action set by GitHub when enabling [code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning) for any repo.
 
-Additionally, this repo includes boilerplate for reproducible environments with Gitpod or GitHub CodeSpaces.
+# Cloud Development
+
+Lightning Pod enables collaborative development with Gitpod and GitHub CodeSpaces. Please note that these tools have only been tested on creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally. Lastly, GitHub CodeSpaces is still in beta for individual pro accounts. Gitpod offers 50 free hours per month. Support for [Grid Sessions](https://docs.grid.ai/features/sessions) is planned.
+
+<div align="center">
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JustinGoheen/lightning-pod)
+
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
+
+</div>
+
+Gitpod and CodeSpaces uses pyenv instead of conda ... meaning the terminal commands to use the CLI's are slightly different.
+
+Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
+
+```sh
+lightning-pod teardown
+lightning-pod run_trainer
+```
+
+If using VS Code (in browser or on desktop), it is possible to view PyTorch Profiler and TensorBoard logs when using Gitpod or CodeSpaces. Access the VS Code command palette and enter `>Python: Launch TensorBoard`. A new port will start; TensorBoard will launch once the new port is active. If the TensorBoard window remains blank, close it and restart the TensorBoard session.
 
 # Getting Help
 
