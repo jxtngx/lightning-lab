@@ -11,7 +11,7 @@
 
 # Overview
 
-This project is a template Python environment, tooling, and system architecture for [Lightning](https://www.pytorchlightning.ai/) OS that culminates with a Plotly Dash [UI](https://01g616ckjfxjv7me6hp48symat.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+This project is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g616ckjfxjv7me6hp48symat.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
 ## Using the Template
 
@@ -20,43 +20,52 @@ The intent is that users [create a new repo from the template](https://docs.gith
 ### Prepping for Use
 A basic [CLI](https://github.com/JustinGoheen/hello-lightning/blob/main/lightning_pod/cli/lightningpod_cli.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
 
-In terminal, run:
+In terminal, run (assumes conda environment manager):
 
 ```sh
 cd {{ path to clone }}
-{{ activate python environment }}
+conda env create --file environment.yml
+conda activate lightning-os
 pip install lightning
 pip install -e .
 lightning-pod teardown
 ```
 > miniconda is not installing lightning from pip when added to the enviroment.yml; hence the `pip install lightning` that follows the environment activation 
 
-> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran before using the template. 
+> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran before using the CLI. 
 
-This will enable running a new example Trainer with:
+Executing the above will enable running a new example Trainer with:
 
 ```
 lightning-pod run_trainer
 ```
 
 #### Full Tear Down
-The `lightning-pod` CLI flag `seed_new_pod` will create a remove all example code and data.
+The `lightning-pod` CLI command `seed_new_pod` will remove all example code and data.
 
-Running this will remove all cached MNIST data, training splits, saved predictions, PyTorch Profiler and TensorBoard logs, and model checkpoints and onnx. Additionally, this command creates a new custom LightningModule class `LitModel` in `lightning_pod/agents/module.py`, and resets `trainer.py` and `trainer_config.yaml` to the default flags.
-
-Meaning, running the below command deletes the necessary files in order to allow users to begin their own projects:
+Meaning, running the below command deletes necessary files, and seeds a new LightningModule and Trainer in order to allow users to begin their own projects:
 
 ```sh
 lightning-pod seed_new_pod
 ```
 
-The example code will be preserved in a new directory `examples` after running the above. This `examples` direcotry can safely be deleted if it is not needed.
+The example code will be preserved in a new directory `examples` after running the above. This `examples` directory can safely be deleted if it is not needed.
+
+Files removed:
+
+- cached MNIST data
+- training splits
+- saved predictions
+- PyTorch Profiler and TensorBoard logs
+- model checkpoints
+- persisted ONNX model 
+
 
 ## Viewing the App Locally
 
-Once the repo has been cloned, the app can be viewed locally by running the following in terminal (assumes conda environment manager):
+Once the repo has been cloned, the app can be viewed locally by running the following in terminal:
 
-> the steps shown above in `Prepping for Use` must be completed before the following
+> the steps shown above in `Prepping for Use` should be completed before the following
 
 ```sh
 lightning run app app.py
@@ -64,19 +73,15 @@ lightning run app app.py
 
 ## Deploying to Lightning Cloud
 
-Deploying finished applications to Lightning is simple. If you haven't done so already, create an account on Lightning.ai. Once an account has been created, one needs only to add an additional flag to `lightning run` as shown below:
+Deploying finished applications to Lightning is simple. If you haven't done so already, create an account on [Lightning.ai](https://www.pytorchlightning.ai/). Once an account has been created, one needs only to add an additional flag to `lightning run` as shown below:
 
 ```sh
 lightning run app app.py --cloud
 ```
 
-This will load the app to your account, build services, and then run the app in Lightning's cloud. An `open` option will be shown when the app is ready to be viewed.
+This will load the app to your account, build services, and then run the app on Lightning's platform. An `open` option will be shown when the app is ready to be viewed.
 
-# Software Engineering and Machine Learning
-
-Many ML courses are taught via notebooks, leading to a possible gap in software engineering skills or outright bad practices for researchers and data science students. The resources shown below can help to build the requisite skills to be considered industry ready.
-
-## Software Engineering
+# Software Engineering
 
 The Lightning team has created a series of [Engineering for Researchers](https://www.pytorchlightning.ai/edu/engineering-class) videos to help upskill individuals for work beyond of notebooks.
 
