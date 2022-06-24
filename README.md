@@ -31,38 +31,46 @@ lightning-pod teardown
 ```
 > miniconda is not installing lightning from pip when added to the enviroment.yml; hence the `pip install lightning` that follows the environment activation 
 
-> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran only once. 
+> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran before using the template. 
 
-This will enable running a new Trainer with:
+This will enable running a new example Trainer with:
 
 ```
-lightning-pod static-trainer
+lightning-pod run_trainer
 ```
+
+#### Full Tear Down
+The `lightning-pod` CLI flag `seed_new_pod` will create a remove all example code and data.
+
+Running this will remove all cached MNIST data, training splits, saved predictions, PyTorch Profiler and TensorBoard logs, and model checkpoints and onnx. Additionally, this command creates a new custom LightningModule class `LitModel` in `lightning_pod/agents/module.py`, and resets `trainer.py` and `trainer_config.yaml` to the default flags.
+
+Meaning, running the below command deletes the necessary files in order to allow users to begin their own projects:
+
+```sh
+lightning-pod seed_new_pod
+```
+
+The example code will be preserved in a new directory `examples` after running the above. This `examples` direcotry can safely be deleted if it is not needed.
 
 ## Viewing the App Locally
 
 Once the repo has been cloned, the app can be viewed locally by running the following in terminal (assumes conda environment manager):
 
+> the steps shown above in `Prepping for Use` must be completed before the following
+
 ```sh
-cd {{ path to clone }}
-conda env create --file environment.yml
-conda activate lightning-os
-pip install lightning
-pip install -e .
 lightning run app app.py
 ```
 
-> miniconda is not installing lightning from pip when added to the enviroment.yml; hence the `pip install lightning` that follows the environment activation 
-
-> `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran only once.
-
 ## Deploying to Lightning Cloud
 
-Deploying finished applications to Lightning is simple; one needs only to add an additional flag to `lightning run` as shown below:
+Deploying finished applications to Lightning is simple. If you haven't done so already, create an account on Lightning.ai. Once an account has been created, one needs only to add an additional flag to `lightning run` as shown below:
 
 ```sh
 lightning run app app.py --cloud
 ```
+
+This will load the app to your account, build services, and then run the app in Lightning's cloud. An `open` option will be shown when the app is ready to be viewed.
 
 # Software Engineering and Machine Learning
 
