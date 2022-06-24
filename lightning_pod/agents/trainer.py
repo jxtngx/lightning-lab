@@ -16,9 +16,14 @@ from lightning_pod.conf import PROJECT_NAME
 # SET PATHS
 filepath = Path(__file__)
 PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
+AGENTSPATH = create_target_path(filepath, "agents")
 
 
-@hydra.main(config_name="hydra_config")
+@hydra.main(
+    config_path=AGENTSPATH,
+    config_name="trainer_config",
+    version_base=hydra.__version__,
+)
 def main(cfg):
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
@@ -45,9 +50,9 @@ def main(cfg):
     trainer = Trainer(
         max_epochs=cfg.trainer.max_epochs,
         limit_train_batches=cfg.trainer.limit_train_batches,
-        limit_predict_batches=None,
-        limit_test_batches=None,
-        limit_val_batches=None,
+        limit_predict_batches=cfg.trainer.limit_predict_batches,
+        limit_test_batches=cfg.trainer.limit_test_batches,
+        limit_val_batches=cfg.trainer.limit_val_batches,
         accelerator=cfg.trainer.accelerator,
         devices=cfg.trainer.devices,
         deterministic=cfg.trainer.deterministic,
@@ -91,7 +96,7 @@ def main(cfg):
         auto_lr_find=cfg.trainer.auto_lr_find,
         replace_sampler_ddp=cfg.trainer.replace_sampler_ddp,
         detect_anomaly=cfg.trainer.detect_anomaly,
-        auto_scale_batch_size=cfg.traainer.auto_scale_batch_size,
+        auto_scale_batch_size=cfg.trainer.auto_scale_batch_size,
         amp_backend=cfg.trainer.amp_backend,
         amp_level=cfg.trainer.amp_level,
         move_metrics_to_cpu=cfg.trainer.move_metrics_to_cpu,

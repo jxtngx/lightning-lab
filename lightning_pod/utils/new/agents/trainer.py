@@ -16,9 +16,12 @@ from lightning_pod.conf import PROJECT_NAME
 # SET PATHS
 filepath = Path(__file__)
 PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
+PODPATH = os.path.join(PROJECTPATH, "lightning-pod", "agents")
 
 
-@hydra.main(config_name="hydra_config")
+@hydra.main(
+    config_path=PODPATH, config_name="trainer_config", version_base=hydra.__version__
+)
 def main(cfg):
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
