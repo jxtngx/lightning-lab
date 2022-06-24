@@ -90,7 +90,10 @@ for i in range(len(ground_truths)):
         break
 
 ## model summary ##
-chkpt_fname = os.path.join("models", "checkpoints", "model-v1.ckpt")
+chkptdir = os.path.join("models", "checkpoints")
+avialable_checkpoints = os.listdir(chkptdir)
+latest_checkpoint = avialable_checkpoints[0]
+chkpt_fname = os.path.join("models", "checkpoints", latest_checkpoint)
 model = LitModel.load_from_checkpoint(chkpt_fname)
 summary = ModelSummary(model)
 model_layers, model_params = make_model_summary(summary)
