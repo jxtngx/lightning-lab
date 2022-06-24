@@ -13,8 +13,8 @@ def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
     if not os.path.isdir(destinationpath):
         os.mkdir(destinationpath)
     src = os.path.join(PROJECTPATH, main_source_dir, sub_source_dir)
-    dest = os.path.join(PROJECTPATH, destinationpath)
-    shutil.copy(src, dest)
+    dest = os.path.join(PROJECTPATH, destinationpath, main_source_dir, sub_source_dir)
+    shutil.copytree(src, dest)
 
 
 def preserve_examples():
@@ -25,7 +25,8 @@ def preserve_examples():
 def _clean_and_build_lightning_pod(module_to_copy):
     src = os.path.join(FILEPATH.parent, module_to_copy)
     dest = os.path.join(PROJECTPATH, "lightning_pod", module_to_copy)
-    shutil.copy(src, dest)
+    shutil.rmtree(dest)
+    shutil.copytree(src, dest)
 
 
 def make_new_lightning_pod():
