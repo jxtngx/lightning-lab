@@ -2,6 +2,7 @@
 lightning
 pytorch-lightning
 lightning-grid
+hydra-core
 # FUNDAMENTAL ML
 scikit-learn
 # TEXT
