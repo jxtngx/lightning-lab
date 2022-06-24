@@ -10,6 +10,7 @@ dependencies:
       - black
       - coverage
       - flake8
+      - hydra-code
       - ipywidgets
       - lightning-bolts
       - lightning-flash
