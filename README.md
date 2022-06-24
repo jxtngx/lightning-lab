@@ -111,7 +111,7 @@ Additionally, this repo includes boilerplate for reproducible environments with 
 
 # Getting Help
 
-Please join the [Lightning Community Slack](https://join.slack.com/t/pytorch-lightning/shared_invite/zt-19m2xnz2o-hC80K2vGCoGCpP4vTh6T1g) for questions about the Lightning ecosystem. After introducing yourself in #introduce-yourself, it is best to post to the #questions channel of the Lightning Slack to receive quick support from the community. Feel free to @ me in Slack if you have a question specific to this repo.
+Please join the [Lightning Community Slack](https://join.slack.com/t/pytorch-lightning/shared_invite/zt-19m2xnz2o-hC80K2vGCoGCpP4vTh6T1g) for questions about the Lightning ecosystem. Feel free to @ me in Slack if you have a question specific to this repo.
 
 # Contributing
 
