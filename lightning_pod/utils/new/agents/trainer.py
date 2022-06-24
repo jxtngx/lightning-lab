@@ -16,11 +16,13 @@ from lightning_pod.conf import PROJECT_NAME
 # SET PATHS
 filepath = Path(__file__)
 PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
-PODPATH = os.path.join(PROJECTPATH, "lightning-pod", "agents")
+AGENTSPATH = create_target_path(filepath, "agents")
 
 
 @hydra.main(
-    config_path=PODPATH, config_name="trainer_config", version_base=hydra.__version__
+    config_path=AGENTSPATH,
+    config_name="trainer_config",
+    version_base=hydra.__version__,
 )
 def main(cfg):
     # SET LOGGER
@@ -48,9 +50,9 @@ def main(cfg):
     trainer = Trainer(
         max_epochs=cfg.trainer.max_epochs,
         limit_train_batches=cfg.trainer.limit_train_batches,
-        limit_predict_batches=None,
-        limit_test_batches=None,
-        limit_val_batches=None,
+        limit_predict_batches=cfg.trainer.limit_predict_batches,
+        limit_test_batches=cfg.trainer.limit_test_batches,
+        limit_val_batches=cfg.trainer.limit_val_batches,
         accelerator=cfg.trainer.accelerator,
         devices=cfg.trainer.devices,
         deterministic=cfg.trainer.deterministic,
@@ -83,9 +85,9 @@ def main(cfg):
         max_time=cfg.trainer.max_time,
         val_check_interval=cfg.trainer.val_check_interval,
         flush_logs_every_n_steps=cfg.trainer.flush_logs_every_n_steps,
-        log_every_n_steps=cfg.trainer.sync_batchnorm,
+        log_every_n_steps=cfg.trainer.log_every_n_steps,
         sync_batchnorm=cfg.trainer.sync_batchnorm,
-        weights_save_path=cfg.trainer.weights_summary,
+        weights_save_path=cfg.trainer.weights_save_path,
         weights_summary=cfg.trainer.weights_summary,
         num_sanity_val_steps=cfg.trainer.num_sanity_val_steps,
         resume_from_checkpoint=cfg.trainer.resume_from_checkpoint,
@@ -94,7 +96,7 @@ def main(cfg):
         auto_lr_find=cfg.trainer.auto_lr_find,
         replace_sampler_ddp=cfg.trainer.replace_sampler_ddp,
         detect_anomaly=cfg.trainer.detect_anomaly,
-        auto_scale_batch_size=cfg.traainer.auto_scale_batch_size,
+        auto_scale_batch_size=cfg.trainer.auto_scale_batch_size,
         amp_backend=cfg.trainer.amp_backend,
         amp_level=cfg.trainer.amp_level,
         move_metrics_to_cpu=cfg.trainer.move_metrics_to_cpu,
@@ -117,6 +119,14 @@ def main(cfg):
     predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
     prediction_fname = os.path.join(predictions_dir, "predictions.pt")
     torch.save(predictions, prediction_fname)
+    # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
+    split_dir = os.path.join(PROJECTPATH, "data", "training_split")
+    train_split_fname = os.path.join(split_dir, "train.pt")
+    test_split_fname = os.path.join(split_dir, "test.pt")
+    val_split_fname = os.path.join(split_dir, "val.pt")
+    torch.save(datamodule.train_data, train_split_fname)
+    torch.save(datamodule.test_data, test_split_fname)
+    torch.save(datamodule.val_data, val_split_fname)
 
 
 if __name__ == "__main__":

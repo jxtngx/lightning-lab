@@ -85,9 +85,9 @@ def main(cfg):
         max_time=cfg.trainer.max_time,
         val_check_interval=cfg.trainer.val_check_interval,
         flush_logs_every_n_steps=cfg.trainer.flush_logs_every_n_steps,
-        log_every_n_steps=cfg.trainer.sync_batchnorm,
+        log_every_n_steps=cfg.trainer.log_every_n_steps,
         sync_batchnorm=cfg.trainer.sync_batchnorm,
-        weights_save_path=cfg.trainer.weights_summary,
+        weights_save_path=cfg.trainer.weights_save_path,
         weights_summary=cfg.trainer.weights_summary,
         num_sanity_val_steps=cfg.trainer.num_sanity_val_steps,
         resume_from_checkpoint=cfg.trainer.resume_from_checkpoint,
@@ -119,6 +119,14 @@ def main(cfg):
     predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
     prediction_fname = os.path.join(predictions_dir, "predictions.pt")
     torch.save(predictions, prediction_fname)
+    # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
+    split_dir = os.path.join(PROJECTPATH, "data", "training_split")
+    train_split_fname = os.path.join(split_dir, "train.pt")
+    test_split_fname = os.path.join(split_dir, "test.pt")
+    val_split_fname = os.path.join(split_dir, "val.pt")
+    torch.save(datamodule.train_data, train_split_fname)
+    torch.save(datamodule.test_data, test_split_fname)
+    torch.save(datamodule.val_data, val_split_fname)
 
 
 if __name__ == "__main__":
