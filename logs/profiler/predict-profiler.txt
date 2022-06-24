@@ -3,25 +3,25 @@ Profile stats for: records
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
-                                          ProfilerStep*        35.27%     699.000us        99.75%       1.977ms     659.000us             3  
-[pl][profile][Strategy]SingleDeviceStrategy.predict_...         2.88%      57.000us        24.07%     477.000us     159.000us             3  
-[pl][profile][Callback]TQDMProgressBar.on_predict_ba...        18.01%     357.000us        18.01%     357.000us     119.000us             3  
-[pl][module]lightning_pod.agents.module.Encoder: enc...         1.01%      20.000us        12.26%     243.000us      81.000us             3  
-[pl][module]torch.nn.modules.container.Sequential: e...         3.48%      69.000us        11.00%     218.000us      72.667us             3  
-enumerate(DataLoader)#_MultiProcessingDataLoaderIter...        10.04%     199.000us        10.34%     205.000us      68.333us             3  
-[pl][module]lightning_pod.agents.module.Decoder: dec...         0.96%      19.000us         8.22%     163.000us      54.333us             3  
-[pl][module]torch.nn.modules.container.Sequential: d...         1.97%      39.000us         7.11%     141.000us      47.000us             3  
-                                           aten::linear         0.61%      12.000us         4.99%      99.000us       8.250us            12  
-                                            aten::zeros         3.18%      63.000us         4.64%      92.000us       1.179us            78  
-                                            aten::addmm         2.72%      54.000us         3.53%      70.000us       5.833us            12  
-[pl][profile][Strategy]SingleDeviceStrategy.batch_to...         3.23%      64.000us         3.38%      67.000us      22.333us             3  
-[pl][module]torch.nn.modules.linear.Linear: encoder....         1.36%      27.000us         3.33%      66.000us      22.000us             3  
-                                            aten::empty         3.23%      64.000us         3.23%      64.000us       0.390us           164  
-[pl][module]torch.nn.modules.linear.Linear: decoder....         0.66%      13.000us         2.17%      43.000us      14.333us             3  
-[pl][module]torch.nn.modules.linear.Linear: encoder....         0.81%      16.000us         1.77%      35.000us      11.667us             3  
-[pl][module]torch.nn.modules.activation.ReLU: encode...         0.86%      17.000us         1.51%      30.000us      10.000us             3  
-[pl][module]torch.nn.modules.linear.Linear: decoder....         0.45%       9.000us         1.36%      27.000us       9.000us             3  
-[pl][module]torch.nn.modules.activation.ReLU: decode...         0.50%      10.000us         1.06%      21.000us       7.000us             3  
-                                             aten::relu         0.20%       4.000us         1.01%      20.000us       3.333us             6  
+                                          ProfilerStep*         4.72%     665.000us        99.97%      14.077ms       4.692ms             3  
+enumerate(DataLoader)#_MultiProcessingDataLoaderIter...        84.80%      11.940ms        85.04%      11.975ms       3.992ms             3  
+[pl][profile][Strategy]SingleDeviceStrategy.predict_...         1.11%     156.000us         4.74%     668.000us     222.667us             3  
+[pl][profile][Callback]TQDMProgressBar.on_predict_ba...         2.81%     395.000us         2.83%     398.000us     132.667us             3  
+[pl][module]lightning_pod.agents.module.Encoder: enc...         0.22%      31.000us         2.13%     300.000us     100.000us             3  
+[pl][module]torch.nn.modules.container.Sequential: e...         0.41%      58.000us         1.84%     259.000us      86.333us             3  
+[pl][module]lightning_pod.agents.module.Decoder: dec...         0.17%      24.000us         1.40%     197.000us      65.667us             3  
+[pl][module]torch.nn.modules.container.Sequential: d...         0.37%      52.000us         1.21%     171.000us      57.000us             3  
+                                           aten::linear         0.11%      16.000us         1.08%     152.000us      12.667us            12  
+                                            aten::addmm         0.58%      82.000us         0.78%     110.000us       9.167us            12  
+                                            aten::zeros         0.39%      55.000us         0.77%     109.000us       1.397us            78  
+                                            aten::empty         0.76%     107.000us         0.76%     107.000us       0.622us           172  
+[pl][module]torch.nn.modules.linear.Linear: encoder....         0.19%      27.000us         0.72%     101.000us      33.667us             3  
+[pl][profile][Callback]TQDMProgressBar.on_predict_ba...         0.52%      73.000us         0.52%      73.000us      24.333us             3  
+[pl][profile][Strategy]SingleDeviceStrategy.batch_to...         0.50%      71.000us         0.51%      72.000us      24.000us             3  
+[pl][module]torch.nn.modules.linear.Linear: decoder....         0.11%      15.000us         0.41%      58.000us      19.333us             3  
+[pl][profile][Callback]ModelCheckpoint{'monitor': No...         0.35%      49.000us         0.35%      49.000us      16.333us             3  
+[pl][module]torch.nn.modules.linear.Linear: encoder....         0.11%      16.000us         0.33%      46.000us      15.333us             3  
+[pl][module]torch.nn.modules.activation.ReLU: encode...         0.13%      19.000us         0.28%      40.000us      13.333us             3  
+[pl][module]torch.nn.modules.linear.Linear: decoder....         0.09%      13.000us         0.21%      29.000us       9.667us             3  
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
-Self CPU time total: 1.982ms
+Self CPU time total: 14.081ms
