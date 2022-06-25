@@ -38,5 +38,5 @@ def run_trainer(hydra_args):
     hydra_args = list(hydra_args)
     hydra_args = [f"'trainer.{i}'" for i in hydra_args]
     hydra_args = " ".join(hydra_args)
-    run_command = "".join(["python", " ", trainer, " ", hydra_args])
+    run_command = " ".join(["python", trainer, hydra_args])
     os.system(run_command)
