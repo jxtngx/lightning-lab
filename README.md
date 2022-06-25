@@ -21,7 +21,7 @@ This project is a template Python environment, tooling, and system architecture 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine.
 
 ### Prepping for Use
-A basic [CLI](https://github.com/JustinGoheen/hello-lightning/blob/main/lightning_pod/cli/lightningpod_cli.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
+A basic [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) has been provided to teardown the example data splits, saved predictions, logs, profilers, checkpoints, and onnx.
 
 In terminal, run (assumes conda environment manager):
 
@@ -31,25 +31,25 @@ conda env create --file environment.yml
 conda activate lightning-os
 pip install lightning
 pip install -e .
-lightning-pod teardown
+pod teardown
 ```
 > miniconda is not installing lightning from pip when added to the enviroment.yml; hence the `pip install lightning` that follows the environment activation 
 
 > `pip install -e .` will install an editable version of the `lightning-pod` module to your Python environment and must be ran before using the CLI. 
 
-Executing the above will enable running a new example Trainer with:
+Executing the above will enable running a new example Trainer with default config settings, as shown below:
 
 ```
-lightning-pod run_trainer
+pod trainer run
 ```
 
 #### Full Tear Down
-The `lightning-pod` CLI command `seed_new_pod` will remove all example code and data.
+The `pod` CLI command `seed_new_pod` will remove all example code and data.
 
-Meaning, running the below command deletes necessary files, and seeds a new LightningModule and Trainer in order to allow users to begin their own projects:
+Meaning, running the below command deletes necessary files and creates a new LightningModule and Trainer in order to allow users to begin their own projects:
 
 ```sh
-lightning-pod seed_new_pod
+pod seed_new_pod
 ```
 
 The example code will be preserved in a new directory `examples` after running the above. This `examples` directory can safely be deleted if it is not needed.
@@ -83,6 +83,14 @@ lightning run app app.py --cloud
 ```
 
 This will load the app to your account, build services, and then run the app on Lightning's platform. An `open` option will be shown when the app is ready to be viewed.
+
+> the requisite .lightning and .lightningignore files are located in [`.lightningos/.lightningai`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningos/.lightningai). 
+
+The name of the app loaded to Lightning can be changed in the [`.lightningos/.lightningai/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningos/.lightningai/.lightning) file or with
+
+```sh
+lightning run app app.py --cloud --name="what ever name you choose"
+```
 
 # Software Engineering
 
@@ -127,8 +135,8 @@ Gitpod and CodeSpaces uses pyenv instead of conda ... meaning the terminal comma
 Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
 
 ```sh
-lightning-pod teardown
-lightning-pod run_trainer
+pod teardown
+pod run_trainer
 ```
 
 If using VS Code (in browser or on desktop), it is possible to view PyTorch Profiler and TensorBoard logs when using Gitpod or CodeSpaces. Access the VS Code command palette and enter `>Python: Launch TensorBoard`. A new port will start; TensorBoard will launch once the new port is active. If the TensorBoard window remains blank, close it and restart the TensorBoard session.
