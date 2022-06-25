@@ -104,29 +104,31 @@ def main(cfg):
     )
     # TRAIN MODEL
     trainer.fit(model=model, datamodule=datamodule)
-    # TEST MODEL
-    trainer.test(ckpt_path="best", datamodule=datamodule)
-    # PERSIST MODEL
-    pretrained_dir = os.path.join(PROJECTPATH, "models", "production")
-    modelpath = os.path.join(pretrained_dir, "model.onnx")
-    input_sample = datamodule.train_data.dataset[0][0]
-    model.to_onnx(modelpath, input_sample=input_sample, export_params=True)
-    # PREDICT
-    predictions = trainer.predict(model, datamodule.val_dataloader())
-    # EXPORT PREDICTIONS
-    predictions = torch.vstack(predictions)
-    predictions = TensorDataset(predictions)
-    predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
-    prediction_fname = os.path.join(predictions_dir, "predictions.pt")
-    torch.save(predictions, prediction_fname)
-    # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
-    split_dir = os.path.join(PROJECTPATH, "data", "training_split")
-    train_split_fname = os.path.join(split_dir, "train.pt")
-    test_split_fname = os.path.join(split_dir, "test.pt")
-    val_split_fname = os.path.join(split_dir, "val.pt")
-    torch.save(datamodule.train_data, train_split_fname)
-    torch.save(datamodule.test_data, test_split_fname)
-    torch.save(datamodule.val_data, val_split_fname)
+    # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
+    if not cfg.trainer.fast_dev_run:
+        # TEST MODEL
+        trainer.test(ckpt_path="best", datamodule=datamodule)
+        # PERSIST MODEL
+        pretrained_dir = os.path.join(PROJECTPATH, "models", "production")
+        modelpath = os.path.join(pretrained_dir, "model.onnx")
+        input_sample = datamodule.train_data.dataset[0][0]
+        model.to_onnx(modelpath, input_sample=input_sample, export_params=True)
+        # PREDICT
+        predictions = trainer.predict(model, datamodule.val_dataloader())
+        # EXPORT PREDICTIONS
+        predictions = torch.vstack(predictions)
+        predictions = TensorDataset(predictions)
+        predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
+        prediction_fname = os.path.join(predictions_dir, "predictions.pt")
+        torch.save(predictions, prediction_fname)
+        # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
+        split_dir = os.path.join(PROJECTPATH, "data", "training_split")
+        train_split_fname = os.path.join(split_dir, "train.pt")
+        test_split_fname = os.path.join(split_dir, "test.pt")
+        val_split_fname = os.path.join(split_dir, "val.pt")
+        torch.save(datamodule.train_data, train_split_fname)
+        torch.save(datamodule.test_data, test_split_fname)
+        torch.save(datamodule.val_data, val_split_fname)
 
 
 if __name__ == "__main__":
