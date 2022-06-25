@@ -1,1 +1,0 @@
-attempting to use .lightningai directory to house lightning files
