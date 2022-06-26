@@ -9,13 +9,20 @@ def main():
     pass
 
 
-@main.command("teardown")
+@main.group("project")
+def project():
+    pass
+
+
+# TODO add help description
+@project.command("teardown")
 def _teardown():
     teardown.main()
 
 
-@main.command("seed_new_pod")
-def _new():
+# TODO add help description
+@project.command("seed")
+def seed():
     teardown.main()
     build.main()
 
@@ -25,12 +32,14 @@ def trainer():
     pass
 
 
-@trainer.command("config_help")
+# TODO add help description
+@trainer.command("config-help")
 def config_help():
     trainer = os.path.join("lightning_pod", "agents", "trainer.py")
     os.system(f"python {trainer} --help")
 
 
+# TODO add help description
 @trainer.command("run")
 @click.argument("hydra-args", nargs=-1)
 def run_trainer(hydra_args):
