@@ -21,12 +21,12 @@ This project is a template Python environment, tooling, and system architecture 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine.
 
 #### Prepping for Use
-A basic [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) `pod` has been provided to assist with basic tasks.
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) `pod` has been provided to assist with basic tasks.
 
 
 `pod project teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and onnx. <br>
 `pod trainer run` runs the provided example, default trainer. <br>
-`pod project seed` executes teardown, moves example code provided in `lightning_pod/agents` to a new directory `examples` in the project root directory, and then creates a new a new `trainer.py` `trainer_config.yaml` and `module.py` in `lightning_pod/agents`.
+`pod project seed` executes teardown, moves example code provided in `lightning_pod/agents` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer_config.yaml` and `module.py` in `lightning_pod/agents`.
 
 The flow for creating new checkpoints and a new ONNX model looks like (assumes conda environment manager):
 
