@@ -3,6 +3,9 @@ lightning
 pytorch-lightning
 lightning-grid
 hydra-core
+click
+colorama
+tabulate
 # FUNDAMENTAL ML
 scikit-learn
 # TEXT

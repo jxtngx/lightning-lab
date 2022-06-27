@@ -1,4 +1,4 @@
-name: lightning-os
+name: lightning-ai
 channels:
   - defaults
 dependencies:
@@ -7,26 +7,29 @@ dependencies:
   - sentencepiece
   - tokenizers
   - pip:
-      - black
-      - coverage
-      - flake8
-      - hydra-code
-      - ipywidgets
       - lightning-bolts
       - lightning-flash
       - lightning-grid
       - lightning-transformers
-      - matplotlib
-      - mypy
-      - optuna
-      - plotly
-      - pytest
       - pytorch-lightning
       - scikit-learn
       - torchaudio
       - torchtext
       - torchvision
+      - optuna
       - torch-tb-profiler
+      - black
+      - coverage
+      - flake8
+      - mypy
+      - pytest
+      - click
+      - hydra-core
+      - colorama
+      - tabulate
+      - ipywidgets
+      - matplotlib
+      - plotly
       - dash
       - dash-bootstrap-components
       - gunicorn
