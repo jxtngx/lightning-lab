@@ -6,7 +6,6 @@ from pytorch_lightning import LightningDataModule
 from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from lightning_pod.pipeline.dataset import LitDataset
-from lightning_pod.utils.paths import create_target_path
 
 
 filepath = Path(__file__)
