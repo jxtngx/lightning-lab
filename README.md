@@ -18,17 +18,17 @@ This project is a template Python environment, tooling, and system architecture 
 
 ### Using the Template
 
-The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine.
+The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. This will provide the user with the included CI/CD flows and Lightning configs found in the respective directories.
 
 #### Prepping for Use
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) `pod` has been provided to assist with basic tasks.
 
 
-`pod project teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and onnx. <br>
-`pod trainer run` runs the provided example, default trainer. <br>
-`pod project seed` executes teardown, moves example code provided in `lightning_pod/agents` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer_config.yaml` and `module.py` in `lightning_pod/agents`.
+`pod project teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
+`pod trainer run` runs the provided example Trainer. <br>
+`pod project seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod`.
 
-The flow for creating new checkpoints and a new ONNX model looks like (assumes conda environment manager):
+The flow for creating new checkpoints and ONNX model looks like (assumes conda environment manager):
 
 ```sh
 cd {{ path to clone }}
@@ -42,6 +42,12 @@ pod trainer run
 
 > miniconda (on macOS) is not installing lighting from the provided environment.yml; which is why the above shows a call to `pip install` after activating the `lightning-os` conda environment
 
+Once the new Trainer has finished, the app can be viewed by running the following in terminal:
+
+```sh
+lightning run app app.py
+```
+
 #### Full Tear Down
 The CLI command `pod project seed` will remove all example `lightning_pod/agents` code and cached MNIST files in `data` in order to allow users to begin their own projects:
 
@@ -53,25 +59,13 @@ The example code will be preserved in a new directory `examples` after running t
 
 Files removed:
 
-- cached MNIST data
-- training splits
-- saved predictions
-- PyTorch Profiler and TensorBoard logs
-- model checkpoints
-- persisted ONNX model 
-
-
-## Viewing the Lightning Dash UI Locally
-
-Once the repo has been cloned, the app can be viewed locally by running the following in terminal:
-
-```sh
-lightning run app app.py
-```
-
-> the UI cannot be viewed if the provided checkpoints have been deleted, or if a new training run has not been completed
- 
-> the provided UI is only suitable for image processing problems; however, the example Dash code and `assets/styles/css.styles` are written in a manner that the code can serve as a reference for creating new graphs, bootstrap components, and dash callbacks.
+- cached MNIST data found in `data/cache/LitDataSet`
+- training splits found in `data/training_split`
+- saved predictions found in `data/predictions`
+- PyTorch Profiler logs found in `logs/profiler`
+- TensorBoard logs found in `logs/logger`
+- model checkpoints found in `models/checkpoints`
+- persisted ONNX model found in `models/onnx`
 
 ## Deploying to Lightning Cloud
 
