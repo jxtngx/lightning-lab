@@ -21,26 +21,26 @@ This project is a template Python environment, tooling, and system architecture 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. This will provide the user with the included CI/CD flows and Lightning configs found in the respective directories.
 
 #### Prepping for Use
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) `pod` has been provided to assist with basic tasks.
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` has been provided to assist with basic tasks.
 
 
 `pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 `pod trainer run` runs the provided example Trainer. <br>
-`pod project seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod`.
+`pod project seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
 
-The flow for creating new checkpoints and ONNX model looks like (assumes conda environment manager):
+The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like (assumes conda environment manager):
 
 ```sh
 cd {{ path to clone }}
 conda env create --file environment.yml
-conda activate lightning-os
+conda activate lightning-ai
 pip install lightning
 pip install -e .
 pod teardown
 pod trainer run
 ```
 
-> miniconda (on macOS) is not installing lighting from the provided environment.yml; which is why the above shows a call to `pip install` after activating the `lightning-os` conda environment
+> miniconda (on macOS) is not installing lighting from the provided environment.yml; which is why the above shows a call to `pip install` after activating the `lightning-ai` conda environment
 
 Once the new Trainer has finished, the app can be viewed by running the following in terminal:
 
@@ -49,7 +49,7 @@ lightning run app app.py
 ```
 
 #### Full Tear Down
-The CLI command `pod project seed` will remove all example `lightning_pod/agents` code and cached MNIST files in `data` in order to allow users to begin their own projects:
+The CLI command shown below will remove boilerplate to allow users to begin their own projects:
 
 ```sh
 pod project seed
