@@ -77,6 +77,12 @@ def make_model_summary(model_summary: ModelSummary):
     return model_layers, model_params
 
 
+def find_index(dataset, label=0, label_idx=1):
+    for i in range(len(dataset)):
+        if dataset[i][label_idx] == label:
+            return i
+
+
 #### DATA ####
 ## images ##
 predictions_fname = os.path.join("data", "predictions", "predictions.pt")
@@ -85,10 +91,8 @@ ground_truths_fname = os.path.join("data", "training_split", "val.pt")
 ground_truths = torch.load(ground_truths_fname)
 ground_truth_labels = list(set(i[1] for i in ground_truths))
 # find first zero
-for i in range(len(ground_truths)):
-    if ground_truths[i][1] == 0:
-        zero_idx = i
-        break
+zero_idx = find_index(ground_truths, label=0, label_idx=1)
+
 
 ## model summary ##
 chkptdir = os.path.join("models", "checkpoints")
