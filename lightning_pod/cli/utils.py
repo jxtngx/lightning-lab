@@ -1,6 +1,9 @@
 import os
 import shutil
 from pathlib import Path
+from rich.console import Console
+from rich.table import Table
+from rich import print as rprint
 
 
 PROJECTPATH = os.getcwd()
@@ -39,28 +42,63 @@ def build():
 
 
 def teardown():
-    filepath = Path(__file__)
-    project_root_path = os.getcwd()
+
+    cwd = os.getcwd()
 
     do_not_delete = "01-README.md"
 
     target_dirs = [
-        os.path.join(project_root_path, "models", "checkpoints"),
-        os.path.join(project_root_path, "models", "onnx"),
-        os.path.join(project_root_path, "logs", "logger"),
-        os.path.join(project_root_path, "logs", "profiler"),
-        os.path.join(project_root_path, "data", "cache"),
-        os.path.join(project_root_path, "data", "predictions"),
-        os.path.join(project_root_path, "data", "training_split"),
-        os.path.join(project_root_path, "docs"),
+        os.path.join(cwd, "models", "checkpoints"),
+        os.path.join(cwd, "models", "onnx"),
+        os.path.join(cwd, "logs", "logger"),
+        os.path.join(cwd, "logs", "profiler"),
+        os.path.join(cwd, "data", "cache"),
+        os.path.join(cwd, "data", "predictions"),
+        os.path.join(cwd, "data", "training_split"),
+        os.path.join(cwd, "docs"),
     ]
 
     for dir in target_dirs:
         for target in os.listdir(dir):
-            targetpath = os.path.join(project_root_path, dir, target)
+            targetpath = os.path.join(cwd, dir, target)
             if not os.path.isdir(targetpath):
                 if target != do_not_delete:
                     os.remove(targetpath)
-            else:  ## for checkpoint version directories
-                dirpath = os.path.join(project_root_path, dir, target)
+            else:
+                dirpath = os.path.join(cwd, dir, target)
                 shutil.rmtree(dirpath)
+
+
+def show_purge_table():
+    # TITLE
+    table = Table(title="Directories To Be Purged")
+    # COLUMNS
+    table.add_column("Directory", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Conents", style="magenta")
+    # ROWS
+    for dirname in ["data", "logs", "models", os.path.join("lightning_pod", "core")]:
+        dirpath = os.path.join(os.getcwd(), dirname)
+        contents = ", ".join(os.listdir(dirpath))
+        table.add_row(dirname, contents)
+    # SHOW
+    console = Console()
+    console.print(table)
+    return
+
+
+def show_destructive_behavior_warning():
+    """
+    uses rich console markup
+
+    notes: https://rich.readthedocs.io/en/stable/markup.html
+    """
+    print()
+    rprint(
+        ":warning: [bold red]Alert![/bold red] This action has destructive behavior! :warning: "
+    )
+    print()
+    rprint("The following directories will be [bold red]purged[/bold red]")
+    print()
+    show_purge_table()
+    print()
+    return
