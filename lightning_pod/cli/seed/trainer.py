@@ -9,17 +9,15 @@ from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.pipeline.datamodule import LitDataModule
 from lightning_pod.core.module import LitModel
-from lightning_pod.utils.paths import create_target_path
 
 
 # SET PATHS
 filepath = Path(__file__)
 PROJECTPATH = os.getcwd()
-AGENTSPATH = create_target_path(filepath, "agents")
 
 
 @hydra.main(
-    config_path=AGENTSPATH,
+    config_path=filepath.parent,
     config_name="trainer_config",
     version_base=hydra.__version__,
 )

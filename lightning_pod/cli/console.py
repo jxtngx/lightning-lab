@@ -1,7 +1,7 @@
 import os
 import click
-from lightning_pod.utils import teardown
-from lightning_pod.utils import build
+from lightning_pod.cli.utils import teardown
+from lightning_pod.cli.utils import build
 
 
 @click.group()
