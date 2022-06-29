@@ -1,4 +1,5 @@
 import os
+import click
 import shutil
 from pathlib import Path
 from rich.console import Console
@@ -102,3 +103,17 @@ def show_destructive_behavior_warning():
     show_purge_table()
     print()
     return
+
+
+def common_destructive_flow(commands: list, command_name: str):
+    show_destructive_behavior_warning()
+    if click.confirm("Do you want to continue"):
+        for command in commands:
+            command()
+        print()
+        rprint(f"[bold green]{command_name.title()} complete[bold green]")
+        print()
+    else:
+        print()
+        rprint("[bold green]No Action Taken[/bold green]")
+        print()

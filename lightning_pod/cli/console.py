@@ -4,25 +4,12 @@ from lightning_pod.cli.utils import teardown
 from lightning_pod.cli.utils import build
 from rich import print as rprint
 from lightning_pod.cli.utils import show_destructive_behavior_warning
+from lightning_pod.cli.utils import common_destructive_flow
 
 
 @click.group()
 def main():
     pass
-
-
-def common_destructive_flow(commands: list, command_name: str):
-    show_destructive_behavior_warning()
-    if click.confirm("Do you want to continue"):
-        for command in commands:
-            command()
-        print()
-        rprint(f"[bold green]{command_name.title()} complete[bold green]")
-        print()
-    else:
-        print()
-        rprint("[bold green]No Action Taken[/bold green]")
-        print()
 
 
 @main.command("teardown")
