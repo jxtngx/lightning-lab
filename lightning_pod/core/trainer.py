@@ -8,7 +8,7 @@ from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.pipeline.datamodule import LitDataModule
-from lightning_pod.module import LitModel
+from lightning_pod.core.module import LitModel
 from lightning_pod.utils.paths import create_target_path
 
 
@@ -20,13 +20,13 @@ AGENTSPATH = create_target_path(filepath, "agents")
 
 @hydra.main(
     config_path=AGENTSPATH,
-    config_name="trainer_config",
+    config_name="trainer",
     version_base=hydra.__version__,
 )
 def main(cfg):
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
-    logger = TensorBoardLogger(logs_dir, name="lightning_logs")
+    logger = TensorBoardLogger(logs_dir, name="logger")
     # SET PROFILER
     profile_dir = os.path.join(logs_dir, "profiler")
     profiler = PyTorchProfiler(dirpath=profile_dir, filename="profiler")
@@ -103,12 +103,13 @@ def main(cfg):
     )
     # TRAIN MODEL
     trainer.fit(model=model, datamodule=datamodule)
-    # IF NOT FAST DEV RUN, THEN TEST, PERSIST, MAKE AND EXPORT PREDICTIONS
+    # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
     if not cfg.trainer.fast_dev_run:
         # TEST MODEL
         trainer.test(ckpt_path="best", datamodule=datamodule)
         # PERSIST MODEL
-        pretrained_dir = os.path.join(PROJECTPATH, "models", "production")
+        # TODO write util to search models dir and append version number
+        pretrained_dir = os.path.join(PROJECTPATH, "models", "onnx")
         modelpath = os.path.join(pretrained_dir, "model.onnx")
         input_sample = datamodule.train_data.dataset[0][0]
         model.to_onnx(modelpath, input_sample=input_sample, export_params=True)

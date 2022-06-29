@@ -1,6 +1,6 @@
 import torch
-from lightning_pod.module import Encoder, Decoder
-from lightning_pod.module import LitModel
+from lightning_pod.core.module import Encoder, Decoder
+from lightning_pod.core.module import LitModel
 
 
 def test_module_not_abstract():
