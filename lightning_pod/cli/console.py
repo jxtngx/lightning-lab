@@ -11,25 +11,29 @@ def main():
     pass
 
 
-@main.command("teardown")
-def _teardown():
+def common_destructive_flow(commands: list, command_name: str):
     show_destructive_behavior_warning()
     if click.confirm("Do you want to continue"):
-        teardown()
+        for command in commands:
+            command()
         print()
-        rprint("[bold green]Tear down complete[bold green]")
+        rprint(f"[bold green]{command_name.title()} complete[bold green]")
         print()
     else:
         print()
-        rprint("[bold green]Contents preserved[/bold green]")
+        rprint("[bold green]No Action Taken[/bold green]")
         print()
+
+
+@main.command("teardown")
+def _teardown():
+    common_destructive_flow([teardown], command_name="tear down")
 
 
 # TODO add help description
 @main.command("seed")
 def seed():
-    teardown()
-    build()
+    common_destructive_flow([teardown, build], command_name="seed")
 
 
 @main.group("trainer")
