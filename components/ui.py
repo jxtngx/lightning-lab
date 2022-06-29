@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 
 from dash import dcc, html, dash_table
 from pytorch_lightning.utilities.model_summary import ModelSummary
-from lightning_pod.agents.module import LitModel
+from lightning_pod.module import LitModel
 
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -83,6 +83,7 @@ predictions_fname = os.path.join("data", "predictions", "predictions.pt")
 predictions = torch.load(predictions_fname)
 ground_truths_fname = os.path.join("data", "training_split", "val.pt")
 ground_truths = torch.load(ground_truths_fname)
+ground_truth_labels = list(set(i[1] for i in ground_truths))
 # find first zero
 for i in range(len(ground_truths)):
     if ground_truths[i][1] == 0:
@@ -110,9 +111,9 @@ NavBar = dbc.NavbarSimple(
 Control = dbc.Card(
     dbc.CardBody(
         [
-            html.H1("Digit", className="card-title"),
+            html.H1("Label", className="card-title"),
             dcc.Dropdown(
-                options=[i for i in range(10)],
+                options=ground_truth_labels,
                 value=0,
                 multi=False,
                 id="dropdown",
@@ -160,7 +161,11 @@ ModelCard = dbc.Card(
 )
 
 SideBar = dbc.Col(
-    [Control, html.Br(), ModelCard],
+    [
+        Control,
+        html.Br(),
+        ModelCard,
+    ],
     width=3,
 )
 
