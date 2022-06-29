@@ -4,7 +4,7 @@ from pathlib import Path
 
 console_scripts = """
 [console_scripts]
-pod=lightning_pod.cli.pod:main
+pod=lightning_pod.cli.console:main
 """
 
 rootdir = Path(__file__).parent
@@ -19,24 +19,7 @@ setup(
     url="https://github.com/JustinGoheen/lightning-pod",
     author="Justin Goheen",
     license="Apache 2.0",
-    # install_requires=[
-    #     "lightning",
-    #     "lightning-grid",
-    #     "pytorch_lightning",
-    #     "torchvision",
-    #     "dearpygui",
-    #     "click",
-    #     "textual",
-    #     "rich-cli",
-    #     "colorama",
-    #     "tabulate",
-    #     "plotly",
-    #     "dash",
-    #     "dash-bootstrap-components",
-    #     "optuna",
-    #     "hydra-core",
-    #     "torch-tb-profilers",
-    # ],
+    install_requires=[],
     author_email="",
     packages=find_packages(),
     zip_safe=False,
