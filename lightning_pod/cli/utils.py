@@ -46,8 +46,8 @@ def teardown():
 
     target_dirs = [
         os.path.join(project_root_path, "models", "checkpoints"),
-        os.path.join(project_root_path, "models", "production"),
-        os.path.join(project_root_path, "logs", "lightning_logs"),
+        os.path.join(project_root_path, "models", "onnx"),
+        os.path.join(project_root_path, "logs", "logger"),
         os.path.join(project_root_path, "logs", "profiler"),
         os.path.join(project_root_path, "data", "cache"),
         os.path.join(project_root_path, "data", "predictions"),
