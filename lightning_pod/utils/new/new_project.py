@@ -2,10 +2,10 @@ import os
 import shutil
 from pathlib import Path
 from lightning_pod.utils.paths import create_target_path
-from lightning_pod.conf import PROJECT_NAME
+
 
 FILEPATH = Path(__file__)
-PROJECTPATH = create_target_path(FILEPATH, PROJECT_NAME)
+PROJECTPATH = os.getcwd()
 
 
 def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):

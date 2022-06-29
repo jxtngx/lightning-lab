@@ -10,12 +10,11 @@ from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from lightning_pod.pipeline.datamodule import LitDataModule
 from lightning_pod.module import LitModel
 from lightning_pod.utils.paths import create_target_path
-from lightning_pod.conf import PROJECT_NAME
 
 
 # SET PATHS
 filepath = Path(__file__)
-PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
+PROJECTPATH = os.getcwd()
 AGENTSPATH = create_target_path(filepath, "agents")
 
 

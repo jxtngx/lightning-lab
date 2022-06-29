@@ -7,11 +7,10 @@ from torch.utils.data import Dataset, DataLoader, random_split
 from torchvision import transforms
 from lightning_pod.pipeline.dataset import LitDataset
 from lightning_pod.utils.paths import create_target_path
-from lightning_pod.conf import PROJECT_NAME
 
 
 filepath = Path(__file__)
-PROJECTPATH = create_target_path(filepath, PROJECT_NAME)
+PROJECTPATH = os.getcwd()
 NUMWORKERS = int(multiprocessing.cpu_count() // 2)
 
 
