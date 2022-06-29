@@ -24,7 +24,7 @@ The intent is that users [create a new repo from the template](https://docs.gith
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/pod.py) `pod` has been provided to assist with basic tasks.
 
 
-`pod project teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
+`pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 `pod trainer run` runs the provided example Trainer. <br>
 `pod project seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod`.
 
@@ -36,7 +36,7 @@ conda env create --file environment.yml
 conda activate lightning-os
 pip install lightning
 pip install -e .
-pod project teardown
+pod teardown
 pod trainer run
 ```
 
@@ -95,7 +95,7 @@ The Lightning team has created a series of [Engineering for Researchers](https:/
 
 For software engineers in need of deep learning know-how, NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
 
-##3 Additional Resources
+### Additional Resources
 
 Aside from the above, I've started a [wiki](https://justingoheen.github.io/lightning-engineer/) to help guide individuals through some of the concepts and tooling discussed in this document.
 
