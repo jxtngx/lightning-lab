@@ -20,19 +20,19 @@ def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
 
 
 def preserve_examples():
-    _preserve_dir("lightning_pod", "agents", "examples")
+    _preserve_dir("lightning_pod", "core", "examples")
     _preserve_dir("lightning_pod", "pipeline", "examples")
 
 
 def _clean_and_build_lightning_pod(module_to_copy):
-    src = os.path.join(FILEPATH.parent, module_to_copy)
+    src = os.path.join(FILEPATH.parent, "seed", module_to_copy)
     dest = os.path.join(PROJECTPATH, "lightning_pod", module_to_copy)
     shutil.rmtree(dest)
     shutil.copytree(src, dest)
 
 
 def make_new_lightning_pod():
-    _clean_and_build_lightning_pod("agents")
+    _clean_and_build_lightning_pod("core")
     _clean_and_build_lightning_pod("pipeline")
 
 
@@ -74,11 +74,11 @@ def show_purge_table():
     table = Table(title="Directories To Be Purged")
     # COLUMNS
     table.add_column("Directory", justify="right", style="cyan", no_wrap=True)
-    table.add_column("Conents", style="magenta")
+    table.add_column("Contents", style="magenta")
     # ROWS
     for dirname in ["data", "logs", "models", os.path.join("lightning_pod", "core")]:
         dirpath = os.path.join(os.getcwd(), dirname)
-        contents = ", ".join(os.listdir(dirpath))
+        contents = ", ".join([f for f in os.listdir(dirpath) if f != "01-README.md"])
         table.add_row(dirname, contents)
     # SHOW
     console = Console()
