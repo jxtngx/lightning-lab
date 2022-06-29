@@ -1,1 +1,1 @@
-from lightning_pod.agents.trainer import main as run_trainer
+from lightning_pod.trainer import main as run_trainer

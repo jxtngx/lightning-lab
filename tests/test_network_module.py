@@ -1,9 +1,6 @@
 import torch
-from lightning_pod.agents.module import (
-    Encoder,
-    Decoder,
-)
-from lightning_pod.agents.module import LitModel
+from lightning_pod.module import Encoder, Decoder
+from lightning_pod.module import LitModel
 
 
 def test_module_not_abstract():
