@@ -26,7 +26,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 `pod trainer run` runs the provided example Trainer. <br>
-`pod project seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
+`pod seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
 
 The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like (assumes conda environment manager):
 
@@ -52,7 +52,7 @@ lightning run app app.py
 The CLI command shown below will remove boilerplate to allow users to begin their own projects:
 
 ```sh
-pod project seed
+pod seed
 ```
 
 The example code will be preserved in a new directory `examples` after running the above. This `examples` directory can safely be deleted if it is not needed.
@@ -77,9 +77,9 @@ lightning run app app.py --cloud
 
 This will load the app to your account, build services, and then run the app on Lightning's platform. An `Open App` button will be shown in the Lightning Web UI when your app is ready to be launched and viewed in the browser.
 
-> the requisite .lightning and .lightningignore files are located in [`.lightningos/.lightningai`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningos/.lightningai). 
+> the requisite .lightning and .lightningignore files are located in [`.lightningai/framework`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework). 
 
-The name of the app loaded to Lightning can be changed in the [`.lightningos/.lightningai/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningos/.lightningai/.lightning) file or with
+The name of the app loaded to Lightning can be changed in the [`.lightningai/framework/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework/.lightning) file or with
 
 ```sh
 lightning run app app.py --cloud --name="what ever name you choose"
