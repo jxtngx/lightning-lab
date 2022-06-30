@@ -14,11 +14,19 @@
 
 ## Overview
 
-This project is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+Lightning Pod is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+
+The main focus of this project is to provide a high-level a framework to students and researchers needing to incorporate deep learning into a project.
+
+The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
+
+The code that facilitates raw data preprocessing, building a Torch Dataset, and Lightning DataModule is in `lightning_pod.pipeline`.
+
+The configs for Lightning Apps and Grid.ai are in `.lightningai`.
 
 ### Using the Template
 
-The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. This will provide the user with the included CI/CD flows and Lightning configs found in the respective directories.
+The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. Following this recommendation will provide users with all code and a clean git tree.
 
 #### Prepping for Use
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` has been provided to assist with basic tasks.
@@ -28,13 +36,13 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 `pod trainer run` runs the provided example Trainer. <br>
 `pod seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
 
-The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like (assumes conda environment manager):
+The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like:
 
 ```sh
 cd {{ path to clone }}
-conda env create --file environment.yml
-conda activate lightning-ai
-pip install lightning
+{{ create virtual environment using provided files }}
+{{ activate virtual environment }}
+pip install lightning # if using conda
 pip install -e .
 pod teardown
 pod trainer run
@@ -77,8 +85,6 @@ lightning run app app.py --cloud
 
 This will load the app to your account, build services, and then run the app on Lightning's platform. An `Open App` button will be shown in the Lightning Web UI when your app is ready to be launched and viewed in the browser.
 
-> the requisite .lightning and .lightningignore files are located in [`.lightningai/framework`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework). 
-
 The name of the app loaded to Lightning can be changed in the [`.lightningai/framework/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework/.lightning) file or with
 
 ```sh
@@ -87,13 +93,25 @@ lightning run app app.py --cloud --name="what ever name you choose"
 
 ## Skills
 
+_New to ML and software engineering students ..._
+
+Do not be overwhelmed by the amount of files contained in the repo. The directories and files not mentioned above are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc. If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
+
 ### Software Engineering
 
 The Lightning team has created a series of [Engineering for Researchers](https://www.pytorchlightning.ai/edu/engineering-class) videos to help individuals become familiar with software engineering best practices.
 
 ### Deep Learning
 
-For software engineers in need of deep learning know-how, NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
+Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
+
+NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
+
+The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
+
+DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
+
+OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in reinforcement learning and deep learning.
 
 ### Additional Resources
 
