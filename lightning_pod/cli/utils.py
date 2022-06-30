@@ -46,7 +46,7 @@ def teardown():
 
     cwd = os.getcwd()
 
-    do_not_delete = "01-README.md"
+    do_not_delete = "README.md"
 
     target_dirs = [
         os.path.join(cwd, "models", "checkpoints"),
@@ -79,7 +79,7 @@ def show_purge_table():
     # ROWS
     for dirname in ["data", "logs", "models", os.path.join("lightning_pod", "core")]:
         dirpath = os.path.join(os.getcwd(), dirname)
-        contents = ", ".join([f for f in os.listdir(dirpath) if f != "01-README.md"])
+        contents = ", ".join([f for f in os.listdir(dirpath) if f != "README.md"])
         table.add_row(dirname, contents)
     # SHOW
     console = Console()
