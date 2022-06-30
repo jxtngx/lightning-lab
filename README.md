@@ -95,7 +95,9 @@ lightning run app app.py --cloud --name="what ever name you choose"
 
 _New to ML and software engineering students ..._
 
-Do not be overwhelmed by the amount of files contained in the repo. The directories and files not mentioned above are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc. If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
+Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc. 
+
+If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided. _Altering the naming conventions will cause breaking changes_.
 
 ### Software Engineering
 
