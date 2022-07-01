@@ -9,8 +9,6 @@ from dash import dcc, html, dash_table
 from pytorch_lightning.utilities.model_summary import ModelSummary
 from lightning_pod.core.module import LitModel
 
-import pdb
-
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
