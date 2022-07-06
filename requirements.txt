@@ -3,6 +3,8 @@ lightning
 pytorch-lightning
 lightning-grid
 hydra-core
+rich
+rich-cli
 click
 colorama
 tabulate
