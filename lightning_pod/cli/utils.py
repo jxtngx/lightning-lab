@@ -9,6 +9,7 @@ from rich import print as rprint
 
 PROJECTPATH = os.getcwd()
 FILEPATH = Path(__file__)
+PKGPATH = FILEPATH.parents[1]
 
 
 def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
@@ -21,25 +22,25 @@ def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
 
 
 def preserve_examples():
-    _preserve_dir("lightning_pod", "core", "examples")
-    _preserve_dir("lightning_pod", "pipeline", "examples")
+    _preserve_dir(PKGPATH.name, "core", "examples")
+    _preserve_dir(PKGPATH.name, "pipeline", "examples")
 
 
-def _clean_and_build_lightning_pod(module_to_copy):
+def _clean_and_build_package(module_to_copy):
     src = os.path.join(FILEPATH.parent, "seed", module_to_copy)
-    dest = os.path.join(PROJECTPATH, "lightning_pod", module_to_copy)
+    dest = os.path.join(PROJECTPATH, PKGPATH, module_to_copy)
     shutil.rmtree(dest)
     shutil.copytree(src, dest)
 
 
-def make_new_lightning_pod():
-    _clean_and_build_lightning_pod("core")
-    _clean_and_build_lightning_pod("pipeline")
+def make_new_package():
+    _clean_and_build_package("core")
+    _clean_and_build_package("pipeline")
 
 
 def build():
     preserve_examples()
-    make_new_lightning_pod()
+    make_new_package()
 
 
 def teardown():
@@ -77,7 +78,7 @@ def show_purge_table():
     table.add_column("Directory", justify="right", style="cyan", no_wrap=True)
     table.add_column("Contents", style="magenta")
     # ROWS
-    for dirname in ["data", "logs", "models", os.path.join("lightning_pod", "core")]:
+    for dirname in ["data", "logs", "models", os.path.join(PKGPATH, "core")]:
         dirpath = os.path.join(os.getcwd(), dirname)
         contents = ", ".join([f for f in os.listdir(dirpath) if f != "README.md"])
         table.add_row(dirname, contents)

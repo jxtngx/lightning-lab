@@ -1,10 +1,13 @@
 import os
 import click
+from pathlib import Path
 from lightning_pod.cli.utils import teardown
 from lightning_pod.cli.utils import build
 from rich import print as rprint
-from lightning_pod.cli.utils import show_destructive_behavior_warning
 from lightning_pod.cli.utils import common_destructive_flow
+
+FILEPATH = Path(__file__)
+PKGPATH = FILEPATH.parents[1]
 
 
 @click.group()
@@ -31,7 +34,7 @@ def trainer():
 # TODO add help description
 @trainer.command("help")
 def help():
-    trainer = os.path.join("lightning_pod", "core", "trainer.py")
+    trainer = os.path.join(PKGPATH, "core", "trainer.py")
     os.system(f"python {trainer} --help")
 
 
@@ -39,7 +42,7 @@ def help():
 @trainer.command("run")
 @click.argument("hydra-args", nargs=-1)
 def run_trainer(hydra_args):
-    trainer = os.path.join("lightning_pod", "core", "trainer.py")
+    trainer = os.path.join(PKGPATH, "core", "trainer.py")
     hydra_args = list(hydra_args)
     hydra_args = [f"'trainer.{i}'" for i in hydra_args]
     hydra_args = " ".join(hydra_args)
