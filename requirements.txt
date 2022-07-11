@@ -34,6 +34,7 @@ flake8
 pytest
 mypy
 coverage
+pre-commit
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
 # PLOTLY DASH APPS

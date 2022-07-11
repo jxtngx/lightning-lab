@@ -23,6 +23,7 @@ dependencies:
       - flake8
       - mypy
       - pytest
+      - pre-commit
       - click
       - hydra-core
       - colorama
