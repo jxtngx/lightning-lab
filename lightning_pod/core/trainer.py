@@ -1,15 +1,17 @@
 import os
-import torch
-import hydra
 from pathlib import Path
-from torch.utils.data import TensorDataset
+
+import hydra
+import torch
+from omegaconf.dictconfig import DictConfig
 from pytorch_lightning import Trainer, seed_everything
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
-from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_pod.pipeline.datamodule import LitDataModule
-from lightning_pod.core.module import LitModel
+from torch.utils.data import TensorDataset
 
+from lightning_pod.core.module import LitModel
+from lightning_pod.pipeline.datamodule import LitDataModule
 
 # SET PATHS
 filepath = Path(__file__)
@@ -17,11 +19,11 @@ PROJECTPATH = os.getcwd()
 
 
 @hydra.main(
-    config_path=filepath.parent,
+    config_path=str(filepath.parent),
     config_name="trainer",
     version_base=hydra.__version__,
 )
-def main(cfg):
+def main(cfg: DictConfig) -> None:
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
     logger = TensorBoardLogger(logs_dir, name="logger")
@@ -114,7 +116,7 @@ def main(cfg):
         # PREDICT
         predictions = trainer.predict(model, datamodule.val_dataloader())
         # EXPORT PREDICTIONS
-        predictions = torch.vstack(predictions)
+        predictions = torch.vstack(predictions)  # type: ignore[arg-type]
         predictions = TensorDataset(predictions)
         predictions_dir = os.path.join(PROJECTPATH, "data", "predictions")
         prediction_fname = os.path.join(predictions_dir, "predictions.pt")
