@@ -35,6 +35,7 @@ pytest
 mypy
 coverage
 pre-commit
+isort
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
 # PLOTLY DASH APPS
