@@ -45,9 +45,6 @@ class LitDataModule(LightningDataModule):
         if stage == "test" or stage is None:
             self.test_data = self.dataset(self.data_dir, train=False, transform=self.transforms)
 
-    # def teardown(self):
-    #     pass
-
     def train_dataloader(self) -> TRAIN_DATALOADERS:
         return DataLoader(self.train_data, num_workers=self.num_workers)
 
