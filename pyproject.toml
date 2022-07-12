@@ -27,8 +27,6 @@ warn_no_return = "False"
 # do not add type hints to lightnig_pod/seed/
 [[tool.mypy.overrides]]
 module = [
-    "lightning_pod.pipeline.datamodule",
-    "lightning_pod.pipeline.dataset",
     "lightning_pod.cli.utils",
     "lightning_pod.cli.console",
     "lightning_pod.cli.seed.core.module",
