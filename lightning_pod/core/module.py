@@ -1,13 +1,9 @@
-"""
-This example expands on basic examples provided in PL docs. A key difference being that forward() is 
-implemented in the LightningModule in order to enable persisting the model with ONNX or torchscript.
-If forward() is not implemented, PyTorch will raise an NotImplementedError and the model will not be
-saved.
-"""
+from typing import Any
 
 import pytorch_lightning as pl
 import torch.nn.functional as F
-from torch import nn, optim
+from pytorch_lightning.utilities.types import STEP_OUTPUT
+from torch import Tensor, nn, optim
 
 
 class Encoder(nn.Module):
@@ -20,7 +16,7 @@ class Encoder(nn.Module):
         an encoded image.
     """
 
-    def __init__(self):
+    def __init__(self):  # type: ignore[no-untyped-def]
         super().__init__()
         self.l1 = nn.Sequential(
             nn.Linear(
@@ -38,7 +34,7 @@ class Encoder(nn.Module):
             ),
         )
 
-    def forward(self, x):
+    def forward(self, x: Any) -> Any:
         return self.l1(x)
 
 
@@ -52,25 +48,25 @@ class Decoder(nn.Module):
         a decoded image.
     """
 
-    def __init__(self):
+    def __init__(self):  # type: ignore[no-untyped-def]
         super().__init__()
         self.l1 = nn.Sequential(
             nn.Linear(
                 in_features=3,
                 out_features=64,
-                bias=True,  # default
+                bias=True,
             ),
             nn.ReLU(
-                inplace=False,  # default
+                inplace=False,
             ),
             nn.Linear(
                 in_features=64,
                 out_features=28 * 28,
-                bias=True,  # default
+                bias=True,
             ),
         )
 
-    def forward(self, x):
+    def forward(self, x: Any) -> Any:
         return self.l1(x)
 
 
@@ -81,19 +77,19 @@ class LitModel(pl.LightningModule):
         None: no arguments are required at initialization.
     """
 
-    def __init__(self):
+    def __init__(self):  # type: ignore[no-untyped-def]
         super().__init__()
         self.encoder = Encoder()
         self.decoder = Decoder()
         self.save_hyperparameters()
 
-    def forward(self, x):
+    def forward(self, x: Tensor) -> Any:  # type: ignore[override]
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
         output = self.decoder(z)
         return output
 
-    def training_step(self, batch):
+    def training_step(self, batch: Tensor) -> STEP_OUTPUT:  # type: ignore[override]
         x, y = batch
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
@@ -102,13 +98,13 @@ class LitModel(pl.LightningModule):
         self.log("loss", loss)
         return loss
 
-    def test_step(self, batch, *args):
+    def test_step(self, batch: Any, *args: Any) -> STEP_OUTPUT:  # type: ignore[override]
         self._shared_eval(batch, "test")
 
-    def validation_step(self, batch, *args):
+    def validation_step(self, batch: Any, *args: Any) -> STEP_OUTPUT:  # type: ignore[override]
         self._shared_eval(batch, "val")
 
-    def _shared_eval(self, batch, prefix):
+    def _shared_eval(self, batch: Any, prefix: str) -> STEP_OUTPUT:
         x, y = batch
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
@@ -116,11 +112,11 @@ class LitModel(pl.LightningModule):
         loss = F.mse_loss(x_hat, x)
         self.log(f"{prefix}_loss", loss)
 
-    def predict_step(self, batch, batch_idx, dataloader_idx=0):
+    def predict_step(self, batch: Any, batch_idx: int, dataloader_idx: int = 0) -> Any:
         x, y = batch
         y_hat = self(x)
         return y_hat
 
-    def configure_optimizers(self):
+    def configure_optimizers(self) -> Any:
         optimizer = optim.Adam(self.parameters(), lr=1e-3)
         return optimizer
