@@ -1,18 +1,19 @@
 import os
-import click
 import shutil
 from pathlib import Path
+from typing import Union
+
+import click
+from rich import print as rprint
 from rich.console import Console
 from rich.table import Table
-from rich import print as rprint
-
 
 PROJECTPATH = os.getcwd()
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
 
 
-def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
+def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str) -> None:
     destinationpath = os.path.join(PROJECTPATH, destination)
     if not os.path.isdir(destinationpath):
         os.mkdir(destinationpath)
@@ -21,29 +22,29 @@ def _preserve_dir(main_source_dir: str, sub_source_dir: str, destination: str):
     shutil.copytree(src, dest)
 
 
-def preserve_examples():
+def preserve_examples() -> None:
     _preserve_dir(PKGPATH.name, "core", "examples")
     _preserve_dir(PKGPATH.name, "pipeline", "examples")
 
 
-def _clean_and_build_package(module_to_copy):
+def _clean_and_build_package(module_to_copy: Union[str, Path]) -> None:
     src = os.path.join(FILEPATH.parent, "seed", module_to_copy)
     dest = os.path.join(PROJECTPATH, PKGPATH, module_to_copy)
     shutil.rmtree(dest)
     shutil.copytree(src, dest)
 
 
-def make_new_package():
+def make_new_package() -> None:
     _clean_and_build_package("core")
     _clean_and_build_package("pipeline")
 
 
-def build():
+def build() -> None:
     preserve_examples()
     make_new_package()
 
 
-def teardown():
+def teardown() -> None:
 
     cwd = os.getcwd()
 
@@ -71,7 +72,7 @@ def teardown():
                 shutil.rmtree(dirpath)
 
 
-def show_purge_table():
+def show_purge_table() -> None:
     # TITLE
     table = Table(title="Directories To Be Purged")
     # COLUMNS
@@ -85,28 +86,24 @@ def show_purge_table():
     # SHOW
     console = Console()
     console.print(table)
-    return
 
 
-def show_destructive_behavior_warning():
+def show_destructive_behavior_warning() -> None:
     """
     uses rich console markup
 
     notes: https://rich.readthedocs.io/en/stable/markup.html
     """
     print()
-    rprint(
-        ":warning: [bold red]Alert![/bold red] This action has destructive behavior! :warning: "
-    )
+    rprint(":warning: [bold red]Alert![/bold red] This action has destructive behavior! :warning: ")
     print()
     rprint("The following directories will be [bold red]purged[/bold red]")
     print()
     show_purge_table()
     print()
-    return
 
 
-def common_destructive_flow(commands: list, command_name: str):
+def common_destructive_flow(commands: list, command_name: str) -> None:
     show_destructive_behavior_warning()
     if click.confirm("Do you want to continue"):
         for command in commands:
