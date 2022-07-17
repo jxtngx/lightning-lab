@@ -16,7 +16,7 @@
 
 Lightning Pod is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
-The main focus of this project is to provide a high-level a framework to students and researchers needing to incorporate deep learning into a project.
+The main focus of this project is to provide a high-level framework to students and researchers needing to incorporate deep learning into a project.
 
 The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
 
@@ -95,7 +95,7 @@ lightning run app app.py --cloud --name="what ever name you choose"
 
 _New to ML and software engineering students ..._
 
-Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc. 
+Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc.
 
 If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided. _Altering the naming conventions will cause breaking changes_.
 
