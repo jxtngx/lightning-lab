@@ -4,7 +4,7 @@ from pathlib import Path
 import hydra
 import torch
 from omegaconf.dictconfig import DictConfig
-from pytorch_lightning import Trainer, seed_everything
+from pytorch_lightning import seed_everything, Trainer
 from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler

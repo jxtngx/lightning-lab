@@ -1,17 +1,16 @@
 import os
-import dash
-import torch
-import lightning as L
-import dash_bootstrap_components as dbc
-
-from dash import html
-from dash.dependencies import Input, Output
-from components.ui import create_figure, find_index
-from components.ui import NavBar, Body
-
 from dataclasses import dataclass
 from pathlib import Path
+
+import dash
+import dash_bootstrap_components as dbc
+import lightning as L
+import torch
+from dash import html
+from dash.dependencies import Input, Output
 from torch.utils.data import TensorDataset
+
+from components.ui import Body, create_figure, find_index, NavBar
 
 
 @dataclass

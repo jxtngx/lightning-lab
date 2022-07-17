@@ -1,10 +1,11 @@
-import os
 import multiprocessing
+import os
 from pathlib import Path
-from pytorch_lightning import LightningDataModule
-from torch.utils.data import Dataset, DataLoader, random_split
-from lightning_pod.pipeline.dataset import LitDataset
 
+from pytorch_lightning import LightningDataModule
+from torch.utils.data import DataLoader, Dataset, random_split
+
+from lightning_pod.pipeline.dataset import LitDataset
 
 filepath = Path(__file__)
 PROJECTPATH = os.getcwd()
@@ -34,18 +35,12 @@ class LitDataModule(LightningDataModule):
 
     def setup(self, stage=None):
         if stage == "fit" or stage is None:
-            full_dataset = self.dataset(
-                self.data_dir, train=True, transform=self.transforms
-            )
+            full_dataset = self.dataset(self.data_dir, train=True, transform=self.transforms)
             train_size = int(len(full_dataset) * self.train_size)
             test_size = len(full_dataset) - train_size
-            self.train_data, self.val_data = random_split(
-                full_dataset, lengths=[train_size, test_size]
-            )
+            self.train_data, self.val_data = random_split(full_dataset, lengths=[train_size, test_size])
         if stage == "test" or stage is None:
-            self.test_data = self.dataset(
-                self.data_dir, train=False, transform=self.transforms
-            )
+            self.test_data = self.dataset(self.data_dir, train=False, transform=self.transforms)
 
     # def teardown(self):
     #     pass

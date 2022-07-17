@@ -1,15 +1,16 @@
 import os
-import torch
-import hydra
 from pathlib import Path
-from torch.utils.data import TensorDataset
-from pytorch_lightning import Trainer, seed_everything
+
+import hydra
+import torch
+from pytorch_lightning import seed_everything, Trainer
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning.profiler import PyTorchProfiler
-from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
-from lightning_pod.pipeline.datamodule import LitDataModule
-from lightning_pod.core.module import LitModel
+from torch.utils.data import TensorDataset
 
+from lightning_pod.core.module import LitModel
+from lightning_pod.pipeline.datamodule import LitDataModule
 
 # SET PATHS
 filepath = Path(__file__)

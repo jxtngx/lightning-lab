@@ -1,14 +1,14 @@
 import os
+
 import dash
-import torch
-import plotly.express as px
-import pandas as pd
 import dash_bootstrap_components as dbc
-
-from dash import dcc, html, dash_table
+import pandas as pd
+import plotly.express as px
+import torch
+from dash import dash_table, dcc, html
 from pytorch_lightning.utilities.model_summary import ModelSummary
-from lightning_pod.core.module import LitModel
 
+from lightning_pod.core.module import LitModel
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -83,8 +83,8 @@ def find_index(dataset, label=0, label_idx=1):
             return i
 
 
-#### DATA ####
-## images ##
+# DATA
+# images
 predictions_fname = os.path.join("data", "predictions", "predictions.pt")
 predictions = torch.load(predictions_fname)
 ground_truths_fname = os.path.join("data", "training_split", "val.pt")
@@ -94,7 +94,7 @@ ground_truth_labels = list(set(i[1] for i in ground_truths))
 zero_idx = find_index(ground_truths, label=0, label_idx=1)
 
 
-## model summary ##
+# model summary
 chkptdir = os.path.join("models", "checkpoints")
 available_checkpoints = os.listdir(chkptdir)
 available_checkpoints.remove("README.md")
@@ -104,7 +104,7 @@ model = LitModel.load_from_checkpoint(chkpt_fname)
 summary = ModelSummary(model)
 model_layers, model_params = make_model_summary(summary)
 
-#### APP LAYOUT ####
+# APP LAYOUT
 NavBar = dbc.NavbarSimple(
     brand="Linear Encoder-Decoder",
     color="#792ee5",
@@ -201,9 +201,7 @@ Metrics = dbc.Row(
                 dbc.Card(
                     [
                         html.H4("Metric 1", className="card-title"),
-                        html.P(
-                            "0.xx", id="metric_1_text", className="metric-card-text"
-                        ),
+                        html.P("0.xx", id="metric_1_text", className="metric-card-text"),
                     ],
                     id="metric_1_card",
                     className="metric-container",
@@ -216,9 +214,7 @@ Metrics = dbc.Row(
                 dbc.Card(
                     [
                         html.H4("Metric 2", className="card-title"),
-                        html.P(
-                            "0.xx", id="metric_2_text", className="metric-card-text"
-                        ),
+                        html.P("0.xx", id="metric_2_text", className="metric-card-text"),
                     ],
                     id="metric_2_card",
                     className="metric-container",
@@ -231,9 +227,7 @@ Metrics = dbc.Row(
                 dbc.Card(
                     [
                         html.H4("Metric 3", className="card-title"),
-                        html.P(
-                            "0.xx", id="metric_3_text", className="metric-card-text"
-                        ),
+                        html.P("0.xx", id="metric_3_text", className="metric-card-text"),
                     ],
                     id="metric_3_card",
                     className="metric-container",
@@ -246,9 +240,7 @@ Metrics = dbc.Row(
                 dbc.Card(
                     [
                         html.H4("Metric 4", className="card-title"),
-                        html.P(
-                            "0.xx", id="metric_4_text", className="metric-card-text"
-                        ),
+                        html.P("0.xx", id="metric_4_text", className="metric-card-text"),
                     ],
                     id="metric_4_card",
                     className="metric-container",
@@ -276,7 +268,7 @@ MainArea = dbc.Col([Metrics, html.Br(), Graphs])
 
 Body = dbc.Container([dbc.Row([SideBar, MainArea])], fluid=True)
 
-#### PASS LAYOUT TO DASH ####
+# PASS LAYOUT TO DASH
 app.layout = html.Div(
     [
         NavBar,

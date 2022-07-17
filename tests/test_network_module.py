@@ -1,12 +1,9 @@
 import torch
-from lightning_pod.core.module import Encoder, Decoder
-from lightning_pod.core.module import LitModel
+
+from lightning_pod.core.module import Decoder, Encoder, LitModel
 
 
 def test_module_not_abstract():
-    """
-    example: https://github.com/PyTorchLightning/pytorch-lightning/blob/15fa5389387b3a220bc044dd30eb0be1e8f64944/tests/core/test_lightning_module.py#L29
-    """
     _ = LitModel()
 
 

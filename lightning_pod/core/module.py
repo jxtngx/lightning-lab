@@ -3,7 +3,7 @@ from typing import Any
 import pytorch_lightning as pl
 import torch.nn.functional as F
 from pytorch_lightning.utilities.types import STEP_OUTPUT
-from torch import Tensor, nn, optim
+from torch import nn, optim, Tensor
 
 
 class Encoder(nn.Module):
