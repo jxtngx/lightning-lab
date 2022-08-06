@@ -43,13 +43,10 @@ The flow for creating new checkpoints and an ONNX model from the provided encode
 cd {{ path to clone }}
 {{ create virtual environment using provided files }}
 {{ activate virtual environment }}
-pip install lightning # if using conda
 pip install -e .
 pod teardown
 pod trainer run
 ```
-
-> miniconda (on macOS) is not installing lighting from the provided environment.yml; which is why the above shows a call to `pip install` after activating the `lightning-ai` conda environment
 
 Once the new Trainer has finished, the app can be viewed by running the following in terminal:
 
