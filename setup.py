@@ -19,7 +19,6 @@ setup(
     url="https://github.com/JustinGoheen/lightning-pod",
     author="Justin Goheen",
     license="Apache 2.0",
-    install_requires=[],
     author_email="",
     packages=find_packages(),
     zip_safe=False,
