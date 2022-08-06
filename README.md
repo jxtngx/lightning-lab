@@ -19,7 +19,7 @@ The main focus of this project is to provide users with high-level (basic to int
 
 The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
 
-The code that facilitates raw data preprocessing, building a Torch Dataset, and Lightning DataModule is in `lightning_pod.pipeline`.
+The code that facilitates data preprocessing, building a Torch Dataset, and LightningDataModule is in `lightning_pod.pipeline`.
 
 The configs for Lightning cloud platform are in `.lightningai`.
 
