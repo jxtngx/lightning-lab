@@ -21,7 +21,7 @@ The code that facilitaties building Torch nn.Modules, a Lightning Module, and Li
 
 The code that facilitates raw data preprocessing, building a Torch Dataset, and Lightning DataModule is in `lightning_pod.pipeline`.
 
-The configs for Lightning Apps and Grid.ai are in `.lightningai`.
+The configs for Lightning cloud platform are in `.lightningai`.
 
 ### Using the Template
 
