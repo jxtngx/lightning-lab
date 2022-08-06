@@ -1,0 +1,4 @@
+exclude *.toml  # project config
+exclude requirements.txt
+exclude __pycache__
+include *.cff  # citation info

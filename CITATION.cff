@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Goheen
+    given-names: Justin
+  - name: "Justin R. Goheen"
+title: "Lightning Pod"
+version: 0.0.5
+date-released: 2022-08-06
+license: "Apache-2.0"
+repository-code: "https://github.com/JustinGoheen/lightning-pod"
+keywords:
+  - machine learning
+  - deep learning
+  - artificial intelligence
