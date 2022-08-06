@@ -13,9 +13,9 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for [Lightning OS](https://www.pytorchlightning.ai/) that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+Lightning Pod is a template Python environment, tooling, and system architecture for the [Lightning AI](https://www.pytorchlightning.ai/) ecosystem that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
-The main focus of this project is to provide a high-level framework to students and researchers needing to incorporate deep learning into a project.
+The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate.
 
 The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
 
