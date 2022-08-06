@@ -63,7 +63,7 @@ pod seed
 
 The example code will be preserved in a new directory `examples` after running the above. This `examples` directory can safely be deleted if it is not needed.
 
-Files removed:
+Files removed by `pod seed`:
 
 - cached MNIST data found in `data/cache/LitDataSet`
 - training splits found in `data/training_split`
@@ -83,7 +83,7 @@ lightning run app app.py --cloud
 
 This will load the app to your account, build services, and then run the app on Lightning's platform. An `Open App` button will be shown in the Lightning Web UI when your app is ready to be launched and viewed in the browser.
 
-The name of the app loaded to Lightning can be changed in the [`.lightningai/framework/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework/.lightning) file or with
+The name of the app loaded to Lightning can be changed in the [`.lightningai/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework/.lightning) file or with
 
 ```sh
 lightning run app app.py --cloud --name="what ever name you choose"
