@@ -44,7 +44,7 @@ conda env create -f environment.yml
 conda activate lightning-ai
 pip install -e .
 # if desired, install extras
-pip install requirements/extras.txt
+pip install -r requirements/extras.txt
 ```
 
 _venv_
@@ -58,7 +58,7 @@ source venv/bin/activate
 # install lightning-pod
 pip install -e .
 # if desired, install extras
-pip install requirements/extras.txt
+pip install -r requirements/extras.txt
 ```
 
 #### Initiating a New Training Run
