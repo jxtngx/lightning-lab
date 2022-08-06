@@ -6,12 +6,8 @@ lightning-transformers
 scikit-learn
 # TEXT
 torchtext
-# VISION
-torchvision
 # AUDIO
 torchaudio
-# VS CODE TENSORBOARD SUPPORT
-torch-tb-profiler
 # PLOTTING AND SYMBOLIC MATH
 matplotlib
 sympy
@@ -20,17 +16,8 @@ rich
 rich-cli
 colorama
 tabulate
-# FORMMATING, LINTING, TESTING, STATIC TYPE CHECKING, COVERAGE
-black
-flake8
-pytest
-mypy
-coverage
-pre-commit
-isort
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
-# PLOTLY DASH APPS
 # DOC TOOLS, MARKDOWN SUPPORT, THEMES
 sphinx
 myst-parser

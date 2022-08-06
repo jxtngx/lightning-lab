@@ -25,13 +25,45 @@ The configs for Lightning cloud platform are in `.lightningai`.
 
 ### Using the Template
 
-The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their machine.
+The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone that repo to their machine.
 
-> [lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included in requirements.txt to support hyperparameter optimization. Follow the provided link for examples of how to use lightning-hpo. [Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
+#### Creating an Environment
 
-#### Prepping for Use
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` has been provided to assist with basic tasks.
+Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg).
 
+[lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included as a base requirement to support hyperparameter optimization. Follow the provided link for examples of how to use lightning-hpo.
+
+[Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
+
+Enter the below shown commands in terminal to create a new environment.
+
+_conda_
+```sh
+cd {{ path to clone }}
+conda env create -f environment.yml
+conda activate lightning-ai
+pip install -e .
+# if desired, install extras
+pip install requirements/extras.txt
+```
+
+_venv_
+```sh
+cd {{ path to clone }}
+python3 -m venv venv/
+# to activate on windows
+venv\Scripts\activate.bat
+# to activate on macos and Unix
+source venv/bin/activate
+# install lightning-pod
+pip install -e .
+# if desired, install extras
+pip install requirements/extras.txt
+```
+
+#### Initiating a New Training Run
+
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with basic tasks. The terminal commands for `pod` and their affects are shown below.
 
 `pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 `pod trainer run` runs the provided example Trainer. <br>
@@ -40,10 +72,6 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like:
 
 ```sh
-cd {{ path to clone }}
-{{ create virtual environment using provided files }}
-{{ activate virtual environment }}
-pip install -e .
 pod teardown
 pod trainer run
 ```
@@ -151,7 +179,7 @@ Lightning Pod enables collaborative development with Gitpod and GitHub CodeSpace
 
 </div>
 
-Gitpod and CodeSpaces uses pyenv instead of conda ... meaning the terminal commands to use the CLI's are slightly different.
+Gitpod and CodeSpaces use pyenv. User do not need to create an environment, as it will be created for them on launch.
 
 Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
 
@@ -159,8 +187,6 @@ Once the workspace image has finished building, do the following to teardown the
 pod teardown
 pod trainer run
 ```
-
-If using VS Code (in browser or on desktop), it is possible to view PyTorch Profiler and TensorBoard logs when using Gitpod or CodeSpaces. Access the VS Code command palette and enter `>Python: Launch TensorBoard`. A new port will start; TensorBoard will launch once the new port is active. If the TensorBoard window remains blank, close it and restart the TensorBoard session.
 
 ## Getting Help
 
