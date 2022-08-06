@@ -1,42 +1,10 @@
-name: lightning-ai
+name: test-reqfile
 channels:
   - defaults
 dependencies:
-  - python
+  - python=3.9
   - pip
   - sentencepiece
   - tokenizers
   - pip:
-      - lightning-bolts
-      - lightning-flash
-      - lightning-grid
-      - lightning-transformers
-      - pytorch-lightning
-      - scikit-learn
-      - torchaudio
-      - torchtext
-      - torchvision
-      - optuna
-      - torch-tb-profiler
-      - black
-      - coverage
-      - flake8
-      - mypy
-      - pytest
-      - pre-commit
-      - isort
-      - click
-      - hydra-core
-      - colorama
-      - tabulate
-      - ipywidgets
-      - matplotlib
-      - plotly
-      - dash
-      - dash-bootstrap-components
-      - gunicorn
-      - sphinx
-      - myst-parser
-      - sphinx_rtd_theme
-      - pydata-sphinx-theme
-      - protobuf==3.20.1
+      - -r requirements.txt

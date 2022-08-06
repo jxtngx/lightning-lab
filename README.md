@@ -27,7 +27,7 @@ The configs for Lightning Apps and Grid.ai are in `.lightningai`.
 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. Following this recommendation will provide users with all code and a clean git tree.
 
-> individuals in need of a hyperparameter optimization component can use [lightning-hpo](https://github.com/Lightning-AI/lightning-hpo)
+> [lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included in requirements.txt to support hyperparameter optimization. Follow the provided link for examples of how to use lightning-hpo. [Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
 
 #### Prepping for Use
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` has been provided to assist with basic tasks.
@@ -98,7 +98,9 @@ _New to ML and software engineering students ..._
 
 Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc.
 
-If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided. _Altering the naming conventions will cause breaking changes_.
+If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
+
+> Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
 
 ### Software Engineering
 
