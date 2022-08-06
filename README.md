@@ -25,7 +25,7 @@ The configs for Lightning cloud platform are in `.lightningai`.
 
 ### Using the Template
 
-The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. Following this recommendation will provide users with all code and a clean git tree.
+The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their machine.
 
 > [lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included in requirements.txt to support hyperparameter optimization. Follow the provided link for examples of how to use lightning-hpo. [Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
 

@@ -1,4 +1,4 @@
-name: test-reqfile
+name: lightning-ai
 channels:
   - defaults
 dependencies:
