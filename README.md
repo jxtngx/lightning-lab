@@ -121,13 +121,19 @@ Aside from the above, I've started a [wiki](https://justingoheen.github.io/light
 
 ## Tooling
 
-The tooling i.e. the dependencies, or stack, was selected by referring to the Lightning ecosystem repos: PyTorch Lightning, Lightning Flash, torchmetrics etc. Tooling not used by the Lightning team is also used, and is described below briefly, and in the wiki in greater detail.
+The ML tooling i.e. the dependencies, or stack, was selected by referring to the Lightning ecosystem repos: PyTorch Lightning, Lightning Flash, torchmetrics etc.
 
-### Lightning Stack
+Non-ML tooling (CI/CD, code quality, and PR automation) includes:
 
-The lightning team typically uses DeepSource, CircleCI, GitHub Actions, and Azure Pipelines for top level CI/CD management. At a deeper level, the team uses PyTest + coverage + CodeCov for unit testing, mypy for type checking, flake8 + Black for linting and formatting, pre-commit to for git commit QA, and mergify for automating PR merges which pass all CI/CD checks.
-
-Azure Pipelines, pre-commit, and mergify are not used in this project repo.
+- DeepSource
+- CircleCI
+- GitHub Actions
+- Azure Pipelines
+- PyTest + coverage + CodeCov
+- mypy
+- flake8 + Black
+- pre-commit git hooks
+- mergify for PRs
 
 ### Extras
 
