@@ -27,6 +27,8 @@ The configs for Lightning Apps and Grid.ai are in `.lightningai`.
 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone the newly created repo in their personal account to their local machine. Following this recommendation will provide users with all code and a clean git tree.
 
+> individuals in need of a hyperparameter optimization component can use [lightning-hpo](https://github.com/Lightning-AI/lightning-hpo)
+
 #### Prepping for Use
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` has been provided to assist with basic tasks.
 
