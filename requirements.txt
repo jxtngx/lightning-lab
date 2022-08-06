@@ -1,15 +1,7 @@
-# LIGHTNING ECOSYSTEM
-lightning
-git+https://github.com/Lightning-AI/lightning-hpo.git
+# view setup.cfg for base requirements installed by lightning-pod
 lightning-bolts
 lightning-flash
 lightning-transformers
-# TRAINER CLI SUPPORT
-hydra-core
-# HYPERPARAMETER TUNING
-optuna
-# EXPERIMENT TRACKING AND REPORTS
-wandb
 # FUNDAMENTAL ML
 scikit-learn
 # TEXT
@@ -21,13 +13,11 @@ torchaudio
 # VS CODE TENSORBOARD SUPPORT
 torch-tb-profiler
 # PLOTTING AND SYMBOLIC MATH
-plotly
 matplotlib
 sympy
 # TERMINAL CLI
 rich
 rich-cli
-click
 colorama
 tabulate
 # FORMMATING, LINTING, TESTING, STATIC TYPE CHECKING, COVERAGE
@@ -41,9 +31,6 @@ isort
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
 # PLOTLY DASH APPS
-dash
-dash-bootstrap-components
-gunicorn
 # DOC TOOLS, MARKDOWN SUPPORT, THEMES
 sphinx
 myst-parser
