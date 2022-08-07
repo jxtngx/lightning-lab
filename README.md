@@ -31,7 +31,7 @@ The intent is that users [create a new repo from the template](https://docs.gith
 
 Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg).
 
-[lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included as a base requirement to support hyperparameter optimization. Follow the provided link for examples of how to use lightning-hpo.
+[lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included as a base requirement to support hyperparameter optimization with [Optuna](https://optuna.readthedocs.io/en/stable/index.html). Follow the provided link for examples of how to use lightning-hpo.
 
 [Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
 

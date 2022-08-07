@@ -1,4 +1,9 @@
-exclude *.toml  # project config
+exclude *.toml
 exclude requirements.txt
 exclude __pycache__
-include *.cff  # citation info
+exclude *.lightningai
+exclude *.circleci
+exclude *.devcontainer
+exclude *.github
+exclude .gitpod.yml
+include *.cff
