@@ -2139,7 +2139,6 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [extras]
 all = ["lightning", "torchvision", "matplotlib"]
 audio = []
-dev = []
 lightningos = ["lightning"]
 text = []
 vision = ["torchvision"]
@@ -2147,7 +2146,7 @@ vision = ["torchvision"]
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9"
-content-hash = "ab48b56b7191cd844d59365784cf728b55ef4e51e7b4a1f3d15d05dbaf8912f0"
+content-hash = "11e77df3cc388f9404e648b871b7b4cf14948c6ed04d0ae687cade85872e5af1"
 
 [metadata.files]
 absl-py = [
