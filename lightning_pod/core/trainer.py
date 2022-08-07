@@ -4,14 +4,14 @@ from pathlib import Path
 import hydra
 import torch
 from omegaconf.dictconfig import DictConfig
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.profiler import PyTorchProfiler
 from torch.utils.data import TensorDataset
 
 from lightning_pod.core.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
+from pytorch_lightning import seed_everything, Trainer
+from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
+from pytorch_lightning.loggers import TensorBoardLogger
+from pytorch_lightning.profiler import PyTorchProfiler
 
 # SET PATHS
 filepath = Path(__file__)
@@ -86,7 +86,6 @@ def main(cfg: DictConfig) -> None:
         log_every_n_steps=cfg.trainer.log_every_n_steps,
         sync_batchnorm=cfg.trainer.sync_batchnorm,
         weights_save_path=cfg.trainer.weights_save_path,
-        weights_summary=cfg.trainer.weights_summary,
         num_sanity_val_steps=cfg.trainer.num_sanity_val_steps,
         resume_from_checkpoint=cfg.trainer.resume_from_checkpoint,
         benchmark=cfg.trainer.benchmark,
