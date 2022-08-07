@@ -11,11 +11,6 @@ torchaudio
 # PLOTTING AND SYMBOLIC MATH
 matplotlib
 sympy
-# TERMINAL CLI
-rich
-rich-cli
-colorama
-tabulate
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
 # DOC TOOLS, MARKDOWN SUPPORT, THEMES
