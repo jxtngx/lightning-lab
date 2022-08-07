@@ -173,7 +173,7 @@ norecursedirs = [
     ".circleci",
     "*.egg-info"
 ]
-addopts = "disable-pytest-warnings"
+addopts = "--disable-pytest-warnings"
 filterwarnings = [
     #  IGNORE THIRD PARTY LIBRARY WARNINGS
     # ignore tensorboard proto warnings
