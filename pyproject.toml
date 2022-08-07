@@ -164,6 +164,9 @@ module = [
 ignore_errors = "True"
 
 [tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
 norecursedirs = [
     ".git",
     ".github",
