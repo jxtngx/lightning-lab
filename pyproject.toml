@@ -10,7 +10,10 @@ requires = [
 
 [tool.isort]
 known_first_party = [
-    "lightning_pod"
+    "lightning_pod",
+    "lightning",
+    "lightning_app",
+    "pytorch_lightning",
 ]
 profile = "black"
 line_length = 120
@@ -39,6 +42,7 @@ warn_no_return = "False"
 # do not add type hints to lightnig_pod/cli/seed/
 [[tool.mypy.overrides]]
 module = [
+    "lightning_pod.core.module",
     "lightning_pod.cli.seed.core.module",
     "lightning_pod.cli.seed.core.trainer",
     "lightning_pod.cli.seed.pipeline.datamodule",
