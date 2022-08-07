@@ -1,0 +1,4 @@
+setuptools
+build
+twine
+poetry
