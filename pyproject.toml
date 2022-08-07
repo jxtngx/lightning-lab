@@ -202,8 +202,8 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
-disable_warnings = "couldnt-parse"
+disable_warnings = ["couldnt-parse"]
 
 [tool.coverage.report]
 ignore_errors = "True"
-exclude_lines = "pragma: no cover"
+exclude_lines = ["pragma: no cover"]
