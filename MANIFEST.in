@@ -1,9 +1,0 @@
-exclude *.toml
-exclude requirements.txt
-exclude __pycache__
-exclude *.lightningai
-exclude *.circleci
-exclude *.devcontainer
-exclude *.github
-exclude .gitpod.yml
-include *.cff

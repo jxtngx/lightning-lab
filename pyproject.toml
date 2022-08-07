@@ -31,6 +31,21 @@ classifiers=[
     "Programming Language :: Python :: 3.10",
 ]
 
+include = [
+    "*.cff"
+]
+
+exclude = [
+    "*.toml",
+    "requirements.txt",
+    "__pycache__",
+    "*.lightningai",
+    "*.circleci",
+    "*.devcontainer",
+    "*.github",
+    ".gitpod.yml",
+]
+
 [tool.poetry.scripts]
 pod = "lightning_pod.cli.console:main"
 
