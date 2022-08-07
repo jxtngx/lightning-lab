@@ -4,3 +4,6 @@ channels:
 dependencies:
   - python=3.9
   - pip
+  - pip:
+      - requirements.txt
+      - ./requirements/extras.txt
