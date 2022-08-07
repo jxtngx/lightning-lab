@@ -31,7 +31,6 @@ trainer:
   min_steps: null
   max_time: null
   val_check_interval: null
-  flush_logs_every_n_steps: null
   log_every_n_steps: 50
   sync_batchnorm: False
   weights_save_path: null

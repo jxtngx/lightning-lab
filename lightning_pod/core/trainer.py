@@ -83,7 +83,6 @@ def main(cfg: DictConfig) -> None:
         min_steps=cfg.trainer.min_steps,
         max_time=cfg.trainer.max_time,
         val_check_interval=cfg.trainer.val_check_interval,
-        flush_logs_every_n_steps=cfg.trainer.flush_logs_every_n_steps,
         log_every_n_steps=cfg.trainer.log_every_n_steps,
         sync_batchnorm=cfg.trainer.sync_batchnorm,
         weights_save_path=cfg.trainer.weights_save_path,
