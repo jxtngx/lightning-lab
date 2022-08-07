@@ -50,7 +50,7 @@ exclude = [
 pod = "lightning_pod.cli.console:main"
 
 [tool.poetry.dependencies]
-python = "3.9"
+python = "<3.10"
 lightning = ">=2022.8.2"
 pytorch-lightning = ">=1.7.0"
 lightning-app = ">=0.5.4"

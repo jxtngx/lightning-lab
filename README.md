@@ -45,6 +45,7 @@ conda activate lightning-ai
 pip install -e .
 # if desired, install extras
 pip install -r requirements/extras.txt
+{{ set interpreter in IDE }}
 ```
 
 _venv_
@@ -59,6 +60,17 @@ source venv/bin/activate
 pip install -e .
 # if desired, install extras
 pip install -r requirements/extras.txt
+{{ set interpreter in IDE }}
+```
+
+_poetry_
+```sh
+cd {{ path to clone }}
+poetry install
+# if desired, install extras
+poetry shell
+pip install -r requirements/extras.txt
+{{ set interpreter in IDE }}
 ```
 
 #### Initiating a New Training Run
