@@ -152,15 +152,15 @@ order_by_type = "False"
 
 [tool.mypy]
 files = ["lightning_pod"]
-install_types = "True"
-non_interactive = "True"
-disallow_untyped_defs = "True"
-ignore_missing_imports = "True"
-show_error_codes = "True"
-warn_redundant_casts = "True"
-warn_unused_configs = "True"
-warn_unused_ignores = "True"
-allow_redefinition = "True"
+install_types = true
+non_interactive = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true
+allow_redefinition = true
 # disable this rule as the Trainer attributes are defined in the connectors, not in its __init__
 disable_error_code = "attr-defined"
 # style choices
@@ -176,7 +176,7 @@ module = [
     "lightning_pod.cli.seed.pipeline.datamodule",
     "lightning_pod.cli.seed.pipeline.dataset",
 ]
-ignore_errors = "True"
+ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -205,5 +205,5 @@ filterwarnings = [
 disable_warnings = ["couldnt-parse"]
 
 [tool.coverage.report]
-ignore_errors = "True"
+ignore_errors = true
 exclude_lines = ["pragma: no cover"]
