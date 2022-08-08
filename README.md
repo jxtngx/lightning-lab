@@ -87,9 +87,9 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 <details>
   <summary>pod</summary>
 
-`pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
+`pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run` runs the provided example Trainer. <br>
+`pod trainer run` runs the Trainer. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
