@@ -15,7 +15,73 @@
 
 Lightning Pod is a template Python environment, tooling, and system architecture for the [Lightning AI](https://www.pytorchlightning.ai/) ecosystem that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
-The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate.
+The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate; inclusive of CI/CD, testing, code quality, and packaging examples.
+
+<details>
+  <summary>Core AI/ML Ecosystem</summary>
+
+  These are the base frameworks. Many other tools (numpy, pyarrow etc) are installed as dependencies when installing the core dependencies.
+
+  - pytorch
+  - pytorch-lightning
+  - lightning-app
+  - lightning-hpo
+  - torchmetrics
+  - weights and biases
+  - optuna
+  - hydra
+  - plotly
+  - dash
+
+</details>
+
+<details>
+  <summary>Testing and Code Quality</summary>
+
+  - PyTest
+  - coverage
+  - MyPy
+  - Black
+  - isort
+  - pre-commit
+
+</details>
+
+<details>
+  <summary>Packaging</summary>
+
+  - setuptools
+  - build
+  - twine
+  - poetry
+
+</details>
+
+<details>
+  <summary>CI/CD</summary>
+
+  - CircleCI
+  - Deepsource
+  - GitHub Actions
+  - Mergify
+
+</details>
+
+<details>
+  <summary>Notable Extras</summary>
+
+  These frameworks and libraries are installed when creating an environment from the provided poetry and conda utilities.
+
+  - fastapi
+  - pydantic
+  - gunicorn
+  - uvicorn
+  - click
+  - rich
+  - pyarrow
+  - numpy
+
+</details>
 
 ### Core Code
 
