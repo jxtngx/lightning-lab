@@ -91,6 +91,10 @@ The main focus of this project is to provide users with high-level (basic to int
 
 `.lightningai` contains configs for Lightning Platform.
 
+If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
+
+> Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
+
 ### Using the Template
 
 The intent is that users [create a new repo from the template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) in GitHub's web interface and then clone that repo to their machine.
@@ -207,10 +211,6 @@ lightning run app app.py --cloud --name="what ever name you choose"
 _New to ML and software engineering students ..._
 
 Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc.
-
-If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
-
-> Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
 
 ### Software Engineering
 
