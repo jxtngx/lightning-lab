@@ -19,11 +19,11 @@ The main focus of this project is to provide users with high-level (basic to int
 
 ### Core Code
 
-The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
+`lightning_pod.core` contains code for Lightning Modules and Trainer.
 
-The code that facilitates data preprocessing, building a Torch Dataset, and LightningDataModule is in `lightning_pod.pipeline`.
+`lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-The configs for Lightning cloud platform are in `.lightningai`.
+`.lightningai` contains configs for Lightning Platform.
 
 ### Using the Template
 
@@ -80,9 +80,9 @@ pip install -r requirements/extras.txt
 ```
 </details>
 
-#### Initiating a New Training Run
+#### Command Line Interface
 
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with basic tasks. The commands for `pod` and their affects are shown below.
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their affects are shown below.
 
 <details>
   <summary>pod</summary>
