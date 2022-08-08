@@ -17,6 +17,8 @@ Lightning Pod is a template Python environment, tooling, and system architecture
 
 The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate.
 
+### Core Code
+
 The code that facilitaties building Torch nn.Modules, a Lightning Module, and Lightning Trainer is in `lightning_pod.core`.
 
 The code that facilitates data preprocessing, building a Torch Dataset, and LightningDataModule is in `lightning_pod.pipeline`.
@@ -29,15 +31,26 @@ The intent is that users [create a new repo from the template](https://docs.gith
 
 #### Creating an Environment
 
-Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg).
+Base dependencies can be viewed in [pyproject.toml](https://github.com/JustinGoheen/lightning-pod/blob/main/pyproject.toml).
 
-[lightning-hpo](https://github.com/Lightning-AI/lightning-hpo) is included as a base requirement to support hyperparameter optimization with [Optuna](https://optuna.readthedocs.io/en/stable/index.html). Follow the provided link for examples of how to use lightning-hpo.
+Instructions for creating a new environment are shown below. Using [Poetry](https://python-poetry.org/docs/master/#installing-with-the-official-installer) is recommended.
 
-[Weights and Biases](https://wandb.ai/site) is included as the default experiment manager to be used by lightning-hpo
+<details>
+  <summary>poetry</summary>
 
-Enter the below shown commands in terminal to create a new environment.
+```sh
+cd {{ path to clone }}
+poetry install
+# if desired, install extras
+poetry shell
+pip install -r requirements/extras.txt
+{{ set interpreter in IDE }}
+```
+</details>
 
-_conda_
+<details>
+  <summary>conda</summary>
+
 ```sh
 cd {{ path to clone }}
 conda env create -f environment.yml
@@ -47,8 +60,11 @@ pip install -e .
 pip install -r requirements/extras.txt
 {{ set interpreter in IDE }}
 ```
+</details>
 
-_venv_
+<details>
+  <summary>venv</summary>
+
 ```sh
 cd {{ path to clone }}
 python3 -m venv venv/
@@ -62,28 +78,32 @@ pip install -e .
 pip install -r requirements/extras.txt
 {{ set interpreter in IDE }}
 ```
-
-_poetry_
-```sh
-cd {{ path to clone }}
-poetry install
-# if desired, install extras
-poetry shell
-pip install -r requirements/extras.txt
-{{ set interpreter in IDE }}
-```
+</details>
 
 #### Initiating a New Training Run
 
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with basic tasks. The terminal commands for `pod` and their affects are shown below.
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with basic tasks. The commands for `pod` and their affects are shown below.
+
+<details>
+  <summary>pod</summary>
 
 `pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
 `pod trainer run` runs the provided example Trainer. <br>
 
-`pod seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
-
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning.
+
+`pod seed` will remove boilerplate to allow users to begin their own projects.
+
+Files removed by `pod seed`:
+
+- cached MNIST data found in `data/cache/LitDataSet`
+- training splits found in `data/training_split`
+- saved predictions found in `data/predictions`
+- PyTorch Profiler logs found in `logs/profiler`
+- TensorBoard logs found in `logs/logger`
+- model checkpoints found in `models/checkpoints`
+- persisted ONNX model found in `models/onnx`
 
 The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like:
 
@@ -98,24 +118,7 @@ Once the new Trainer has finished, the app can be viewed by running the followin
 lightning run app app.py
 ```
 
-#### Full Tear Down
-The CLI command shown below will remove boilerplate to allow users to begin their own projects:
-
-```sh
-pod seed
-```
-
-The example code will be preserved in a new directory `examples` after running the above. This `examples` directory can safely be deleted if it is not needed.
-
-Files removed by `pod seed`:
-
-- cached MNIST data found in `data/cache/LitDataSet`
-- training splits found in `data/training_split`
-- saved predictions found in `data/predictions`
-- PyTorch Profiler logs found in `logs/profiler`
-- TensorBoard logs found in `logs/logger`
-- model checkpoints found in `models/checkpoints`
-- persisted ONNX model found in `models/onnx`
+</details>
 
 ## Deploying to Lightning Cloud
 
