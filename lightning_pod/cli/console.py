@@ -16,6 +16,7 @@ from pathlib import Path
 
 import click
 
+from lightning_pod.cli import bugreport
 from lightning_pod.cli.utils import build, common_destructive_flow, teardown
 
 FILEPATH = Path(__file__)
@@ -36,6 +37,11 @@ def _teardown() -> None:
 @main.command("seed")
 def seed() -> None:
     common_destructive_flow([teardown, build], command_name="seed")
+
+
+@main.command("bug-report")
+def bug_report() -> None:
+    bugreport.main()
 
 
 @main.group("trainer")

@@ -78,8 +78,12 @@ pip install -r requirements/extras.txt
 A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with basic tasks. The terminal commands for `pod` and their affects are shown below.
 
 `pod teardown` will destroy the example data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
+
 `pod trainer run` runs the provided example Trainer. <br>
+
 `pod seed` executes teardown, moves example code provided in `lightning_pod` to a new directory `examples` in the project root directory, and then creates a new `trainer.py` `trainer.yaml` and `module.py` in `lightning_pod/core`.
+
+`pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning.
 
 The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like:
 
