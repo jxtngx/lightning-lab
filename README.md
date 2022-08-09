@@ -103,10 +103,12 @@ The intent is that users [create a new repo from the template](https://docs.gith
 
 Base dependencies can be viewed in [pyproject.toml](https://github.com/JustinGoheen/lightning-pod/blob/main/pyproject.toml).
 
-Instructions for creating a new environment are shown below. Using [Poetry](https://python-poetry.org/docs/master/#installing-with-the-official-installer) is recommended.
+Instructions for creating a new environment are shown below.
 
 <details>
   <summary>poetry</summary>
+
+Install [Poetry](https://python-poetry.org/docs/master/#installing-with-the-official-installer) if you do not already have it installed.
 
 ```sh
 cd {{ path to clone }}
@@ -121,6 +123,10 @@ pip install -r requirements/extras.txt
 <details>
   <summary>conda</summary>
 
+Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) if you do not already have it installed.
+
+> m-series macOS users, it is recommended to use the `Miniconda3 macOS Apple M1 64-bit bash` installation
+
 ```sh
 cd {{ path to clone }}
 conda env create -f environment.yml
@@ -134,6 +140,8 @@ pip install -r requirements/extras.txt
 
 <details>
   <summary>venv</summary>
+
+[venv](https://docs.python.org/3/library/venv.html) is not something that needs to be installed; it is part of Python standard.
 
 ```sh
 cd {{ path to clone }}
