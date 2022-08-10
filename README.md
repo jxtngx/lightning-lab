@@ -13,7 +13,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for the [Lightning AI](https://www.pytorchlightning.ai/) ecosystem that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
+Lightning Pod is a template Python environment, tooling, and system architecture that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
 
 The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate; inclusive of CI/CD, testing, code quality, and packaging examples.
 
@@ -216,17 +216,7 @@ The name of the app loaded to Lightning can be changed in the [`.lightningai/.li
 lightning run app app.py --cloud --name="what ever name you choose"
 ```
 
-## Skills
-
-_New to ML and software engineering students ..._
-
-Do not be overwhelmed by the amount of files contained in the repo. The directories other than lightning_pod are a collection of "Hello, World!" like examples meant to help you begin to understand basic CI-CD, testing, documentation etc.
-
-### Software Engineering
-
-The Lightning team has created a series of [Engineering for Researchers](https://www.pytorchlightning.ai/edu/engineering-class) videos to help individuals become familiar with software engineering best practices.
-
-### Deep Learning
+## Deep Learning
 
 Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
 
@@ -237,10 +227,6 @@ The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon
 DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
 
 OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in reinforcement learning and deep learning.
-
-### Additional Resources
-
-Aside from the above, I've started a [wiki](https://justingoheen.github.io/lightning-engineer/) to help guide individuals through some of the concepts and tooling discussed in this document.
 
 ## Tooling
 
@@ -282,11 +268,3 @@ Once the workspace image has finished building, do the following to teardown the
 pod teardown
 pod trainer run
 ```
-
-## Getting Help
-
-Please join the [Lightning Community Slack](https://join.slack.com/t/pytorch-lightning/shared_invite/zt-19m2xnz2o-hC80K2vGCoGCpP4vTh6T1g) for questions about the Lightning ecosystem. Feel free to @ me in Slack if you have a question specific to this repo.
-
-## Contributing
-
-There is no need to submit an issue or PR to this repo. This template is exactly that – a template for others to fork or clone and improve on, and share with the community. My hopes in sharing this template is that new to ML students or PhD researchers in any domain can quickly form a project from trustworthy boilerplate.
