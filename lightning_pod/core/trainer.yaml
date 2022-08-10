@@ -8,7 +8,7 @@ trainer:
   devices: "auto"
   deterministic: True
   precision: 32
-  strategy: single_device
+  strategy: null
   enable_checkpointing: True
   enable_progress_bar: True
   enable_model_summary: True
