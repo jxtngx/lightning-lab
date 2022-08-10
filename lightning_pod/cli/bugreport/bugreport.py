@@ -19,7 +19,6 @@ This server mainly to get detail info for better bug reporting.
 import os
 import platform
 import sys
-from datetime import datetime
 
 import numpy
 import torch
@@ -94,7 +93,7 @@ def main():
     lines = nice_print(details)
     text = os.linesep.join(lines)
     print(text)
-    with open(f"bugreport_{str(datetime.now().date())}.md", "w") as file:
+    with open("bug_report.md", "w") as file:
         file.writelines(text)
     file.close()
 
