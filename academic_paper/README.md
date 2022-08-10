@@ -1,4 +1,4 @@
-This directory can store an academic paper written with LaTeX.
+Researchers and students can use this directory for and academic paper. This directory can be deleted if it is not needed.
 
 VS Code supports LaTeX with the [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) extension.
 
