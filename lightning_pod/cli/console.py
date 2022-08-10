@@ -16,8 +16,8 @@ from pathlib import Path
 
 import click
 
-from lightning_pod.cli import bugreport
-from lightning_pod.cli.utils import build, common_destructive_flow, teardown
+from lightning_pod.cli.bugreport import bugreport
+from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_trainer, teardown
 
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
@@ -42,6 +42,12 @@ def seed() -> None:
 @main.command("bug-report")
 def bug_report() -> None:
     bugreport.main()
+    print("\n")
+    make_bug_trainer()
+    trainer = os.path.join(PKGPATH, "core", "bug_trainer.py")
+    run_command = " ".join(["python", trainer, " 2> boring_trainer_error.md"])
+    os.system(run_command)
+    os.remove(trainer)
 
 
 @main.group("trainer")

@@ -85,6 +85,13 @@ def teardown() -> None:
                 shutil.rmtree(dirpath)
 
 
+def make_bug_trainer():
+    cwd = os.getcwd()
+    source = os.path.join(cwd, "lightning_pod", "cli", "bugreport", "trainer.py")
+    destination = os.path.join(cwd, "lightning_pod", "core", "bug_trainer.py")
+    shutil.copyfile(source, destination)
+
+
 def show_purge_table() -> None:
     # TITLE
     table = Table(title="Directories To Be Purged")

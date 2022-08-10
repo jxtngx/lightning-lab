@@ -4,7 +4,7 @@ trainer:
   limit_predict_batches: null
   limit_test_batches: null
   limit_val_batches: null
-  accelerator: "cpu"
+  accelerator: "auto"
   devices: "auto"
   deterministic: True
   precision: 32
