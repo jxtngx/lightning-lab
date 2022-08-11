@@ -2,9 +2,6 @@
 
 # Lightning Pod
 
-[![](https://img.shields.io/badge/Python-Language-informational?style=flat&logo=python&logoColor=white&color=2bbc8a)](#)
-[![](https://img.shields.io/badge/Lightning.ai-Ecosystem-informational?style=flat&logo=pytorchlightning&logoColor=white&color=2bbc8a)](#)
-
 [![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
 
@@ -13,9 +10,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture that culminates with a Plotly Dash [UI](https://01g6bdbc5e55wc5ffgj11gtkxj.litng-ai-03.litng.ai/view/home) deployed to the Lightning platform.
-
-The main focus of this project is to provide users with high-level (basic to intermediate) research boilerplate; inclusive of CI/CD, testing, code quality, and packaging examples.
+Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -85,11 +80,9 @@ The main focus of this project is to provide users with high-level (basic to int
 
 ### Core Code
 
-`lightning_pod.core` contains code for Lightning Modules and Trainer.
+`lightning_pod.core` contains code for LightningModule and and the Trainer.
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
-
-`.lightningai` contains configs for Lightning Platform.
 
 If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
 
@@ -200,22 +193,6 @@ lightning run app app.py
 
 </details>
 
-## Deploying to Lightning Cloud
-
-Deploying finished applications to Lightning is simple. If you haven't done so, create an account on [Lightning.ai](https://www.pytorchlightning.ai/). Once an account has been created, one needs only to add an additional flag to `lightning run` as shown below:
-
-```sh
-lightning run app app.py --cloud
-```
-
-This will load the app to your account, build services, and then run the app on Lightning's platform. An `Open App` button will be shown in the Lightning Web UI when your app is ready to be launched and viewed in the browser.
-
-The name of the app loaded to Lightning can be changed in the [`.lightningai/.lightning`](https://github.com/JustinGoheen/lightning-pod/tree/main/.lightningai/framework/.lightning) file or with
-
-```sh
-lightning run app app.py --cloud --name="what ever name you choose"
-```
-
 ## Deep Learning
 
 Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
@@ -227,26 +204,6 @@ The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon
 DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
 
 OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in reinforcement learning and deep learning.
-
-## Tooling
-
-The ML tooling i.e. the dependencies, or stack, was selected by referring to the Lightning ecosystem repos: PyTorch Lightning, Lightning Flash, torchmetrics etc.
-
-Non-ML tooling (CI/CD, code quality, and PR automation) includes:
-
-- DeepSource
-- CircleCI
-- GitHub Actions
-- Azure Pipelines
-- PyTest + coverage + CodeCov
-- mypy
-- flake8 + Black
-- pre-commit git hooks
-- mergify for PRs
-
-### Extras
-
-This repo uses a GitHub Action for GitHub CodeQL security analysis; this action is the default action set by GitHub when enabling [code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning) for any repo.
 
 ## Cloud Development
 
