@@ -10,7 +10,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The examples culminate with a [UI](https://01ga68pfjprs65ad9wa032j9z6.litng-ai-03.litng.ai/view/home) deployed to the Lightning Cloud platform
+Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The examples culminate with a [UI](https://01gcfpsrmb3cb4x9bc6sqvhazs.litng-ai-03.litng.ai/view/home) deployed to the Lightning Cloud platform
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
