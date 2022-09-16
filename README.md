@@ -35,6 +35,7 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   - PyTest
   - coverage
   - MyPy
+  - Bandit
   - Black
   - isort
   - pre-commit
@@ -47,15 +48,12 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   - setuptools
   - build
   - twine
-  - poetry
 
 </details>
 
 <details>
   <summary>CI/CD</summary>
 
-  - CircleCI
-  - Deepsource
   - GitHub Actions
   - Mergify
 
@@ -64,7 +62,7 @@ Lightning Pod is a template Python environment, tooling, and system architecture
 <details>
   <summary>Notable Extras</summary>
 
-  These frameworks and libraries are installed when creating an environment from the provided poetry and conda utilities.
+  These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
 
   - fastapi
   - pydantic

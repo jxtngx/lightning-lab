@@ -23,6 +23,7 @@ black
 flake8
 pytest
 mypy
+bandit
 coverage
 pre-commit
 isort
