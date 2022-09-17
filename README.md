@@ -2,7 +2,7 @@
 
 # Lightning Pod
 
-[![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
+<!--[![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod) -->
 
 
 </div>
@@ -55,7 +55,6 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   <summary>CI/CD</summary>
 
   - GitHub Actions
-  - Mergify
 
 </details>
 
