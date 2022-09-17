@@ -9,7 +9,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The project examples culminate with an [app](https://lightning.ai/JustinGoheen/apps/01gcfpsrmb3cb4x9bc6sqvhazs) deployed to the Lightning Cloud platform.
+Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The project culminates with an [app](https://lightning.ai/JustinGoheen/apps/01gcfpsrmb3cb4x9bc6sqvhazs) deployed to the Lightning Cloud platform.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -26,6 +26,23 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   - hydra
   - plotly
   - dash
+
+</details>
+
+<details>
+  <summary>Notable Extras</summary>
+
+  These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
+
+  - torchserve
+  - fastapi
+  - pydantic
+  - gunicorn
+  - uvicorn
+  - click
+  - rich
+  - pyarrow
+  - numpy
 
 </details>
 
@@ -58,22 +75,6 @@ Lightning Pod is a template Python environment, tooling, and system architecture
 
 </details>
 
-<details>
-  <summary>Notable Extras</summary>
-
-  These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
-
-  - fastapi
-  - pydantic
-  - gunicorn
-  - uvicorn
-  - click
-  - rich
-  - pyarrow
-  - numpy
-
-</details>
-
 ### Core Code
 
 `lightning_pod.core` contains code for LightningModule and and the Trainer.
@@ -92,7 +93,7 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 #### Creating an Environment
 
-Base dependencies can be viewed in [pyproject.toml](https://github.com/JustinGoheen/lightning-pod/blob/main/pyproject.toml).
+Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/pyproject.toml).
 
 Instructions for creating a new environment are shown below.
 
@@ -203,17 +204,15 @@ OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/lat
 
 ## Cloud Development
 
-Lightning Pod enables development with Gitpod or GitHub CodeSpaces. Please note that these tools have only been tested on creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally. Lastly, GitHub CodeSpaces is still in beta for individual pro accounts. Gitpod offers 50 free hours per month.
+Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally. Lastly, GitHub CodeSpaces is still in beta for individual pro accounts; GitHub users with access to a team or enterprise account plan should be able to access CodeSpaces if enabled by their administrator.
 
 <div align="center">
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JustinGoheen/lightning-pod)
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
 </div>
 
-Gitpod and CodeSpaces use pyenv. User do not need to create an environment, as it will be created for them on launch.
+CodeSpaces use pyenv. User do not need to create an environment, as it will be created for them on launch.
 
 Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
 
