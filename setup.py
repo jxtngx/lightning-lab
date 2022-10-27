@@ -28,7 +28,6 @@ setup(
     author="Justin Goheen",
     license="Apache 2.0",
     author_email="",
-    zip_safe=False,
     classifiers=[
         "Environment :: Console",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
