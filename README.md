@@ -204,7 +204,7 @@ OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/lat
 
 ## Cloud Development
 
-Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally. Lastly, GitHub CodeSpaces is still in beta for individual pro accounts; GitHub users with access to a team or enterprise account plan should be able to access CodeSpaces if enabled by their administrator.
+Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally.
 
 <div align="center">
 
