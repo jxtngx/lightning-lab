@@ -85,7 +85,6 @@ def main(cfg: DictConfig) -> None:
         val_check_interval=cfg.trainer.val_check_interval,
         log_every_n_steps=cfg.trainer.log_every_n_steps,
         sync_batchnorm=cfg.trainer.sync_batchnorm,
-        weights_save_path=cfg.trainer.weights_save_path,
         num_sanity_val_steps=cfg.trainer.num_sanity_val_steps,
         resume_from_checkpoint=cfg.trainer.resume_from_checkpoint,
         benchmark=cfg.trainer.benchmark,
