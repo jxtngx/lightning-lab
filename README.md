@@ -217,6 +217,7 @@ CodeSpaces use pyenv. User do not need to create an environment, as it will be c
 Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
 
 ```sh
+pip3 install -e .
 pod teardown
 pod trainer run
 ```
