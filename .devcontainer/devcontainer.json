@@ -50,6 +50,6 @@
     "features": {
         "git": "latest",
         "git-lfs": "latest"
-    }
-    // "postStartCommand": "pip3 install -e ."
+    },
+    "postStartCommand": "pip3 install -e ."
 }
