@@ -4,6 +4,8 @@
 
 <!--[![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod) -->
 
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
+
 
 </div>
 
@@ -190,7 +192,9 @@ lightning run app app.py
 
 </details>
 
-## Deep Learning
+## Learning Deep Learning
+
+Lightning AI' Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
 
 Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
 
@@ -200,7 +204,7 @@ The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon
 
 DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
 
-OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in reinforcement learning and deep learning.
+OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
 
 ## Cloud Development
 
@@ -212,11 +216,10 @@ Lightning Pod enables development with GitHub CodeSpaces. Please note that light
 
 </div>
 
-CodeSpaces use pyenv. User do not need to create an environment, as it will be created for them on launch.
-
 Once the workspace image has finished building, do the following to teardown the example and run a trainer of your own from the provided example LightningModule:
 
 ```sh
+pip3 install -e .
 pod teardown
 pod trainer run
 ```
