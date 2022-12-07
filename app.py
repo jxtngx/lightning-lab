@@ -66,7 +66,7 @@ class DashWorker(L.LightningWork):
 class DashFlow(L.LightningFlow):
     def __init__(self):
         super().__init__()
-        self.lit_dash = DashWorker(parallel=True)
+        self.lit_dash = DashWorker(parallel=True, cloud_compute=L.CloudCompute("default"))
 
     def run(self):
         self.lit_dash.run()
