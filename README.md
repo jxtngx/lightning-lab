@@ -11,7 +11,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The project culminates with an [app](https://lightning.ai/JustinGoheen/apps/01gcfpsrmb3cb4x9bc6sqvhazs) deployed to the Lightning Cloud platform.
+Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The project culminates with an [app](https://01gcfpsrmb3cb4x9bc6sqvhazs.litng-ai-03.litng.ai/view/home) deployed to the Lightning Cloud platform.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -208,7 +208,7 @@ OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/lat
 
 ## Cloud Development
 
-Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally. Lastly, GitHub CodeSpaces is still in beta for individual pro accounts; GitHub users with access to a team or enterprise account plan should be able to access CodeSpaces if enabled by their administrator.
+Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally.
 
 <div align="center">
 
