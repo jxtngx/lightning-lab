@@ -1,7 +1,7 @@
 # pytorch lightning, lightning app, torchmetrics, pytorch core
 lightning
 # hyperparameter optimization
-lightning_hpo @ git+https://github.com/Lightning-AI/lightning-hpo.git
+lightning_training_studio @ git+https://github.com/Lightning-AI/lightning-hpo.git
 # mnist data
 torchvision
 # lightning-hpo dependency
