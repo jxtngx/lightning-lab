@@ -2,6 +2,8 @@
 
 # Lightning Pod
 
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" height=25/>   <img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height=25/>
+<br>
 <!--[![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod) -->
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
@@ -11,7 +13,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects. The project culminates with an [app](https://01gcfpsrmb3cb4x9bc6sqvhazs.litng-ai-03.litng.ai/view/home) deployed to the Lightning Cloud platform.
+Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with an [app](https://01gcfpsrmb3cb4x9bc6sqvhazs.litng-ai-03.litng.ai/view/home) deployed to the Lightning Cloud platform.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -21,7 +23,7 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   - pytorch
   - pytorch-lightning
   - lightning-app
-  - lightning-hpo
+  - lightning-trainging-studio (HPO)
   - torchmetrics
   - weights and biases
   - optuna
@@ -194,7 +196,7 @@ lightning run app app.py
 
 ## Learning Deep Learning
 
-Lightning AI' Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
+Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
 
 Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
 
