@@ -156,7 +156,7 @@ pip install -r requirements/extras.txt
 
 #### Command Line Interface
 
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their affects are shown below.
+A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their effects are shown below.
 
 <details>
   <summary>pod</summary>
