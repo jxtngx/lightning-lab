@@ -76,6 +76,7 @@ Lightning Pod is a template Python environment, tooling, and system architecture
   <summary>CI/CD</summary>
 
   - GitHub Actions
+  - CircleCI
 
 </details>
 
