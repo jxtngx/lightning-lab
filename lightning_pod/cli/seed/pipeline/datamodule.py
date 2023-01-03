@@ -2,7 +2,7 @@ import multiprocessing
 import os
 from pathlib import Path
 
-from pytorch_lightning import LightningDataModule
+from lightning.pytorch import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
 
 from lightning_pod.pipeline.dataset import LitDataset

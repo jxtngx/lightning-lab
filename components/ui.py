@@ -19,7 +19,7 @@ import pandas as pd
 import plotly.express as px
 import torch
 from dash import dash_table, dcc, html
-from pytorch_lightning.utilities.model_summary import ModelSummary
+from lightning.pytorch.utilities.model_summary import ModelSummary
 
 from lightning_pod.core.module import LitModel
 

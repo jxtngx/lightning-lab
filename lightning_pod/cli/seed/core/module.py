@@ -1,10 +1,10 @@
-import pytorch_lightning as pl
-import torch.nn.functional as F
-import torchmetrics
-from torch import nn, optim
+import lightning as L
+import torch.nn.functional as F  # noqa: F401
+import torchmetrics  # noqa: F401
+from torch import nn, optim  # noqa: F401
 
 
-class LitModel(pl.LightningModule):
+class LitModel(L.LightningModule):
     """a custom PyTorch Lightning LightningModule"""
 
     def __init__(self):

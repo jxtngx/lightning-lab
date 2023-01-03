@@ -25,8 +25,11 @@ import torch
 import tqdm
 
 sys.path += [os.path.abspath(".."), os.path.abspath("")]
-import pytorch_lightning  # noqa: E402
 
+try:
+    import pytorch_lightning  # noqa: E402
+except ModuleNotFoundError:
+    pass
 try:
     import lightning
 except ModuleNotFoundError:
@@ -64,7 +67,7 @@ def info_packages():
         "numpy": numpy.__version__,
         "pyTorch_version": torch.__version__,
         "pyTorch_debug": torch.version.debug,
-        "pytorch-lightning": pytorch_lightning.__version__,
+        "pytorch-lightning": pytorch_lightning.__version__ if "pytorch_lightning" in sys.modules else None,
         "lightning": lightning.__version__ if "lightning" in sys.modules else None,
         "lightning_app": lightning_app.__version__ if "lightning_app" in sys.modules else None,
         "tqdm": tqdm.__version__,

@@ -1,4 +1,4 @@
-import pytorch_lightning as pl
+import lightning as L
 import torch.nn.functional as F
 from torch import nn, optim
 
@@ -67,7 +67,7 @@ class Decoder(nn.Module):
         return self.l1(x)
 
 
-class LitModel(pl.LightningModule):
+class LitModel(L.LightningModule):
     """a custom PyTorch Lightning LightningModule
 
     Args:

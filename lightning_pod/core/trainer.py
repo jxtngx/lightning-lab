@@ -2,16 +2,17 @@ import os
 from pathlib import Path
 
 import hydra
+import lightning as L
 import torch
+from lightning.pytorch import seed_everything
+from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
+from lightning.pytorch.loggers import TensorBoardLogger
+from lightning.pytorch.profiler import PyTorchProfiler
 from omegaconf.dictconfig import DictConfig
 from torch.utils.data import TensorDataset
 
 from lightning_pod.core.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.profiler import PyTorchProfiler
 
 # SET PATHS
 filepath = Path(__file__)
@@ -46,7 +47,7 @@ def main(cfg: DictConfig) -> None:
     #  SET MODEL
     model = LitModel()
     # SET TRAINER
-    trainer = Trainer(
+    trainer = L.Trainer(
         max_epochs=cfg.trainer.max_epochs,
         limit_train_batches=cfg.trainer.limit_train_batches,
         limit_predict_batches=cfg.trainer.limit_predict_batches,

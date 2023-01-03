@@ -3,10 +3,10 @@ from pathlib import Path
 
 import hydra
 import torch
-from pytorch_lightning import seed_everything, Trainer
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
-from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.profiler import PyTorchProfiler
+from lightning.pytorch import seed_everything, Trainer
+from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
+from lightning.pytorch.loggers import TensorBoardLogger
+from lightning.pytorch.profiler import PyTorchProfiler
 from torch.utils.data import TensorDataset
 
 from lightning_pod.core.module import LitModel
