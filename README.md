@@ -8,6 +8,7 @@
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
 [![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
+![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
 
 
 </div>
