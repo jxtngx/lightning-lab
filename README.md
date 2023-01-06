@@ -197,6 +197,50 @@ lightning run app app.py
 
 </details>
 
+#### Datasets
+
+<details>
+  <summary>Scikit and PyTorch Provided Datasets</summary>
+
+If using built-in datasets from [torchvision](https://pytorch.org/vision/stable/datasets.html), [torchaudio](https://pytorch.org/audio/stable/datasets.html), or [Lightning Bolts integration of scikit-learn datasets](https://lightning-bolts.readthedocs.io/en/latest/datamodules/sklearn.html), then creating LightningDataModules should be relatively straight forward, with little to no change necessary for the provided `lightning_pod.pipeline.datamodule`. However, be sure to pay attention to which methods and hooks are available to the respective datasets, and be ready to debug errors in `lightning_pod.pipeline.datamodule` attributed to `lightning_pod.pipeline.dataset`'s differences in hooks after using a dataset other than torchvision's MNIST.
+
+</details>
+
+<details>
+  <summary>Custom Torch Datasets</summary>
+
+Depending on scale and complexity, creating your own custom torch dataset can be relatively straight forward. Keep in mind that in doing so, none of the hooks available to the MNIST torch dataset used in the example will be availble to your custom dataset; you must create your own hooks and methods. You can view the source code of PyTorch and Lightning Bolts as examples of how to develop a custom dataset that will be piped to a LightningDatamodule.
+
+A basic custom torch dataset is shown below:
+
+```python
+import pandas as pd
+import torch
+from torch.utils.data import Dataset
+
+
+class LitDataset(Dataset):
+    def __init__(self, features_path, labels_path):
+        self.features = pd.read_csv(features_path)
+        self.labels = pd.read_csv(labels_path)
+
+    def __len__(self):
+        return len(self.labels)
+
+    def __getitem__(self, idx):
+        x, y = self.features.iloc[idx], self.labels.iloc[idx]
+        return torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
+```
+
+You read more on PyTorch datasets and LightningDatamodules by following the links below:
+
+- PyTorch [Datasets](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files)
+- Lightning [Datamodules](https://pytorch-lightning.readthedocs.io/en/stable/data/datamodule.html?highlight=datamodule#what-is-a-datamodule)
+
+> LightningDataModules handle DataLoaders; you do not need to follow the DataLoaders portion of the PyTorch tutorial
+
+</details>
+
 ## Learning Deep Learning
 
 Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
