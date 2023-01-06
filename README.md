@@ -104,7 +104,7 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 #### Creating an Environment
 
-Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/pyproject.toml).
+Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg), under `install_requires`.
 
 Instructions for creating a new environment are shown below.
 
