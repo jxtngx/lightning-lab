@@ -105,21 +105,6 @@ Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/l
 Instructions for creating a new environment are shown below.
 
 <details>
-  <summary>poetry</summary>
-
-Install [Poetry](https://python-poetry.org/docs/master/#installing-with-the-official-installer) if you do not already have it installed.
-
-```sh
-cd {{ path to clone }}
-poetry install
-# if desired, install extras
-poetry shell
-pip install -r requirements/extras.txt
-{{ set interpreter in IDE }}
-```
-</details>
-
-<details>
   <summary>conda</summary>
 
 Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) if you do not already have it installed.
@@ -196,6 +181,8 @@ lightning run app app.py
 ```
 
 </details>
+
+> the CLI is built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://github.com/Textualize/rich)
 
 #### Datasets
 
