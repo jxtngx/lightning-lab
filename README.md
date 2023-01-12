@@ -15,7 +15,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and system architecture for artificial intelligence and machine learning projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) [deployed to the Lightning Cloud platform](https://lightning.ai/JustinGoheen).
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results.
 
 ![](assets/dash_ui.png)
 
@@ -26,7 +26,6 @@ Lightning Pod is a template Python environment, tooling, and system architecture
 
   These are the base frameworks. Many other tools (numpy, pyarrow etc) are installed as dependencies when installing the core dependencies.
 
-  - pytorch
   - pytorch-lightning
   - lightning-app
   - lightning-trainging-studio (HPO)
@@ -232,19 +231,19 @@ You read more on PyTorch datasets and LightningDatamodules by following the link
 
 </details>
 
-## Learning Deep Learning
+## Deploying to Lightning Cloud
 
-Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
+Once a user has created a Lightning account, the app can be deployed to Lightning Cloud with the following command in terminal:
 
-Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
+```bash
+lightning run app your_app_file_name.py --cloud
+```
 
-NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
+On command to load to cloud, Lightning will look for two files in the root directory `.lightningignore` and `.lightning`.
 
-The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
+`.lightning` is the config file.
 
-DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
-
-OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
+`.lightningignore` is a more granular version of gitignore that allows users to be specific about which project files should be loaded to Lightning Cloud.
 
 ## Cloud Development
 
@@ -262,3 +261,29 @@ Once the workspace image has finished building, do the following to teardown the
 pod teardown
 pod trainer run
 ```
+
+## Learning Resources
+
+### Deep Learning
+
+Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
+
+Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
+
+NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
+
+The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
+
+DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
+
+OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
+
+### Reviewing Source Code
+
+The following three videos were created by Lightning's Thomas Chaton; the videos are extremely helpful in learning how to use code search features in VS Code to navigate a project's source code, enabling a deeper understanding of what is going on under the hood.
+
+> these videos were created before PyTorch Lightning was moved into the Lightning Framework mono repo
+
+[Lightning Codebase Deep Dive 1](https://youtu.be/aEeh9ucKUkU) <br>
+[Lightning Codebase Deep Dive 2](https://youtu.be/NEpRYqdsm54) <br>
+[Lightning Codebase Deep Dive 3](https://youtu.be/x4d4RDNJaZk)
