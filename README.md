@@ -156,7 +156,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod trainer run-hydra` runs the example hydra Trainer. <br>
 
-`pod trainer run-wandb` runs the example wandb Trainer. <br>
+`pod trainer run-wandb --project-name=your-project-name` runs the example wandb Trainer. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
