@@ -27,10 +27,10 @@ PROJECTPATH = os.getcwd()
 def main(cfg: DictConfig) -> None:
     # SET LOGGER
     logs_dir = os.path.join(PROJECTPATH, "logs")
-    logger = TensorBoardLogger(logs_dir, name="logger")
+    logger = TensorBoardLogger(logs_dir, name="tensorboard")
     # SET PROFILER
     profile_dir = os.path.join(logs_dir, "profiler")
-    profiler = PyTorchProfiler(dirpath=profile_dir, filename="profiler")
+    profiler = PyTorchProfiler(dirpath=profile_dir, filename="torch_profiler")
     # SET CHECKPOINT CALLBACK
     chkpt_dir = os.path.join(PROJECTPATH, "models", "checkpoints")
     checkpoint_callback = ModelCheckpoint(dirpath=chkpt_dir, filename="model")

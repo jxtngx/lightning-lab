@@ -140,15 +140,13 @@ dmypy.json
 
 # profiler, logger logs, model checkpoints, production models
 outputs/
+logs/
 
 # tests
 tests/
 
 # research notebooks
 notebooks/
-
-# logs and profilers
-logs/
 
 # CICD
 .circleci/
@@ -157,5 +155,6 @@ logs/
 .deepsource/
 .git/
 
-# doc
+# docs and examples
 docs/
+examples/

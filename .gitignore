@@ -140,3 +140,4 @@ dmypy.json
 
 # profiler, logger logs, model checkpoints, production models
 outputs/
+logs/wandb_logs/wandb
