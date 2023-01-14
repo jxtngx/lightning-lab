@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 import sys
 from typing import Any, Dict, Optional
 
@@ -21,6 +20,7 @@ import wandb as wb
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
 from lightning.pytorch.loggers import WandbLogger
 
+from lightning_pod import conf
 from lightning_pod.core.module import LitModel
 from lightning_pod.pipeline.datamodule import LitDataModule
 
@@ -32,7 +32,7 @@ class PipelineWorker:
             a wandb run can be passed in for users who want to log intermediate preprocessing results.
             see https://docs.wandb.ai/guides/track/log
         """
-        # _ prevents flow from checking JSON serialization if converting to App
+        # _ prevents flow from checking JSON serialization if converting to Lightning App
         self._datamodule = datamodule()
         self.experiment = wandb_run
 
@@ -64,7 +64,7 @@ class SweepFlow:
     def __init__(
         self,
         project_name: Optional[str] = None,
-        wandb_dir: Optional[str] = os.path.join(os.getcwd(), "logs", "wandb_logs"),
+        wandb_dir: Optional[str] = conf.WANDBPATH,
     ):
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self.pipeline_work = PipelineWorker(LitDataModule)
@@ -76,7 +76,7 @@ class SweepFlow:
                 "max_epochs": 10,
                 "callbacks": [
                     EarlyStopping(monitor="loss", mode="min"),
-                    ModelCheckpoint(dirpath=os.path.join(os.getcwd(), "models", "checkpoints"), filename="model"),
+                    ModelCheckpoint(dirpath=conf.CHKPTSPATH, filename="model"),
                 ],
             },
         )
