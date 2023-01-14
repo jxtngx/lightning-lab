@@ -31,6 +31,7 @@ class LitTrainer(L.Trainer):
         logger: Optional[Logger] = None,
         profiler: Optional[Profiler] = None,
         callbacks: Optional[List] = [],
+        set_seed: bool = True,
         **trainer_init_kwargs: Dict[str, Any]
     ) -> None:
         super().__init__(
@@ -40,7 +41,8 @@ class LitTrainer(L.Trainer):
             **trainer_init_kwargs
         )
         # SET SEED
-        seed_everything(conf.GLOBALSEED, workers=True)
+        if set_seed:
+            seed_everything(conf.GLOBALSEED, workers=True)
         #  SET DATALOADER
         self.datamodule = LitDataModule()
         #  SET MODEL

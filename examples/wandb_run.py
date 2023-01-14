@@ -16,7 +16,6 @@ import sys
 from typing import Any, Dict, Optional
 
 import wandb as wb
-from lightning.pytorch import seed_everything
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
 
@@ -64,7 +63,6 @@ class SweepFlow:
         project_name: Optional[str] = None,
         wandb_dir: Optional[str] = conf.WANDBPATH,
     ):
-        seed_everything(conf.GLOBALSEED, workers=True)
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self.pipeline_work = PipelineWorker(LitDataModule)
         self.training_work = TrainerWorker(
