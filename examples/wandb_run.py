@@ -15,7 +15,8 @@ class PipelineWorker:
     def __init__(self, datamodule, wandb_run=None):
         """
         Note:
-            a wandb run can be passed in for users who want to log intermediate preprocessing results
+            a wandb run can be passed in for users who want to log intermediate preprocessing results.
+            see https://docs.wandb.ai/guides/track/log
         """
         # _ prevents flow from checking JSON serialization if converting to App
         self._datamodule = datamodule()
