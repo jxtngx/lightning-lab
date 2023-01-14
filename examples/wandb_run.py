@@ -15,13 +15,13 @@
 import sys
 from typing import Any, Dict, Optional
 
-import lightning as L
 import wandb as wb
-from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
+from lightning.pytorch import seed_everything
+from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
 
 from lightning_pod import conf
-from lightning_pod.core.module import LitModel
+from lightning_pod.core.trainer import LitTrainer
 from lightning_pod.pipeline.datamodule import LitDataModule
 
 
@@ -44,15 +44,13 @@ class PipelineWorker:
 class TrainerWorker:
     def __init__(
         self,
-        model,
-        datamodule,
         logger,
         trainer_init_kwargs: Optional[Dict[str, Any]] = {},
         trainer_fit_kwargs: Optional[Dict[str, Any]] = {},
     ):
-        self._trainer = L.Trainer(logger=logger, **trainer_init_kwargs)
-        self._datamodule = datamodule
-        self._model = model
+        self._trainer = LitTrainer(logger=logger, **trainer_init_kwargs)
+        self._datamodule = self._trainer.datamodule
+        self._model = self._trainer.model
         self.fit_kwargs = trainer_fit_kwargs
 
     def run(self):
@@ -66,18 +64,14 @@ class SweepFlow:
         project_name: Optional[str] = None,
         wandb_dir: Optional[str] = conf.WANDBPATH,
     ):
+        seed_everything(conf.GLOBALSEED, workers=True)
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self.pipeline_work = PipelineWorker(LitDataModule)
         self.training_work = TrainerWorker(
-            LitModel(),
-            self.pipeline_work._datamodule,
             WandbLogger(experiment=self._wb_run),
             trainer_init_kwargs={
                 "max_epochs": 10,
-                "callbacks": [
-                    EarlyStopping(monitor="loss", mode="min"),
-                    ModelCheckpoint(dirpath=conf.CHKPTSPATH, filename="model"),
-                ],
+                "callbacks": [EarlyStopping(monitor="loss", mode="min")],
             },
         )
 

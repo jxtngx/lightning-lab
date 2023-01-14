@@ -16,18 +16,13 @@ import os
 from pathlib import Path
 
 import hydra
-import lightning as L
 import torch
-from lightning.pytorch import seed_everything
-from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
-from lightning.pytorch.loggers import TensorBoardLogger
-from lightning.pytorch.profiler import PyTorchProfiler
+from lightning.pytorch.callbacks import EarlyStopping
 from omegaconf.dictconfig import DictConfig
 from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
-from lightning_pod.core.module import LitModel
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_pod.core.trainer import LitTrainer
 
 # SET PATHS
 FILEPATH = Path(__file__)
@@ -39,26 +34,10 @@ FILEPATH = Path(__file__)
     version_base=hydra.__version__,
 )
 def main(cfg: DictConfig) -> None:
-    # SET LOGGER
-    logger = TensorBoardLogger(conf.LOGSPATH, name="tensorboard")
-    # SET PROFILER
-    profiler = PyTorchProfiler(dirpath=conf.PROFILERPATH, filename="profiler")
-    # SET CHECKPOINT CALLBACK
-    checkpoint_callback = ModelCheckpoint(dirpath=conf.CHKPTSPATH, filename="model")
-    # SET EARLYSTOPPING CALLBACK
-    early_stopping = EarlyStopping(monitor="loss", mode="min")
-    # SET CALLBACKS
-    callbacks = [checkpoint_callback, early_stopping]
-    # SET PLUGINS
-    plugins = None
-    # SET SEED
-    seed_everything(conf.GLOBALSEED, workers=True)
-    #  SET DATALOADER
-    datamodule = LitDataModule()
-    #  SET MODEL
-    model = LitModel()
-    # SET TRAINER
-    trainer = L.Trainer(logger=logger, profiler=profiler, callbacks=callbacks, plugins=plugins, **cfg.trainer)
+    # SET MODEL, DATAMODULE TRAINER
+    trainer = LitTrainer(callbacks=[EarlyStopping(monitor="loss", mode="min")], **cfg.trainer)
+    model = trainer.model
+    datamodule = trainer.datamodule
     # TRAIN MODEL
     trainer.fit(model=model, datamodule=datamodule)
     # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
