@@ -263,7 +263,7 @@ On command to load to cloud, Lightning will look for two files in the root direc
 
 `.lightningignore` is a more granular version of gitignore that allows users to be specific about which project files should be loaded to Lightning Cloud.
 
-## Cloud Development
+## GitHub CodeSpaces
 
 Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally.
 
