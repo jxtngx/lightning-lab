@@ -254,7 +254,7 @@ You read more on PyTorch datasets and LightningDatamodules by following the link
 Once a user has created a Lightning account, the app can be deployed to Lightning Cloud with the following command in terminal:
 
 ```bash
-lightning run app your_app_file_name.py --cloud
+lightning run app app.py --cloud
 ```
 
 On command to load to cloud, Lightning will look for two files in the root directory `.lightningignore` and `.lightning`.
@@ -265,7 +265,7 @@ On command to load to cloud, Lightning will look for two files in the root direc
 
 ## GitHub CodeSpaces
 
-Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule i.e. it is necessary to debug Lightning and Dash apps locally.
+Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule in the CodeSpace i.e. it is necessary to debug Lightning and Dash apps locally.
 
 <div align="center">
 
