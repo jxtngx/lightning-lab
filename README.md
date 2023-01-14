@@ -115,6 +115,8 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 > it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
 
+Examples can be found in [lighting-pod/examples/](examples/).
+
 #### Creating an Environment
 
 Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg), under `install_requires`.
