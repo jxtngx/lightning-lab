@@ -71,12 +71,13 @@ def run_hydra(hydra_args: tuple) -> None:
     hydra_args = list(hydra_args)
     hydra_args = [f"'trainer.{i}'" for i in hydra_args]
     hydra_args = " ".join(hydra_args)
-    run_command = " ".join(["python", trainer, hydra_args])
+    run_command = " ".join(["python3", trainer, hydra_args])
     os.system(run_command)
 
 
 @trainer.command("run-wandb")
-@click.argument("project-name", nargs=-1)
+@click.option("--project-name")
 def run_wandb(project_name) -> None:
-    run_command = " ".join(["python", "wandb_run.py", project_name])
+    trainer = os.path.join(PROJECTPATH, "examples", "wandb_run.py")
+    run_command = " ".join(["python3", trainer, project_name])
     os.system(run_command)
