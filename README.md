@@ -154,7 +154,9 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run` runs the Trainer. <br>
+`pod trainer run-hydra` runs the example hydra Trainer. <br>
+
+`pod trainer run-wandb` runs the example wandb Trainer. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
@@ -259,7 +261,7 @@ Once the workspace image has finished building, do the following to teardown the
 
 ```sh
 pod teardown
-pod trainer run
+pod trainer run-hydra
 ```
 
 ## Learning Resources
