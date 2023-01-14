@@ -74,7 +74,7 @@ class SweepFlow:
 
 if __name__ == "__main__":
     # to set a project name, use as
-    # python3 wandb_run.py some_project_name
+    # python3 examples/wandb_run.py some_project_name
     args = sys.argv
     if len(args) > 1:
         project_name = sys.argv[1]
