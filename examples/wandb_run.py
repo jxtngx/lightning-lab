@@ -12,9 +12,12 @@ from lightning_pod.pipeline.datamodule import LitDataModule
 
 
 class PipelineWorker:
-    def __init__(self, datamodule, project_name: Optional[str] = None, wandb_dir: Optional[str] = None):
+    def __init__(self, datamodule, wandb_run=None):
+        """
+        Note:
+            a wandb run can be passed in for users who want to log intermediate preprocessing results
+        """
         # _ prevents flow from checking JSON serialization if converting to App
-        self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self._datamodule = datamodule()
 
     def run(self):
@@ -42,16 +45,17 @@ class TrainerWorker:
 
 
 class SweepFlow:
-    def __init__(self, project_name: Optional[str] = None):
-        self.pipeline_work = PipelineWorker(
-            LitDataModule,
-            project_name=project_name,
-            wandb_dir=os.path.join(os.getcwd(), "logs", "wandb_logs"),
-        )
+    def __init__(
+        self,
+        project_name: Optional[str] = None,
+        wandb_dir: Optional[str] = os.path.join(os.getcwd(), "logs", "wandb_logs"),
+    ):
+        self._wb_run = wb.init(project=project_name, dir=wandb_dir)
+        self.pipeline_work = PipelineWorker(LitDataModule())
         self.training_work = TrainerWorker(
             LitModel(),
             self.pipeline_work._datamodule,
-            WandbLogger(experiment=self.pipeline_work._wb_run),
+            WandbLogger(experiment=self._wb_run),
             trainer_init_kwargs={
                 "max_epochs": 10,
                 "callbacks": [
