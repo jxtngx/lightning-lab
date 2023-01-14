@@ -53,7 +53,7 @@ class SweepFlow:
         wandb_dir: Optional[str] = os.path.join(os.getcwd(), "logs", "wandb_logs"),
     ):
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
-        self.pipeline_work = PipelineWorker(LitDataModule())
+        self.pipeline_work = PipelineWorker(LitDataModule)
         self.training_work = TrainerWorker(
             LitModel(),
             self.pipeline_work._datamodule,
