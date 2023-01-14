@@ -19,6 +19,7 @@ class PipelineWorker:
         """
         # _ prevents flow from checking JSON serialization if converting to App
         self._datamodule = datamodule()
+        self.experiment = wandb_run
 
     def run(self):
         """preprocessing"""
