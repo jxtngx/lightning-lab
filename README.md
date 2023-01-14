@@ -101,7 +101,7 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 ### Core Code
 
-`lightning_pod.core` contains code for LightningModule and and the Trainer.
+`lightning_pod.core` contains code for LightningModule and the Trainer.
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
