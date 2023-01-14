@@ -13,12 +13,8 @@ from lightning_pod.pipeline.datamodule import LitDataModule
 
 class PipelineWorker:
     def __init__(self, datamodule, project_name: Optional[str] = None, wandb_dir: Optional[str] = None):
-        if project_name:
-            # _ prevents flow from checking JSON serialization if converting to App
-            self._wb_run = wb.init(project=project_name, dir=wandb_dir)
-        else:
-            # project name will be root dir's name
-            self._wb_run = wb.init()
+        # _ prevents flow from checking JSON serialization if converting to App
+        self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self._datamodule = datamodule()
 
     def run(self):
