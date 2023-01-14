@@ -140,5 +140,9 @@ dmypy.json
 
 # profiler, logger logs, model checkpoints, production models
 outputs/
-logs/wandb_logs/wandb
 models/checkpoints/model-*
+logs/tensorboard/version*
+logs/torch_profiler/fit*
+logs/torch_profiler/predict*
+logs/torch_profiler/test*
+logs/wandb_logs/wandb

@@ -21,6 +21,7 @@ from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_tra
 
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
+PROJECTPATH = FILEPATH.parents[2]
 
 
 @click.group()
@@ -63,12 +64,19 @@ def help() -> None:
 
 
 # TODO add help description
-@trainer.command("run")
+@trainer.command("run-hydra")
 @click.argument("hydra-args", nargs=-1)
-def run_trainer(hydra_args: tuple) -> None:
-    trainer = os.path.join(PKGPATH, "core", "trainer.py")
+def run_hydra(hydra_args: tuple) -> None:
+    trainer = os.path.join(PROJECTPATH, "examples", "hydra", "trainer.py")
     hydra_args = list(hydra_args)
     hydra_args = [f"'trainer.{i}'" for i in hydra_args]
     hydra_args = " ".join(hydra_args)
     run_command = " ".join(["python", trainer, hydra_args])
+    os.system(run_command)
+
+
+@trainer.command("run-wandb")
+@click.argument("project-name", nargs=-1)
+def run_wandb(project_name) -> None:
+    run_command = " ".join(["python", "wandb_run.py", project_name])
     os.system(run_command)
