@@ -12,19 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 from pathlib import Path
 
 import hydra
-import torch
 from lightning.pytorch.callbacks import EarlyStopping
 from omegaconf.dictconfig import DictConfig
-from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
 from lightning_pod.core.trainer import LitTrainer
 
-# SET PATHS
 FILEPATH = Path(__file__)
 
 
@@ -36,31 +32,21 @@ FILEPATH = Path(__file__)
 def main(cfg: DictConfig) -> None:
     # SET MODEL, DATAMODULE TRAINER
     trainer = LitTrainer(callbacks=[EarlyStopping(monitor="loss", mode="min")], **cfg.trainer)
-    model = trainer.model
-    datamodule = trainer.datamodule
     # TRAIN MODEL
-    trainer.fit(model=model, datamodule=datamodule)
+    trainer.fit(model=trainer.model, datamodule=trainer.datamodule)
     # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
     if not cfg.trainer.fast_dev_run:
         # TEST MODEL
-        trainer.test(ckpt_path="best", datamodule=datamodule)
+        trainer.test(ckpt_path="best", datamodule=trainer.datamodule)
         # PERSIST MODEL
-        # TODO write util to search models dir and append version number
-        input_sample = datamodule.train_data.dataset[0][0]
-        model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
+        input_sample = trainer.datamodule.train_data.dataset[0][0]
+        trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
         # PREDICT
-        predictions = trainer.predict(model, datamodule.val_dataloader())
-        # EXPORT PREDICTIONS
-        predictions = torch.vstack(predictions)  # type: ignore[arg-type]
-        predictions = TensorDataset(predictions)
-        torch.save(predictions, conf.PREDSPATH)
-        # EXPORT ALL DATA SPLITS FOR REPRODUCIBILITY
-        train_split_fname = os.path.join(conf.SPLITSPATH, "train.pt")
-        test_split_fname = os.path.join(conf.SPLITSPATH, "test.pt")
-        val_split_fname = os.path.join(conf.SPLITSPATH, "val.pt")
-        torch.save(datamodule.train_data, train_split_fname)
-        torch.save(datamodule.test_data, test_split_fname)
-        torch.save(datamodule.val_data, val_split_fname)
+        predictions = trainer.predict(trainer.model, trainer.datamodule.val_dataloader())
+        # PERSIST PREDICTIONS
+        trainer.persist_predictions(predictions)
+        # PERSIST DATA SPLITS FOR REPRODUCIBILITY
+        trainer.datamodule.persist_splits()
 
 
 if __name__ == "__main__":

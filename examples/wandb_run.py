@@ -16,6 +16,7 @@ import sys
 from typing import Any, Dict, Optional
 
 import wandb as wb
+from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
 
@@ -46,15 +47,31 @@ class TrainerWorker:
         logger,
         trainer_init_kwargs: Optional[Dict[str, Any]] = {},
         trainer_fit_kwargs: Optional[Dict[str, Any]] = {},
+        trainer_val_kwargs: Optional[Dict[str, Any]] = {},
+        trainer_test_kwargs: Optional[Dict[str, Any]] = {},
     ):
+        # _ prevents flow from checking JSON serialization if converting to Lightning App
         self._trainer = LitTrainer(logger=logger, **trainer_init_kwargs)
-        self._datamodule = self._trainer.datamodule
-        self._model = self._trainer.model
         self.fit_kwargs = trainer_fit_kwargs
+        self.val_kwargs = trainer_val_kwargs
+        self.test_kwargs = trainer_test_kwargs
 
-    def run(self):
-        """fit, validate, test"""
-        self._trainer.fit(model=self._model, datamodule=self._datamodule, **self.fit_kwargs)
+    def run(self, fit: bool = True, validate: bool = False, test: bool = False):
+        """fit, validate, test
+
+        Note:
+            Validation can be set via Trainer flags, or called as Trainer method.
+            See:
+             - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#validation
+             - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#val-check-interval
+             - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#check-val-every-n-epoch
+        """
+        if fit:
+            self._trainer.fit(model=self._trainer._model, datamodule=self._trainer._datamodule, **self.fit_kwargs)
+        if validate:
+            self._trainer.validate(model=self._trainer._model, datamodule=self._trainer._datamodule, **self.val_kwargs)
+        if test:
+            self._trainer.test(ckpt_path="best", datamodule=self._trainer._datamodule, **self.test_kwargs)
 
 
 class SweepFlow:
@@ -63,6 +80,7 @@ class SweepFlow:
         project_name: Optional[str] = None,
         wandb_dir: Optional[str] = conf.WANDBPATH,
     ):
+        # _ prevents flow from checking JSON serialization if converting to Lightning App
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
         self.pipeline_work = PipelineWorker(LitDataModule)
         self.training_work = TrainerWorker(
@@ -75,9 +93,12 @@ class SweepFlow:
 
     def run(self):
         self.pipeline_work.run()
+        #  set stage to fit since pipeline_work calls prepare_data
         self.pipeline_work._datamodule.setup(stage="fit")
         self.training_work.run()
-        sys.exit()
+        #  stop Lightning App's loop after training is complete
+        if issubclass(SweepFlow, LightningFlow):
+            sys.exit()
 
 
 if __name__ == "__main__":

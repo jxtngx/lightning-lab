@@ -15,10 +15,12 @@
 from typing import Any, Dict, List, Optional
 
 import lightning as L
+import torch
 from lightning.pytorch import seed_everything
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import Logger, TensorBoardLogger
 from lightning.pytorch.profiler import Profiler, PyTorchProfiler
+from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
 from lightning_pod.core.module import LitModel
@@ -47,3 +49,8 @@ class LitTrainer(L.Trainer):
         self.datamodule = LitDataModule()
         #  SET MODEL
         self.model = LitModel()
+
+    def persist_predictions(self, predictions):
+        predictions = torch.vstack(predictions)  # type: ignore[arg-type]
+        predictions = TensorDataset(predictions)
+        torch.save(predictions, conf.PREDSPATH)

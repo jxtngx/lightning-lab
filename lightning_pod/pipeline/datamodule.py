@@ -17,11 +17,13 @@ import os
 from pathlib import Path
 from typing import Any, Callable, Union
 
+import torch
 from lightning.pytorch import LightningDataModule
 from lightning.pytorch.utilities.types import EVAL_DATALOADERS, TRAIN_DATALOADERS
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 
+from lightning_pod import conf
 from lightning_pod.pipeline.dataset import LitDataset
 
 filepath = Path(__file__)
@@ -58,6 +60,12 @@ class LitDataModule(LightningDataModule):
             self.train_data, self.val_data = random_split(full_dataset, lengths=[train_size, test_size])
         if stage == "test" or stage is None:
             self.test_data = self.dataset(self.data_dir, train=False, transform=self.transforms)
+
+    def persist_splits(self):
+        """saves all splits for reproducibility"""
+        torch.save(self.train_data, os.path.join(conf.SPLITSPATH, "train.pt"))
+        torch.save(self.test_data, os.path.join(conf.SPLITSPATH, "test.pt"))
+        torch.save(self.val_data, os.path.join(conf.SPLITSPATH, "val.pt"))
 
     def train_dataloader(self) -> TRAIN_DATALOADERS:
         return DataLoader(self.train_data, num_workers=self.num_workers)
