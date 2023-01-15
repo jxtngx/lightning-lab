@@ -80,5 +80,8 @@ def run_hydra(hydra_args: tuple) -> None:
 @click.option("--project-name")
 def run_wandb(project_name) -> None:
     trainer = os.path.join(PROJECTPATH, "examples", "wandb_run.py")
-    run_command = " ".join(["python3", trainer, project_name])
+    if project_name:
+        run_command = " ".join(["python3", trainer, project_name])
+    else:
+        run_command = " ".join(["python3", trainer])
     os.system(run_command)

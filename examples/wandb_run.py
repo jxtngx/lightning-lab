@@ -67,11 +67,11 @@ class TrainerWorker:
              - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#check-val-every-n-epoch
         """
         if fit:
-            self._trainer.fit(model=self._trainer._model, datamodule=self._trainer._datamodule, **self.fit_kwargs)
+            self._trainer.fit(model=self._trainer.model, datamodule=self._trainer.datamodule, **self.fit_kwargs)
         if validate:
-            self._trainer.validate(model=self._trainer._model, datamodule=self._trainer._datamodule, **self.val_kwargs)
+            self._trainer.validate(model=self._trainer.model, datamodule=self._trainer.datamodule, **self.val_kwargs)
         if test:
-            self._trainer.test(ckpt_path="best", datamodule=self._trainer._datamodule, **self.test_kwargs)
+            self._trainer.test(ckpt_path="best", datamodule=self._trainer.datamodule, **self.test_kwargs)
 
 
 class SweepFlow:
