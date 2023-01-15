@@ -282,6 +282,15 @@ pod trainer run-hydra
 
 ## Learning Resources
 
+### Reviewing Source Code
+
+The following three videos were created by Lightning's Thomas Chaton; the videos are extremely helpful in learning how to use code search features in VS Code to navigate a project's source code, enabling a deeper understanding of what is going on under the hood.
+
+> these videos were created before PyTorch Lightning was moved into the Lightning Framework mono repo
+
+[Lightning Codebase Deep Dive 1](https://youtu.be/aEeh9ucKUkU) <br>
+[Lightning Codebase Deep Dive 2](https://youtu.be/NEpRYqdsm54) <br>
+[Lightning Codebase Deep Dive 3](https://youtu.be/x4d4RDNJaZk)
 ### Deep Learning
 
 Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
@@ -296,12 +305,6 @@ DeepMind has shared several lectures series created for UCL [on YouTube](https:/
 
 OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
 
-### Reviewing Source Code
+### ML Ops
 
-The following three videos were created by Lightning's Thomas Chaton; the videos are extremely helpful in learning how to use code search features in VS Code to navigate a project's source code, enabling a deeper understanding of what is going on under the hood.
-
-> these videos were created before PyTorch Lightning was moved into the Lightning Framework mono repo
-
-[Lightning Codebase Deep Dive 1](https://youtu.be/aEeh9ucKUkU) <br>
-[Lightning Codebase Deep Dive 2](https://youtu.be/NEpRYqdsm54) <br>
-[Lightning Codebase Deep Dive 3](https://youtu.be/x4d4RDNJaZk)
+Weights and Biases has created a free [ML Ops](https://www.wandb.courses/courses/effective-mlops-model-development) course.
