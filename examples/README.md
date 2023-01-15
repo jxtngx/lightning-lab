@@ -37,7 +37,7 @@ You must have a wandb account to use this example.
 In order to run the wandb example, in terminal do:
 
 ```bash
-pod trainer run-wandb --project-name=LP-Example
+pod trainer run-wandb
 ```
 
-A training run will start in your terminal and lightning will output information to the terminal. Results will be synced to the project `LP-Example` in your wandb account.
+A training run will start in your terminal and lightning will output information to the terminal. Results will be synced to the project [`lightning-pod-examples`](https://wandb.ai/justingoheen/lightning-pod-examples) in your wandb account.
