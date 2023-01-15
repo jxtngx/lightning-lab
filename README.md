@@ -29,7 +29,7 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results.
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as Lightning App that can shared via Lightning Cloud.
 
 ![](assets/dash_ui.png)
 
