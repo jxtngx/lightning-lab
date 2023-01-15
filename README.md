@@ -192,7 +192,7 @@ The flow for creating new checkpoints and an ONNX model from the provided encode
 
 ```sh
 pod teardown
-pod trainer run
+pod trainer run-hydra
 ```
 
 Once the new Trainer has finished, the app can be viewed by running the following in terminal:
