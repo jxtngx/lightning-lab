@@ -25,6 +25,7 @@ MODELPATH = os.path.join(PROJECTPATH, "models", "onnx", "model.onnx")
 PREDSPATH = os.path.join(PROJECTPATH, "data", "predictions", "predictions.pt")
 SPLITSPATH = os.path.join(PROJECTPATH, "data", "training_split")
 WANDBPATH = os.path.join(PROJECTPATH, "logs", "wandb_logs")
+OPTUNAPATH = os.path.join(PROJECTPATH, "logs", "optuna")
 
 # GLOBAL SEED
 GLOBALSEED = 42
