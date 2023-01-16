@@ -108,9 +108,7 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 `lightning_pod.flows` contains interfaces for hydra, wandb, and optuna.
 
-If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
-
-> Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
+> If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided. Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
 
 ### Using the Template
 
