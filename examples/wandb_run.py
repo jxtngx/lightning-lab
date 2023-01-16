@@ -26,14 +26,14 @@ from lightning_pod.pipeline.datamodule import LitDataModule
 
 
 class PipelineWorker:
-    def __init__(self, datamodule, wandb_run=None):
+    def __init__(self, wandb_run=None):
         """
         Note:
             a wandb run can be passed in for users who want to log intermediate preprocessing results.
             see https://docs.wandb.ai/guides/track/log
         """
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._datamodule = datamodule()
+        self._datamodule = LitDataModule()
         self.experiment = wandb_run
 
     def run(self):
@@ -82,7 +82,7 @@ class SweepFlow:
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
         self._wb_run = wb.init(project=project_name, dir=wandb_dir)
-        self.pipeline_work = PipelineWorker(LitDataModule)
+        self.pipeline_work = PipelineWorker()
         self.training_work = TrainerWorker(
             WandbLogger(experiment=self._wb_run),
             trainer_init_kwargs={
