@@ -97,15 +97,3 @@ class SweepFlow:
         #  stop Lightning App's loop after training is complete
         if issubclass(SweepFlow, LightningFlow):
             sys.exit()
-
-
-if __name__ == "__main__":
-    # to set a project name, use as
-    # python3 examples/wandb.py some_project_name
-    args = sys.argv
-    if len(args) > 1:
-        project_name = sys.argv[1]
-    else:
-        project_name = "lightingpod-examples-wandb"
-    sweep = SweepFlow(project_name=project_name)
-    sweep.run()

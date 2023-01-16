@@ -122,7 +122,7 @@ class TrialWorker:
         console = Console()
         console.print(table)
 
-    def _objective(self):
+    def _objective(self, trial):
         optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
         lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
         optimizer = getattr(optim, optimizer_name)(self._trainer.model.parameters(), lr=lr)
@@ -181,15 +181,3 @@ class TrialFlow:
         # stop Lightning App's loop after training is complete
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
-
-
-if __name__ == "__main__":
-    # to set a project name, use as
-    # python3 examples/optuna.py some_project_name
-    args = sys.argv
-    if len(args) > 1:
-        project_name = sys.argv[1]
-    else:
-        project_name = "lightingpod-examples-optuna"
-    trial = TrialFlow(project_name=project_name)
-    trial.run(display_report=True)
