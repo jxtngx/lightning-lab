@@ -106,6 +106,8 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
+`lightning_pod.flows` contains interfaces for hydra, wandb, and optuna.
+
 If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
 
 > Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
@@ -205,6 +207,86 @@ lightning run app app.py
 </details>
 
 > the CLI is built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://github.com/Textualize/rich)
+
+#### Flows as Examples
+
+<details>
+    <summary>lightning_pod.flows</summary>
+
+The provided examples are lite introductions to [hydra](https://hydra.cc) and [wandb](https://wandb.ai/site). Examples of hyperparameter optimization with [lightning-training-studio](https://github.com/Lightning-AI/lightning-hpo) and [Optuna](https://optuna.readthedocs.io/en/stable/) will be added soon.
+
+To use the examples, lightning-pod must be installed to your virtual environment. If you've not created a venv, in terminal do:
+
+```bash
+python3 -m .venv/
+```
+
+then activate with
+
+```bash
+source .venv/bin/activate
+```
+
+then install lighting-pod with
+
+```bash
+pip install -e .
+```
+
+## Hydra
+
+Hydra is an open-source Python framework that simplifies the development of research and other complex applications. The key feature is the ability to dynamically create a hierarchical configuration by composition and override it through config files and the command line. The name Hydra comes from its ability to run multiple similar jobs
+
+### Usage
+
+In order to run the hydra example, in terminal do:
+
+```bash
+pod trainer run-hydra
+```
+
+A training run will start in your terminal and lightning will output information to the terminal.
+
+### Resources
+
+[Docs](https://hydra.cc/docs/intro/)
+
+## Weights and Biases (wandb)
+
+wandb can be used to track and visualize experiments in real time, compare baselines, and iterate quickly on ML projects.
+
+### Usage
+
+You must have a wandb account to use this example.
+
+In order to run the wandb example, in terminal do:
+
+```bash
+pod trainer run-wandb
+```
+
+A training run will start in your terminal and lightning will output information to the terminal. Results will be synced to the project [`lightning-pod-examples`](https://wandb.ai/justingoheen/lightning-pod-examples) in your wandb account.
+
+### Resources
+
+[Docs](https://docs.wandb.ai/)
+
+## Optuna
+
+Optuna is an automatic hyperparameter optimization software framework, particularly designed for machine learning. It features an imperative, define-by-run style user API. Thanks to our define-by-run API, the code written with Optuna enjoys high modularity, and the user of Optuna can dynamically construct the search spaces for the hyperparameters.
+
+### Usage
+
+The Optuna example also uses wandb. Individuals not familiar with hyperparameter optimization or wandb should start by reviewing the wandb example.
+
+### Resources
+
+[Docs](https://optuna.readthedocs.io/en/stable/reference/index.html) <br>
+[Optuna meets WandB](https://medium.com/optuna/optuna-meets-weights-and-biases-58fc6bab893) (a Medium article by the Optuna team) <br>
+[PyTorch with Optuna](https://youtu.be/P6NwZVl8ttc) (by PyTorch)
+[Optuna with PL](https://github.com/optuna/optuna-examples/blob/main/pytorch/pytorch_lightning_simple.py) (an example by the Optuna team)
+
+</details>
 
 #### Datasets
 
