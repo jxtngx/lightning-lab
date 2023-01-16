@@ -24,17 +24,17 @@ from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 
 from lightning_pod import conf
-from lightning_pod.pipeline.dataset import LitDataset
+from lightning_pod.pipeline.dataset import PodDataset
 
 filepath = Path(__file__)
 PROJECTPATH = os.getcwd()
 NUMWORKERS = int(multiprocessing.cpu_count() // 2)
 
 
-class LitDataModule(LightningDataModule):
+class PodDataModule(LightningDataModule):
     def __init__(
         self,
-        dataset: Any = LitDataset,
+        dataset: Any = PodDataset,
         data_dir: str = "data",
         split: bool = True,
         train_size: float = 0.8,

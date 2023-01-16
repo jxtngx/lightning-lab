@@ -26,8 +26,8 @@ from rich.console import Console
 from rich.table import Table
 
 from lightning_pod import conf
-from lightning_pod.core.trainer import LitTrainer
-from lightning_pod.pipeline.datamodule import LitDataModule
+from lightning_pod.core.trainer import PodTrainer
+from lightning_pod.pipeline.datamodule import PodDataModule
 
 
 class PipelineWorker:
@@ -38,7 +38,7 @@ class PipelineWorker:
             see https://docs.wandb.ai/guides/track/log
         """
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._datamodule = LitDataModule()
+        self._datamodule = PodDataModule()
         self.experiment = wandb_run
 
     def run(self):
@@ -56,7 +56,7 @@ class TrainerWorker:
         trainer_test_kwargs: Optional[Dict[str, Any]] = {},
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._trainer = LitTrainer(logger=logger, **trainer_init_kwargs)
+        self._trainer = PodTrainer(logger=logger, **trainer_init_kwargs)
         self.fit_kwargs = trainer_fit_kwargs
         self.val_kwargs = trainer_val_kwargs
         self.test_kwargs = trainer_test_kwargs

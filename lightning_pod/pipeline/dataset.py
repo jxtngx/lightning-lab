@@ -17,7 +17,7 @@ from typing import Any
 from torchvision.datasets import MNIST
 
 
-class LitDataset(MNIST):
+class PodDataset(MNIST):
     """
     Note:
         see below for a basic example of a custom torch dataset
@@ -27,7 +27,7 @@ class LitDataset(MNIST):
     from torch.utils.data import Dataset
 
 
-    class LitDataset(Dataset):
+    class PodDataset(Dataset):
         def __init__(self, features_path, labels_path):
             self.features = pd.read_csv(features_path)
             self.labels = pd.read_csv(labels_path)

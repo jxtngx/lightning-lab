@@ -180,7 +180,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 Files removed by `pod seed`:
 
-- cached MNIST data found in `data/cache/LitDataSet`
+- cached MNIST data found in `data/cache/PodDataset`
 - training splits found in `data/training_split`
 - saved predictions found in `data/predictions`
 - PyTorch Profiler logs found in `logs/profiler`
@@ -227,7 +227,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class LitDataset(Dataset):
+class PodDataset(Dataset):
     def __init__(self, features_path, labels_path):
         self.features = pd.read_csv(features_path)
         self.labels = pd.read_csv(labels_path)

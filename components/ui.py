@@ -21,7 +21,7 @@ import torch
 from dash import dash_table, dcc, html
 from lightning.pytorch.utilities.model_summary import ModelSummary
 
-from lightning_pod.core.module import LitModel
+from lightning_pod.core.module import PodModule
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -113,7 +113,7 @@ available_checkpoints = os.listdir(chkptdir)
 available_checkpoints.remove("README.md")
 latest_checkpoint = available_checkpoints[0]
 chkpt_fname = os.path.join("models", "checkpoints", "model.ckpt")
-model = LitModel.load_from_checkpoint(chkpt_fname)
+model = PodModule.load_from_checkpoint(chkpt_fname)
 summary = ModelSummary(model)
 model_layers, model_params = make_model_summary(summary)
 

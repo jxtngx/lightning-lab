@@ -81,7 +81,7 @@ class Decoder(nn.Module):
         return self.l1(x)
 
 
-class LitModel(L.LightningModule):
+class PodModule(L.LightningModule):
     """a custom PyTorch Lightning LightningModule
 
     Args:

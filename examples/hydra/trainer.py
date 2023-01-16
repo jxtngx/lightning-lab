@@ -19,7 +19,7 @@ from lightning.pytorch.callbacks import EarlyStopping
 from omegaconf.dictconfig import DictConfig
 
 from lightning_pod import conf
-from lightning_pod.core.trainer import LitTrainer
+from lightning_pod.core.trainer import PodTrainer
 
 FILEPATH = Path(__file__)
 
@@ -31,7 +31,7 @@ FILEPATH = Path(__file__)
 )
 def main(cfg: DictConfig) -> None:
     # SET MODEL, DATAMODULE TRAINER
-    trainer = LitTrainer(callbacks=[EarlyStopping(monitor="loss", mode="min")], **cfg.trainer)
+    trainer = PodTrainer(callbacks=[EarlyStopping(monitor="loss", mode="min")], **cfg.trainer)
     # TRAIN MODEL
     trainer.fit(model=trainer.model, datamodule=trainer.datamodule)
     # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
