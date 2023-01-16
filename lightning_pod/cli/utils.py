@@ -22,8 +22,8 @@ from rich import print as rprint
 from rich.console import Console
 from rich.table import Table
 
-PROJECTPATH = os.getcwd()
 FILEPATH = Path(__file__)
+PROJECTPATH = FILEPATH.parents[2]
 PKGPATH = FILEPATH.parents[1]
 
 
@@ -60,47 +60,49 @@ def build() -> None:
 
 def teardown() -> None:
 
-    cwd = os.getcwd()
-
     do_not_delete = "README.md"
 
     target_dirs = [
-        os.path.join(cwd, "models", "checkpoints"),
-        os.path.join(cwd, "models", "onnx"),
-        os.path.join(cwd, "logs", "logger"),
-        os.path.join(cwd, "logs", "profiler"),
-        os.path.join(cwd, "data", "cache"),
-        os.path.join(cwd, "data", "predictions"),
-        os.path.join(cwd, "data", "training_split"),
-        os.path.join(cwd, "docs"),
+        os.path.join(PROJECTPATH, "models", "checkpoints"),
+        os.path.join(PROJECTPATH, "models", "onnx"),
+        os.path.join(PROJECTPATH, "logs", "optuna"),
+        os.path.join(PROJECTPATH, "logs", "tensorboard"),
+        os.path.join(PROJECTPATH, "logs", "torch_profiler"),
+        os.path.join(PROJECTPATH, "logs", "wandb_logs"),
+        os.path.join(PROJECTPATH, "data", "cache"),
+        os.path.join(PROJECTPATH, "data", "predictions"),
+        os.path.join(PROJECTPATH, "data", "training_split"),
+        os.path.join(PROJECTPATH, "docs"),
     ]
 
     for dir in target_dirs:
         for target in os.listdir(dir):
-            targetpath = os.path.join(cwd, dir, target)
+            targetpath = os.path.join(PROJECTPATH, dir, target)
             if not os.path.isdir(targetpath):
                 if target != do_not_delete:
                     os.remove(targetpath)
             else:
-                dirpath = os.path.join(cwd, dir, target)
+                dirpath = os.path.join(PROJECTPATH, dir, target)
                 shutil.rmtree(dirpath)
 
 
 def make_bug_trainer():
-    cwd = os.getcwd()
-    source = os.path.join(cwd, "lightning_pod", "cli", "bugreport", "trainer.py")
-    destination = os.path.join(cwd, "lightning_pod", "core", "bug_trainer.py")
+    source = os.path.join(PROJECTPATH, "lightning_pod", "cli", "bugreport", "trainer.py")
+    destination = os.path.join(PROJECTPATH, "lightning_pod", "core", "bug_trainer.py")
     shutil.copyfile(source, destination)
 
 
-def show_purge_table() -> None:
+def show_purge_table(command_name) -> None:
     # TITLE
     table = Table(title="Directories To Be Purged")
     # COLUMNS
     table.add_column("Directory", justify="right", style="cyan", no_wrap=True)
     table.add_column("Contents", style="magenta")
     # ROWS
-    for dirname in ["data", "logs", "models", os.path.join(PKGPATH, "core")]:
+    trash = ["data", "logs", "models"]
+    if command_name == "seed":
+        trash.append(os.path.join(PKGPATH, "core"))
+    for dirname in trash:
         dirpath = os.path.join(os.getcwd(), dirname)
         contents = ", ".join([f for f in os.listdir(dirpath) if f != "README.md"])
         table.add_row(dirname, contents)
@@ -109,7 +111,7 @@ def show_purge_table() -> None:
     console.print(table)
 
 
-def show_destructive_behavior_warning() -> None:
+def show_destructive_behavior_warning(command_name) -> None:
     """
     uses rich console markup
 
@@ -120,12 +122,12 @@ def show_destructive_behavior_warning() -> None:
     print()
     rprint("The following directories will be [bold red]purged[/bold red]")
     print()
-    show_purge_table()
+    show_purge_table(command_name)
     print()
 
 
 def common_destructive_flow(commands: list, command_name: str) -> None:
-    show_destructive_behavior_warning()
+    show_destructive_behavior_warning(command_name)
     if click.confirm("Do you want to continue"):
         for command in commands:
             command()

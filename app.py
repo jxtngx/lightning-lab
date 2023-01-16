@@ -24,7 +24,7 @@ from dash import html
 from dash.dependencies import Input, Output
 from torch.utils.data import TensorDataset
 
-from components.ui import Body, create_figure, find_index, NavBar
+from lightning_pod.components.ui import Body, create_figure, find_index, NavBar
 
 
 @dataclass

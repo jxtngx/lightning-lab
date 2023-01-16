@@ -19,6 +19,7 @@ from typing import Any, Callable, Union
 
 import torch
 from lightning.pytorch import LightningDataModule
+from lightning.pytorch.loggers import Logger
 from lightning.pytorch.utilities.types import EVAL_DATALOADERS, TRAIN_DATALOADERS
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
@@ -40,6 +41,8 @@ class PodDataModule(LightningDataModule):
         train_size: float = 0.8,
         num_workers: int = NUMWORKERS,
         transforms: Callable = transforms.ToTensor(),
+        logger: Logger = None,
+        log_preprocessing: bool = False,
     ):
         super().__init__()
         self.data_dir = os.path.join(PROJECTPATH, data_dir, "cache")

@@ -23,13 +23,15 @@ from lightning.pytorch.profiler import Profiler, PyTorchProfiler
 from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
-from lightning_pod.core.module import PodModule
-from lightning_pod.pipeline.datamodule import PodDataModule
 
 
 class PodTrainer(L.Trainer):
     def __init__(
         self,
+        model: L.LightningModule,
+        datamodule: L.LightningDataModule,
+        model_kwargs: Optional[Dict[str, Any]] = {},
+        datamodule_kwargs: Optional[Dict[str, Any]] = {},
         logger: Optional[Logger] = None,
         profiler: Optional[Profiler] = None,
         callbacks: Optional[List] = [],
@@ -46,9 +48,9 @@ class PodTrainer(L.Trainer):
         if set_seed:
             seed_everything(conf.GLOBALSEED, workers=True)
         #  SET DATALOADER
-        self.datamodule = PodDataModule()
+        self.datamodule = datamodule(**datamodule_kwargs)
         #  SET MODEL
-        self.model = PodModule()
+        self.model = model(**model_kwargs)
 
     def persist_predictions(self, predictions):
         predictions = torch.vstack(predictions)  # type: ignore[arg-type]

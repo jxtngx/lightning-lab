@@ -19,6 +19,8 @@ import click
 
 from lightning_pod.cli.bugreport import bugreport
 from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_trainer, teardown
+from lightning_pod.flows.optuna_flow import TrialFlow
+from lightning_pod.flows.wandb_flow import SweepFlow
 
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
@@ -32,7 +34,7 @@ def main() -> None:
 
 @main.command("teardown")
 def _teardown() -> None:
-    common_destructive_flow([teardown], command_name="tear down")
+    common_destructive_flow([teardown], command_name="teardown")
 
 
 # TODO add help description
@@ -68,7 +70,7 @@ def help() -> None:
 @trainer.command("run-hydra")
 @click.argument("hydra-args", nargs=-1)
 def run_hydra(hydra_args: tuple) -> None:
-    trainer = os.path.join(PROJECTPATH, "examples", "hydra", "trainer.py")
+    trainer = os.path.join(PROJECTPATH, "lightning_pod", "flows", "hydra", "hydra_flow.py")
     hydra_args = list(hydra_args)
     hydra_args = [f"'trainer.{i}'" for i in hydra_args]
     hydra_args = " ".join(hydra_args)
@@ -79,9 +81,12 @@ def run_hydra(hydra_args: tuple) -> None:
 @trainer.command("run-wandb")
 @click.option("--project-name")
 def run_wandb(project_name) -> None:
-    trainer = os.path.join(PROJECTPATH, "examples", "wandb.py")
-    if project_name:
-        run_command = " ".join(["python3", trainer, project_name])
-    else:
-        run_command = " ".join(["python3", trainer])
-    os.system(run_command)
+    sweep = SweepFlow(project_name=project_name)
+    sweep.run()
+
+
+@trainer.command("run-optuna")
+@click.option("--project-name")
+def run_optuna(project_name) -> None:
+    trial = TrialFlow(project_name=project_name)
+    trial.run()
