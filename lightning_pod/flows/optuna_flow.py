@@ -34,7 +34,12 @@ from lightning_pod.pipeline.datamodule import PodDataModule
 
 
 class PipelineWork:
-    def run(self, datamodule, logger: Optional[Logger] = None, log_preprocessing: bool = False):
+    def run(
+        self,
+        datamodule,
+        logger: Optional[Logger] = None,
+        log_preprocessing: bool = False,
+    ):
         """initiates preprocessing with .prepare_data()
 
         Note:
@@ -47,23 +52,23 @@ class PipelineWork:
 class TrainerWork:
     def __init__(
         self,
-        model,
-        datamodule,
         logger: Optional[Logger] = None,
         trainer_init_kwargs: Optional[Dict[str, Any]] = {},
-        trainer_fit_kwargs: Optional[Dict[str, Any]] = {},
-        trainer_val_kwargs: Optional[Dict[str, Any]] = {},
-        trainer_test_kwargs: Optional[Dict[str, Any]] = {},
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self.model = model
-        self.datamodule = datamodule
         self._trainer = PodTrainer(logger=logger, **trainer_init_kwargs)
-        self.fit_kwargs = trainer_fit_kwargs
-        self.val_kwargs = trainer_val_kwargs
-        self.test_kwargs = trainer_test_kwargs
 
-    def run(self, fit: bool = True, validate: bool = False, test: bool = False):
+    def run(
+        self,
+        model,
+        datamodule,
+        fit: bool = True,
+        validate: bool = False,
+        test: bool = False,
+        fit_kwargs: Optional[Dict[str, Any]] = {},
+        val_kwargs: Optional[Dict[str, Any]] = {},
+        test_kwargs: Optional[Dict[str, Any]] = {},
+    ):
         """fit, validate, test
 
         Note:
@@ -74,11 +79,11 @@ class TrainerWork:
              - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#check-val-every-n-epoch
         """
         if fit:
-            self._trainer.fit(model=self.model, datamodule=self.datamodule, **self.fit_kwargs)
+            self._trainer.fit(model=model, datamodule=datamodule, **fit_kwargs)
         if validate:
-            self._trainer.validate(model=self.model, datamodule=self.datamodule, **self.val_kwargs)
+            self._trainer.validate(model=model, datamodule=datamodule, **val_kwargs)
         if test:
-            self._trainer.test(ckpt_path="best", datamodule=self.datamodule, **self.test_kwargs)
+            self._trainer.test(ckpt_path="best", datamodule=datamodule, **test_kwargs)
 
 
 class ObjectiveWork:
