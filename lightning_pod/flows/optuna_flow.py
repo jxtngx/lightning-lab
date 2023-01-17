@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import logging
+import os
 import sys
 from typing import Any, Dict, Optional
 
@@ -40,7 +41,7 @@ class PipelineWorker:
             a wandb run can be passed in for users who want to log intermediate preprocessing results.
             see https://docs.wandb.ai/guides/track/log
         """
-        datamodule.prepare_data(logger=logger, log_preprocessing=log_preprocessing)
+        datamodule.prepare_data()
 
 
 class TrainerWorker:
@@ -79,12 +80,12 @@ class TrainerWorker:
 
 
 class TrialWorker:
-    def __init__(self, trainer: PodTrainer, study: optuna.study.Study):
+    def __init__(self, trainer: PodTrainer, study: optuna.study.Study, artifact_path: str):
         self._trainer = trainer
         self._study = study
+        self.artifact_path = artifact_path
 
-    @staticmethod
-    def _set_log_file() -> None:
+    def _set_artifact_path(self) -> None:
         """sets optuna log file
         Note:
             borrowed from Optuna
@@ -94,7 +95,11 @@ class TrialWorker:
         root_logger = logging.getLogger("optuna")
         root_logger.setLevel(logging.DEBUG)
 
-        file_handler = logging.FileHandler(filename=conf.OPTUNAPATH)
+        full_artifact_path = os.path.join(conf.OPTUNAPATH, self.artifact_path)
+
+        os.mkdir(full_artifact_path)
+
+        file_handler = logging.FileHandler(filename=os.path.join(conf.OPTUNAPATH, full_artifact_path, "optuna.log"))
         file_handler.setFormatter(optuna.logging.create_default_formatter())
         root_logger.addHandler(file_handler)
 
@@ -133,7 +138,7 @@ class TrialWorker:
         self._trainer.run()
 
     def run(self, display_report: bool = False):
-        self._set_log_file()
+        self._set_artifact_path()
         self._study.optimize(self._objective, n_trials=10, timeout=600)
         if display_report:
             self.display_report()
@@ -154,9 +159,9 @@ class TrialFlow:
         project_name: Optional[str] = None,
         wandb_dir: Optional[str] = conf.WANDBPATH,
         study_name: Optional[str] = "lightning-pod",
+        log_preprocessing: bool = False,
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._pipeline_work = PipelineWorker()
         self._trainer_work = TrainerWorker(
             PodModule,
             PodDataModule,
@@ -167,15 +172,34 @@ class TrialFlow:
             },
         )
 
+        self._pipeline_work = PipelineWorker()
+        self.log_preprocessing = log_preprocessing
+
         self._study = optuna.create_study(direction="maximize", study_name=study_name)
-        self._trial_work = TrialWorker(self._trainer_work, self._study)
+        self._trial_work = TrialWorker(self._trainer_work._trainer, self._study, self.artifact_path)
+
+    @property
+    def wandb_settings(self):
+        return self._trainer_work._trainer.logger.experiment.settings
+
+    @property
+    def artifact_path(self):
+        """helps to sync wandb and optuna directory names for logs"""
+        log_dir = self.wandb_settings.log_user or self.wandb_settings.log_internal
+
+        if log_dir:
+            log_dir = os.path.dirname(log_dir.replace(os.getcwd(), "."))
+
+        return str(log_dir).split(os.sep)[-2]
 
     def run(self, display_report: bool = False):
         self._pipeline_work.run(
-            self._trainer_work.datamodule, logger=self._trainer_work.logger, log_preprocessing=False
+            self._trainer_work._trainer.datamodule,
+            logger=self._trainer_work._trainer.logger,
+            log_preprocessing=self.log_preprocessing,
         )
         # set stage to fit since pipeline_work calls prepare_data
-        self._pipeline_work._datamodule.setup(stage="fit")
+        self._trainer_work._trainer.datamodule.setup(stage="fit")
         # run trial
         self._trial_work.run(display_report)
         # stop Lightning App's loop after training is complete
