@@ -15,7 +15,7 @@
 import multiprocessing
 import os
 from pathlib import Path
-from typing import Any, Callable, Union
+from typing import Any, Callable, Optional, Union
 
 import torch
 from lightning.pytorch import LightningDataModule
@@ -41,8 +41,6 @@ class PodDataModule(LightningDataModule):
         train_size: float = 0.8,
         num_workers: int = NUMWORKERS,
         transforms: Callable = transforms.ToTensor(),
-        logger: Logger = None,
-        log_preprocessing: bool = False,
     ):
         super().__init__()
         self.data_dir = os.path.join(PROJECTPATH, data_dir, "cache")
@@ -52,7 +50,7 @@ class PodDataModule(LightningDataModule):
         self.num_workers = num_workers
         self.transforms = transforms
 
-    def prepare_data(self) -> None:
+    def prepare_data(self, logger: Optional[Logger] = None, log_preprocessing: bool = False) -> None:
         self.dataset(self.data_dir, download=True)
 
     def setup(self, stage: Union[str, None] = None) -> None:

@@ -18,7 +18,6 @@ import sys
 from typing import Any, Dict, Optional
 
 import optuna
-import wandb  # NOQA
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import Logger, WandbLogger
@@ -41,7 +40,7 @@ class PipelineWorker:
             a wandb run can be passed in for users who want to log intermediate preprocessing results.
             see https://docs.wandb.ai/guides/track/log
         """
-        datamodule.prepare_data()
+        datamodule.prepare_data(logger=logger, log_preprocessing=log_preprocessing)
 
 
 class TrainerWorker:
