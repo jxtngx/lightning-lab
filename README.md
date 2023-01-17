@@ -34,6 +34,9 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 ![](assets/dash_ui.png)
 
+The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo created from the template.
+
+> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
 
 ### Project Requirements and Extras
 <details>
@@ -108,15 +111,7 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 `lightning_pod.flows` contains interfaces for hydra, wandb, and optuna.
 
-> If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided. Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
-
 ### Using the Template
-
-The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo created from the template.
-
-> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
-
-Examples can be found in [lighting-pod/examples/](examples/).
 
 #### Creating an Environment
 
