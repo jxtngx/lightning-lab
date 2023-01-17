@@ -28,8 +28,6 @@ from lightning_pod import conf
 class PodTrainer(L.Trainer):
     def __init__(
         self,
-        model_params: Optional[Dict[str, Any]] = {},
-        datamodule_kwargs: Optional[Dict[str, Any]] = {},
         logger: Optional[Logger] = None,
         profiler: Optional[Profiler] = None,
         callbacks: Optional[List] = [],

@@ -47,15 +47,18 @@ class PipelineWork:
 class TrainerWork:
     def __init__(
         self,
+        model,
+        datamodule,
         logger: Optional[Logger] = None,
         trainer_init_kwargs: Optional[Dict[str, Any]] = {},
         trainer_fit_kwargs: Optional[Dict[str, Any]] = {},
         trainer_val_kwargs: Optional[Dict[str, Any]] = {},
         trainer_test_kwargs: Optional[Dict[str, Any]] = {},
-        model_params: Optional[Dict[str, Any]] = {},
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._trainer = PodTrainer(logger=logger, model_params=model_params, **trainer_init_kwargs)
+        self.model = model
+        self.datamodule = datamodule
+        self._trainer = PodTrainer(logger=logger, **trainer_init_kwargs)
         self.fit_kwargs = trainer_fit_kwargs
         self.val_kwargs = trainer_val_kwargs
         self.test_kwargs = trainer_test_kwargs
@@ -71,11 +74,11 @@ class TrainerWork:
              - https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#check-val-every-n-epoch
         """
         if fit:
-            self._trainer.fit(model=self._trainer.model, datamodule=self._trainer.datamodule, **self.fit_kwargs)
+            self._trainer.fit(model=self.model, datamodule=self.datamodule, **self.fit_kwargs)
         if validate:
-            self._trainer.validate(model=self._trainer.model, datamodule=self._trainer.datamodule, **self.val_kwargs)
+            self._trainer.validate(model=self.model, datamodule=self.datamodule, **self.val_kwargs)
         if test:
-            self._trainer.test(ckpt_path="best", datamodule=self._trainer.datamodule, **self.test_kwargs)
+            self._trainer.test(ckpt_path="best", datamodule=self.datamodule, **self.test_kwargs)
 
 
 class ObjectiveWork:
@@ -174,6 +177,20 @@ class TrialFlow:
         root_logger.addHandler(file_handler)
 
     @property
+    def artifact_path(self):
+        """helps to sync wandb and optuna directory names for logs"""
+        log_dir = self.wandb_settings.log_user or self.wandb_settings.log_internal
+
+        if log_dir:
+            log_dir = os.path.dirname(log_dir.replace(os.getcwd(), "."))
+
+        return str(log_dir).split(os.sep)[-2]
+
+    @property
+    def trials(self):
+        return self._study.trials
+
+    @property
     def pruned_trial(self):
         return self._study.get_trials(deepcopy=False, states=[TrialState.PRUNED])
 
@@ -189,24 +206,15 @@ class TrialFlow:
     def wandb_settings(self):
         return self._trainer_work._trainer.logger.experiment.settings
 
-    @property
-    def artifact_path(self):
-        """helps to sync wandb and optuna directory names for logs"""
-        log_dir = self.wandb_settings.log_user or self.wandb_settings.log_internal
-
-        if log_dir:
-            log_dir = os.path.dirname(log_dir.replace(os.getcwd(), "."))
-
-        return str(log_dir).split(os.sep)[-2]
-
-    def display_report(self):
+    def _display_report(self):
+        """a rich table"""
         # TITLE
         table = Table(title="Study Statistics")
         # COLUMNS
         for col in ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]:
             table.add_column(col)
         # ROW
-        table.add_row(len(self._study.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value)
+        table.add_row(len(self.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value)
         # SHOW
         console = Console()
         console.print(table)
@@ -222,6 +230,6 @@ class TrialFlow:
         self._set_artifact_path()
         self._study.optimize(self._objective_work.run, n_trials=10, timeout=600)
         if display_report:
-            self.display_report()
+            self._display_report()
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
