@@ -21,6 +21,7 @@ import optuna
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import Logger, WandbLogger
+from optuna.integration import PyTorchLightningPruningCallback
 from optuna.trial import TrialState
 from rich.console import Console
 from rich.table import Table
@@ -32,7 +33,7 @@ from lightning_pod.core.trainer import PodTrainer
 from lightning_pod.pipeline.datamodule import PodDataModule
 
 
-class PipelineWorker:
+class PipelineWork:
     def run(self, datamodule, logger: Optional[Logger] = None, log_preprocessing: bool = False):
         """initiates preprocessing with .prepare_data()
 
@@ -43,19 +44,18 @@ class PipelineWorker:
         datamodule.prepare_data(logger=logger, log_preprocessing=log_preprocessing)
 
 
-class TrainerWorker:
+class TrainerWork:
     def __init__(
         self,
-        model,
-        datamodule,
-        logger,
+        logger: Optional[Logger] = None,
         trainer_init_kwargs: Optional[Dict[str, Any]] = {},
         trainer_fit_kwargs: Optional[Dict[str, Any]] = {},
         trainer_val_kwargs: Optional[Dict[str, Any]] = {},
         trainer_test_kwargs: Optional[Dict[str, Any]] = {},
+        model_params: Optional[Dict[str, Any]] = {},
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._trainer = PodTrainer(model, datamodule, logger=logger, **trainer_init_kwargs)
+        self._trainer = PodTrainer(logger=logger, model_params=model_params, **trainer_init_kwargs)
         self.fit_kwargs = trainer_fit_kwargs
         self.val_kwargs = trainer_val_kwargs
         self.test_kwargs = trainer_test_kwargs
@@ -78,11 +78,82 @@ class TrainerWorker:
             self._trainer.test(ckpt_path="best", datamodule=self._trainer.datamodule, **self.test_kwargs)
 
 
-class TrialWorker:
-    def __init__(self, trainer: PodTrainer, study: optuna.study.Study, artifact_path: str):
-        self._trainer = trainer
-        self._study = study
-        self.artifact_path = artifact_path
+class ObjectiveWork:
+    def run(self, trial, trainer_work, model, datamodule):
+
+        lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
+        optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
+        optimizer = getattr(optim, optimizer_name)(self._trainer.model.parameters(), lr=lr)
+
+        dropout = trial.suggest_float("dropout", 0.2, 0.5)
+        # n_layers = trial.suggest_int("n_layers", 1, 3)
+        # output_dims = [trial.suggest_int("n_units_l{}".format(i), 4, 128, log=True) for i in range(n_layers)]
+
+        config = dict(trial.params)
+        config["trial.number"] = trial.number
+
+        trainer_work(
+            model,
+            datamodule,
+            logger=trainer_work._trainer.logger(
+                project=self.project_name, save_dir=self.wandb_dir, config=config, reinit=True
+            ),
+            model_params={"dropout": dropout, "optimizer": optimizer, "lr": lr},
+            trainer_init_kwargs={
+                "max_epochs": 10,
+                "callbacks": [
+                    EarlyStopping(monitor="loss", mode="min"),
+                    PyTorchLightningPruningCallback(trial, monitor="val_acc"),
+                ],
+            },
+        )
+
+        hyperparameters = dict(
+            optimizer=optimizer_name,
+            lr=lr,
+            dropout=dropout,
+            # n_layers=n_layers,
+            # output_dims=output_dims,
+        )
+
+        trainer_work.trainer.logger.log_hyperparams(hyperparameters)
+
+        trainer_work._trainer.run()
+
+        return trainer_work._trainer.callback_metrics["val_acc"].item()
+
+
+class TrialFlow:
+    """
+    Note:
+        see:
+         - https://github.com/optuna/optuna-examples/blob/main/pytorch/pytorch_lightning_simple.py
+         - https://github.com/nzw0301/optuna-wandb/blob/main/part-1/wandb_optuna.py
+         - https://medium.com/optuna/optuna-meets-weights-and-biases-58fc6bab893
+         - PyTorch with Optuna (by PyTorch) https://youtu.be/P6NwZVl8ttc
+    """
+
+    def __init__(
+        self,
+        project_name: Optional[str] = None,
+        wandb_dir: Optional[str] = conf.WANDBPATH,
+        study_name: Optional[str] = "lightning-pod",
+        log_preprocessing: bool = False,
+    ):
+        # settings
+        self.project_name = project_name
+        self.wandb_dir = wandb_dir
+        self.log_preprocesing = log_preprocessing
+        self._model = PodModule
+        self._datamodule = PodDataModule
+        self._logger = WandbLogger
+        # works
+        # _ prevents flow from checking JSON serialization if converting to Lightning App
+        self._pipeline_work = PipelineWork()
+        self._trainer_work = TrainerWork()
+        self._objective_work = ObjectiveWork()
+        # optuna study
+        self._study = optuna.create_study(direction="maximize", study_name=study_name)
 
     def _set_artifact_path(self) -> None:
         """sets optuna log file
@@ -114,69 +185,6 @@ class TrialWorker:
     def best_trial(self):
         return self._study.best_trial
 
-    def display_report(self):
-        # TITLE
-        table = Table(title="Study Statistics")
-        # COLUMNS
-        for col in ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]:
-            table.add_column(col)
-        # ROW
-        table.add_row(len(self._study.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value)
-        # SHOW
-        console = Console()
-        console.print(table)
-
-    def _objective(self, trial):
-        optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
-        lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
-        optimizer = getattr(optim, optimizer_name)(self._trainer.model.parameters(), lr=lr)
-        config = dict(trial.params)
-        config["trial.number"] = trial.number
-        self._trainer.optimizers = optimizer
-        self._trainer.logger.experiment.config = config
-        self._trainer.run()
-
-    def run(self, display_report: bool = False):
-        self._set_artifact_path()
-        self._study.optimize(self._objective, n_trials=10, timeout=600)
-        if display_report:
-            self.display_report()
-
-
-class TrialFlow:
-    """
-    Note:
-        see:
-         - https://github.com/optuna/optuna-examples/blob/main/pytorch/pytorch_lightning_simple.py
-         - https://github.com/nzw0301/optuna-wandb/blob/main/part-1/wandb_optuna.py
-         - https://medium.com/optuna/optuna-meets-weights-and-biases-58fc6bab893
-         - PyTorch with Optuna (by PyTorch) https://youtu.be/P6NwZVl8ttc
-    """
-
-    def __init__(
-        self,
-        project_name: Optional[str] = None,
-        wandb_dir: Optional[str] = conf.WANDBPATH,
-        study_name: Optional[str] = "lightning-pod",
-        log_preprocessing: bool = False,
-    ):
-        # _ prevents flow from checking JSON serialization if converting to Lightning App
-        self._trainer_work = TrainerWorker(
-            PodModule,
-            PodDataModule,
-            WandbLogger(project=project_name, save_dir=wandb_dir),
-            trainer_init_kwargs={
-                "max_epochs": 10,
-                "callbacks": [EarlyStopping(monitor="loss", mode="min")],
-            },
-        )
-
-        self._pipeline_work = PipelineWorker()
-        self.log_preprocessing = log_preprocessing
-
-        self._study = optuna.create_study(direction="maximize", study_name=study_name)
-        self._trial_work = TrialWorker(self._trainer_work._trainer, self._study, self.artifact_path)
-
     @property
     def wandb_settings(self):
         return self._trainer_work._trainer.logger.experiment.settings
@@ -191,6 +199,18 @@ class TrialFlow:
 
         return str(log_dir).split(os.sep)[-2]
 
+    def display_report(self):
+        # TITLE
+        table = Table(title="Study Statistics")
+        # COLUMNS
+        for col in ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]:
+            table.add_column(col)
+        # ROW
+        table.add_row(len(self._study.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value)
+        # SHOW
+        console = Console()
+        console.print(table)
+
     def run(self, display_report: bool = False):
         self._pipeline_work.run(
             self._trainer_work._trainer.datamodule,
@@ -199,8 +219,9 @@ class TrialFlow:
         )
         # set stage to fit since pipeline_work calls prepare_data
         self._trainer_work._trainer.datamodule.setup(stage="fit")
-        # run trial
-        self._trial_work.run(display_report)
-        # stop Lightning App's loop after training is complete
+        self._set_artifact_path()
+        self._study.optimize(self._objective_work.run, n_trials=10, timeout=600)
+        if display_report:
+            self.display_report()
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
