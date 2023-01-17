@@ -53,7 +53,7 @@ class TrainerWork:
     def __init__(
         self,
         logger: Optional[Logger] = None,
-        trainer_init_kwargs: Optional[Dict[str, Any]] = {},
+        **trainer_init_kwargs: Optional[Dict[str, Any]],
     ):
         # _ prevents flow from checking JSON serialization if converting to Lightning App
         self._trainer = PodTrainer(logger=logger, **trainer_init_kwargs)
