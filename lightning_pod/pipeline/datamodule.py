@@ -15,31 +15,33 @@
 import multiprocessing
 import os
 from pathlib import Path
-from typing import Any, Callable, Union
+from typing import Any, Callable, Optional, Union
 
 import torch
 from lightning.pytorch import LightningDataModule
+from lightning.pytorch.loggers import Logger
 from lightning.pytorch.utilities.types import EVAL_DATALOADERS, TRAIN_DATALOADERS
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 
 from lightning_pod import conf
-from lightning_pod.pipeline.dataset import LitDataset
+from lightning_pod.pipeline.dataset import PodDataset
 
 filepath = Path(__file__)
 PROJECTPATH = os.getcwd()
 NUMWORKERS = int(multiprocessing.cpu_count() // 2)
 
 
-class LitDataModule(LightningDataModule):
+class PodDataModule(LightningDataModule):
     def __init__(
         self,
-        dataset: Any = LitDataset,
+        dataset: Any = PodDataset,
         data_dir: str = "data",
         split: bool = True,
         train_size: float = 0.8,
         num_workers: int = NUMWORKERS,
         transforms: Callable = transforms.ToTensor(),
+        batch_size: int = 64,
     ):
         super().__init__()
         self.data_dir = os.path.join(PROJECTPATH, data_dir, "cache")
@@ -48,8 +50,9 @@ class LitDataModule(LightningDataModule):
         self.train_size = train_size
         self.num_workers = num_workers
         self.transforms = transforms
+        self.batch_size = batch_size
 
-    def prepare_data(self) -> None:
+    def prepare_data(self, logger: Optional[Logger] = None, log_preprocessing: bool = False) -> None:
         self.dataset(self.data_dir, download=True)
 
     def setup(self, stage: Union[str, None] = None) -> None:
@@ -68,10 +71,10 @@ class LitDataModule(LightningDataModule):
         torch.save(self.val_data, os.path.join(conf.SPLITSPATH, "val.pt"))
 
     def train_dataloader(self) -> TRAIN_DATALOADERS:
-        return DataLoader(self.train_data, num_workers=self.num_workers)
+        return DataLoader(self.train_data, num_workers=self.num_workers, batch_size=self.batch_size)
 
     def test_dataloader(self) -> EVAL_DATALOADERS:
-        return DataLoader(self.test_data, num_workers=self.num_workers)
+        return DataLoader(self.test_data, num_workers=self.num_workers, batch_size=self.batch_size)
 
     def val_dataloader(self) -> EVAL_DATALOADERS:
-        return DataLoader(self.val_data, num_workers=self.num_workers)
+        return DataLoader(self.val_data, num_workers=self.num_workers, batch_size=self.batch_size)

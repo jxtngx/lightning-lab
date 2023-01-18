@@ -16,23 +16,27 @@
 
 # Lightning Pod
 
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" height=25/>   <img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height=25/>
-<br>
-
-<!-- [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod) -->
+![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+<a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
+[![](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28-gray.svg)](https://wandb.ai/justingoheen/lightning-pod-examples)
 
 [![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
+
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
 
 </div>
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as Lightning App that can shared via Lightning Cloud.
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
 
 ![](assets/dash_ui.png)
 
+The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo created from the template.
+
+> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
 
 ### Project Requirements and Extras
 <details>
@@ -105,17 +109,9 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-If you only need to process data and implement an algorithm from a paper or pseudcode, you can focus on `lightning_pod.core` and `lightning_pod.pipeline` and ignore the rest of the code, so long as you follow the basic class and function naming conventions I've provided.
-
-> Altering the naming conventions will cause the flow to break. Be sure to refactor correctly.
+`lightning_pod.flows` contains interfaces for hydra, wandb, and optuna.
 
 ### Using the Template
-
-The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo created from the template.
-
-> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
-
-Examples can be found in [lighting-pod/examples/](examples/).
 
 #### Creating an Environment
 
@@ -170,9 +166,11 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run-hydra` runs the example hydra Trainer. <br>
+`pod trainer run-hydra` runs the Trainer with hydra. <br>
 
-`pod trainer run-wandb --project-name=your-project-name` runs the example wandb Trainer. <br>
+`pod trainer run-wandb` runs the Trainer with a WandbLogger. <br>
+
+`pod trainer run-optuna` runs the Trainer along with an Optuna trial. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
@@ -180,7 +178,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 Files removed by `pod seed`:
 
-- cached MNIST data found in `data/cache/LitDataSet`
+- cached MNIST data found in `data/cache/PodDataset`
 - training splits found in `data/training_split`
 - saved predictions found in `data/predictions`
 - PyTorch Profiler logs found in `logs/profiler`
@@ -205,6 +203,86 @@ lightning run app app.py
 
 > the CLI is built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://github.com/Textualize/rich)
 
+#### Flows as Examples
+
+<details>
+    <summary>lightning_pod.flows</summary>
+
+The provided examples are lite introductions to [hydra](https://hydra.cc) and [wandb](https://wandb.ai/site). Examples of hyperparameter optimization with [lightning-training-studio](https://github.com/Lightning-AI/lightning-hpo) and [Optuna](https://optuna.readthedocs.io/en/stable/) will be added soon.
+
+To use the examples, lightning-pod must be installed to your virtual environment. If you've not created a venv, in terminal do:
+
+```bash
+python3 -m .venv/
+```
+
+then activate with
+
+```bash
+source .venv/bin/activate
+```
+
+then install lighting-pod with
+
+```bash
+pip install -e .
+```
+
+## Hydra
+
+Hydra is an open-source Python framework that simplifies the development of research and other complex applications. The key feature is the ability to dynamically create a hierarchical configuration by composition and override it through config files and the command line. The name Hydra comes from its ability to run multiple similar jobs
+
+### Usage
+
+In order to run the hydra example, in terminal do:
+
+```bash
+pod trainer run-hydra
+```
+
+A training run will start in your terminal and lightning will output information to the terminal.
+
+### Resources
+
+[Docs](https://hydra.cc/docs/intro/)
+
+## Weights and Biases (wandb)
+
+wandb can be used to track and visualize experiments in real time, compare baselines, and iterate quickly on ML projects.
+
+### Usage
+
+You must have a wandb account to use this example.
+
+In order to run the wandb example, in terminal do:
+
+```bash
+pod trainer run-wandb
+```
+
+A training run will start in your terminal and lightning will output information to the terminal. Results will be synced to the project [`lightning-pod-examples`](https://wandb.ai/justingoheen/lightning-pod-examples) in your wandb account.
+
+### Resources
+
+[Docs](https://docs.wandb.ai/)
+
+## Optuna
+
+Optuna is an automatic hyperparameter optimization software framework, particularly designed for machine learning. It features an imperative, define-by-run style user API. Thanks to our define-by-run API, the code written with Optuna enjoys high modularity, and the user of Optuna can dynamically construct the search spaces for the hyperparameters.
+
+### Usage
+
+The Optuna example also uses wandb. Individuals not familiar with hyperparameter optimization or wandb should start by reviewing the wandb example.
+
+### Resources
+
+[Docs](https://optuna.readthedocs.io/en/stable/reference/index.html) <br>
+[Optuna meets WandB](https://medium.com/optuna/optuna-meets-weights-and-biases-58fc6bab893) (a Medium article by the Optuna team) <br>
+[PyTorch with Optuna](https://youtu.be/P6NwZVl8ttc) (by PyTorch)
+[Optuna with PL](https://github.com/optuna/optuna-examples/blob/main/pytorch/pytorch_lightning_simple.py) (an example by the Optuna team)
+
+</details>
+
 #### Datasets
 
 <details>
@@ -227,7 +305,7 @@ import torch
 from torch.utils.data import Dataset
 
 
-class LitDataset(Dataset):
+class PodDataset(Dataset):
     def __init__(self, features_path, labels_path):
         self.features = pd.read_csv(features_path)
         self.labels = pd.read_csv(labels_path)
@@ -291,13 +369,35 @@ The following three videos were created by Lightning's Thomas Chaton; the videos
 [Lightning Codebase Deep Dive 1](https://youtu.be/aEeh9ucKUkU) <br>
 [Lightning Codebase Deep Dive 2](https://youtu.be/NEpRYqdsm54) <br>
 [Lightning Codebase Deep Dive 3](https://youtu.be/x4d4RDNJaZk)
+
+### General Engineering and Tools
+
+Lightning's founder, and their lead educator have created a series of short videos called [Lightning Bits](https://lightning.ai/pages/ai-education/#bits) for beginners who need guides for using IDEs, git, and terminal.
+
+A long standing Python community resource has been [The Hitchhiker's Guide to Python](https://docs.python-guide.org). The "guide exists to provide both novice and expert Python developers a best practice handbook for the installation, configuration, and usage of Python on a daily basis".
+
+[VS Code](https://code.visualstudio.com/docs) and [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html) IDEs have each provided great docs for their users. My preference is VS Code, as I find it easier to use and more easily customizable than PyCharm - though PyCharm does have its benefits; I especially like VS Code's [integrations for PyTorch and tensorboard](https://code.visualstudio.com/docs/datascience/pytorch-support). I pair [Gitkraken](https://www.gitkraken.com) and [GitLens](https://www.gitkraken.com/gitlens) with VS Code to manage my version control and contributions.
+
+### Data Analysis
+
+Wes McKinney, creator of Pandas and founder of Voltron Data (responsible for Ibis, Apache Arrow etc) has released his third edition of [Python for Data Analysis](https://wesmckinney.com/book/) in an open access format.
+
+### Intro to Artificial Intelligence and Mathematics for Machine Learning
+
+Harvard University has developed an [Introduction to Artificial Intelligence with Python](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python) course that can be audited for free.
+
+[Artificial Intelligence: A Modern Approach](https://www.google.com/books/edition/_/koFptAEACAAJ?hl=en&sa=X&ved=2ahUKEwj3rILozs78AhV1gIQIHbMWCtsQ8fIDegQIAxBB) is the most widely used text on Artificial Intelligence in college courses.
+
+[Mathematics for Machine Learning](https://mml-book.github.io) provides "the necessary mathematical skills to read" books that cover advanced maching learning techniques.
+
+Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
+
 ### Deep Learning
 
 Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
 
 NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
 
-Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very useful, high level [introduction to neural networks](https://www.3blue1brown.com/topics/neural-networks). Grant's [other videos](https://www.3blue1brown.com/#lessons) are also useful for computer and data science, and mathematics in general.
 
 The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
 

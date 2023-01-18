@@ -23,32 +23,28 @@ from lightning.pytorch.profiler import Profiler, PyTorchProfiler
 from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
-from lightning_pod.core.module import LitModel
-from lightning_pod.pipeline.datamodule import LitDataModule
 
 
-class LitTrainer(L.Trainer):
+class PodTrainer(L.Trainer):
     def __init__(
         self,
         logger: Optional[Logger] = None,
         profiler: Optional[Profiler] = None,
         callbacks: Optional[List] = [],
+        plugins: Optional[List] = [],
         set_seed: bool = True,
         **trainer_init_kwargs: Dict[str, Any]
     ) -> None:
+        # SET SEED
+        if set_seed:
+            seed_everything(conf.GLOBALSEED, workers=True)
         super().__init__(
             logger=logger or TensorBoardLogger(conf.LOGSPATH, name="tensorboard"),
             profiler=profiler or PyTorchProfiler(dirpath=conf.PROFILERPATH, filename="profiler"),
             callbacks=callbacks + [ModelCheckpoint(dirpath=conf.CHKPTSPATH, filename="model")],
+            plugins=plugins,
             **trainer_init_kwargs
         )
-        # SET SEED
-        if set_seed:
-            seed_everything(conf.GLOBALSEED, workers=True)
-        #  SET DATALOADER
-        self.datamodule = LitDataModule()
-        #  SET MODEL
-        self.model = LitModel()
 
     def persist_predictions(self, predictions):
         predictions = torch.vstack(predictions)  # type: ignore[arg-type]

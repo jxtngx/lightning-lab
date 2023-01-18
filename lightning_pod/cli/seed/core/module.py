@@ -4,7 +4,7 @@ import torchmetrics  # noqa: F401
 from torch import nn, optim  # noqa: F401
 
 
-class LitModel(L.LightningModule):
+class PodModule(L.LightningModule):
     """a custom PyTorch Lightning LightningModule"""
 
     def __init__(self):
