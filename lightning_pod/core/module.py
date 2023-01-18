@@ -52,9 +52,7 @@ class Encoder(nn.Module):
                 out_features=64,
                 bias=True,
             ),
-            nn.PReLU(
-                inplace=False,
-            ),
+            nn.PReLU(),
             nn.Dropout(dropout),
             nn.Linear(
                 in_features=64,
@@ -97,9 +95,7 @@ class Decoder(nn.Module):
                 out_features=64,
                 bias=True,
             ),
-            nn.PReLU(
-                inplace=False,
-            ),
+            nn.PReLU(),
             nn.Dropout(dropout),
             nn.Linear(
                 in_features=64,
@@ -173,7 +169,7 @@ class PodModule(L.LightningModule):
         loss = F.mse_loss(x_hat, x)
 
         if stage in ["val", "test"]:
-            acc = accuracy(y_hat, y, accuracy_task=self.accuracy_task)
+            acc = accuracy(y_hat, y, task=self.accuracy_task)
             ssim = structural_similarity_index_measure(x_hat, x)
             self.log(f"{stage}_ssim ", ssim)
             self.log(f"{stage}_acc", acc)

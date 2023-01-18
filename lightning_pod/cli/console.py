@@ -86,7 +86,7 @@ def run_wandb(project_name) -> None:
 
 
 @trainer.command("run-optuna")
-@click.option("--project-name")
+@click.option("--project-name", default="lightning-examples-optuna")
 def run_optuna(project_name) -> None:
     trial = TrialFlow(project_name=project_name)
     trial.run()
