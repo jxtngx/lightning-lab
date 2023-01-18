@@ -80,8 +80,6 @@ class ObjectiveWork:
         optimizer = getattr(optim, optimizer_name)
 
         dropout = trial.suggest_float("dropout", 0.2, 0.5)
-        # n_layers = trial.suggest_int("n_layers", 1, 3)
-        # output_dims = [trial.suggest_int("n_units_l{}".format(i), 4, 128, log=True) for i in range(n_layers)]
 
         config = dict(trial.params)
         config["trial.number"] = trial.number
