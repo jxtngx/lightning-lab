@@ -41,6 +41,7 @@ class PodDataModule(LightningDataModule):
         train_size: float = 0.8,
         num_workers: int = NUMWORKERS,
         transforms: Callable = transforms.ToTensor(),
+        batch_size: int = 64,
     ):
         super().__init__()
         self.data_dir = os.path.join(PROJECTPATH, data_dir, "cache")
@@ -49,6 +50,7 @@ class PodDataModule(LightningDataModule):
         self.train_size = train_size
         self.num_workers = num_workers
         self.transforms = transforms
+        self.batch_size = batch_size
 
     def prepare_data(self, logger: Optional[Logger] = None, log_preprocessing: bool = False) -> None:
         self.dataset(self.data_dir, download=True)
@@ -69,10 +71,10 @@ class PodDataModule(LightningDataModule):
         torch.save(self.val_data, os.path.join(conf.SPLITSPATH, "val.pt"))
 
     def train_dataloader(self) -> TRAIN_DATALOADERS:
-        return DataLoader(self.train_data, num_workers=self.num_workers)
+        return DataLoader(self.train_data, num_workers=self.num_workers, batch_size=self.batch_size)
 
     def test_dataloader(self) -> EVAL_DATALOADERS:
-        return DataLoader(self.test_data, num_workers=self.num_workers)
+        return DataLoader(self.test_data, num_workers=self.num_workers, batch_size=self.batch_size)
 
     def val_dataloader(self) -> EVAL_DATALOADERS:
-        return DataLoader(self.val_data, num_workers=self.num_workers)
+        return DataLoader(self.val_data, num_workers=self.num_workers, batch_size=self.batch_size)

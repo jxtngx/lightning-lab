@@ -17,7 +17,7 @@ from typing import Optional
 import lightning as L
 import torch.nn.functional as F
 from torch import nn, optim
-from torchmetrics.functional import accuracy, structural_similarity_index_measure
+from torchmetrics.functional import accuracy
 
 
 class Encoder(nn.Module):
@@ -165,13 +165,13 @@ class PodModule(L.LightningModule):
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
         x_hat = self.decoder(z)
-        y_hat = F.log_softmax(x_hat, dim=1)
         loss = F.mse_loss(x_hat, x)
 
         if stage in ["val", "test"]:
-            acc = accuracy(y_hat, y, task=self.accuracy_task, num_labels=10)
-            ssim = structural_similarity_index_measure(x_hat, x)
-            self.log(f"{stage}_ssim ", ssim)
+            num_classes = 10
+            y_hat = nn.Linear(28 * 28, num_classes)(x_hat)
+            y_hat = F.log_softmax(y_hat).argmax(dim=1)
+            acc = accuracy(y_hat, y, task="multiclass", num_classes=num_classes)
             self.log(f"{stage}_acc", acc)
             self.log(f"{stage}_loss", loss)
         if stage == "training":

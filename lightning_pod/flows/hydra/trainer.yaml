@@ -1,5 +1,5 @@
 trainer:
-  max_epochs: 100
+  max_epochs: 10
   limit_train_batches: 1.0
   limit_predict_batches: null
   limit_test_batches: null

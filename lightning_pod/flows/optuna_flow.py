@@ -52,7 +52,8 @@ class ObjectiveWork:
 
         full_artifact_path = os.path.join(conf.OPTUNAPATH, self.artifact_path)
 
-        os.mkdir(full_artifact_path)
+        if not os.path.isdir(full_artifact_path):
+            os.mkdir(full_artifact_path)
 
         file_handler = logging.FileHandler(filename=os.path.join(conf.OPTUNAPATH, full_artifact_path, "optuna.log"))
         file_handler.setFormatter(optuna.logging.create_default_formatter())
@@ -90,7 +91,7 @@ class ObjectiveWork:
         trainer_init_kwargs = {
             "max_epochs": 10,
             "callbacks": [
-                EarlyStopping(monitor="loss", mode="min"),
+                EarlyStopping(monitor="training_loss", mode="min"),
             ],
         }
 
@@ -101,13 +102,7 @@ class ObjectiveWork:
 
         self._set_artifact_path()
 
-        hyperparameters = dict(
-            optimizer=optimizer_name,
-            lr=lr,
-            dropout=dropout,
-            # n_layers=n_layers,
-            # output_dims=output_dims,
-        )
+        hyperparameters = dict(optimizer=optimizer_name, lr=lr, dropout=dropout)
 
         self.trainer.logger.log_hyperparams(hyperparameters)
 
