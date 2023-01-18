@@ -169,7 +169,7 @@ class PodModule(L.LightningModule):
         loss = F.mse_loss(x_hat, x)
 
         if stage in ["val", "test"]:
-            acc = accuracy(y_hat, y, task=self.accuracy_task)
+            acc = accuracy(y_hat, y, task=self.accuracy_task, num_labels=10)
             ssim = structural_similarity_index_measure(x_hat, x)
             self.log(f"{stage}_ssim ", ssim)
             self.log(f"{stage}_acc", acc)
