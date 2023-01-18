@@ -96,7 +96,12 @@ class ObjectiveWork:
         }
 
         self.trainer = PodTrainer(
-            logger=WandbLogger(project=self.project_name, save_dir=self.wandb_save_dir, config=config, reinit=True),
+            logger=WandbLogger(
+                project=self.project_name,
+                name="-".join(["Trial", str(trial.number)]),
+                save_dir=self.wandb_save_dir,
+                config=config,
+            ),
             **trainer_init_kwargs,
         )
 
@@ -107,6 +112,8 @@ class ObjectiveWork:
         self.trainer.logger.log_hyperparams(hyperparameters)
 
         self.trainer.fit(model=model, datamodule=self.datamodule)
+
+        self.trainer.logger.experiment.finish()
 
         return self.trainer.callback_metrics["val_acc"].item()
 
