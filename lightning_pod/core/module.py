@@ -156,10 +156,6 @@ class PodModule(L.LightningModule):
         self._common_step(batch, "val")
 
     def _common_step(self, batch, stage):
-        """
-        Note:
-            For more on SSIM, see: https://torchmetrics.readthedocs.io/en/stable/image/structural_similarity.html
-        """
         x, y = batch
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
