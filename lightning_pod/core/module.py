@@ -143,19 +143,19 @@ class PodModule(L.LightningModule):
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
         x_hat = self.decoder(z)
-        y_hat = F.log_softmax(x_hat, dim=1)
+        y_hat = F.log_softmax(x_hat, dim=1).argmax(dim=1)
         return x_hat, y_hat
 
     def training_step(self, batch):
-        self._common_flow(batch, "training")
+        self._common_step(batch, "training")
 
     def test_step(self, batch, *args):
-        self._common_flow(batch, "test")
+        self._common_step(batch, "test")
 
     def validation_step(self, batch, *args):
-        self._common_flow(batch, "val")
+        self._common_step(batch, "val")
 
-    def _common_flow(self, batch, stage):
+    def _common_step(self, batch, stage):
         """
         Note:
             For more on SSIM, see: https://torchmetrics.readthedocs.io/en/stable/image/structural_similarity.html
