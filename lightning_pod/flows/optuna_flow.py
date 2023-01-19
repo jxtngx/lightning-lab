@@ -38,7 +38,6 @@ class ObjectiveWork:
         self.wandb_save_dir = wandb_save_dir
         self.log_preprocessing = log_preprocessing
         self.datamodule = PodDataModule()
-        self.prep_and_setup_data = False
 
     def _set_artifact_dir(self) -> None:
         """sets optuna log file
@@ -115,10 +114,10 @@ class ObjectiveWork:
 
     def run(self, trial: Trial) -> float:
 
-        if not self.prep_and_setup_data:
+        if trial.number == 0:
             self.datamodule.prepare_data()
-            self.datamodule.setup(stage="fit")
-            self.prep_and_setup_data = True
+
+        self.datamodule.setup(stage="fit")
 
         return self._objective(trial)
 
