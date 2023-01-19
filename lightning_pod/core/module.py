@@ -130,6 +130,7 @@ class PodModule(L.LightningModule):
         lr: float = 1e-3,
         dropout: float = 0.5,
         accuracy_task: str = "multiclass",
+        num_classes: int = 10,
     ):
         super().__init__()
         self.encoder = Encoder(dropout)
@@ -137,12 +138,15 @@ class PodModule(L.LightningModule):
         self.optimizer = optimizer
         self.lr = lr
         self.accuracy_task = accuracy_task
+        self.num_classes = num_classes
         self.save_hyperparameters()
 
     def forward(self, x):
         x = x.view(x.size(0), -1)
         z = self.encoder(x)
         x_hat = self.decoder(z)
+        num_classes = self.num_classes
+        y_hat = nn.Linear(28 * 28, num_classes)(x_hat)
         y_hat = F.log_softmax(x_hat, dim=1).argmax(dim=1)
         return x_hat, y_hat
 
@@ -163,7 +167,7 @@ class PodModule(L.LightningModule):
         loss = F.mse_loss(x_hat, x)
 
         if stage in ["val", "test"]:
-            num_classes = 10
+            num_classes = self.num_classes
             y_hat = nn.Linear(28 * 28, num_classes)(x_hat)
             y_hat = F.log_softmax(y_hat, dim=1).argmax(dim=1)
             acc = accuracy(y_hat, y, task=self.accuracy_task, num_classes=num_classes)
