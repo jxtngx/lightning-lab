@@ -130,7 +130,7 @@ class PodModule(L.LightningModule):
         optimizer: Optional[optim.Optimizer] = optim.Adam,
         lr: float = 1e-3,
         dropout: float = 0.5,
-        accuracy_task: str = "multilabel",
+        accuracy_task: str = "multiclass",
     ):
         super().__init__()
         self.encoder = Encoder(dropout)
@@ -170,8 +170,8 @@ class PodModule(L.LightningModule):
         if stage in ["val", "test"]:
             num_classes = 10
             y_hat = nn.Linear(28 * 28, num_classes)(x_hat)
-            y_hat = F.log_softmax(y_hat).argmax(dim=1)
-            acc = accuracy(y_hat, y, task="multiclass", num_classes=num_classes)
+            y_hat = F.log_softmax(y_hat, dim=1).argmax(dim=1)
+            acc = accuracy(y_hat, y, task=self.accuracy_task, num_classes=num_classes)
             self.log(f"{stage}_acc", acc)
             self.log(f"{stage}_loss", loss)
         if stage == "training":

@@ -93,7 +93,7 @@ class ObjectiveWork:
             ],
         }
 
-        self.trainer = PodTrainer(
+        trainer = PodTrainer(
             logger=WandbLogger(
                 project=self.project_name,
                 name="-".join(["Trial", str(trial.number)]),
@@ -107,13 +107,13 @@ class ObjectiveWork:
 
         hyperparameters = dict(optimizer=optimizer_name, lr=lr, dropout=dropout)
 
-        self.trainer.logger.log_hyperparams(hyperparameters)
+        trainer.logger.log_hyperparams(hyperparameters)
 
-        self.trainer.fit(model=model, datamodule=self.datamodule)
+        trainer.fit(model=model, datamodule=self.datamodule)
 
-        self.trainer.logger.experiment.finish()
+        trainer.logger.experiment.finish()
 
-        return self.trainer.callback_metrics["val_acc"].item()
+        return trainer.callback_metrics["val_acc"].item()
 
     def run(self, trial) -> float:
 
@@ -148,7 +148,6 @@ class TrialFlow:
         self.log_preprocessing = log_preprocessing
         # work
         self._objective_work = ObjectiveWork(self.project_name, self.wandb_dir, self.log_preprocessing)
-
         # optuna study
         self._study = optuna.create_study(direction="maximize", study_name=study_name)
 
