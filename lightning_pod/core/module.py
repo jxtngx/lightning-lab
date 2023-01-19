@@ -105,8 +105,7 @@ class Decoder(nn.Module):
         )
 
     def forward(self, x):
-        logits = self.decoder(x)
-        return logits
+        return self.decoder(x)
 
 
 class PodModule(L.LightningModule):
