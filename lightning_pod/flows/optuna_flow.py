@@ -15,13 +15,13 @@
 import logging
 import os
 import sys
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import optuna
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
-from optuna.trial import TrialState
+from optuna.trial import FrozenTrial, Trial, TrialState
 from rich.console import Console
 from rich.table import Table
 from torch import optim
@@ -40,7 +40,7 @@ class ObjectiveWork:
         self.datamodule = PodDataModule()
         self.prep_and_setup_data = False
 
-    def _set_artifact_path(self) -> None:
+    def _set_artifact_dir(self) -> None:
         """sets optuna log file
         Note:
             borrowed from Optuna
@@ -50,12 +50,12 @@ class ObjectiveWork:
         root_logger = logging.getLogger("optuna")
         root_logger.setLevel(logging.DEBUG)
 
-        full_artifact_path = os.path.join(conf.OPTUNAPATH, self.artifact_path)
+        artifact_dir = os.path.join(conf.OPTUNAPATH, self.artifact_path)
 
-        if not os.path.isdir(full_artifact_path):
-            os.mkdir(full_artifact_path)
+        if not os.path.isdir(artifact_dir):
+            os.mkdir(artifact_dir)
 
-        file_handler = logging.FileHandler(filename=os.path.join(conf.OPTUNAPATH, full_artifact_path, "optuna.log"))
+        file_handler = logging.FileHandler(filename=os.path.join(conf.OPTUNAPATH, artifact_dir, "optuna.log"))
         file_handler.setFormatter(optuna.logging.create_default_formatter())
         root_logger.addHandler(file_handler)
 
@@ -73,18 +73,17 @@ class ObjectiveWork:
     def wandb_settings(self) -> Dict[str, Any]:
         return self.trainer.logger.experiment.settings
 
-    def _objective(self, trial):
+    def _objective(self, trial: Trial) -> float:
 
         lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
         optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
         optimizer = getattr(optim, optimizer_name)
-
         dropout = trial.suggest_float("dropout", 0.2, 0.5)
+
+        model = PodModule(dropout=dropout, optimizer=optimizer, lr=lr)
 
         config = dict(trial.params)
         config["trial.number"] = trial.number
-
-        model = PodModule(dropout=dropout, optimizer=optimizer, lr=lr)
 
         trainer_init_kwargs = {
             "max_epochs": 10,
@@ -102,20 +101,19 @@ class ObjectiveWork:
             ),
             **trainer_init_kwargs,
         )
-
-        self._set_artifact_path()
-
+        # set optuna logs dir
+        self._set_artifact_dir()
+        # logs hyperparameters to logs/wandb_logs/wandb/{run_name}/files/config.yaml
         hyperparameters = dict(optimizer=optimizer_name, lr=lr, dropout=dropout)
-
         trainer.logger.log_hyperparams(hyperparameters)
 
         trainer.fit(model=model, datamodule=self.datamodule)
-
+        # stops wandb run so that a new run can be initialized on next trial
         trainer.logger.experiment.finish()
 
         return trainer.callback_metrics["val_acc"].item()
 
-    def run(self, trial) -> float:
+    def run(self, trial: Trial) -> float:
 
         if not self.prep_and_setup_data:
             self.datamodule.prepare_data()
@@ -152,19 +150,19 @@ class TrialFlow:
         self._study = optuna.create_study(direction="maximize", study_name=study_name)
 
     @property
-    def trials(self):
+    def trials(self) -> List[FrozenTrial]:
         return self._study.trials
 
     @property
-    def pruned_trial(self):
+    def pruned_trial(self) -> List[FrozenTrial]:
         return self._study.get_trials(deepcopy=False, states=[TrialState.PRUNED])
 
     @property
-    def complete_trials(self):
+    def complete_trials(self) -> List[FrozenTrial]:
         return self._study.get_trials(deepcopy=False, states=[TrialState.COMPLETE])
 
     @property
-    def best_trial(self):
+    def best_trial(self) -> FrozenTrial:
         return self._study.best_trial
 
     def _display_report(self) -> None:
