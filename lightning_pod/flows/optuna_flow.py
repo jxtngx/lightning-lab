@@ -18,6 +18,7 @@ import sys
 from typing import Any, Dict, List, Optional
 
 import optuna
+import wandb
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
@@ -72,6 +73,20 @@ class ObjectiveWork:
     def wandb_settings(self) -> Dict[str, Any]:
         return self.trainer.logger.experiment.settings
 
+    def persist_model(self):
+        """should be called after persist predictions"""
+        input_sample = self.trainer.datamodule.train_data.dataset[0][0]
+        self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
+
+    def persist_predictions(self):
+        self.trainer.test(ckpt_path="best", datamodule=self.trainer.datamodule)
+        predictions = self.trainer.predict(self.trainer.model, self.trainer.datamodule.val_dataloader())
+        self.trainer.persist_predictions(predictions)
+
+    def persist_splits(self):
+        """should be called after persist predictions"""
+        self.trainer.datamodule.persist_splits()
+
     def _objective(self, trial: Trial) -> float:
 
         lr = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
@@ -91,26 +106,31 @@ class ObjectiveWork:
             ],
         }
 
-        trainer = PodTrainer(
+        if trial.number == 0:
+            self.trial_group = wandb.util.generate_id()
+
+        self.trainer = PodTrainer(
             logger=WandbLogger(
                 project=self.project_name,
-                name="-".join(["Trial", str(trial.number)]),
+                name="-".join(["trial", str(trial.number)]),
+                group=self.trial_group,
                 save_dir=self.wandb_save_dir,
                 config=config,
             ),
             **trainer_init_kwargs,
         )
+
         # set optuna logs dir
         self._set_artifact_dir()
         # logs hyperparameters to logs/wandb_logs/wandb/{run_name}/files/config.yaml
         hyperparameters = dict(optimizer=optimizer_name, lr=lr, dropout=dropout)
-        trainer.logger.log_hyperparams(hyperparameters)
+        self.trainer.logger.log_hyperparams(hyperparameters)
 
-        trainer.fit(model=model, datamodule=self.datamodule)
+        self.trainer.fit(model=model, datamodule=self.datamodule)
         # stops wandb run so that a new run can be initialized on next trial
-        trainer.logger.experiment.finish()
+        self.trainer.logger.experiment.finish()
 
-        return trainer.callback_metrics["val_acc"].item()
+        return self.trainer.callback_metrics["val_acc"].item()
 
     def run(self, trial: Trial) -> float:
 
@@ -164,22 +184,42 @@ class TrialFlow:
     def best_trial(self) -> FrozenTrial:
         return self._study.best_trial
 
-    def _display_report(self) -> None:
+    @staticmethod
+    def _display_report(trial_metric_names: List[str], trial_info: List[str]) -> None:
         """a rich table"""
-        # TITLE
+
         table = Table(title="Study Statistics")
-        # COLUMNS
-        for col in ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]:
-            table.add_column(col)
-        # ROW
-        table.add_row(len(self.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value)
-        # SHOW
+
+        for col in trial_metric_names:
+            table.add_column(col, header_style="cyan")
+
+        table.add_row(*trial_info)
+
         console = Console()
         console.print(table)
 
-    def run(self, display_report: bool = False) -> None:
+        return
+
+    def run(
+        self,
+        persist_predictions: bool = True,
+        persist_splits: bool = True,
+        persist_model: bool = True,
+        display_report: bool = False,
+    ) -> None:
         self._study.optimize(self._objective_work.run, n_trials=10, timeout=600)
+        if persist_predictions:
+            self._objective_work.persist_predictions()
+        if persist_splits:
+            if not persist_predictions:
+                self._objective_work.trainer.datamodule.setup(stage="val")
+            self._objective_work.persist_splits()
+        if persist_model:
+            self._objective_work.persist_model()
         if display_report:
-            self._display_report()
+            trial_metric_names = ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]
+            trial_info = [len(self.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value]
+            trial_info = [str(i) for i in trial_info]
+            self._display_report(trial_metric_names, trial_info)
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
