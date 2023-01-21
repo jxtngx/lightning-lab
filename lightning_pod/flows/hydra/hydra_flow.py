@@ -18,7 +18,6 @@ import hydra
 from lightning.pytorch.callbacks import EarlyStopping
 from omegaconf.dictconfig import DictConfig
 
-from lightning_pod import conf
 from lightning_pod.core.module import PodModule
 from lightning_pod.core.trainer import PodTrainer
 from lightning_pod.pipeline.datamodule import PodDataModule
@@ -42,15 +41,6 @@ def main(cfg: DictConfig) -> None:
     if not cfg.trainer.fast_dev_run:
         # TEST MODEL
         trainer.test(ckpt_path="best", datamodule=trainer.datamodule)
-        # PERSIST MODEL
-        input_sample = trainer.datamodule.train_data.dataset[0][0]
-        trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
-        # PREDICT
-        predictions = trainer.predict(trainer.model, trainer.datamodule.val_dataloader())
-        # PERSIST PREDICTIONS
-        trainer.persist_predictions(predictions)
-        # PERSIST DATA SPLITS FOR REPRODUCIBILITY
-        trainer.datamodule.persist_splits()
 
 
 if __name__ == "__main__":

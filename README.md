@@ -18,7 +18,7 @@
 
 ![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 <a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
-[![](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28-gray.svg)](https://wandb.ai/justingoheen/lightning-pod-examples)
+[![](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28-gray.svg)](https://wandb.ai/justingoheen/lightning-examples-optuna?workspace=user-justingoheen)
 
 [![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
@@ -166,11 +166,11 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run-hydra` runs the Trainer with hydra. <br>
+`pod trainer run-optuna` runs the Trainer along with an Optuna trial and logs with wandb. <br>
 
 `pod trainer run-wandb` runs the Trainer with a WandbLogger. <br>
 
-`pod trainer run-optuna` runs the Trainer along with an Optuna trial. <br>
+`pod trainer run-hydra` runs the Trainer with hydra. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
@@ -355,7 +355,7 @@ Once the workspace image has finished building, do the following to teardown the
 
 ```sh
 pod teardown
-pod trainer run-hydra
+pod trainer run-optuna
 ```
 
 ## Learning Resources
