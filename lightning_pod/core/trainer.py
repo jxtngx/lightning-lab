@@ -47,6 +47,6 @@ class PodTrainer(L.Trainer):
         )
 
     def persist_predictions(self, predictions):
-        predictions = torch.vstack(predictions)  # type: ignore[arg-type]
+        # predictions = torch.vstack(predictions)  # type: ignore[arg-type]
         predictions = TensorDataset(predictions)
         torch.save(predictions, conf.PREDSPATH)

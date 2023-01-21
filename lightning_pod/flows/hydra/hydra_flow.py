@@ -33,9 +33,11 @@ FILEPATH = Path(__file__)
 )
 def main(cfg: DictConfig) -> None:
     # SET MODEL, DATAMODULE TRAINER
-    trainer = PodTrainer(PodModule, PodDataModule, callbacks=[EarlyStopping(monitor="loss", mode="min")], **cfg.trainer)
+    model = PodModule()
+    datamodule = PodDataModule()
+    trainer = PodTrainer(callbacks=[EarlyStopping(monitor="training_loss", mode="min")], **cfg.trainer)
     # TRAIN MODEL
-    trainer.fit(model=trainer.model, datamodule=trainer.datamodule)
+    trainer.fit(model=model, datamodule=datamodule)
     # IF NOT FAST DEV RUN: TEST, PREDICT, PERSIST
     if not cfg.trainer.fast_dev_run:
         # TEST MODEL
