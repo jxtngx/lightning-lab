@@ -46,11 +46,12 @@ def main(cfg: DictConfig) -> None:
         input_sample = trainer.datamodule.train_data.dataset[0][0]
         trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
         # PREDICT
-        predictions = trainer.predict(trainer.model, trainer.datamodule.val_dataloader())
-        # PERSIST PREDICTIONS
-        trainer.persist_predictions(predictions)
-        # PERSIST DATA SPLITS FOR REPRODUCIBILITY
-        trainer.datamodule.persist_splits()
+        # predictions = trainer.predict(trainer.model, trainer.datamodule.val_dataloader())
+        # TODO fix persist methods to account for new prediction output
+        # # PERSIST PREDICTIONS
+        # trainer.persist_predictions(predictions)
+        # # PERSIST DATA SPLITS FOR REPRODUCIBILITY
+        # trainer.datamodule.persist_splits()
 
 
 if __name__ == "__main__":
