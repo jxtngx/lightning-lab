@@ -198,28 +198,26 @@ class TrialFlow:
         console = Console()
         console.print(table)
 
-        return
-
     def run(
         self,
         persist_predictions: bool = True,
         persist_splits: bool = True,
         persist_model: bool = True,
-        display_report: bool = False,
+        display_report: bool = True,
     ) -> None:
         self._study.optimize(self._objective_work.run, n_trials=10, timeout=600)
-        if persist_predictions:
-            self._objective_work.persist_predictions()
-        if persist_splits:
-            if not persist_predictions:
-                self._objective_work.trainer.datamodule.setup(stage="val")
-            self._objective_work.persist_splits()
-        if persist_model:
-            self._objective_work.persist_model()
         if display_report:
             trial_metric_names = ["Finished Trials", "Pruned Trials", "Completed Trials", "Best Trial"]
             trial_info = [len(self.trials), len(self.pruned_trial), len(self.complete_trials), self.best_trial.value]
             trial_info = [str(i) for i in trial_info]
             self._display_report(trial_metric_names, trial_info)
+        if persist_model:
+            self._objective_work.persist_model()
+        if persist_predictions:
+            self._objective_work.persist_predictions()
+        if persist_splits:
+            if not persist_predictions:
+                self._objective_work.trainer.datamodule.setup(stage="test")
+            self._objective_work.persist_splits()
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
