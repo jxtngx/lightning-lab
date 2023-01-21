@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import lightning as L
 import torch
@@ -20,7 +20,6 @@ from lightning.pytorch import seed_everything
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import Logger, TensorBoardLogger
 from lightning.pytorch.profiler import Profiler, PyTorchProfiler
-from torch.utils.data import TensorDataset
 
 from lightning_pod import conf
 
@@ -46,7 +45,5 @@ class PodTrainer(L.Trainer):
             **trainer_init_kwargs
         )
 
-    def persist_predictions(self, predictions):
-        # predictions = torch.vstack(predictions)  # type: ignore[arg-type]
-        predictions = TensorDataset(predictions)
+    def persist_predictions(self, predictions: Tuple[torch.Tensor, Tuple[int, ...]]) -> None:
         torch.save(predictions, conf.PREDSPATH)
