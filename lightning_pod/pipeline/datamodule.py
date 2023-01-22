@@ -68,6 +68,8 @@ class PodDataModule(LightningDataModule):
         """saves all splits for reproducibility"""
         torch.save(self.train_data, os.path.join(conf.SPLITSPATH, "train.pt"))
         torch.save(self.val_data, os.path.join(conf.SPLITSPATH, "val.pt"))
+        if not hasattr(self, "test_data"):
+            self.test_data = self.dataset(self.data_dir, train=False, transform=self.transforms)
         torch.save(self.test_data, os.path.join(conf.SPLITSPATH, "test.pt"))
 
     def train_dataloader(self) -> TRAIN_DATALOADERS:

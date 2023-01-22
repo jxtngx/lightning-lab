@@ -19,7 +19,8 @@ from pathlib import Path
 filepath = Path(__file__)
 PROJECTPATH = filepath.parents[1]
 LOGSPATH = os.path.join(PROJECTPATH, "logs")
-PROFILERPATH = os.path.join(LOGSPATH, "torch_profiler")
+TORCHPROFILERPATH = os.path.join(LOGSPATH, "torch_profiler")
+SIMPLEPROFILERPATH = os.path.join(LOGSPATH, "simple_profiler")
 CHKPTSPATH = os.path.join(PROJECTPATH, "models", "checkpoints")
 MODELPATH = os.path.join(PROJECTPATH, "models", "onnx", "model.onnx")
 PREDSPATH = os.path.join(PROJECTPATH, "data", "predictions", "predictions.pt")

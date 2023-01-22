@@ -79,9 +79,7 @@ class ObjectiveWork:
         self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
 
     def persist_predictions(self):
-        self.trainer.test(ckpt_path="best", datamodule=self.trainer.datamodule)
-        predictions = self.trainer.predict(self.trainer.model, self.trainer.datamodule.val_dataloader())
-        self.trainer.persist_predictions(predictions)
+        self.trainer.persist_predictions()
 
     def persist_splits(self):
         """should be called after persist predictions"""
@@ -109,6 +107,14 @@ class ObjectiveWork:
         if trial.number == 0:
             self.trial_group = wandb.util.generate_id()
 
+        if hasattr(self, "trainer"):
+            # stops previous wandb run so that a new run can be initialized on new trial
+            # also helps to avoid hanging process in wandb sdk
+            # i.e. if this is called after self.trainer.fit,
+            # a key error is encountered in wandb.sdk on the final trial
+            # and wandb does not finish, and does not return control to TrialFlow
+            self.trainer.logger.experiment.finish()
+
         self.trainer = PodTrainer(
             logger=WandbLogger(
                 project=self.project_name,
@@ -127,8 +133,6 @@ class ObjectiveWork:
         self.trainer.logger.log_hyperparams(hyperparameters)
 
         self.trainer.fit(model=model, datamodule=self.datamodule)
-        # stops wandb run so that a new run can be initialized on next trial
-        self.trainer.logger.experiment.finish()
 
         return self.trainer.callback_metrics["val_acc"].item()
 
@@ -164,6 +168,7 @@ class TrialFlow:
         self.wandb_dir = wandb_dir
         self.log_preprocessing = log_preprocessing
         # work
+        # _ helps to avoid LightningFlow from checking JSON serialization if converting to Lightning App
         self._objective_work = ObjectiveWork(self.project_name, self.wandb_dir, self.log_preprocessing)
         # optuna study
         self._study = optuna.create_study(direction="maximize", study_name=study_name)
@@ -200,10 +205,10 @@ class TrialFlow:
 
     def run(
         self,
+        display_report: bool = True,
+        persist_model: bool = True,
         persist_predictions: bool = True,
         persist_splits: bool = True,
-        persist_model: bool = True,
-        display_report: bool = True,
     ) -> None:
         self._study.optimize(self._objective_work.run, n_trials=10, timeout=600)
         if display_report:
@@ -216,8 +221,6 @@ class TrialFlow:
         if persist_predictions:
             self._objective_work.persist_predictions()
         if persist_splits:
-            if not persist_predictions:
-                self._objective_work.trainer.datamodule.setup(stage="test")
             self._objective_work.persist_splits()
         if issubclass(TrialFlow, LightningFlow):
             sys.exit()
