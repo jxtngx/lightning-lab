@@ -12,14 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, Dict, List, Optional, Tuple
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
 
 import lightning as L
 import torch
 from lightning.pytorch import seed_everything
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import Logger, TensorBoardLogger
-from lightning.pytorch.profiler import Profiler, PyTorchProfiler
+from lightning.pytorch.profilers import Profiler, PyTorchProfiler
 
 from lightning_pod import conf
 
@@ -39,11 +40,13 @@ class PodTrainer(L.Trainer):
             seed_everything(conf.GLOBALSEED, workers=True)
         super().__init__(
             logger=logger or TensorBoardLogger(conf.LOGSPATH, name="tensorboard"),
-            profiler=profiler or PyTorchProfiler(dirpath=conf.PROFILERPATH, filename="profiler"),
+            profiler=profiler or PyTorchProfiler(dirpath=conf.TORCHPROFILERPATH, filename="profiler"),
             callbacks=callbacks + [ModelCheckpoint(dirpath=conf.CHKPTSPATH, filename="model")],
             plugins=plugins,
             **trainer_init_kwargs
         )
 
-    def persist_predictions(self, predictions: Tuple[torch.Tensor, Tuple[int, ...]]) -> None:
-        torch.save(predictions, conf.PREDSPATH)
+    def persist_predictions(self, predictions_dir: Optional[Union[str, Path]] = conf.PREDSPATH) -> None:
+        self.test(ckpt_path="best", datamodule=self.datamodule)
+        predictions = self.predict(self.model, self.datamodule.val_dataloader())
+        torch.save(predictions, predictions_dir)
