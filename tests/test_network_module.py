@@ -24,12 +24,12 @@ def test_module_not_abstract():
 def test_module_forward():
     input_sample = torch.randn((1, 784))
     model = PodModule()
-    output = model.forward(input_sample)
-    assert output.shape == input_sample.shape
+    preds, label = model.forward(input_sample)
+    assert preds.shape == input_sample.shape
 
 
 def test_module_training_step():
-    input_sample = torch.randn((1, 784)), torch.randn((1, 784))
+    input_sample = torch.randn((1, 784)), 1
     model = PodModule()
     loss = model.training_step(input_sample)
     assert isinstance(loss, torch.Tensor)

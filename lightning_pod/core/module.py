@@ -150,7 +150,7 @@ class PodModule(L.LightningModule):
         return x_hat, y_hat
 
     def training_step(self, batch):
-        self._common_step(batch, "training")
+        return self._common_step(batch, "training")
 
     def test_step(self, batch, *args):
         self._common_step(batch, "test")
