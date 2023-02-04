@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
+import { Button } from "@mui/material"
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -17,9 +19,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
@@ -27,6 +29,14 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+    {/* <select>
+        <option value="grapefruit">Grapefruit</option>
+        <option value="lime">Lime</option>
+        <option selected value="coconut">Coconut</option>
+        <option value="mango">Mango</option>
+    </select> */}
+    </div>
     </div>
   )
 }
