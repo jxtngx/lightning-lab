@@ -1,21 +1,18 @@
-import { Avatar, Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import "../../App.css";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 
 export const MetricOne = (props: any) => (
-    <Card sx={{ height: "100%" }} {...props}>
+    <Card className="metric-container" {...props}>
         <CardContent>
             <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
                 <Grid item>
-                    <Typography color="textPrimary" variant="h4">
-                        Metric One
+                    <Typography color="textPrimary" id="card-title">
+                        Metric Name
                     </Typography>
                 </Grid>
                 <Grid item>
                     <Typography
-                        color="pass"
-                        sx={{
-                            mr: 1,
-                        }}
-                        variant="h4"
+                        className="metric-card-text"
                     >
                         .xx%
                     </Typography>

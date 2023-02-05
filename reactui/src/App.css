@@ -1,42 +1,74 @@
-#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+/* # Copyright Justin R. Goheen.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. */
+
+.pretty-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
 }
 
-.logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-}
-.logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
+.metric-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 10px;
+    margin-top: 0%;
+    padding: 10px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
 }
 
-@keyframes logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.metric-card-text {
+    margin: 0px;
+    padding: 0px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-        animation: logo-spin infinite 20s linear;
-    }
+.model-card-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
 }
 
-.card {
-    padding: 2em;
+.model-card-text {
+    margin: 0px;
+    padding: 1px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray;
 }
 
-.read-the-docs {
-    color: #888;
+.card-title {
+    margin: 0px;
+    padding: 0px;
+    font-family: Ucityweb, sans-serif;
+    font-weight: normal;
+}
+
+.app-title {
+    font-family: Montserrat, sans-serif;
+}
+
+#left-fig .modebar {
+    margin-top: 10px;
+}
+
+#right-fig .modebar {
+    margin-top: 10px;
 }
