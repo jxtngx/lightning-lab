@@ -1,20 +1,12 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 
 export const MetricFour = (props: any) => (
-    <Card className="metric-container" {...props}>
+    <Card {...props}>
         <CardContent>
-            <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
+            <Grid container spacing={3}>
                 <Grid item>
-                    <Typography color="textPrimary" id="card-title">
-                        Metric Name
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <Typography
-                        className="metric-card-text"
-                    >
-                        .xx%
-                    </Typography>
+                    <Typography variant="h5">Metric Name</Typography>
+                    <Typography>0.xx</Typography>
                 </Grid>
             </Grid>
         </CardContent>

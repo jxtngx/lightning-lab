@@ -1,55 +1,30 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Container, Grid, Box, Typography } from "@mui/material";
 
-const groundTruth = (props: any) => (
-    <Card sx={{ height: "100%" }} {...props}>
-        <CardContent>
-            <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
-                <Grid item>
-                    <Typography color="textPrimary" variant="h4">
-                        Metric One
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <Typography
-                        color="pass"
-                        sx={{
-                            mr: 1,
-                        }}
-                        variant="h4"
-                    >
-                        .xx%
-                    </Typography>
-                </Grid>
+export const ImageGrid = (props: any) => (
+    <Container>
+        <Grid container spacing={4}>
+            <Grid item>
+                <Box
+                    sx={{
+                        width: 300,
+                        height: 300,
+                        backgroundColor: "primary.light",
+                    }}
+                >
+                    <Typography>Ground Truth</Typography>
+                </Box>
             </Grid>
-        </CardContent>
-    </Card>
-);
-
-const decodedImage = (props: any) => (
-    <Card sx={{ height: "100%" }} {...props}>
-        <CardContent>
-            <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
-                <Grid item>
-                    <Typography color="textPrimary" variant="h4">
-                        Metric One
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <Typography
-                        color="pass"
-                        sx={{
-                            mr: 1,
-                        }}
-                        variant="h4"
-                    >
-                        .xx%
-                    </Typography>
-                </Grid>
+            <Grid item>
+                <Box
+                    sx={{
+                        width: 300,
+                        height: 300,
+                        backgroundColor: "primary.light",
+                    }}
+                >
+                    <Typography>Decoded Image</Typography>
+                </Box>
             </Grid>
-        </CardContent>
-    </Card>
+        </Grid>
+    </Container>
 );
-
-export const imageGrid = (props: any) => (
-    <></>
-)

@@ -61,9 +61,9 @@
     font-weight: normal;
 }
 
-.app-title {
+/* .app-title {
     font-family: Montserrat, sans-serif;
-}
+} */
 
 #left-fig .modebar {
     margin-top: 10px;
@@ -71,4 +71,9 @@
 
 #right-fig .modebar {
     margin-top: 10px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
 }

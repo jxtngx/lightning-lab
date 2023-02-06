@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 export default function NavBar() {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" color="primary">
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography component="div" sx={{ flexGrow: 1 }}>
                         Linear Encoder-Decoder
                     </Typography>
                 </Toolbar>
