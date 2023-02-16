@@ -19,6 +19,8 @@ from typing import Any, Dict, Optional
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
+from rich.console import Console
+from rich.table import Table
 from torch import optim
 
 import wandb
@@ -138,22 +140,39 @@ class WandbSweepFlow:
         self.log_preprocessing = log_preprocessing
         # _ helps to avoid LightningFlow from checking JSON serialization if converting to Lightning App
         self._objective_work = ObjectiveWork(self.project_name, self.wandb_dir, self.log_preprocessing)
-        # self._wandb_api = wandb.Api()
+        self._wandb_api = wandb.Api()
+
+    @staticmethod
+    def _display_report(best_config_dict: Dict[str, Any]) -> None:
+        """a rich table"""
+
+        table = Table(title="Best Run Config")
+
+        for col in best_config_dict.keys():
+            table.add_column(col, header_style="cyan")
+
+        table.add_row(*[str(v) for v in best_config_dict.values()])
+
+        console = Console()
+        console.print(table, new_line_start=True)
+        print()
 
     def run(
         self,
         persist_model: bool = False,
         persist_predictions: bool = False,
         persist_splits: bool = False,
+        display_report: bool = True,
     ) -> None:
 
-        # this will block
+        # this is blocking
         self._objective_work.run(count=2)
-        # will only run after obejective is complete
+        # will only run after objective is complete
         self._objective_work.stop()
-        # sweep_results = self._wandb_api.sweep(self._objective_work.sweep_path)
-        # print(sweep_results)
+        best_run = self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
 
+        if display_report:
+            self._display_report(best_run.config)
         if persist_model:
             self._objective_work.persist_model()
         if persist_predictions:
