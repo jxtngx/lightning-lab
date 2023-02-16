@@ -34,7 +34,7 @@ from lightning_pod.pipeline.datamodule import PodDataModule
 
 
 class ObjectiveWork:
-    def __init__(self, project_name, wandb_save_dir, log_preprocessing):
+    def __init__(self, project_name: str, wandb_save_dir: str, log_preprocessing: bool):
         self.project_name = project_name
         self.wandb_save_dir = wandb_save_dir
         self.log_preprocessing = log_preprocessing
@@ -146,7 +146,7 @@ class ObjectiveWork:
         return self._objective(trial)
 
 
-class TrialFlow:
+class SweepFlow:
     """
     Note:
         see:
@@ -222,5 +222,5 @@ class TrialFlow:
             self._objective_work.persist_predictions()
         if persist_splits:
             self._objective_work.persist_splits()
-        if issubclass(TrialFlow, LightningFlow):
+        if issubclass(self, LightningFlow):
             sys.exit()

@@ -25,81 +25,81 @@
 
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
-
 </div>
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains easy to understand across the breadth of topics. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
 
 ![](assets/dash_ui.png)
 
-The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo created from the template.
+The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo.
 
-> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately after release
+> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately
 
 ### Project Requirements and Extras
+
 <details>
   <summary>Core AI/ML Ecosystem</summary>
 
-  These are the base frameworks. Many other tools (numpy, pyarrow etc) are installed as dependencies when installing the core dependencies.
+These are the base frameworks. Many other tools (numpy, pyarrow etc) are installed as dependencies when installing the core dependencies.
 
-  - pytorch-lightning
-  - lightning-app
-  - lightning-trainging-studio (HPO)
-  - torchmetrics
-  - weights and biases
-  - optuna
-  - hydra
-  - plotly
-  - dash
+- pytorch-lightning
+- lightning-app
+- lightning-trainging-studio (HPO)
+- torchmetrics
+- weights and biases
+- optuna
+- hydra
+- plotly
+- dash
 
 </details>
 
 <details>
   <summary>Notable Extras</summary>
 
-  These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
+These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
 
-  - torchserve
-  - fastapi
-  - pydantic
-  - gunicorn
-  - uvicorn
-  - click
-  - rich
-  - pyarrow
-  - numpy
+- torchserve
+- fastapi
+- pydantic
+- gunicorn
+- uvicorn
+- click
+- rich
+- pyarrow
+- numpy
 
 </details>
 
 <details>
   <summary>Testing and Code Quality</summary>
 
-  - PyTest
-  - coverage
-  - MyPy
-  - Bandit
-  - Black
-  - isort
-  - pre-commit
+- PyTest
+- coverage
+- MyPy
+- Bandit
+- Black
+- isort
+- pre-commit
 
 </details>
 
 <details>
   <summary>Packaging</summary>
 
-  - setuptools
-  - build
-  - twine
+- setuptools
+- build
+- twine
 
 </details>
 
 <details>
   <summary>CI/CD</summary>
 
-  - GitHub Actions
-  - CircleCI
+- GitHub Actions
+- CircleCI
 
 </details>
 
@@ -109,7 +109,7 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-`lightning_pod.flows` contains interfaces for hydra, wandb, and optuna.
+`lightning_pod.flows` contains root Lightning Flows.
 
 ### Using the Template
 
@@ -135,6 +135,7 @@ pip install -e .
 pip install -r requirements/extras.txt
 {{ set interpreter in IDE }}
 ```
+
 </details>
 
 <details>
@@ -155,6 +156,7 @@ pip install -e .
 pip install -r requirements/extras.txt
 {{ set interpreter in IDE }}
 ```
+
 </details>
 
 #### Command Line Interface
@@ -166,11 +168,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run-optuna` runs the Trainer along with an Optuna trial and logs with wandb. <br>
-
-`pod trainer run-wandb` runs the Trainer with a WandbLogger. <br>
-
-`pod trainer run-hydra` runs the Trainer with hydra. <br>
+`pod trainer run-sweep` runs the Trainer along with an Optuna trial and logs with wandb. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
@@ -355,7 +353,7 @@ Once the workspace image has finished building, do the following to teardown the
 
 ```sh
 pod teardown
-pod trainer run-optuna
+pod trainer run-sweep
 ```
 
 ## Learning Resources
@@ -397,7 +395,6 @@ Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very usefu
 Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
 
 NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
-
 
 The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
 
