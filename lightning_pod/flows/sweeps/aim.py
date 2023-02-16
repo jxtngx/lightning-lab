@@ -18,7 +18,6 @@ import sys
 from typing import Any, Dict, List, Optional
 
 import optuna
-import wandb
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
@@ -27,6 +26,7 @@ from rich.console import Console
 from rich.table import Table
 from torch import optim
 
+import wandb
 from lightning_pod import conf
 from lightning_pod.core.module import PodModule
 from lightning_pod.core.trainer import PodTrainer
