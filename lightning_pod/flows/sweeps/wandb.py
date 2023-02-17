@@ -205,7 +205,7 @@ class TrainWork:
         logger = WandbLogger(
             project=project_name,
             name="Training Run",
-            group_name=group_name,
+            group=group_name,
             save_dir=wandb_dir,
         )
         trainer_init_kwargs = {
