@@ -231,19 +231,19 @@ class TrainFlow:
 
     @property
     def lr(self):
-        return self._sweep_flow.best_run["lr"]
+        return self._sweep_flow.best_run.config["lr"]
 
     @property
     def dropout(self):
-        return self._sweep_flow.best_run["dropout"]
+        return self._sweep_flow.best_run.config["dropout"]
 
     @property
     def optimizer(self):
-        return self._sweep_flow.best_run["optimizer"]
+        return self._sweep_flow.best_run.config["optimizer"]
 
     @property
     def sweep_group(self):
-        return self._sweep_flow._sweep_config["name"]
+        return self._sweep_flow._sweep_config.config["name"]
 
     @property
     def group_name(self):
