@@ -19,7 +19,7 @@ import click
 
 from lightning_pod.cli.bugreport import bugreport
 from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_trainer, teardown
-from lightning_pod.flows.sweeps.wandb import WandbSweepFlow
+from lightning_pod.flows.sweeps import wandb, wandb_optuna
 
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
@@ -65,8 +65,20 @@ def help() -> None:
     os.system(f"python {trainer} --help")
 
 
-@trainer.command("run-sweep")
-@click.option("--project-name", default="lightning-example-sweep")
-def run_optuna(project_name) -> None:
-    sweep = WandbSweepFlow(project_name=project_name)
+@main.group("sweep")
+def sweep() -> None:
+    pass
+
+
+@sweep.command("wandb")
+@click.option("--project-name", default="lightning-example-sweep-wandb")
+def run_wandb_sweep(project_name) -> None:
+    sweep = wandb.SweepFlow(project_name=project_name)
+    sweep.run()
+
+
+@sweep.command("wandb")
+@click.option("--project-name", default="lightning-examples-optuna")
+def run_wandb_optuna_sweep(project_name) -> None:
+    sweep = wandb_optuna.SweepFlow(project_name=project_name)
     sweep.run()

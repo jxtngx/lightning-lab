@@ -222,5 +222,5 @@ class SweepFlow:
             self._objective_work.persist_predictions()
         if persist_splits:
             self._objective_work.persist_splits()
-        if issubclass(self, LightningFlow):
+        if issubclass(SweepFlow, LightningFlow):
             sys.exit()

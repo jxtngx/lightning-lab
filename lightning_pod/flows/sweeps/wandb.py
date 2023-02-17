@@ -123,7 +123,7 @@ class ObjectiveWork:
         os.system(f"wandb sweep --stop {self.entity}/{self.project_name}/{self.sweep_id}")
 
 
-class WandbSweepFlow:
+class SweepFlow:
     def __init__(
         self,
         project_name: Optional[str] = None,
@@ -180,5 +180,5 @@ class WandbSweepFlow:
         if persist_splits:
             self._objective_work.persist_splits()
 
-        if issubclass(WandbSweepFlow, LightningFlow):
+        if issubclass(SweepFlow, LightningFlow):
             sys.exit()
