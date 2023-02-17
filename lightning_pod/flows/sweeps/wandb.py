@@ -166,7 +166,7 @@ class WandbSweepFlow:
     ) -> None:
 
         # this is blocking
-        self._objective_work.run(count=2)
+        self._objective_work.run(count=10)
         # will only run after objective is complete
         self._objective_work.stop()
         best_run = self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
