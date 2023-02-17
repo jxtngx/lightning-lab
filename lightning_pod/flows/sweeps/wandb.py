@@ -191,14 +191,15 @@ class SweepFlow:
 
 
 class TrainWork:
-    def run(self, lr: float, dropout: float, optimizer: str, project_name: str, group_name: str):
+    def run(
+        self, lr: float, dropout: float, optimizer: str, project_name: str, wandb_dir: Optional[str] = conf.WANDBPATH
+    ):
         self.model = PodModule(lr=lr, dropout=dropout, optimizer=getattr(optim, optimizer))
         self.datamodule = PodDataModule()
         logger = WandbLogger(
             project=project_name,
-            name="-".join(["train", str(self.trial_number)]),
-            group=group_name,
-            save_dir=self.wandb_save_dir,
+            name="Training Run",
+            save_dir=wandb_dir,
         )
         trainer_init_kwargs = {
             "max_epochs": 100,
