@@ -243,7 +243,7 @@ class TrainFlow:
 
     @property
     def sweep_group(self):
-        return self._sweep_flow._sweep_config.config["name"]
+        return self._sweep_flow._sweep_config["name"]
 
     @property
     def group_name(self):
