@@ -45,11 +45,11 @@ class ObjectiveWork:
         return self.trainer.logger.experiment.settings
 
     @property
-    def sweep_path(self):
+    def sweep_path(self) -> str:
         return "/".join([self.entity, self.project_name, "sweeps", self.sweep_id])
 
     @property
-    def sweep_config(self):
+    def sweep_config(self) -> Dict[str, Any]:
         cfg = dict(
             method="random",
             name=self.sweep_name,
@@ -63,18 +63,18 @@ class ObjectiveWork:
         return cfg
 
     @property
-    def entity(self):
+    def entity(self) -> str:
         return self.trainer.logger.experiment.entity
 
-    def persist_model(self):
+    def persist_model(self) -> None:
         """should be called after persist predictions"""
         input_sample = self.trainer.datamodule.train_data.dataset[0][0]
         self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
 
-    def persist_predictions(self):
+    def persist_predictions(self) -> None:
         self.trainer.persist_predictions()
 
-    def persist_splits(self):
+    def persist_splits(self) -> None:
         """should be called after persist predictions"""
         self.trainer.datamodule.persist_splits()
 
@@ -119,7 +119,7 @@ class ObjectiveWork:
     def run(self, count=5) -> float:
         wandb.agent(self.sweep_id, function=self._objective, count=count)
 
-    def stop(self):
+    def stop(self) -> None:
         os.system(f"wandb sweep --stop {self.entity}/{self.project_name}/{self.sweep_id}")
 
 
