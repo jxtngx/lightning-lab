@@ -244,6 +244,6 @@ class TrainFlow:
 
     def run(self):
         self._sweep_flow.run(display_report=False)
-        self._train_work.run(lr=self.lr, dropout=self.dropout, optimizer=self.optimizer, project_name=self.group_name)
+        self._train_work.run(lr=self.lr, dropout=self.dropout, optimizer=self.optimizer, project_name=self.project_name)
         if issubclass(TrainFlow, LightningFlow):
             sys.exit()
