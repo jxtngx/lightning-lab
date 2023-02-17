@@ -31,12 +31,14 @@ from lightning_pod.pipeline.datamodule import PodDataModule
 
 
 class ObjectiveWork:
-    def __init__(self, project_name: str, wandb_save_dir: str, log_preprocessing: bool):
+    def __init__(self, sweep_config: Dict[str, Any], project_name: str, wandb_save_dir: str, log_preprocessing: bool):
         self.project_name = project_name
         self.wandb_save_dir = wandb_save_dir
         self.log_preprocessing = log_preprocessing
-        self.sweep_name = "-".join(["Sweep", wandb.util.generate_id()])
-        self.sweep_id = wandb.sweep(sweep=self.sweep_config, project=project_name)  # set once
+        self.sweep_config = sweep_config
+        self.sweep_id = wandb.sweep(sweep=self.sweep_config, project=project_name)
+        self.sweep_name = "-".join(["Sweep", self.sweep_id])
+        self.sweep_config.update({"name": self.sweep_name})
         self.datamodule = PodDataModule()
         self.trial_number = 1
 
@@ -47,20 +49,6 @@ class ObjectiveWork:
     @property
     def sweep_path(self) -> str:
         return "/".join([self.entity, self.project_name, "sweeps", self.sweep_id])
-
-    @property
-    def sweep_config(self) -> Dict[str, Any]:
-        cfg = dict(
-            method="random",
-            name=self.sweep_name,
-            metric={"goal": "maximize", "name": "val_acc"},
-            parameters={
-                "lr": {"min": 0.0001, "max": 0.1},
-                "optimizer": {"distribution": "categorical", "values": ["Adam", "RMSprop", "SGD"]},
-                "dropout": {"min": 0.2, "max": 0.5},
-            },
-        )
-        return cfg
 
     @property
     def entity(self) -> str:
@@ -82,7 +70,7 @@ class ObjectiveWork:
 
         logger = WandbLogger(
             project=self.project_name,
-            name="-".join(["trial", str(self.trial_number)]),
+            name="-".join(["sweep", self.sweep_id, "trial", str(self.trial_number)]),
             group=self.sweep_config["name"],
             save_dir=self.wandb_save_dir,
         )
@@ -127,6 +115,7 @@ class SweepFlow:
     def __init__(
         self,
         project_name: Optional[str] = None,
+        trial_count: int = 10,
         wandb_dir: Optional[str] = conf.WANDBPATH,
         log_preprocessing: bool = False,
     ) -> None:
@@ -138,8 +127,23 @@ class SweepFlow:
         self.project_name = project_name
         self.wandb_dir = wandb_dir
         self.log_preprocessing = log_preprocessing
+        self.trial_count = trial_count
         # _ helps to avoid LightningFlow from checking JSON serialization if converting to Lightning App
-        self._objective_work = ObjectiveWork(self.project_name, self.wandb_dir, self.log_preprocessing)
+        self._sweep_config = dict(
+            method="random",
+            metric={"goal": "maximize", "name": "val_acc"},
+            parameters={
+                "lr": {"min": 0.0001, "max": 0.1},
+                "optimizer": {"distribution": "categorical", "values": ["Adam", "RMSprop", "SGD"]},
+                "dropout": {"min": 0.2, "max": 0.5},
+            },
+        )
+        self._objective_work = ObjectiveWork(
+            self._sweep_config,
+            self.project_name,
+            self.wandb_dir,
+            self.log_preprocessing,
+        )
         self._wandb_api = wandb.Api()
 
     @staticmethod
@@ -166,7 +170,7 @@ class SweepFlow:
     ) -> None:
 
         # this is blocking
-        self._objective_work.run(count=10)
+        self._objective_work.run(count=self.trial_count)
         # will only run after objective is complete
         self._objective_work.stop()
 

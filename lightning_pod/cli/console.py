@@ -71,14 +71,21 @@ def sweep() -> None:
 
 
 @sweep.command("wandb")
-@click.option("--project-name", default="lightning-example-sweep-wandb")
-def run_wandb_sweep(project_name) -> None:
-    sweep = wandb.SweepFlow(project_name=project_name)
+@click.option("--project-name", default="lightningpod-sweep-wandb")
+@click.option("--trial-count", default=10)
+def run_wandb_sweep(project_name, trial_count) -> None:
+    sweep = wandb.SweepFlow(project_name=project_name, trial_count=trial_count)
     sweep.run()
 
 
-@sweep.command("wandb")
-@click.option("--project-name", default="lightning-examples-optuna")
+@sweep.command("wandb-optuna")
+@click.option("--project-name", default="lightningpod-sweep-optuna")
 def run_wandb_optuna_sweep(project_name) -> None:
     sweep = wandb_optuna.SweepFlow(project_name=project_name)
     sweep.run()
+
+
+@sweep.command("aim")
+@click.option("--project-name", default="lightningpod-sweep-aim")
+def run_aim_sweep(project_name) -> None:
+    pass
