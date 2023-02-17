@@ -65,6 +65,14 @@ def help() -> None:
     os.system(f"python {trainer} --help")
 
 
+@trainer.command("wandb")
+@click.option("--project-name", default="lightningpod-train-wandb")
+@click.option("--trial-count", default=10)
+def run_wandb_train(project_name, trial_count) -> None:
+    trainer = wandb.TrainFlow(project_name=project_name, trial_count=trial_count)
+    trainer.run()
+
+
 @main.group("sweep")
 def sweep() -> None:
     pass

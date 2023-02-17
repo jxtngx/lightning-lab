@@ -146,6 +146,10 @@ class SweepFlow:
         )
         self._wandb_api = wandb.Api()
 
+    @property
+    def best_run(self):
+        return self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
+
     @staticmethod
     def _display_report(best_config_dict: Dict[str, Any]) -> None:
         """a rich table"""
@@ -175,14 +179,70 @@ class SweepFlow:
         self._objective_work.stop()
 
         if display_report:
-            best_run = self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
-            self._display_report(best_run.config)
+            self._display_report(self.best_run.config)
         if persist_model:
             self._objective_work.persist_model()
         if persist_predictions:
             self._objective_work.persist_predictions()
         if persist_splits:
             self._objective_work.persist_splits()
-
         if issubclass(SweepFlow, LightningFlow):
+            sys.exit()
+
+
+class TrainWork:
+    def run(self, lr: float, dropout: float, optimizer: str, project_name: str, group_name: str):
+        self.model = PodModule(lr=lr, dropout=dropout, optimizer=getattr(optim, optimizer))
+        self.datamodule = PodDataModule()
+        logger = WandbLogger(
+            project=project_name,
+            name="-".join(["train", str(self.trial_number)]),
+            group=group_name,
+            save_dir=self.wandb_save_dir,
+        )
+        trainer_init_kwargs = {
+            "max_epochs": 100,
+            "callbacks": [
+                EarlyStopping(monitor="training_loss", mode="min"),
+            ],
+        }
+
+        self.trainer = PodTrainer(logger=logger, **trainer_init_kwargs)
+        self.trainer.fit(model=self.model, datamodule=self.datamodule)
+
+
+class TrainFlow:
+    def __init__(
+        self,
+        project_name: Optional[str] = None,
+        trial_count: int = 10,
+    ):
+        self.project_name = project_name
+        self._sweep_flow = SweepFlow(project_name=project_name, trial_count=trial_count)
+        self._train_work = TrainWork()
+
+    @property
+    def lr(self):
+        return self._sweep_flow.best_run["lr"]
+
+    @property
+    def dropout(self):
+        return self._sweep_flow.best_run["dropout"]
+
+    @property
+    def optimizer(self):
+        return self._sweep_flow.best_run["optimizer"]
+
+    @property
+    def sweep_group(self):
+        return self._sweep_flow._sweep_config["name"]
+
+    @property
+    def group_name(self):
+        return self._sweep_flow._sweep_config["name"].replace("Sweep", "Train")
+
+    def run(self):
+        self._sweep_flow.run(display_report=False)
+        self._train_work.run(lr=self.lr, dropout=self.dropout, optimizer=self.optimizer, project_name=self.group_name)
+        if issubclass(TrainFlow, LightningFlow):
             sys.exit()
