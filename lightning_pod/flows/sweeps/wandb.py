@@ -169,9 +169,9 @@ class SweepFlow:
         self._objective_work.run(count=10)
         # will only run after objective is complete
         self._objective_work.stop()
-        best_run = self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
 
         if display_report:
+            best_run = self._wandb_api.sweep(self._objective_work.sweep_path).best_run()
             self._display_report(best_run.config)
         if persist_model:
             self._objective_work.persist_model()
