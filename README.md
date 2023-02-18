@@ -39,7 +39,7 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 ### Covered Concepts
 
-These are concepts are introduced at a high level in lightning-pod. While not all are discussed in this README or associated blog posts, the code base can serve as examples of each.
+The following concepts are introduced at a high level in lightning-pod. While not all are discussed in this README or associated blog posts, the code base can serve as examples of each.
 
 <details>
   <summary>Concepts</summary>
