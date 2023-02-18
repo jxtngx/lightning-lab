@@ -185,7 +185,7 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
 
-`pod trainer run-sweep` runs the Trainer along with an Optuna trial and logs with wandb. <br>
+`pod trainer run-example` runs the Trainer in a fast-dev-run. <br>
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
@@ -205,7 +205,7 @@ The flow for creating new checkpoints and an ONNX model from the provided encode
 
 ```sh
 pod teardown
-pod trainer run-hydra
+pod trainer -em=wandb --persist-model --persist-predictions --persist-splits
 ```
 
 Once the new Trainer has finished, the app can be viewed by running the following in terminal:
