@@ -342,13 +342,13 @@ You read more on PyTorch datasets and LightningDatamodules by following the link
 
 </details>
 
-### Roadmap
+### Simple Roadmap
 
 - Dash will be replaced with PyneCone
 - wandb will be replaced with Aim
 - CLI will be improved to use common conventions such as `init`, `build`, `run`.
 
-Why PyncCone and Aim? Simply put, I want to support up-and-coming projects. At a slightly lower level: I like that PyneCone compiles as a NextJS app, making it deployable to Vercel; and I appreciate the control and simplicity that Aim and Optuna provide over wandb's `agent` and `controller`.
+Why PyneCone and Aim? Simply put, I want to support up-and-coming projects. At a slightly lower level: I like that PyneCone compiles as a NextJS app, meaning I don't have to learn React, and it is deployable to Vercel; and I appreciate the control and simplicity that Aim and Optuna provide over wandb's `agent` and `controller`.
 
 ## Deploying to Lightning Cloud
 
