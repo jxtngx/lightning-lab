@@ -16,6 +16,7 @@ import os
 import sys
 from typing import Any, Dict, Optional
 
+import wandb
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
@@ -23,7 +24,6 @@ from rich.console import Console
 from rich.table import Table
 from torch import optim
 
-import wandb
 from lightning_pod import conf
 from lightning_pod.core.module import PodModule
 from lightning_pod.core.trainer import PodTrainer
@@ -199,7 +199,7 @@ class TrainWork:
         project_name: str,
         training_run_name: str,
         wandb_dir: Optional[str] = conf.WANDBPATH,
-    ):
+    ) -> None:
         self.model = PodModule(lr=lr, dropout=dropout, optimizer=getattr(optim, optimizer))
         self.datamodule = PodDataModule()
         logger = WandbLogger(
@@ -224,32 +224,32 @@ class TrainFlow:
         self,
         project_name: Optional[str] = None,
         trial_count: int = 10,
-    ):
+    ) -> None:
         self.project_name = project_name
         self._sweep_flow = SweepFlow(project_name=project_name, trial_count=trial_count)
         self._train_work = TrainWork()
 
     @property
-    def lr(self):
+    def lr(self) -> float:
         return self._sweep_flow.best_run.config["lr"]
 
     @property
-    def dropout(self):
+    def dropout(self) -> float:
         return self._sweep_flow.best_run.config["dropout"]
 
     @property
-    def optimizer(self):
+    def optimizer(self) -> str:
         return self._sweep_flow.best_run.config["optimizer"]
 
     @property
-    def sweep_group(self):
+    def sweep_group(self) -> str:
         return self._sweep_flow._sweep_config["name"]
 
     @property
-    def run_name(self):
+    def run_name(self) -> str:
         return self.sweep_group.replace("Sweep", "train")
 
-    def run(self):
+    def run(self) -> None:
         self._sweep_flow.run(display_report=False)
         self._train_work.run(
             lr=self.lr,
