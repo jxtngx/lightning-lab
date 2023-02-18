@@ -197,15 +197,15 @@ class TrainWork:
         dropout: float,
         optimizer: str,
         project_name: str,
-        group_name: str,
+        training_run_name: str,
         wandb_dir: Optional[str] = conf.WANDBPATH,
     ):
         self.model = PodModule(lr=lr, dropout=dropout, optimizer=getattr(optim, optimizer))
         self.datamodule = PodDataModule()
         logger = WandbLogger(
             project=project_name,
-            name="Training Run",
-            group=group_name,
+            name=training_run_name,
+            group="Training Runs",
             save_dir=wandb_dir,
         )
         trainer_init_kwargs = {
@@ -246,8 +246,8 @@ class TrainFlow:
         return self._sweep_flow._sweep_config["name"]
 
     @property
-    def group_name(self):
-        return self.sweep_group.replace("Sweep", "Train")
+    def run_name(self):
+        return self.sweep_group.replace("Sweep", "train")
 
     def run(self):
         self._sweep_flow.run(display_report=False)
@@ -256,7 +256,7 @@ class TrainFlow:
             dropout=self.dropout,
             optimizer=self.optimizer,
             project_name=self.project_name,
-            group_name=self.group_name,
+            training_run_name=self.run_name,
         )
         if issubclass(TrainFlow, LightningFlow):
             sys.exit()
