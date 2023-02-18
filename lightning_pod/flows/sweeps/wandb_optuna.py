@@ -18,6 +18,7 @@ import sys
 from typing import Any, Dict, List, Optional
 
 import optuna
+import wandb
 from lightning import LightningFlow
 from lightning.pytorch.callbacks import EarlyStopping
 from lightning.pytorch.loggers import WandbLogger
@@ -26,7 +27,6 @@ from rich.console import Console
 from rich.table import Table
 from torch import optim
 
-import wandb
 from lightning_pod import conf
 from lightning_pod.core.module import PodModule
 from lightning_pod.core.trainer import PodTrainer
@@ -74,7 +74,6 @@ class ObjectiveWork:
         return self.trainer.logger.experiment.settings
 
     def persist_model(self):
-        """should be called after persist predictions"""
         input_sample = self.trainer.datamodule.train_data.dataset[0][0]
         self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
 
@@ -82,7 +81,6 @@ class ObjectiveWork:
         self.trainer.persist_predictions()
 
     def persist_splits(self):
-        """should be called after persist predictions"""
         self.trainer.datamodule.persist_splits()
 
     def _objective(self, trial: Trial) -> float:
@@ -191,7 +189,6 @@ class SweepFlow:
 
     @staticmethod
     def _display_report(trial_metric_names: List[str], trial_info: List[str]) -> None:
-        """a rich table"""
 
         table = Table(title="Study Statistics")
 
