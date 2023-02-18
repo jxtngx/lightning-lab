@@ -19,7 +19,10 @@ import click
 
 from lightning_pod.cli.bugreport import bugreport
 from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_trainer, teardown
+from lightning_pod.core.module import PodModule
+from lightning_pod.core.trainer import PodTrainer
 from lightning_pod.flows.sweeps import wandb, wandb_optuna
+from lightning_pod.pipeline.datamodule import PodDataModule
 
 FILEPATH = Path(__file__)
 PKGPATH = FILEPATH.parents[1]
@@ -63,6 +66,15 @@ def trainer() -> None:
 def help() -> None:
     trainer = os.path.join(PKGPATH, "core", "trainer.py")
     os.system(f"python {trainer} --help")
+
+
+@trainer.command("run-example")
+def run_example() -> None:
+
+    model = PodModule()
+    dm = PodDataModule()
+    trainer = PodTrainer(fast_dev_run=True)
+    trainer.fit(model=model, datamodule=dm)
 
 
 @trainer.command("wandb")

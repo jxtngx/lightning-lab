@@ -353,7 +353,7 @@ Once the workspace image has finished building, do the following to teardown the
 
 ```sh
 pod teardown
-pod trainer run-sweep
+pod trainer run-example
 ```
 
 ## Learning Resources
