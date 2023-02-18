@@ -77,12 +77,20 @@ def run_example() -> None:
     trainer.fit(model=model, datamodule=dm)
 
 
-@trainer.command("wandb")
-@click.option("--project-name", default="lightningpod-train-wandb")
+@trainer.command("run")
+@click.option("--em", default="wandb", type=click.Choice(["wandb", "aim"]))
+@click.option("--project-name", default="lightningpod-train")
 @click.option("--trial-count", default=10)
-def run_wandb_train(project_name, trial_count) -> None:
-    trainer = wandb.TrainFlow(project_name=project_name, trial_count=trial_count)
-    trainer.run()
+@click.option("--persist_model", is_flag=True)
+@click.option("--persist_predictions", is_flag=True)
+@click.option("--persist_splits", is_flag=True)
+def run_trainer(em, project_name, trial_count, persist_model, persist_predictions, persist_splits) -> None:
+    project_name = "-".join([project_name, em])
+    if em == "wandb":
+        trainer = wandb.TrainFlow(project_name=project_name, trial_count=trial_count)
+        trainer.run(persist_model=persist_model, persist_predictions=persist_predictions, persist_splits=persist_splits)
+    if em == "aim":
+        raise NotImplementedError("Aim experiment manager is not implemented")
 
 
 @main.group("sweep")
