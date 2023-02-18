@@ -55,7 +55,6 @@ class ObjectiveWork:
         return self.trainer.logger.experiment.entity
 
     def persist_model(self) -> None:
-        """should be called after persist predictions"""
         input_sample = self.trainer.datamodule.train_data.dataset[0][0]
         self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
 
@@ -63,7 +62,6 @@ class ObjectiveWork:
         self.trainer.persist_predictions()
 
     def persist_splits(self) -> None:
-        """should be called after persist predictions"""
         self.trainer.datamodule.persist_splits()
 
     def _objective(self) -> float:
@@ -152,7 +150,6 @@ class SweepFlow:
 
     @staticmethod
     def _display_report(best_config_dict: Dict[str, Any]) -> None:
-        """a rich table"""
 
         table = Table(title="Best Run Config")
 
@@ -170,7 +167,7 @@ class SweepFlow:
         persist_model: bool = False,
         persist_predictions: bool = False,
         persist_splits: bool = False,
-        display_report: bool = True,
+        display_report: bool = False,
     ) -> None:
 
         # this is blocking
@@ -191,6 +188,16 @@ class SweepFlow:
 
 
 class TrainWork:
+    def persist_model(self) -> None:
+        input_sample = self.trainer.datamodule.train_data.dataset[0][0]
+        self.trainer.model.to_onnx(conf.MODELPATH, input_sample=input_sample, export_params=True)
+
+    def persist_predictions(self) -> None:
+        self.trainer.persist_predictions()
+
+    def persist_splits(self) -> None:
+        self.trainer.datamodule.persist_splits()
+
     def run(
         self,
         lr: float,
@@ -223,10 +230,10 @@ class TrainFlow:
     def __init__(
         self,
         project_name: Optional[str] = None,
-        trial_count: int = 10,
+        sweep_trial_count: int = 10,
     ) -> None:
         self.project_name = project_name
-        self._sweep_flow = SweepFlow(project_name=project_name, trial_count=trial_count)
+        self._sweep_flow = SweepFlow(project_name=project_name, trial_count=sweep_trial_count)
         self._train_work = TrainWork()
 
     @property
@@ -249,7 +256,12 @@ class TrainFlow:
     def run_name(self) -> str:
         return self.sweep_group.replace("Sweep", "train")
 
-    def run(self) -> None:
+    def run(
+        self,
+        persist_model: bool = False,
+        persist_predictions: bool = False,
+        persist_splits: bool = False,
+    ) -> None:
         self._sweep_flow.run(display_report=False)
         self._train_work.run(
             lr=self.lr,
@@ -258,5 +270,12 @@ class TrainFlow:
             project_name=self.project_name,
             training_run_name=self.run_name,
         )
+
+        if persist_model:
+            self._train_work.persist_model()
+        if persist_predictions:
+            self._train_work.persist_predictions()
+        if persist_splits:
+            self._train_work.persist_splits()
         if issubclass(TrainFlow, LightningFlow):
             sys.exit()
