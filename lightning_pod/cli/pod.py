@@ -19,9 +19,9 @@ import click
 
 from lightning_pod.cli.bugreport import bugreport
 from lightning_pod.cli.utils import build, common_destructive_flow, make_bug_trainer, teardown
+from lightning_pod.components import sweeps
 from lightning_pod.core.module import PodModule
 from lightning_pod.core.trainer import PodTrainer
-from lightning_pod.flows.sweeps import wandb, wandb_optuna
 from lightning_pod.pipeline.datamodule import PodDataModule
 
 FILEPATH = Path(__file__)
@@ -87,7 +87,8 @@ def run_example() -> None:
 def run_trainer(em, project_name, trial_count, persist_model, persist_predictions, persist_splits) -> None:
     project_name = "-".join([project_name, em])
     if em == "wandb":
-        trainer = wandb.TrainFlow(project_name=project_name, trial_count=trial_count)
+        trainer = sweeps.WandbTrainFlow(project_name=project_name, trial_count=trial_count)
+        sweeps
         trainer.run(persist_model=persist_model, persist_predictions=persist_predictions, persist_splits=persist_splits)
     if em == "aim":
         raise NotImplementedError("Aim experiment manager is not implemented")
@@ -102,14 +103,14 @@ def sweep() -> None:
 @click.option("--project-name", default="lightningpod-sweep-wandb")
 @click.option("--trial-count", default=10)
 def run_wandb_sweep(project_name, trial_count) -> None:
-    sweep = wandb.SweepFlow(project_name=project_name, trial_count=trial_count)
+    sweep = sweeps.WandbSweepFlow(project_name=project_name, trial_count=trial_count)
     sweep.run()
 
 
 @sweep.command("wandb-optuna")
 @click.option("--project-name", default="lightningpod-sweep-optuna")
 def run_wandb_optuna_sweep(project_name) -> None:
-    sweep = wandb_optuna.SweepFlow(project_name=project_name)
+    sweep = sweeps.WandbOptunaSweepFlow(project_name=project_name)
     sweep.run()
 
 

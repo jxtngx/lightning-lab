@@ -11,3 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+from lightning_pod.components.sweeps.wandb import SweepFlow as WandbSweepFlow  # noqa: F401
+from lightning_pod.components.sweeps.wandb import TrainFlow as WandbTrainFlow  # noqa: F401
+from lightning_pod.components.sweeps.wandb_optuna import SweepFlow as WandbOptunaSweepFlow  # noqa: F401

@@ -128,7 +128,7 @@ These frameworks and libraries are installed when creating an environment from t
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-`lightning_pod.components` contains root Lightning Flows and Works.
+`lightning_pod.components` contains root Lightning Flows and Works grouped by purpose.
 
 `lightning_pod.pages` contains UIs built with Dash or PyneCone.
 
