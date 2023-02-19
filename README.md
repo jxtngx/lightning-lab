@@ -45,7 +45,7 @@ The following concepts are introduced at a high level in lightning-pod. While no
   <summary>Concepts</summary>
 
 - _CI/CD_: `.github` and `.circleci` directories contain basic configs for running CircleCI and GitHub Action jobs.
-- _Code Quality_: when installed correctly, the project will use pre-commit to format a user's code with [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/). MyPy and PyTest are also available. Coverage will run pytest for commits to the default branch.
+- _Code Quality_: when installed correctly, the project will use pre-commit to format a user's code with [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/). MyPy and PyTest are also available. Coverage will run pytest for commits to the default branch. Tests are located in `tests/` and are based on minimal examples found in Lightning's code base.
 - _Packaging_: The current (Feb 18 2023) version uses methods provided by `setuptools` in `setup.py`, `setup.cfg`, and `pyproject.toml`. Some of these will be consolidated to reflect changes in Lightning to include [`ruff`](https://github.com/charliermarsh/ruff) as a tool. Basic use of `build` and `twine` for distribution via pypi can be found in the following [quickstart](https://setuptools.pypa.io/en/latest/userguide/quickstart.html).
 - _AI/ML research project architecture_: while opinionated, this repo does provide a basic structure for research projects, and is certainly suitable for algorithm design research that will rely on datasets provided in torchvision, torchaudio, and torchtext. By architecture, I mean the location of directories such as `data`, `logs`, `models`, and `notebooks`. The source code is contained in `lightning_pod`, it's structure is formed from concepts found in Lightning's core projects, and in React projects given the inclusion of the `pages` module in the source directory and `assets` at root.
 - _Experiment Management_: the project provides example of using [`wandb`](https://wandb.ai/site), [`tensorboard`](https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html), and [`aim`](https://aimstack.io) to log hyperparameter optimization sweeps and training runs. The project also provides and example of using [Optuna](https://optuna.readthedocs.io/en/stable/) as a replacement for wandb's built-in Sweeps.
@@ -120,13 +120,17 @@ These frameworks and libraries are installed when creating an environment from t
 
 </details>
 
-### Core Code
+### Source Code
 
-`lightning_pod.core` contains code for LightningModule and the Trainer.
+`lightning_pod.cli` contains code for the CLI `pod`.
+
+`lightning_pod.core` contains code for Lightning Module and Trainer.
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-`lightning_pod.flows` contains root Lightning Flows.
+`lightning_pod.components` contains root Lightning Flows and Works.
+
+`lightning_pod.pages` contains UIs built with Dash or PyneCone.
 
 ### Using the Template
 
