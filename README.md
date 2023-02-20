@@ -18,7 +18,6 @@
 
 ![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 <a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
-[![](https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28-gray.svg)](https://wandb.ai/justingoheen/lightningpod-train-wandb?workspace=user-justingoheen)
 
 [![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
 ![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
@@ -29,55 +28,17 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains easy to understand across the breadth of topics.
+> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The current version of lightning-pod now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead.
 
-The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains usable as an instructional resource for Deep Learning courses.
 
-![](assets/dash_ui.png)
+An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). `lightning-pod-example`'s README provides a somewhat comprehensive explanation of how to use `lightning-pod`.
 
 The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo.
 
-> it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately
-
-### Using Lightning Pod as an Instructional Resource
-
-Lightning Pod does provide an example Lightning Module trained on MNIST; however, there are purposeful gaps in the data pipeline, network design, and UI that will allow instructors to use this project as a template to provide to students.
-
-The inclusion of a GitHub CodeSpace devcontainer allows instructors to provide a uniform development environment to students. Pairing this with GitHub version control means instructors can also use the git tree to track student progress, and use development branches as a way to help students troubleshoot their way through issues.
-
-> Additional how-to content will be created during 2023 to assist Professors and TAs in using lightning-pod for their courses.
-
-> as of 20 Feb 2023, [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example) will be the new home for example methodologies and components. `lightning-pod` will become a cleaned public template that can be used to generate new, bare repos for research projects – alleviating the need for users to use the CLI for teardown then do refactoring, thereby also making lightning-pod easier for instructors to provide as a template. See [lightning_pod.cli.init_seed](lightning_pod/cli/init_seed/) for a sense of what will be provided.
-
-### Covered Concepts
-
-The following concepts are introduced at a high level in lightning-pod. While not all are discussed in this README or associated blog posts, the code base can serve as examples of each.
-
-<details>
-  <summary>Concepts</summary>
-
-- _CI/CD_: `.github` and `.circleci` directories contain basic configs for running CircleCI and GitHub Action jobs.
-- _Python Programming_: the project forces students into using interfaces (classes) and inheritance. The hope here is that early exposure to such principles will allow students to quickly upskill their programming abilities.
-- _Code Quality_: when installed correctly, the project will use pre-commit to format a user's code with [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/). MyPy and PyTest are also available. Coverage will run pytest for commits to the default branch. Tests are located in `tests/` and are based on minimal examples found in Lightning's code base.
-- _Packaging_: The current (Feb 18 2023) version uses methods provided by `setuptools` in `setup.py`, `setup.cfg`, and `pyproject.toml`. Some of these will be consolidated to reflect changes in Lightning to include [`ruff`](https://github.com/charliermarsh/ruff) as a tool. Basic use of `build` and `twine` for distribution via pypi can be found in the following [quickstart](https://setuptools.pypa.io/en/latest/userguide/quickstart.html).
-- _AI/ML Research Project Architecture_: while opinionated, this repo does provide a basic structure for research projects, and is certainly suitable for algorithm design research that will rely on datasets provided in torchvision, torchaudio, and torchtext. By architecture, I mean the location of directories such as `data`, `logs`, `models`, and `notebooks`. The source code is contained in `lightning_pod`, it's structure is formed from concepts found in Lightning's core projects, and in React projects given the inclusion of the `pages` module in the source directory and `assets` at root.
-- _Experiment Management_: the project provides examples for [`wandb`](https://wandb.ai/site), [`tensorboard`](https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html), and [`aim`](https://aimstack.io) to log hyperparameter optimization sweeps and training runs. The project also provides an example of using [Optuna](https://optuna.readthedocs.io/en/stable/) as a replacement for wandb's built-in Sweeps.
-- _UIs and DataViz_: Any React app will be in a directory of its own at the project's root, and will be structured according to Next or Vite's setup. React apps may be created with a javascript utility or Pynecone.
-- _CLIs_: a command line interface entrypoint `pod` serves as an example CLI. It is built with [click](https://click.palletsprojects.com/en/8.1.x/). The code for `pod` is found in `lightning_pod.cli.pod` and it is created in `setup.cfg`'s entry point option.
-
-To some degree, the concepts would be covered in the following courses:
-
-- Intro and Intermediate Python programming
-- Intro to data acquisition and pre-processing
-- Intro to user interfaces and data visualization
-- Intro to AI, ML, and DL (types of agents, styles of learning, and algorithms and data structures)
-- Intro to research i.e. applied machine learning or designing learning agents
-- Intro to distributed systems
-- Intro to hardware for AI/ML systems (HPU, IPU, TPU, GPU)
-
-</details>
-
 ### Project Requirements and Extras
+
+Lightning Pod provides an opionated `setup.py` and `setup.cfg` to enable easy creation of new virtual environments. The following is a list of core requirements and extras.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -126,24 +87,9 @@ These frameworks and libraries are installed when creating an environment from t
 
 </details>
 
-<details>
-  <summary>Packaging</summary>
-
-- setuptools
-- build
-- twine
-
-</details>
-
-<details>
-  <summary>CI/CD</summary>
-
-- GitHub Actions
-- CircleCI
-
-</details>
-
 ### Source Code
+
+The source module,`lightning_pod/`, also provides a structure for students to begin from. That structure is as follow
 
 `lightning_pod.cli` contains code for the CLI `pod`.
 
@@ -153,7 +99,7 @@ These frameworks and libraries are installed when creating an environment from t
 
 `lightning_pod.components` contains Lightning Flows and Works grouped by purpose.
 
-`lightning_pod.pages` contains UIs built with Dash or PyneCone.
+`lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
 
 ### Using the Template
 
@@ -202,106 +148,6 @@ pip install -r requirements/extras.txt
 ```
 
 </details>
-
-#### Command Line Interface
-
-A CLI `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their effects are shown below.
-
-<details>
-  <summary>pod</summary>
-
-`pod teardown` will destroy any existing data splits, saved predictions, logs, profilers, checkpoints, and ONNX. <br>
-
-`pod trainer run-example` runs the Trainer in a fast-dev-run. <br>
-
-`pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
-
-`pod init` will remove boilerplate to allow users to begin their own projects.
-
-Files removed by `pod init`:
-
-- cached MNIST data found in `data/cache/PodDataset`
-- training splits found in `data/training_split`
-- saved predictions found in `data/predictions`
-- PyTorch Profiler logs found in `logs/profiler`
-- TensorBoard logs found in `logs/logger`
-- model checkpoints found in `models/checkpoints`
-- persisted ONNX model found in `models/onnx`
-
-The flow for creating new checkpoints and an ONNX model from the provided encoder-decoder looks like:
-
-```sh
-pod teardown
-pod trainer -em=wandb --persist-model --persist-predictions --persist-splits
-```
-
-Once the new Trainer has finished, the app can be viewed by running the following in terminal:
-
-```sh
-lightning run app app.py
-```
-
-</details>
-
-> the CLI is built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://github.com/Textualize/rich)
-
-#### Datasets
-
-<details>
-  <summary>Scikit and PyTorch Provided Datasets</summary>
-
-If using built-in datasets from [torchvision](https://pytorch.org/vision/stable/datasets.html), [torchaudio](https://pytorch.org/audio/stable/datasets.html), or [Lightning Bolts integration of scikit-learn datasets](https://lightning-bolts.readthedocs.io/en/latest/datamodules/sklearn.html), then creating LightningDataModules should be relatively straight forward, with little to no change necessary for the provided `lightning_pod.pipeline.datamodule`. However, be sure to pay attention to which methods and hooks are available to the respective datasets, and be ready to debug errors in `lightning_pod.pipeline.datamodule` attributed to `lightning_pod.pipeline.dataset`'s differences in hooks after using a dataset other than torchvision's MNIST.
-
-</details>
-
-<details>
-  <summary>Custom Torch Datasets</summary>
-
-Depending on scale and complexity, creating your own custom torch dataset can be relatively straight forward. Keep in mind that in doing so, none of the hooks available to the MNIST torch dataset used in the example will be availble to your custom dataset; you must create your own hooks and methods. You can view the source code of PyTorch and Lightning Bolts as examples of how to develop a custom dataset that will be piped to a LightningDatamodule.
-
-A basic custom torch dataset is shown below:
-
-```python
-import pandas as pd
-import torch
-from torch.utils.data import Dataset
-
-
-class PodDataset(Dataset):
-    def __init__(self, features_path, labels_path):
-        self.features = pd.read_csv(features_path)
-        self.labels = pd.read_csv(labels_path)
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, idx):
-        x, y = self.features.iloc[idx], self.labels.iloc[idx]
-        return torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
-```
-
-You read more on PyTorch datasets and LightningDatamodules by following the links below:
-
-- PyTorch [Datasets](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html#creating-a-custom-dataset-for-your-files)
-- Lightning [Datamodules](https://pytorch-lightning.readthedocs.io/en/stable/data/datamodule.html?highlight=datamodule#what-is-a-datamodule)
-
-> LightningDataModules handle DataLoaders; you do not need to follow the DataLoaders portion of the PyTorch tutorial
-
-</details>
-
-## Deploying to Lightning Cloud
-
-Once a user has created a Lightning account, the app can be deployed to Lightning Cloud with the following command in terminal:
-
-```bash
-lightning run app app.py --cloud
-```
-
-On command to load to cloud, Lightning will look for two files in the root directory `.lightningignore` and `.lightning`.
-
-`.lightning` is the config file.
-
-`.lightningignore` is a more granular version of gitignore that allows users to be specific about which project files should be loaded to Lightning Cloud.
 
 ## GitHub CodeSpaces
 
