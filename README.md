@@ -39,6 +39,14 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 > it is recommended to keep your fork of lightning-pod free of changes and synced with the lightning-pod source repo, as this ensures new features become available immediately
 
+### Using Lightning Pod as an Instructional Resource
+
+lightning-pod does provide an example Lightning Module trained on MNIST; however, there are purposeful gaps in the data pipeline, network design, and UI that will allow instructors to use this project as a template to provide to students.
+
+The inclusion of a GitHub CodeSpace devcontainer allows instructors to provide a uniform development environment to students. Pairing this with GitHub version control means instructors can also use the git tree to track student progress, and use development branches as a way to help students troubleshoot their way through issues.
+
+Additional how-to content will be created during 2023 to assist Professors and TAs in using lighting-pod for their courses.
+
 ### Covered Concepts
 
 The following concepts are introduced at a high level in lightning-pod. While not all are discussed in this README or associated blog posts, the code base can serve as examples of each.
