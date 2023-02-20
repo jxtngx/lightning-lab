@@ -41,11 +41,11 @@ The intent is that users [fork](https://docs.github.com/en/get-started/quickstar
 
 ### Using Lightning Pod as an Instructional Resource
 
-lightning-pod does provide an example Lightning Module trained on MNIST; however, there are purposeful gaps in the data pipeline, network design, and UI that will allow instructors to use this project as a template to provide to students.
+Lightning Pod does provide an example Lightning Module trained on MNIST; however, there are purposeful gaps in the data pipeline, network design, and UI that will allow instructors to use this project as a template to provide to students.
 
 The inclusion of a GitHub CodeSpace devcontainer allows instructors to provide a uniform development environment to students. Pairing this with GitHub version control means instructors can also use the git tree to track student progress, and use development branches as a way to help students troubleshoot their way through issues.
 
-Additional how-to content will be created during 2023 to assist Professors and TAs in using lighting-pod for their courses.
+> Additional how-to content will be created during 2023 to assist Professors and TAs in using lighting-pod for their courses.
 
 ### Covered Concepts
 
@@ -55,6 +55,7 @@ The following concepts are introduced at a high level in lightning-pod. While no
   <summary>Concepts</summary>
 
 - _CI/CD_: `.github` and `.circleci` directories contain basic configs for running CircleCI and GitHub Action jobs.
+- _Python Programming_: the project forces students into using interfaces (classes) and inheritance. The hope here is that early exposure to such principles will allow students to quickly upskill their programming abilities.
 - _Code Quality_: when installed correctly, the project will use pre-commit to format a user's code with [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/). MyPy and PyTest are also available. Coverage will run pytest for commits to the default branch. Tests are located in `tests/` and are based on minimal examples found in Lightning's code base.
 - _Packaging_: The current (Feb 18 2023) version uses methods provided by `setuptools` in `setup.py`, `setup.cfg`, and `pyproject.toml`. Some of these will be consolidated to reflect changes in Lightning to include [`ruff`](https://github.com/charliermarsh/ruff) as a tool. Basic use of `build` and `twine` for distribution via pypi can be found in the following [quickstart](https://setuptools.pypa.io/en/latest/userguide/quickstart.html).
 - _AI/ML Research Project Architecture_: while opinionated, this repo does provide a basic structure for research projects, and is certainly suitable for algorithm design research that will rely on datasets provided in torchvision, torchaudio, and torchtext. By architecture, I mean the location of directories such as `data`, `logs`, `models`, and `notebooks`. The source code is contained in `lightning_pod`, it's structure is formed from concepts found in Lightning's core projects, and in React projects given the inclusion of the `pages` module in the source directory and `assets` at root.
