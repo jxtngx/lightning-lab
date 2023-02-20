@@ -28,13 +28,13 @@
 
 ## Overview
 
-> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The current version of lightning-pod now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead.
-
 Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains usable as an instructional resource for Deep Learning courses.
 
 An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). `lightning-pod-example`'s README provides a somewhat comprehensive explanation of how to use `lightning-pod`.
 
 The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo.
+
+> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The current version of lightning-pod now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead. See [lightning_pod.cli.init_seed](lightning_pod/cli/init_seed/) for a sense of what will be provided after the change has been implemented.
 
 ### Project Requirements and Extras
 
