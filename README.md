@@ -34,11 +34,11 @@ An example project can be found at [lightning-pod-example](https://github.com/Ju
 
 The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo.
 
-> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The current version of lightning-pod now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead. See [lightning_pod.cli.init_seed](lightning_pod/cli/init_seed/) for a sense of what will be provided after the change has been implemented.
+> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The previous version of lightning-pod now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead. See [lightning_pod.cli.init_seed](lightning_pod/cli/init_seed/) for a sense of what will be provided after the change has been implemented.
 
 ### Project Requirements and Extras
 
-Lightning Pod provides an opionated `setup.py` and `setup.cfg` to enable easy creation of new virtual environments. The following is a list of core requirements and extras.
+Lightning Pod provides opinionated project requirements to enable easy creation of new virtual environments. The following is a list of core requirements and extras.
 
 <details>
   <summary>Core AI/ML Ecosystem</summary>
@@ -50,10 +50,12 @@ These are the base frameworks. Many other tools (numpy, pyarrow etc) are install
 - lightning-trainging-studio (HPO)
 - torchmetrics
 - weights and biases
+- aim
 - optuna
 - hydra
 - plotly
 - dash
+- pynecone
 
 </details>
 
@@ -89,7 +91,7 @@ These frameworks and libraries are installed when creating an environment from t
 
 ### Source Code
 
-The source module,`lightning_pod/`, also provides a structure for students to begin from. That structure is as follow
+The source module,`lightning_pod/`, provides a structure for students to begin from. That structure is as follows:
 
 `lightning_pod.cli` contains code for the CLI `pod`.
 
