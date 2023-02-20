@@ -25,8 +25,8 @@ def test_module_not_abstract():
 
 
 def test_prepare_data():
-    data_module = PodDataModule()
-    data_module.prepare_data()
+    datamodule = PodDataModule()
+    datamodule.prepare_data()
     networkpath = Path(__file__).parent
     projectpath = networkpath.parents[0]
     datapath = os.path.join(projectpath, "data", "cache")
@@ -34,35 +34,35 @@ def test_prepare_data():
 
 
 def test_setup():
-    data_module = PodDataModule()
-    data_module.prepare_data()
-    data_module.setup()
+    datamodule = PodDataModule()
+    datamodule.prepare_data()
+    datamodule.setup()
     data_keys = ["train_data", "test_data", "val_data"]
-    assert all(key in dir(data_module) for key in data_keys)
+    assert all(key in dir(datamodule) for key in data_keys)
 
 
 def test_trainloader():
-    data_module = PodDataModule()
-    data_module.prepare_data()
-    data_module.setup()
-    loader = data_module.train_dataloader()
+    datamodule = PodDataModule()
+    datamodule.prepare_data()
+    datamodule.setup()
+    loader = datamodule.train_dataloader()
     sample = loader.dataset[0][0]
     assert isinstance(sample, torch.Tensor)
 
 
 def test_testloader():
-    data_module = PodDataModule()
-    data_module.prepare_data()
-    data_module.setup()
-    loader = data_module.test_dataloader()
+    datamodule = PodDataModule()
+    datamodule.prepare_data()
+    datamodule.setup()
+    loader = datamodule.test_dataloader()
     sample = loader.dataset[0][0]
     assert isinstance(sample, torch.Tensor)
 
 
 def test_valloader():
-    data_module = PodDataModule()
-    data_module.prepare_data()
-    data_module.setup()
-    loader = data_module.val_dataloader()
+    datamodule = PodDataModule()
+    datamodule.prepare_data()
+    datamodule.setup()
+    loader = datamodule.val_dataloader()
     sample = loader.dataset[0][0]
     assert isinstance(sample, torch.Tensor)
