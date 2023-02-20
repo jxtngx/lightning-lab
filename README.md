@@ -33,7 +33,7 @@ Lightning Pod is a template Python environment, tooling, and architecture for de
 
 The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
 
-> [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example) will be the new home for example methodologies and components. `lightning-pod` will become a public template that can be used to generate new, bare repos for research projects – alleviating the need for users to use the CLI for teardown then do refactoring.
+> as of 20 Feb 2023, [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example) will be the new home for example methodologies and components. `lightning-pod` will become a public template that can be used to generate new, bare repos for research projects – alleviating the need for users to use the CLI for teardown then do refactoring.
 
 ![](assets/dash_ui.png)
 
