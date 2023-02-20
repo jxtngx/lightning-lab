@@ -42,7 +42,7 @@ def preserve_examples() -> None:
 
 
 def _clean_and_build_package(module_to_copy: Union[str, Path]) -> None:
-    src = os.path.join(FILEPATH.parent, "seed", module_to_copy)
+    src = os.path.join(FILEPATH.parent, "init", module_to_copy)
     dest = os.path.join(PROJECTPATH, PKGPATH, module_to_copy)
     shutil.rmtree(dest)
     shutil.copytree(src, dest)
@@ -100,7 +100,7 @@ def show_purge_table(command_name) -> None:
     table.add_column("Contents", style="magenta")
     # ROWS
     trash = ["data", "logs", "models"]
-    if command_name == "seed":
+    if command_name == "init":
         trash.append(os.path.join(PKGPATH, "core"))
     for dirname in trash:
         dirpath = os.path.join(os.getcwd(), dirname)

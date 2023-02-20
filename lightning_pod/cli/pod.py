@@ -40,9 +40,9 @@ def _teardown() -> None:
 
 
 # TODO add help description
-@main.command("seed")
-def seed() -> None:
-    common_destructive_flow([teardown, build], command_name="seed")
+@main.command("init")
+def init() -> None:
+    common_destructive_flow([teardown, build], command_name="init")
 
 
 @main.command("bug-report")
