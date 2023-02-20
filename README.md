@@ -47,7 +47,7 @@ The inclusion of a GitHub CodeSpace devcontainer allows instructors to provide a
 
 > Additional how-to content will be created during 2023 to assist Professors and TAs in using lightning-pod for their courses.
 
-> as of 20 Feb 2023, [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example) will be the new home for example methodologies and components. `lightning-pod` will become a cleaned public template that can be used to generate new, bare repos for research projects – alleviating the need for users to use the CLI for teardown then do refactoring, thereby also making lightning-pod easier for instructors to provide as a template.
+> as of 20 Feb 2023, [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example) will be the new home for example methodologies and components. `lightning-pod` will become a cleaned public template that can be used to generate new, bare repos for research projects – alleviating the need for users to use the CLI for teardown then do refactoring, thereby also making lightning-pod easier for instructors to provide as a template. See [lightning_pod.cli.init](lightning_pod/cli/init_seed/) for a sense of what will be provided.
 
 ### Covered Concepts
 
