@@ -29,7 +29,9 @@
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains easy to understand across the breadth of topics. The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
+Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains easy to understand across the breadth of topics.
+
+The project culminates with a Dash UI (shown below) to display training results. The UI is implemented as a Lightning App that can be shared via Lightning Cloud.
 
 ![](assets/dash_ui.png)
 
@@ -47,10 +49,20 @@ The following concepts are introduced at a high level in lightning-pod. While no
 - _CI/CD_: `.github` and `.circleci` directories contain basic configs for running CircleCI and GitHub Action jobs.
 - _Code Quality_: when installed correctly, the project will use pre-commit to format a user's code with [black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/). MyPy and PyTest are also available. Coverage will run pytest for commits to the default branch. Tests are located in `tests/` and are based on minimal examples found in Lightning's code base.
 - _Packaging_: The current (Feb 18 2023) version uses methods provided by `setuptools` in `setup.py`, `setup.cfg`, and `pyproject.toml`. Some of these will be consolidated to reflect changes in Lightning to include [`ruff`](https://github.com/charliermarsh/ruff) as a tool. Basic use of `build` and `twine` for distribution via pypi can be found in the following [quickstart](https://setuptools.pypa.io/en/latest/userguide/quickstart.html).
-- _AI/ML research project architecture_: while opinionated, this repo does provide a basic structure for research projects, and is certainly suitable for algorithm design research that will rely on datasets provided in torchvision, torchaudio, and torchtext. By architecture, I mean the location of directories such as `data`, `logs`, `models`, and `notebooks`. The source code is contained in `lightning_pod`, it's structure is formed from concepts found in Lightning's core projects, and in React projects given the inclusion of the `pages` module in the source directory and `assets` at root.
-- _Experiment Management_: the project provides example of using [`wandb`](https://wandb.ai/site), [`tensorboard`](https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html), and [`aim`](https://aimstack.io) to log hyperparameter optimization sweeps and training runs. The project also provides and example of using [Optuna](https://optuna.readthedocs.io/en/stable/) as a replacement for wandb's built-in Sweeps.
+- _AI/ML Research Project Architecture_: while opinionated, this repo does provide a basic structure for research projects, and is certainly suitable for algorithm design research that will rely on datasets provided in torchvision, torchaudio, and torchtext. By architecture, I mean the location of directories such as `data`, `logs`, `models`, and `notebooks`. The source code is contained in `lightning_pod`, it's structure is formed from concepts found in Lightning's core projects, and in React projects given the inclusion of the `pages` module in the source directory and `assets` at root.
+- _Experiment Management_: the project provides examples for [`wandb`](https://wandb.ai/site), [`tensorboard`](https://pytorch.org/tutorials/recipes/recipes/tensorboard_with_pytorch.html), and [`aim`](https://aimstack.io) to log hyperparameter optimization sweeps and training runs. The project also provides an example of using [Optuna](https://optuna.readthedocs.io/en/stable/) as a replacement for wandb's built-in Sweeps.
 - _UIs and DataViz_: Any React app will be in a directory of its own at the project's root, and will be structured according to Next or Vite's setup. React apps may be created with a javascript utility or Pynecone.
 - _CLIs_: a command line interface entrypoint `pod` serves as an example CLI. It is built with [click](https://click.palletsprojects.com/en/8.1.x/). The code for `pod` is found in `lightning_pod.cli.pod` and it is created in `setup.cfg`'s entry point option.
+
+To some degree, the concepts would be covered in the following courses:
+
+- Intro and Intermediate Python programming
+- Intro to data acquisition and pre-processing
+- Intro to user interfaces and data visualization
+- Intro to AI, ML, and DL (types of agents, styles of learning, and algorithms and data structures)
+- Intro to research i.e. applied machine learning or designing learning agents
+- Intro to distributed systems
+- Intro to hardware for AI/ML systems (HPU, IPU, TPU, GPU)
 
 </details>
 
@@ -128,7 +140,7 @@ These frameworks and libraries are installed when creating an environment from t
 
 `lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
 
-`lightning_pod.components` contains root Lightning Flows and Works grouped by purpose.
+`lightning_pod.components` contains Lightning Flows and Works grouped by purpose.
 
 `lightning_pod.pages` contains UIs built with Dash or PyneCone.
 
@@ -166,11 +178,11 @@ pip install -r requirements/extras.txt
 
 ```sh
 cd {{ path to clone }}
-python3 -m venv venv/
+python3 -m venv .venv/
 # to activate on windows
-venv\Scripts\activate.bat
+.venv\Scripts\activate.bat
 # to activate on macos and Unix
-source venv/bin/activate
+source .venv/bin/activate
 # install lightning-pod
 pip install -e .
 # if desired, install extras
@@ -182,7 +194,7 @@ pip install -r requirements/extras.txt
 
 #### Command Line Interface
 
-A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cli/console.py) `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their effects are shown below.
+A CLI `pod` is provided to assist with certain project tasks and to interact with Trainer. The commands for `pod` and their effects are shown below.
 
 <details>
   <summary>pod</summary>
@@ -193,9 +205,9 @@ A [CLI](https://github.com/JustinGoheen/lightning-pod/blob/main/lightning_pod/cl
 
 `pod bug-report` creates a bug report to [submit issues on GitHub](https://github.com/Lightning-AI/lightning/issues) for Lightning. the report is printed to screen in terminal, and generated as a markdown file for easy submission.
 
-`pod seed` will remove boilerplate to allow users to begin their own projects.
+`pod init` will remove boilerplate to allow users to begin their own projects.
 
-Files removed by `pod seed`:
+Files removed by `pod init`:
 
 - cached MNIST data found in `data/cache/PodDataset`
 - training splits found in `data/training_split`
@@ -221,86 +233,6 @@ lightning run app app.py
 </details>
 
 > the CLI is built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://github.com/Textualize/rich)
-
-#### Flows as Examples
-
-<details>
-    <summary>lightning_pod.flows</summary>
-
-The provided examples are lite introductions to [hydra](https://hydra.cc) and [wandb](https://wandb.ai/site). Examples of hyperparameter optimization with [lightning-training-studio](https://github.com/Lightning-AI/lightning-hpo) and [Optuna](https://optuna.readthedocs.io/en/stable/) will be added soon.
-
-To use the examples, lightning-pod must be installed to your virtual environment. If you've not created a venv, in terminal do:
-
-```bash
-python3 -m .venv/
-```
-
-then activate with
-
-```bash
-source .venv/bin/activate
-```
-
-then install lighting-pod with
-
-```bash
-pip install -e .
-```
-
-## Hydra
-
-Hydra is an open-source Python framework that simplifies the development of research and other complex applications. The key feature is the ability to dynamically create a hierarchical configuration by composition and override it through config files and the command line. The name Hydra comes from its ability to run multiple similar jobs
-
-### Usage
-
-In order to run the hydra example, in terminal do:
-
-```bash
-pod trainer run-hydra
-```
-
-A training run will start in your terminal and lightning will output information to the terminal.
-
-### Resources
-
-[Docs](https://hydra.cc/docs/intro/)
-
-## Weights and Biases (wandb)
-
-wandb can be used to track and visualize experiments in real time, compare baselines, and iterate quickly on ML projects.
-
-### Usage
-
-You must have a wandb account to use this example.
-
-In order to run the wandb example, in terminal do:
-
-```bash
-pod trainer run-wandb
-```
-
-A training run will start in your terminal and lightning will output information to the terminal. Results will be synced to the project [`lightning-pod-examples`](https://wandb.ai/justingoheen/lightning-pod-examples) in your wandb account.
-
-### Resources
-
-[Docs](https://docs.wandb.ai/)
-
-## Optuna
-
-Optuna is an automatic hyperparameter optimization software framework, particularly designed for machine learning. It features an imperative, define-by-run style user API. Thanks to our define-by-run API, the code written with Optuna enjoys high modularity, and the user of Optuna can dynamically construct the search spaces for the hyperparameters.
-
-### Usage
-
-The Optuna example also uses wandb. Individuals not familiar with hyperparameter optimization or wandb should start by reviewing the wandb example.
-
-### Resources
-
-[Docs](https://optuna.readthedocs.io/en/stable/reference/index.html) <br>
-[Optuna meets WandB](https://medium.com/optuna/optuna-meets-weights-and-biases-58fc6bab893) (a Medium article by the Optuna team) <br>
-[PyTorch with Optuna](https://youtu.be/P6NwZVl8ttc) (by PyTorch)
-[Optuna with PL](https://github.com/optuna/optuna-examples/blob/main/pytorch/pytorch_lightning_simple.py) (an example by the Optuna team)
-
-</details>
 
 #### Datasets
 
@@ -381,7 +313,7 @@ pod trainer run-example
 
 ### Reviewing Source Code
 
-The following three videos were created by Lightning's Thomas Chaton; the videos are extremely helpful in learning how to use code search features in VS Code to navigate a project's source code, enabling a deeper understanding of what is going on under the hood.
+The following three videos were created by Lightning's Thomas Chaton; the videos are extremely helpful in learning how to use code search features in VS Code to navigate a project's source code, enabling a deeper understanding of what is going on under the hood of someone else's code.
 
 > these videos were created before PyTorch Lightning was moved into the Lightning Framework mono repo
 
@@ -395,7 +327,7 @@ Lightning's founder, and their lead educator have created a series of short vide
 
 A long standing Python community resource has been [The Hitchhiker's Guide to Python](https://docs.python-guide.org). The "guide exists to provide both novice and expert Python developers a best practice handbook for the installation, configuration, and usage of Python on a daily basis".
 
-[VS Code](https://code.visualstudio.com/docs) and [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html) IDEs have each provided great docs for their users. My preference is VS Code, as I find it easier to use and more easily customizable than PyCharm - though PyCharm does have its benefits; I especially like VS Code's [integrations for PyTorch and tensorboard](https://code.visualstudio.com/docs/datascience/pytorch-support). I pair [Gitkraken](https://www.gitkraken.com) and [GitLens](https://www.gitkraken.com/gitlens) with VS Code to manage my version control and contributions.
+[VS Code](https://code.visualstudio.com/docs) and [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html) IDEs have each provided great docs for their users. My preference is VS Code - though PyCharm does have its benefits and is absolutely a suitable alternative to VS Code. I especially like VS Code's [integrations for PyTorch and tensorboard](https://code.visualstudio.com/docs/datascience/pytorch-support). I pair [Gitkraken](https://www.gitkraken.com) and [GitLens](https://www.gitkraken.com/gitlens) with VS Code to manage my version control and contributions.
 
 ### Data Analysis
 
