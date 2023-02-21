@@ -19,22 +19,19 @@
 ![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 <a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
 
-[![codecov](https://codecov.io/gh/JustinGoheen/lightning-pod/branch/main/graph/badge.svg)](https://codecov.io/gh/JustinGoheen/lightning-pod)
-![CircleCI](https://circleci.com/gh/JustinGoheen/lightning-pod.svg?style=shield)
-
 [![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
 </div>
 
 ## Overview
 
-Lightning Pod is a template Python environment, tooling, and architecture for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that the project remains usable as an instructional resource for Deep Learning courses.
+Lightning Pod is a public template for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal and high-level in nature so that template is helpful, but not bloated.
 
-An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). `lightning-pod-example`'s README provides a somewhat comprehensive explanation of how to use `lightning-pod`.
+Lightning Pod is inspired by ReactJS utilities such as CRA and CRACOS in that each of those utilities provides opionated boilerplate that has now become convention.
 
-The intent is that users [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo, set that fork as a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), then [create a new repo from their template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template), and lastly [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) their newly created repo.
+The intent is that users create new repos from the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-> As of 20 Feb 2023: I began minimizing examples in lightning-pod in favor of creating a clean template. The previous version of lightning-pod with an end-to-end example culminating with a dashboard UI now lives at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example). That repo will be used to provide new examples of components and methodologies. Over the next week,`lightning-pod` will become a reusable template with minimal setup overhead. See [lightning_pod.cli.init_seed](lightning_pod/cli/init_seed/) for a sense of what will be provided after the change has been implemented.
+An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example)..
 
 ### Project Requirements and Extras
 
@@ -91,13 +88,15 @@ These frameworks and libraries are installed when creating an environment from t
 
 ### Source Code
 
-The source module,`lightning_pod/`, provides a structure for students to begin from. That structure is as follows:
+The source module,`lightning_pod/`, provides a structure for users to begin from. That structure is as follows:
 
-`lightning_pod.cli` contains code for the CLI `pod`.
+`lightning_pod.cli` contains code for the command line interface.
 
 `lightning_pod.core` contains code for Lightning Module and Trainer.
 
-`lightning_pod.pipeline` contains code for data preprocessing, building a Torch Dataset, and LightningDataModule.
+`lightning_pod.fabric` contains MixIns, Hooks, and utilities.
+
+`lightning_pod.pipeline` contains code for data acquistion preprocessing, building a TorchDataset, and LightningDataModule.
 
 `lightning_pod.components` contains Lightning Flows and Works grouped by purpose.
 
