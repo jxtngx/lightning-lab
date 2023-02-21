@@ -1,20 +1,32 @@
-# view setup.cfg for base requirements installed by lightning-pod
+# #####################################
+# comment out or delete what you do not need
+# #####################################
+# lightning ecosystem
 lightning-bolts
 lightning-flash
-lightning-transformers
 # FUNDAMENTAL ML
 scikit-learn
-# TEXT
+# Vision
+torchvision
+# Test
 torchtext
-# AUDIO
+# Audio
 torchaudio
 # PLOTTING AND SYMBOLIC MATH
 matplotlib
 sympy
 # TQDM SUPPORT IN NOTEBOOKS
 ipywidgets
-# DOC TOOLS, MARKDOWN SUPPORT, THEMES
-sphinx
-myst-parser
-sphinx_rtd_theme
-pydata-sphinx-theme
+# hyperparameter optimization with Lightning
+lightning_training_studio @ git+https://github.com/Lightning-AI/lightning-hpo.git
+# hpo trials
+optuna
+# experiment managers
+wandb
+aim
+# tensorboard support for pytorch profiler
+torch-tb-profiler
+# pod-cli support
+click
+# pynecone apps
+pynecone

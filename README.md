@@ -31,7 +31,7 @@ Lightning Pod is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn
 
 The intent is that users create new repos from the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example)..
+An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example).
 
 ### Project Requirements and Extras
 

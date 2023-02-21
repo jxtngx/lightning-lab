@@ -1,0 +1,5 @@
+# plotly dash apps
+plotly
+dash
+dash-bootstrap-components
+gunicorn

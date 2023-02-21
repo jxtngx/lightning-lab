@@ -1,0 +1,9 @@
+# FORMMATING, LINTING, TESTING, STATIC TYPE CHECKING, COVERAGE
+black
+flake8
+pytest
+mypy
+bandit
+coverage
+pre-commit
+isort

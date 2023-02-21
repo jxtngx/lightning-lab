@@ -1,0 +1,5 @@
+# DOC TOOLS, MARKDOWN SUPPORT, THEMES
+sphinx
+myst-parser
+sphinx_rtd_theme
+pydata-sphinx-theme
