@@ -27,7 +27,7 @@
 
 Lightning Pod is a public template for machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
 
-It is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate eachother's work.
+It is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate projects created with the same utility.
 
 The recommended way for users to create new repos from Lightning Pod is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
