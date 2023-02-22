@@ -81,10 +81,10 @@ The recommended install is as follows:
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e ".[full, { torchlib preference }]"
+pip install -e ".[full, { domain extra(s) }]"
 ```
 
-where { torchlib preference } is one of or some combination of (vision, text, audio, rl) e.g.
+where { domain extra(s) } is one of or some combination of (vision, text, audio, rl, forecast) e.g.
 
 ```sh
 python3 -m venv .venv
@@ -138,16 +138,12 @@ Grant Sanderson, also known as 3blue1brown on YouTube, has provided a very usefu
 
 ### Deep Learning
 
-Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/).
+Lightning AI's Sebastian Raschka has created a [free series on Deep Learning](https://lightning.ai/pages/courses/deep-learning-fundamentals/) and has shared his [university lectures](https://sebastianraschka.com/teaching/).
 
-NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning. Additionally, Professor Canziani was kind enough to make his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
+NYU's Alfredo Canziani has created a [YouTube Series](https://www.youtube.com/playlist?list=PLLHTzKZzVU9e6xUfG10TkTWApKSZCzuBI) for his lectures on deep learning and has also made his his course materials public [on GitHub](https://github.com/Atcold/NYU-DLSP21).
 
 The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon engineers, is availlable for free.
 
 DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
 
 OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
-
-### ML Ops
-
-Weights and Biases has created a free [ML Ops](https://www.wandb.courses/courses/effective-mlops-model-development) course.
