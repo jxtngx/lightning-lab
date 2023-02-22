@@ -16,10 +16,9 @@
 
 # Lightning Pod
 
-[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
-
-![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-<a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
+<a
+href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/>
+</a>
 
 </div>
 
@@ -29,7 +28,7 @@ Lightning Pod is a public template for machine learning research projects using 
 
 It is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate projects created with the same utility.
 
-The recommended way for users to create new repos from Lightning Pod is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
+The recommended way for Lightning Pod users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
 An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example).
 
@@ -37,7 +36,7 @@ An example project can be found at [lightning-pod-example](https://github.com/Ju
 
 ### Source Module
 
-The intent of the source module - `lightning_pod/` - is as follows:
+The structure of the source module - `lightning_pod` - is as follows:
 
 `lightning_pod.cli` contains code for the command line interface built with click.
 
@@ -51,33 +50,39 @@ The intent of the source module - `lightning_pod/` - is as follows:
 
 `lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
 
+`lightning_pod.conf.py` and `lightning_pod.conf.yaml` assist with project, trainer, and sweep configurations.
+
 ### Project Root
 
-In the project root, you will find:
+<details>
+    <summary>Root Directories and Files</summary>
+    <br>
 
 `app.py` is the Lightning App.
 
-`assets/` contains CSS and images for UIs.
+`assets` directory contains CSS and images for pages.
 
-`data/` should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
+`data` directory should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
 
-`docs/` should be used to create technical documentation with mkdocstring + material-for-mkdocs, or sphinx.
+`docs` directory should be used to create technical documentation with mkdocstring + material-for-mkdocs, or sphinx.
 
-`logs/` will store logs generated from experiment managers and profilers.
+`logs` directory will store logs generated from experiment managers and profilers.
 
-`models/` will store training checkpoints and the pre-trained ONNX model.
+`models` directory will store training checkpoints and the pre-trained ONNX model.
 
-`notebooks/` can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
+`notebooks` directory can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
 
-`requirements/` should mirror base requirements and extras found in setup.cfg. the requirements directory and `requirements.txt` at root are required by the basic CircleCI GitHub Action.
+`requirements` directory should mirror base requirements and extras found in setup.cfg. the requirements directory and _requirements.txt_ at root are required by the basic CircleCI GitHub Action.
 
-`tests/` is the module for any unit and integration tests targeted by pytest.
+`tests` module contains unit and integration tests targeted by pytest.
 
 `.lightning` and `.lightningignore` are used by Lightning as config files.
 
 `setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
+
+</details>
 
 ## Base Requirements and Extras
 
