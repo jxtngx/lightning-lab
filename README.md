@@ -50,7 +50,7 @@ The structure of the source module - `lightning_pod` - is as follows:
 
 `data` directory should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
 
-`docs` directory should be used to create technical documentation with mkdocstring + material-for-mkdocs, or sphinx.
+`docs` directory should be used to store technical documentation.
 
 `logs` directory will store logs generated from experiment managers and profilers.
 
