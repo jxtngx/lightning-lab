@@ -1,7 +1,7 @@
 import lightning as L
 import torch.nn.functional as F  # noqa: F401
 import torchmetrics  # noqa: F401
-from torch import nn, optim  # noqa: F401
+from torch import optim  # noqa: F401
 
 
 class PodModule(L.LightningModule):
@@ -17,12 +17,9 @@ class PodModule(L.LightningModule):
         pass
 
     def test_step(self, batch, *args):
-        self._shared_eval(batch, "test")
+        pass
 
     def validation_step(self, batch, *args):
-        self._shared_eval(batch, "val")
-
-    def _shared_eval(self, batch, prefix):
         pass
 
     def predict_step(self, batch, batch_idx, dataloader_idx=0):

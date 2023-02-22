@@ -22,7 +22,7 @@ long_description = (rootdir / "README.md").read_text()
 setup(
     name="lightning-pod",
     version="0.0.1",
-    description="A Research Template for the Lightning.ai Ecosystem",
+    description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="",

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import click
 
-from lightning_pod.cli.bugreport import bugreport
+from lightning_pod.fabric.bugreport import bugreport
 
 FILEPATH = Path(__file__)
 PROJECTPATH = FILEPATH.parents[2]
@@ -19,7 +19,7 @@ def main() -> None:
 @main.command("bug-report")
 def bug_report() -> None:
     def make_bug_trainer():
-        source = os.path.join(PROJECTPATH, "lightning_pod", "cli", "bugreport", "trainer.py")
+        source = os.path.join(PROJECTPATH, "lightning_pod", "fabric", "bugreport", "trainer.py")
         destination = os.path.join(PROJECTPATH, "lightning_pod", "core", "bug_trainer.py")
         shutil.copyfile(source, destination)
 

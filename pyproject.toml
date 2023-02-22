@@ -37,9 +37,5 @@ warn_no_return = "False"
 [[tool.mypy.overrides]]
 module = [
     "lightning_pod.core.module",
-    "lightning_pod.cli.seed.core.module",
-    "lightning_pod.cli.seed.core.trainer",
-    "lightning_pod.cli.seed.pipeline.datamodule",
-    "lightning_pod.cli.seed.pipeline.dataset",
 ]
 ignore_errors = true

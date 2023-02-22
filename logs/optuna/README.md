@@ -1,1 +1,1 @@
-logs from examples/optuna.py will be pushed here
+logs from optuna will be pushed here
