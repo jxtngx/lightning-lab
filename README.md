@@ -35,11 +35,27 @@ An example project can be found at [lightning-pod-example](https://github.com/Ju
 
 ## The Structure
 
+### Source Module
+
+The intent of the source module - `lightning_pod/` - is as follows:
+
+`lightning_pod.cli` contains code for the command line interface built with click.
+
+`lightning_pod.core` contains code for Lightning Module and Trainer.
+
+`lightning_pod.fabric` contains MixIns, Hooks, and utilities.
+
+`lightning_pod.pipeline` contains code for data acquistion and preprocessing, building a TorchDataset, and LightningDataModule.
+
+`lightning_pod.components` contains Lightning Flows and Works grouped by purpose for cohesion.
+
+`lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
+
 ### Project Root
 
 In the project root, you will find:
 
-`app.py` is the Lightning App
+`app.py` is the Lightning App.
 
 `assets/` contains CSS and images for UIs.
 
@@ -62,22 +78,6 @@ In the project root, you will find:
 `setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
-
-### Source Module
-
-The intent of the source module - `lightning_pod/` - is as follows:
-
-`lightning_pod.cli` contains code for the command line interface built with click.
-
-`lightning_pod.core` contains code for Lightning Module and Trainer.
-
-`lightning_pod.fabric` contains MixIns, Hooks, and utilities.
-
-`lightning_pod.pipeline` contains code for data acquistion and preprocessing, building a TorchDataset, and LightningDataModule.
-
-`lightning_pod.components` contains Lightning Flows and Works grouped by purpose for cohesion.
-
-`lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
 
 ## Base Requirements and Extras
 
