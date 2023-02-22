@@ -84,7 +84,7 @@ source .venv/bin/activate
 pip install -e ".[full, { domain extra(s) }]"
 ```
 
-where { domain extra(s) } is one of or some combination of (vision, text, audio, rl, forecast) e.g.
+where { domain extra(s) } is one of, or some combination of (vision, text, audio, rl, forecast) e.g.
 
 ```sh
 python3 -m venv .venv
