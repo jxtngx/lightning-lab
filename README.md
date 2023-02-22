@@ -16,143 +16,94 @@
 
 # Lightning Pod
 
+[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
+
 ![](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 <a href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/> </a>
-
-[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
 
 </div>
 
 ## Overview
 
-Lightning Pod is a public template for deep learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem. It is meant to be minimal so that template is helpful, but not bloated.
+Lightning Pod is a public template for machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
 
-Lightning Pod is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opionated boilerplate that has now become convention among users.
+It is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate eachother's work.
 
-The intent is that users create new repos from the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
+The recommended way for users to create new repos from Lightning Pod is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
 An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example).
 
-### Project Requirements and Extras
+## The Structure
 
-Lightning Pod provides opinionated project requirements to enable easy creation of new virtual environments. The following is a list of core requirements and extras.
+### Project Root
 
-<details>
-  <summary>Core AI/ML Ecosystem</summary>
+In the project root, you will find:
 
-These are the base frameworks. Many other tools (numpy, pyarrow etc) are installed as dependencies when installing the core dependencies.
+`app.py` is the Lightning App
 
-- pytorch-lightning
-- lightning-app
-- lightning-trainging-studio (HPO)
-- torchmetrics
-- weights and biases
-- aim
-- optuna
-- hydra
-- plotly
-- dash
-- pynecone
+`assets/` contains CSS and images for UIs.
 
-</details>
+`data/` should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
 
-<details>
-  <summary>Notable Extras</summary>
+`docs/` should be used to create technical documentation with mkdocstring + material-for-mkdocs, or sphinx.
 
-These frameworks and libraries are installed when creating an environment from the provided requirements utilities.
+`logs/` will store logs generated from experiment managers and profilers.
 
-- torchserve
-- fastapi
-- pydantic
-- gunicorn
-- uvicorn
-- click
-- rich
-- pyarrow
-- numpy
+`models/` will store training checkpoints and the pre-trained ONNX model.
 
-</details>
+`notebooks/` can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
 
-<details>
-  <summary>Testing and Code Quality</summary>
+`requirements/` should mirror base requirements and extras found in setup.cfg. the requirements directory and `requirements.txt` at root are required by the basic CircleCI GitHub Action.
 
-- PyTest
-- coverage
-- MyPy
-- Bandit
-- Black
-- isort
-- pre-commit
+`tests/` is the module for any unit and integration tests targeted by pytest.
 
-</details>
+`.lightning` and `.lightningignore` are used by Lightning as config files.
 
-### Source Code
+`setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
-The source module,`lightning_pod/`, provides a structure for users to begin from. That structure is as follows:
+`.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
 
-`lightning_pod.cli` contains code for the command line interface.
+### Source Module
+
+The intent of the source module - `lightning_pod/` - is as follows:
+
+`lightning_pod.cli` contains code for the command line interface built with click.
 
 `lightning_pod.core` contains code for Lightning Module and Trainer.
 
 `lightning_pod.fabric` contains MixIns, Hooks, and utilities.
 
-`lightning_pod.pipeline` contains code for data acquistion preprocessing, building a TorchDataset, and LightningDataModule.
+`lightning_pod.pipeline` contains code for data acquistion and preprocessing, building a TorchDataset, and LightningDataModule.
 
-`lightning_pod.components` contains Lightning Flows and Works grouped by purpose.
+`lightning_pod.components` contains Lightning Flows and Works grouped by purpose for cohesion.
 
 `lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
 
-### Using the Template
+## Base Requirements and Extras
 
-#### Creating an Environment
+Lightning Pod installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
 
-Base dependencies can be viewed in [setup.cfg](https://github.com/JustinGoheen/lightning-pod/blob/main/setup.cfg), under `install_requires`.
+> popular alternatives are listed in the extras, and commented out to avoid installation. to use the alternatives, uncomment the line and then comment out or delete the libraries you do not want to install
 
-Instructions for creating a new environment are shown below.
-
-<details>
-  <summary>conda</summary>
-
-Install [miniconda](https://docs.conda.io/en/latest/miniconda.html) if you do not already have it installed.
-
-> m-series macOS users, it is recommended to use the `Miniconda3 macOS Apple M1 64-bit bash` installation
+The recommended install is as follows:
 
 ```sh
-cd {{ path to clone }}
-conda env create -f environment.yml
-conda activate lightning-ai
-pip install -e .
-# if desired, install extras
-pip install -r requirements/extras.txt
-{{ set interpreter in IDE }}
-```
-
-</details>
-
-<details>
-  <summary>venv</summary>
-
-[venv](https://docs.python.org/3/library/venv.html) is not something that needs to be installed; it is part of Python standard.
-
-```sh
-cd {{ path to clone }}
-python3 -m venv .venv/
-# to activate on windows
-.venv\Scripts\activate.bat
-# to activate on macos and Unix
+python3 -m venv .venv
 source .venv/bin/activate
-# install lightning-pod
-pip install -e .
-# if desired, install extras
-pip install -r requirements/extras.txt
-{{ set interpreter in IDE }}
+pip install -e ".[full, { torchlib preference }]"
 ```
 
-</details>
+where { torchlib preference } is one of or some combination of (vision, text, audio, rl) e.g.
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[full, vision]"
+```
 
 ## GitHub CodeSpaces
 
-Lightning Pod enables development with GitHub CodeSpaces. Please note that lightning-pod has only been tested with regard to creating and training a custom LightningModule in the CodeSpace i.e. it is necessary to debug Lightning and Dash apps locally.
+Lightning Pod enables development with GitHub CodeSpaces. To start a new CodeSpace in your account, click the button below. Be sure to manage this CodeSpace from the `CodeSpaces` tab found in the navbar (the top of the page) of your GitHub account.
 
 <div align="center">
 
