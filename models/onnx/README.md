@@ -1,1 +1,1 @@
-production models will get pushed to this directory
+pre-trained models will get pushed to this directory

@@ -1,1 +1,1 @@
-wanbd logs will be pushed here when using wandb.py
+wanbd logs will be pushed here when using WandbLogger

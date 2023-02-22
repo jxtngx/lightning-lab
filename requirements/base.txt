@@ -1,29 +1,3 @@
 # pytorch lightning, lightning app, torchmetrics, pytorch core
 lightning
-# hyperparameter optimization
-lightning_training_studio @ git+https://github.com/Lightning-AI/lightning-hpo.git
-# mnist data
-torchvision
-# lightning-hpo dependency
-optuna
-# experiment manager
-wandb
-# tensorboard support for pytorch profiler
-torch-tb-profiler
-# pod-cli support
-click
-hydra-core
-# plotly dash apps
-plotly
-dash
-dash-bootstrap-components
-gunicorn
-# FORMMATING, LINTING, TESTING, STATIC TYPE CHECKING, COVERAGE
-black
-flake8
-pytest
-mypy
-bandit
-coverage
-pre-commit
-isort
+torch

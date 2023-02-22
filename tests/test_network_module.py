@@ -14,7 +14,7 @@
 
 import torch
 
-from lightning_pod.core.module import Decoder, Encoder, PodModule
+from lightning_pod.core.module import PodModule
 
 
 def test_module_not_abstract():
@@ -40,25 +40,3 @@ def test_optimizer():
     optimizer = model.configure_optimizers()
     optimizer_base_class = optimizer.__class__.__base__.__name__
     assert optimizer_base_class == "Optimizer"
-
-
-def test_encoder_not_abstract():
-    _ = Encoder()
-
-
-def test_encoder_forward():
-    input_sample = torch.randn((1, 784))
-    model = Encoder()
-    output = model.forward(input_sample)
-    assert output.shape == torch.Size([1, 3])
-
-
-def test_decoder_not_abstract():
-    _ = Decoder()
-
-
-def test_decoder_forward():
-    input_sample = torch.randn((1, 3))
-    model = Decoder()
-    output = model.forward(input_sample)
-    assert output.shape == torch.Size([1, 784])

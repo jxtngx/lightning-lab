@@ -1,1 +1,3 @@
+# this should only be used by CircleCI for installing base and testing requirements
 -r requirements/base.txt
+-r requirements/dev.txt

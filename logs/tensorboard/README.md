@@ -1,1 +1,1 @@
-tensorboard logs will be pushed here from the hydra trainer example
+tensorboard logs will be pushed here when using TensorboardLogger

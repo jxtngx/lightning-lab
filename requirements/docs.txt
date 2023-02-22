@@ -1,0 +1,6 @@
+# DOC TOOLS, MARKDOWN SUPPORT, THEMES
+mkdocs-material
+mkdocstrings
+# sphinx
+# myst-parser
+# pydata-sphinx-theme

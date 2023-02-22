@@ -21,15 +21,14 @@ long_description = (rootdir / "README.md").read_text()
 
 setup(
     name="lightning-pod",
-    version="0.0.5",
-    description="A Research Template for the Lightning.ai Ecosystem",
+    version="0.0.1",
+    description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Justin Goheen",
+    author="",
     license="Apache 2.0",
     author_email="",
     classifiers=[
-        "Environment :: Console",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Information Analysis",
         "Operating System :: OS Independent",
