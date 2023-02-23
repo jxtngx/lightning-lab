@@ -24,13 +24,15 @@ An example project can be found at [lightning-pod-example](https://github.com/Ju
 
 The structure of the source module - `lightning_pod` - is as follows:
 
-`lightning_pod.cli` contains code for the command line interface built with click.
+`lightning_pod.api` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi)
+
+`lightning_pod.cli` contains code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
 `lightning_pod.core` contains code for Lightning Module and Trainer.
 
 `lightning_pod.fabric` contains MixIns, Hooks, and utilities.
 
-`lightning_pod.pipeline` contains code for data acquistion and preprocessing, building a TorchDataset, and LightningDataModule.
+`lightning_pod.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
 `lightning_pod.components` contains Lightning Flows and Works grouped by purpose for cohesion.
 
