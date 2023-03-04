@@ -12,33 +12,31 @@ href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-
 
 Lightning Pod is a public template for machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
 
-It is inspired by ReactJS utilities such as CRA and CRACOS, and `yarn create next-app` or `yarn create vite` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate projects created with the same utility.
+It is inspired by JavaScript utilities such as CRA and CRACOS and `yarn create next-app` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate projects created with the same utility.
 
 The recommended way for Lightning Pod users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An example project can be found at [lightning-pod-example](https://github.com/JustinGoheen/lightning-pod-example).
+An adaptation can be found at [lightning-pod-vision](https://github.com/JustinGoheen/lightning-pod-vision).
 
 ## The Structure
 
 ### Source Module
 
-The structure of the source module - `lightning_pod` - is as follows:
+`lightning_pod.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
 
-`lightning_pod.api` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi)
+`lightning_pod.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
-`lightning_pod.cli` contains code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
+`lightning_pod.core` should contain code for Lightning Module and Trainer.
 
-`lightning_pod.core` contains code for Lightning Module and Trainer.
+`lightning_pod.fabric` should contain MixIns, Hooks, and utilities.
 
-`lightning_pod.fabric` contains MixIns, Hooks, and utilities.
+`lightning_pod.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightning_pod.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`lightning_pod.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
 
-`lightning_pod.components` contains Lightning Flows and Works grouped by purpose for cohesion.
+`lightning_pod.pages` should contain code for data apps. the `pages` module concept is borrowed from React concepts. [Pynecone](https://pynecone.io) is recommended.
 
-`lightning_pod.pages` contains code for data apps. `pages` is borrowed from React project concepts.
-
-`lightning_pod.conf.py` and `lightning_pod.conf.yaml` assist with project, trainer, and sweep configurations.
+`lightning_pod.conf.py` and `lightning_pod.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
 
 ### Project Root
 
