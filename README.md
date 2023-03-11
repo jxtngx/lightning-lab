@@ -34,7 +34,7 @@ An adaptation can be found at [lightning-pod-vision](https://github.com/JustinGo
 
 `lightning_pod.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
 
-`lightning_pod.pages` should contain code for data apps. the `pages` module concept is borrowed from React concepts. [Pynecone](https://pynecone.io) is recommended.
+`lightning_pod.pages` should contain code for data apps. the `pages` module concept is borrowed from React concepts.
 
 `lightning_pod.conf.py` and `lightning_pod.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
 
@@ -147,3 +147,7 @@ The book [Dive into Deep Learning](http://d2l.ai/#), created by a team of Amazon
 DeepMind has shared several lectures series created for UCL [on YouTube](https://www.youtube.com/c/DeepMind/playlists?view=50&sort=dd&shelf_id=9).
 
 OpenAI has created [Spinning Up in Deep RL](https://spinningup.openai.com/en/latest/), an introductory series in deep reinforcement learning.
+
+### MLOps
+
+Weights and Biases has created a free course for MLOps titled [Effective MLOps: Model Development](https://www.wandb.courses/courses/effective-mlops-model-development)
