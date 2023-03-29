@@ -1,5 +1,5 @@
     pynecone
     plotly
-    # dash
-    # dash-bootstrap-components
-    # gunicorn
+    dash
+    dash-bootstrap-components
+    gunicorn

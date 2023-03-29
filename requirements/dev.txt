@@ -4,7 +4,6 @@ pytest
 mypy
 bandit
 coverage
-flake8
 pre-commit
 isort
-# ruff
+ruff
