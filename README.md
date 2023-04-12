@@ -92,16 +92,6 @@ source .venv/bin/activate
 pip install -e ".[full, vision]"
 ```
 
-## GitHub CodeSpaces
-
-Lightning Pod enables development with GitHub CodeSpaces. To start a new CodeSpace in your account, click the button below. Be sure to manage this CodeSpace from the `CodeSpaces` tab found in the navbar (the top of the page) of your GitHub account.
-
-<div align="center">
-
-[![Open in Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new?repo=JustinGoheen/lightning-pod)
-
-</div>
-
 ## Learning Resources
 
 ### Reviewing Source Code
