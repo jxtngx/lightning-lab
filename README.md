@@ -28,11 +28,11 @@ An adaptation can be found at [lightning-pod-vision](https://github.com/JustinGo
 
 `lightning_pod.core` should contain code for Lightning Module and Trainer.
 
-`lightning_pod.fabric` should contain MixIns, Hooks, and utilities.
-
-`lightning_pod.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`lightning_pod.backend` should contain MixIns, Hooks, and utilities.
 
 `lightning_pod.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
+
+`lightning_pod.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
 `lightning_pod.pages` should contain code for data apps. the `pages` module concept is borrowed from React concepts.
 
