@@ -12,11 +12,7 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 ### Source Module
 
-`lightning_pod.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
-
-`lightning_pod.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
-
-`lightning_pod.core` should contain code for Lightning Module and Trainer.
+`lightning_pod.core` should contain code for the Lightning Module and Trainer.
 
 `lightning_pod.backend` should contain MixIns, Hooks, and utilities.
 
@@ -24,7 +20,11 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 `lightning_pod.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightning_pod.pages` should contain code for data apps. the `pages` module concept is borrowed from React concepts.
+`lightning_pod.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
+
+`lightning_pod.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
+
+`lightning_pod.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
 
 `lightning_pod.conf.py` and `lightning_pod.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
 
