@@ -16,7 +16,7 @@ It is inspired by JavaScript utilities such as CRA and CRACOS and `yarn create n
 
 The recommended way for Lightning Pod users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An adaptation can be found at [lightning-pod-vision](https://github.com/JustinGoheen/lightning-pod-vision).
+An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightning-pod-vision).
 
 ## The Structure
 
