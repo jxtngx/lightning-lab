@@ -1,18 +1,8 @@
-<div align="center">
-
 # Lightning Pod
-
-<a
-href="https://lightning.ai" ><img src ="https://img.shields.io/badge/-Lightning-792ee5?logo=pytorchlightning&logoColor=white" height="28"/>
-</a>
-
-</div>
 
 ## Overview
 
-Lightning Pod is a public template for machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
-
-It is inspired by JavaScript utilities such as CRA and CRACOS and `yarn create next-app` in that each of those utilities provides opinionated boilerplate that has become convention among users, making it easier for the community to navigate projects created with the same utility.
+Lightning Pod is a public template for artificial intelligence and machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
 
 The recommended way for Lightning Pod users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
