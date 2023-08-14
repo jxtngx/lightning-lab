@@ -14,7 +14,7 @@
 
 import torch
 
-from lightning_pod.core.module import PodModule
+from lightning_lab.core.module import PodModule
 
 
 def test_module_not_abstract():

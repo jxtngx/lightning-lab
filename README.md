@@ -1,32 +1,32 @@
-# Lightning Pod
+# Lightning Lab
 
 ## Overview
 
-Lightning Pod is a public template for artificial intelligence and machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
+Lightning Lab is a public template for artificial intelligence and machine learning research projects using the [Lightning.ai](https://lightning.ai) ecosystem.
 
-The recommended way for Lightning Pod users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
+The recommended way for Lightning Lab users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightning-pod-vision).
+An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightning-lab-vision).
 
 ## The Structure
 
 ### Source Module
 
-`lightning_pod.core` should contain code for the Lightning Module and Trainer.
+`lightning_lab.core` should contain code for the Lightning Module and Trainer.
 
-`lightning_pod.backend` should contain MixIns, Hooks, and utilities.
+`lightning_lab.backend` should contain MixIns, Hooks, and utilities.
 
-`lightning_pod.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
+`lightning_lab.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
 
-`lightning_pod.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`lightning_lab.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightning_pod.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
+`lightning_lab.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
 
-`lightning_pod.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
+`lightning_lab.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
-`lightning_pod.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
+`lightning_lab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
 
-`lightning_pod.conf.py` and `lightning_pod.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
+`lightning_lab.conf.py` and `lightning_lab.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
 
 ### Project Root
 
@@ -62,7 +62,7 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 ## Base Requirements and Extras
 
-Lightning Pod installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
+Lightning Lab installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
 
 > popular alternatives are listed in the extras, and commented out to avoid installation. to use the alternatives, uncomment the line and then comment out or delete the libraries you do not want to install
 

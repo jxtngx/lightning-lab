@@ -22,7 +22,7 @@ from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import Logger, TensorBoardLogger
 from lightning.pytorch.profilers import Profiler, PyTorchProfiler
 
-from lightning_pod import conf
+from lightning_lab import conf
 
 
 class PodTrainer(L.Trainer):
