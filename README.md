@@ -67,7 +67,7 @@ The recommended install is as follows:
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e ".[full, { domain extra(s) }]"
+pip install -e ".[all, { domain extra(s) }]"
 ```
 
 where { domain extra(s) } is one of, or some combination of (vision, text, audio, rl, forecast) e.g.
@@ -75,7 +75,7 @@ where { domain extra(s) } is one of, or some combination of (vision, text, audio
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -e ".[full, vision]"
+pip install -e ".[all, vision]"
 ```
 
 ## Learning Resources
