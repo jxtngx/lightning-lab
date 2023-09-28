@@ -1,5 +1,2 @@
-    pynecone
-    plotly
-    dash
-    dash-bootstrap-components
-    gunicorn
+streamlit
+plotly

@@ -1,4 +1,4 @@
-# pytorch lightning, lightning app, torchmetrics, pytorch core
-lightning
+pytorch-lightning
 torch
-wandb
+optuna
+torch-tb-profiler

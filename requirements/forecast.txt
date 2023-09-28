@@ -1,4 +1,0 @@
-statsforecast
-neuralforecast
-mlforecast
-hierarchicalforecast
