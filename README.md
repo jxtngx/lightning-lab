@@ -14,9 +14,7 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 `lightning_lab.core` should contain code for the Lightning Module and Trainer.
 
-`lightning_lab.backend` should contain MixIns, Hooks, and utilities.
-
-`lightning_lab.components` should contain Lightning Flows and Works for use with LightningApps, grouped by purpose for cohesion.
+`lightning_lab.components` should contain experiment utilities grouped by purpose for cohesion.
 
 `lightning_lab.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
@@ -26,7 +24,7 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 `lightning_lab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
 
-`lightning_lab.conf.py` and `lightning_lab.conf.yaml` can assist with project, trainer, and sweep configurations. The .yaml file is provided for users who may want to use hydra.cc, or omegaconf with click; I prefer omegaconf and click.
+`lightning_lab.conf.py` can assist with project, trainer, and sweep configurations.
 
 ### Project Root
 
@@ -63,8 +61,6 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 ## Base Requirements and Extras
 
 Lightning Lab installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
-
-> popular alternatives are listed in the extras, and commented out to avoid installation. to use the alternatives, uncomment the line and then comment out or delete the libraries you do not want to install
 
 The recommended install is as follows:
 
