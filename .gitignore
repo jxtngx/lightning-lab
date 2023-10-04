@@ -142,9 +142,9 @@ dmypy.json
 # PyCharm
 .idea
 
-# profiler, logger logs, model checkpoints, production models, data
+# profiler, logger logs, model trials, production models, data
 outputs/
-models/checkpoints/model-*
+models/trials/model-*
 logs/tensorboard/version*
 logs/torch_profiler/fit*
 logs/torch_profiler/predict*
