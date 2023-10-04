@@ -22,7 +22,7 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `lightninglab.lab` should contain code for the command line interface built with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
-`lightninglab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
+`lightninglab.pages` should contain code for data apps built with streamlit.
 
 `lightninglab.conf` can assist with project, trainer, and sweep configurations.
 
