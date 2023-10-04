@@ -22,10 +22,10 @@ from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import Logger, TensorBoardLogger
 from lightning.pytorch.profilers import Profiler, PyTorchProfiler
 
-from lightning_lab import conf
+from lightninglab import conf
 
 
-class PodTrainer(L.Trainer):
+class LabTrainer(L.Trainer):
     def __init__(
         self,
         logger: Optional[Logger] = None,

@@ -14,29 +14,29 @@
 
 import torch
 
-from lightning_lab.core.module import PodModule
+from lightninglab.core.module import LabModule
 
 
 def test_module_not_abstract():
-    _ = PodModule()
+    _ = LabModule()
 
 
 def test_module_forward():
     input_sample = torch.randn((1, 784))
-    model = PodModule()
+    model = LabModule()
     preds, label = model.forward(input_sample)
     assert preds.shape == input_sample.shape
 
 
 def test_module_training_step():
     input_sample = torch.randn((1, 784)), 1
-    model = PodModule()
+    model = LabModule()
     loss = model.training_step(input_sample)
     assert isinstance(loss, torch.Tensor)
 
 
 def test_optimizer():
-    model = PodModule()
+    model = LabModule()
     optimizer = model.configure_optimizers()
     optimizer_base_class = optimizer.__class__.__base__.__name__
     assert optimizer_base_class == "Optimizer"

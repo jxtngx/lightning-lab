@@ -150,5 +150,5 @@ logs/torch_profiler/fit*
 logs/torch_profiler/predict*
 logs/torch_profiler/test*
 logs/wandb_logs/wandb
-data/cache/PodDataset
+data/cache/LabDataset
 wandb/

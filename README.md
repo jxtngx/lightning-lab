@@ -6,25 +6,25 @@ Lightning Lab is a public template for artificial intelligence and machine learn
 
 The recommended way for Lightning Lab users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightning-lab-vision).
+An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightninglab-vision).
 
 ## The Structure
 
 ### Source Module
 
-`lightning_lab.core` should contain code for the Lightning Module and Trainer.
+`lightninglab.core` should contain code for the Lightning Module and Trainer.
 
-`lightning_lab.components` should contain experiment utilities grouped by purpose for cohesion.
+`lightninglab.components` should contain experiment utilities grouped by purpose for cohesion.
 
-`lightning_lab.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`lightninglab.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightning_lab.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
+`lightninglab.api` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
 
-`lightning_lab.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
+`lightninglab.cli` should contain code for the command line interface built with [Click](https://click.palletsprojects.com/en/8.1.x/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
-`lightning_lab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
+`lightninglab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
 
-`lightning_lab.conf.py` can assist with project, trainer, and sweep configurations.
+`lightninglab.conf.py` can assist with project, trainer, and sweep configurations.
 
 ### Project Root
 

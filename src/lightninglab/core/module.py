@@ -4,7 +4,7 @@ import torchmetrics  # noqa: F401
 from torch import optim  # noqa: F401
 
 
-class PodModule(L.LightningModule):
+class LabModule(L.LightningModule):
     """a custom PyTorch Lightning LightningModule"""
 
     def __init__(self):

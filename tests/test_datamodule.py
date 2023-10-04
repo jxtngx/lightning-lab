@@ -17,24 +17,24 @@ from pathlib import Path
 
 import torch
 
-from lightning_lab.pipeline.datamodule import PodDataModule
+from lightninglab.pipeline.datamodule import LabDataModule
 
 
 def test_module_not_abstract():
-    _ = PodDataModule()
+    _ = LabDataModule()
 
 
 def test_prepare_data():
-    datamodule = PodDataModule()
+    datamodule = LabDataModule()
     datamodule.prepare_data()
     networkpath = Path(__file__).parent
     projectpath = networkpath.parents[0]
     datapath = os.path.join(projectpath, "data", "cache")
-    assert "PodDataset" in os.listdir(datapath)
+    assert "LabDataset" in os.listdir(datapath)
 
 
 def test_setup():
-    datamodule = PodDataModule()
+    datamodule = LabDataModule()
     datamodule.prepare_data()
     datamodule.setup()
     data_keys = ["train_data", "test_data", "val_data"]
@@ -42,7 +42,7 @@ def test_setup():
 
 
 def test_trainloader():
-    datamodule = PodDataModule()
+    datamodule = LabDataModule()
     datamodule.prepare_data()
     datamodule.setup()
     loader = datamodule.train_dataloader()
@@ -51,7 +51,7 @@ def test_trainloader():
 
 
 def test_testloader():
-    datamodule = PodDataModule()
+    datamodule = LabDataModule()
     datamodule.prepare_data()
     datamodule.setup()
     loader = datamodule.test_dataloader()
@@ -60,7 +60,7 @@ def test_testloader():
 
 
 def test_valloader():
-    datamodule = PodDataModule()
+    datamodule = LabDataModule()
     datamodule.prepare_data()
     datamodule.setup()
     loader = datamodule.val_dataloader()
