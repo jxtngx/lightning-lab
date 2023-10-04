@@ -24,7 +24,7 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `lightninglab.pages` should contain code for data apps built with streamlit, dash, or reflex. the `pages` module naming convention is borrowed from React concepts.
 
-`lightninglab.conf.py` can assist with project, trainer, and sweep configurations.
+`lightninglab.conf` can assist with project, trainer, and sweep configurations.
 
 ### Project Root
 
