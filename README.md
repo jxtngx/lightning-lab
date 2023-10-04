@@ -42,7 +42,7 @@ An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen
 
 `logs` directory will store logs generated from experiment managers and profilers.
 
-`models` directory will store training checkpoints and the pre-trained ONNX model.
+`models` directory will store training checkpoints and the pre-trained production model.
 
 `notebooks` directory can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
 
