@@ -6,7 +6,7 @@ Lightning Lab is a public template for artificial intelligence and machine learn
 
 The recommended way for Lightning Lab users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-An adaptation can be found at [lightning-vision](https://github.com/JustinGoheen/lightninglab-vision).
+Adaptations can be found in my collection of [lab repos](https://github.com/stars/JustinGoheen/lists/lightning-labs).
 
 ## The Structure
 
