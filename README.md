@@ -50,8 +50,6 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `tests` module contains unit and integration tests targeted by pytest.
 
-`.lightning` and `.lightningignore` are used by Lightning as config files.
-
 `setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
