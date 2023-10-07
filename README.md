@@ -24,7 +24,7 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `lightninglab.pages` should contain code for data apps built with streamlit.
 
-`lightninglab.conf` can assist with project, trainer, and sweep configurations.
+`lightninglab.config` can assist with project, trainer, and sweep configurations.
 
 ### Project Root
 
