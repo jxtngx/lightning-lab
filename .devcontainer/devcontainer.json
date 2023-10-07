@@ -12,13 +12,6 @@
 		"ghcr.io/devcontainers/features/git-lfs:1": {
 			"autoPull": true,
 			"version": "latest"
-		},
-		"ghcr.io/devcontainers/features/nvidia-cuda:1": {
-			"installCudnn": true,
-			"installNvtx": true,
-			"installToolkit": true,
-			"cudaVersion": "12.1",
-			"cudnnVersion": "8.6.0.163"
 		}
 	},
 
