@@ -11,7 +11,7 @@ app = typer.Typer()
 
 @app.callback()
 def callback() -> None:
-    """callback is required for CLI applications"""
+    pass
 
 
 @app.command()
