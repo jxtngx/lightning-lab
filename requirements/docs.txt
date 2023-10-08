@@ -1,3 +1,3 @@
 # DOC TOOLS, MARKDOWN SUPPORT, THEMES
 mkdocs-material
-mkdocstrings
+mkdocstrings[python]

@@ -1,4 +1,4 @@
-name: Workflow for Codecov
+name: Codecov
 on: [push, pull_request]
 jobs:
   run:
@@ -18,3 +18,5 @@ jobs:
           coverage xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+
+        

@@ -1,0 +1,78 @@
+site_name: Vision Lab
+site_author: Justin Goheen
+repo_url: https://github.com/JustinGoheen/vision-lab
+repo_name: Justin Goheen
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - content.code.copy
+  palette:
+    # Palette toggle for automatic mode
+    - scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_source: false
+            line_length: 120
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/JustinGoheen
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Justin_Goheen
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/justingoheen/
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/XncpTy7DSt
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
