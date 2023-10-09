@@ -97,3 +97,4 @@ Lightning Lab is a great template for deep learning projects. Using the template
 - [Ruff](https://docs.astral.sh/ruff/)
 - [Black](https://black.readthedocs.io/en/stable/)
 - [GitHub Actions](https://github.com/features/actions)
+- Version control as experiment management
