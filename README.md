@@ -35,7 +35,7 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 
 `notebooks` directory can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
 
-`requirements` directory should mirror base requirements and extras found in setup.cfg. the requirements directory and _requirements.txt_ at root are required by the basic CircleCI GitHub Action.
+`requirements` directory should mirror base requirements and extras found in setup.cfg. the requirements directory and _requirements.txt_ at root are required by the basic `Coverage` GitHub Action.
 
 `tests` module contains unit and integration tests targeted by pytest.
 
