@@ -1,10 +1,10 @@
-import lightning as L
+import pytorch_lightning as pl
 import torch.nn.functional as F  # noqa: F401
 import torchmetrics  # noqa: F401
 from torch import optim  # noqa: F401
 
 
-class LabModule(L.LightningModule):
+class LabModule(pl.LightningModule):
     """a custom PyTorch Lightning LightningModule"""
 
     def __init__(self):
