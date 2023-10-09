@@ -24,7 +24,12 @@ load_dotenv()
 
 
 class Supabase:
-    """Wrapper for Supabase-Py"""
+    """Wrapper for Supabase-Py
+
+    Args:
+        url: The Supabase project URL
+        key: The Supabase project key
+    """
 
     def __init__(self, url: str, key: str) -> None:
         self.url: str = url
@@ -35,7 +40,11 @@ class Supabase:
         _create_client(self.url, self.key)
 
     def create_bucket(self, bucketname: str) -> None:
-        """creates a Supabase bucket"""
+        """creates a Supabase bucket
+
+        Args:
+            bucketname: name of source Supabase bucket
+        """
         supabase.storage.create_bucket(bucketname)
 
     def list_buckets(self) -> List:
@@ -43,20 +52,37 @@ class Supabase:
         return supabase.storage.list_buckets()
 
     def list_bucket_files(self, bucketname: str) -> List:
-        """lists all files in a given bucket"""
+        """lists all files in a given bucket
+
+        Args:
+            bucketname: name of source Supabase bucket
+        """
         return supabase.storage.from_(bucketname).list()
 
     def download_file(self, bucketname: str, source: str, destination: Union[Path, str]) -> None:
-        """downloads a file from a given bucket"""
+        """downloads a file from a given bucket
+
+        Args:
+            bucketname: name of source Supabase bucket
+            source: name of file to download
+            destination: path to download file to
+        """
         with open(destination, "wb+") as f:
             res = supabase.storage.from_(bucketname).download(source)
             f.write(res)
 
-    def upload_file(self, bucketname: str, filepath: Union[Path, str], destination: str):
-        """uploads a file from a given bucket"""
-        with open(filepath, "rb") as f:
+    def upload_file(self, bucketname: str, source: Union[Path, str], destination: str, file_options: dict):
+        """uploads a file from a given bucket
+
+        Args:
+            bucketname: name of source Supabase bucket
+            source: path of file to upload
+            destination: bucket location to upload to
+            file_options: see https://supabase.com/docs/reference/javascript/storage-from-upload
+        """
+        with open(source, "rb") as f:
             supabase.storage.from_(bucketname).upload(
                 file=f,
                 path=destination,
-                file_options={"content-type": "audio/mpeg"},
+                file_options=file_options,
             )
