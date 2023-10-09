@@ -76,7 +76,7 @@ Lightning Lab is a great template for deep learning projects. Using the template
 
 1. Start by renaming the `src/lightninglab` to something like `src/textlab` or `src/imagenetlab`. Doing so will allow VS Code to refactor all instance of `lightninglab` that exists in any `.py` file.
 2. Open the search pane in VS Code and search for `lightniglab` in `tests/` and replace those occurences with whatever you have renamed the source module to.
-3. Next, earch for `lightninglab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
+3. Next, search for `lightninglab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
 4. Next, search for Lightning Lab and change that to your repo name.
 5. Next, search for my name – `Justin Goheen` and replace that with either your name or GitHub username.
 6. Next, search once again for my name as `justingoheen` and do the following:
@@ -95,6 +95,7 @@ Lightning Lab is a great template for deep learning projects. Using the template
 - Supabase's [Python client](https://supabase.com/docs/reference/python/initializing)
 - [PyTest](https://docs.pytest.org/en/stable/)
 - [Ruff](https://docs.astral.sh/ruff/)
+- [MyPY](https://mypy.readthedocs.io/en/stable/)
 - [Black](https://black.readthedocs.io/en/stable/)
 - [GitHub Actions](https://github.com/features/actions)
 - Version control as experiment management

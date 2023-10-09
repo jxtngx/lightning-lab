@@ -14,13 +14,49 @@
 
 
 import os
+from pathlib import Path
+from typing import List, Union
+import supabase
 from dotenv import load_dotenv
-from supabase import create_client, Client
+from supabase import create_client as _create_client, Client
 
 load_dotenv()
 
 
 class Supabase:
-    url: str = os.environ.get("SUPABASE_URL")
-    key: str = os.environ.get("SUPABASE_KEY")
-    client: Client = create_client(url, key)
+    """Wrapper for Supabase-Py"""
+
+    def __init__(self, url: str, key: str) -> None:
+        self.url: str = url
+        self.key: str = key
+
+    def create_client(self) -> None:
+        """start the Supabase Client session"""
+        _create_client(self.url, self.key)
+
+    def create_bucket(self, bucketname: str) -> None:
+        """creates a Supabase bucket"""
+        supabase.storage.create_bucket(bucketname)
+
+    def list_buckets(self) -> List:
+        """lists all buckets available to the user"""
+        return supabase.storage.list_buckets()
+
+    def list_bucket_files(self, bucketname: str) -> List:
+        """lists all files in a given bucket"""
+        return supabase.storage.from_(bucketname).list()
+
+    def download_file(self, bucketname: str, source: str, destination: Union[Path, str]) -> None:
+        """downloads a file from a given bucket"""
+        with open(destination, "wb+") as f:
+            res = supabase.storage.from_(bucketname).download(source)
+            f.write(res)
+
+    def upload_file(self, bucketname: str, filepath: Union[Path, str], destination: str):
+        """uploads a file from a given bucket"""
+        with open(filepath, "rb") as f:
+            supabase.storage.from_(bucketname).upload(
+                file=f,
+                path=destination,
+                file_options={"content-type": "audio/mpeg"},
+            )
