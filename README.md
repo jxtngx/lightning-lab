@@ -6,7 +6,6 @@ Lightning Lab is a public template for artificial intelligence and machine learn
 
 The recommended way for Lightning Lab users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
 
-Adaptations can be found in my collection of [lab repos](https://github.com/stars/JustinGoheen/lists/lightning-labs).
 
 ## The Structure
 
@@ -22,19 +21,9 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `lightninglab.lab` should contain code for the command line interface built with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/).
 
-`lightninglab.pages` should contain code for data apps built with streamlit.
-
 `lightninglab.config` can assist with project, trainer, and sweep configurations.
 
 ### Project Root
-
-<details>
-    <summary>Root Directories and Files</summary>
-    <br>
-
-`app.py` is the Lightning App.
-
-`assets` directory contains CSS and images for pages.
 
 `data` directory should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
 
@@ -50,11 +39,12 @@ Adaptations can be found in my collection of [lab repos](https://github.com/star
 
 `tests` module contains unit and integration tests targeted by pytest.
 
+`streamlit` contains the Streamlit UI.
+
 `setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
 
-</details>
 
 ## Base Requirements and Extras
 
@@ -75,3 +65,20 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[all, vision]"
 ```
+
+!!! warning
+
+    Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
+
+## Refactoring the Template
+
+Lightning Lab is a great template for deep learning projects. Using the template will require some refactoring if you intend to rename `src/lightninglab` to something like `src/textlab`. You can refactor in a few simple steps in VS Code:
+
+1. Start by renaming the `src/lightninglab` to something like `src/textlab` or `src/imagenetlab`. Doing so will allow VS Code to refactor all instance of `lightninglab` that exists in any `.py` file.
+2. Open the search pane in VS Code and search for `lightniglab` in `tests/` and replace those occurences with whatever you have renamed the source module to.
+3. Next, earch for `lightninglab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
+4. Next, search for Lightning Lab and change that to your repo name.
+5. Next, search for my name – `Justin Goheen` and replace that with either your name or GitHub username.
+6. Next, search once again for my name as `justingoheen` and do the following:
+    - replace the occurences in `mkdocs.yml` with your GitHub username.
+    - replace the occurences in `authors.yml` with your choice of author name for your docs and blog.
