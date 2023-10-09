@@ -46,7 +46,7 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
 
 
-## Base Requirements and Extras
+## Installation
 
 Lightning Lab installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
 
@@ -82,3 +82,18 @@ Lightning Lab is a great template for deep learning projects. Using the template
 6. Next, search once again for my name as `justingoheen` and do the following:
     - replace the occurences in `mkdocs.yml` with your GitHub username.
     - replace the occurences in `authors.yml` with your choice of author name for your docs and blog.
+
+
+## Tools and Concepts
+
+- Hyperparameter Sweeps and experiment management with [Weights and Biases](https://wandb.ai/site)
+- Command Line Interfaces with [Typer](https://typer.tiangolo.com)
+- Model serving with [FastAPI](https://fastapi.tiangolo.com)
+- UIs with [Streamlit](https://streamlit.io) and [Plotly](https://plotly.com/python/)
+- Using [python-dotenv](https://github.com/theskumar/python-dotenv)
+- Documenting code with [mkdocstrings](https://mkdocstrings.github.io) and [material-for-mkdocs](https://squidfunk.github.io/mkdocs-material/)
+- Supabase's [Python client](https://supabase.com/docs/reference/python/initializing)
+- [PyTest](https://docs.pytest.org/en/stable/)
+- [Ruff](https://docs.astral.sh/ruff/)
+- [Black](https://black.readthedocs.io/en/stable/)
+- [GitHub Actions](https://github.com/features/actions)
