@@ -15,6 +15,7 @@
 
 from pathlib import Path
 from typing import List, Union
+
 import supabase
 from dotenv import load_dotenv
 from supabase import create_client as _create_client
