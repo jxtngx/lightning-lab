@@ -4,7 +4,7 @@
 
 Lightning Lab is a public template for artificial intelligence and machine learning research projects using Lightning AI's [PyTorch Lightning](https://lightning.ai/docs/pytorch/latest/).
 
-The recommended way for Lightning Lab users to create new repos is with the [use this template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) button.
+The recommended way for Lightning Lab users to create new repos is with the [use this template](https://github.com/new?template_name=lightning-lab&template_owner=JustinGoheen) button.
 
 You can find domain specific variations of Lightning Lab on [my wiki](https://justingoheen.github.io/pages/lightninglabs/).
 
