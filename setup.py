@@ -15,15 +15,21 @@
 from pathlib import Path
 
 from setuptools import setup
+from setuptools import find_packages
 
 rootdir = Path(__file__).parent
 long_description = (rootdir / "README.md").read_text()
 
+package_name = "lightninglab"
+
 setup(
-    name="lightninglab",
+    name=package_name,
     version="0.0.1",
     package_dir={"": "src"},
-    packages=["lightninglab"],
+    packages=find_packages(where="src", include=[package_name, f"{package_name}.*"]),
+    include_package_data=True,
+    setup_requires=["wheel"],
+    zip_safe=False,
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -37,5 +43,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
     ],
 )
