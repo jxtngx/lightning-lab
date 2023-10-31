@@ -8,32 +8,31 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 
 You can find domain specific variations of Lightning Lab on [my wiki](https://justingoheen.github.io/pages/lightninglabs/).
 
-
 ## The Structure
 
 ### Source Module
 
-`lightninglab.cli` should contain code for the command line interface built with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/).
+`lightninglab.cli` contains code for the command line interface built with [Typer](https://typer.tiangolo.com/).
 
-`lightninglab.components` should contain experiment utilities grouped by purpose for cohesion.
+`lightninglab.components` contains experiment utilities grouped by purpose for cohesion.
 
-`lightninglab.core` should contain code for the Lightning Module and Trainer.
+`lightninglab.core` contains code for the Lightning Module and Trainer.
 
-`lightninglab.pipeline` should contain code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`lightninglab.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightninglab.serve` should contain code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
+`lightninglab.serve` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
 
-`lightninglab.config` can assist with project, trainer, and sweep configurations.
+`lightninglab.config` assists with project, trainer, and sweep configurations.
 
 ### Project Root
 
 `data` directory should be used to cache the TorchDataset and training splits locally if the size of the dataset allows for local storage. additionally, this directory should be used to cache predictions during HPO sweeps.
 
-`docs` directory should be used to store technical documentation.
+`docs` directory should be used for technical documentation.
 
-`logs` directory will store logs generated from experiment managers and profilers.
+`logs` directory contains logs generated from experiment managers and profilers.
 
-`models` directory will store training checkpoints and the pre-trained production model.
+`models` directory contains training checkpoints and the pre-trained production model.
 
 `notebooks` directory can be used to present exploratory data analysis, explain math concepts, and create a presentation notebook to accompany a conference style paper.
 
@@ -46,7 +45,6 @@ You can find domain specific variations of Lightning Lab on [my wiki](https://ju
 `setup.py` `setup.cfg` `pyproject.toml` and `MANIFEST.ini` assist with packaging the Python project.
 
 `.pre-commit-config.yaml` is required by pre-commit to install its git-hooks.
-
 
 ## Installation
 
@@ -70,7 +68,7 @@ pip install -e ".[all, vision]"
 
 !!! warning
 
-    Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
+   Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
 
 ## Refactoring the Template
 
@@ -82,9 +80,8 @@ Lightning Lab is a great template for deep learning projects. Using the template
 4. Next, search for Lightning Lab and change that to your repo name.
 5. Next, search for my name – `Justin Goheen` and replace that with either your name or GitHub username.
 6. Next, search once again for my name as `justingoheen` and do the following:
-    - replace the occurences in `mkdocs.yml` with your GitHub username.
-    - replace the occurences in `authors.yml` with your choice of author name for your docs and blog.
-
+   - replace the occurences in `mkdocs.yml` with your GitHub username.
+   - replace the occurences in `authors.yml` with your choice of author name for your docs and blog.
 
 ## Tools and Concepts
 
