@@ -20,7 +20,7 @@ from setuptools import find_packages
 rootdir = Path(__file__).parent
 long_description = (rootdir / "README.md").read_text()
 
-package_name = "lightninglab"
+package_name = "studiolab"
 
 setup(
     name=package_name,

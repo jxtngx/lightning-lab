@@ -4,24 +4,24 @@
 
 Studio Lab is a public template for artificial intelligence and machine learning research projects using Lightning AI's [PyTorch Lightning](https://lightning.ai/docs/pytorch/latest/). The best way to use Studio Lab is in a [Studio](https://lightning.ai/studios).
 
-The recommended way for Studio Lab users to create new repos is with the [use this template](https://github.com/new?template_name=lightning-lab&template_owner=JustinGoheen) button.
+The recommended way for Studio Lab users to create new repos is with the [use this template](https://github.com/new?template_name=studio-lab&template_owner=JustinGoheen) button.
 
 
 ## The Structure
 
 ### Source Module
 
-`lightninglab.cli` contains code for the command line interface built with [Typer](https://typer.tiangolo.com/).
+`studiolab.cli` contains code for the command line interface built with [Typer](https://typer.tiangolo.com/).
 
-`lightninglab.components` contains experiment utilities grouped by purpose for cohesion.
+`studiolab.components` contains experiment utilities grouped by purpose for cohesion.
 
-`lightninglab.core` contains code for the Lightning Module and Trainer.
+`studiolab.core` contains code for the Lightning Module and Trainer.
 
-`lightninglab.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
+`studiolab.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
 
-`lightninglab.serve` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
+`studiolab.serve` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
 
-`lightninglab.config` assists with project, trainer, and sweep configurations.
+`studiolab.config` assists with project, trainer, and sweep configurations.
 
 ### Project Root
 
@@ -71,11 +71,11 @@ pip install -e ".[all, vision]"
 
 ## Refactoring the Template
 
-Studio Lab is a great template for deep learning projects. Using the template will require some refactoring if you intend to rename `src/lightninglab` to something like `src/textlab`. You can refactor in a few simple steps in VS Code:
+Studio Lab is a great template for deep learning projects. Using the template will require some refactoring if you intend to rename `src/studiolab` to something like `src/textlab`. You can refactor in a few simple steps in VS Code:
 
-1. Start by renaming the `src/lightninglab` to something like `src/textlab` or `src/imagenetlab`. Doing so will allow VS Code to refactor all instance of `lightninglab` that exists in any `.py` file.
+1. Start by renaming the `src/studiolab` to something like `src/textlab` or `src/imagenetlab`. Doing so will allow VS Code to refactor all instance of `studiolab` that exists in any `.py` file.
 2. Open the search pane in VS Code and search for `lightniglab` in `tests/` and replace those occurences with whatever you have renamed the source module to.
-3. Next, search for `lightninglab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
+3. Next, search for `studiolab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
 4. Next, search for Studio Lab and change that to your repo name.
 5. Next, search for my name – `Justin Goheen` and replace that with either your name or GitHub username.
 6. Next, search once again for my name as `justingoheen` and do the following:
