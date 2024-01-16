@@ -67,7 +67,7 @@ pip install -e ".[all, vision]"
 
 !!! warning
 
-   Do not install multiple variations of Studio Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
+   Do not install multiple variations of Studio Lab into a single virtual environment. As this will override the `studio` CLI for each new variation that is installed.
 
 ## Refactoring the Template
 
@@ -82,7 +82,7 @@ Studio Lab is a great template for deep learning projects. Using the template wi
    - replace the occurences in `mkdocs.yml` with your GitHub username.
    - replace the occurences in `authors.yml` with your choice of author name for your docs and blog.
 
-## Tools and Concepts
+<!-- ## Tools and Concepts
 
 - Hyperparameter Sweeps and experiment management with [Weights and Biases](https://wandb.ai/site)
 - Command Line Interfaces with [Typer](https://typer.tiangolo.com)
@@ -96,4 +96,4 @@ Studio Lab is a great template for deep learning projects. Using the template wi
 - [MyPY](https://mypy.readthedocs.io/en/stable/)
 - [Black](https://black.readthedocs.io/en/stable/)
 - [GitHub Actions](https://github.com/features/actions)
-- Version control as experiment management
+- Version control as experiment management -->

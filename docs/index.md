@@ -68,7 +68,7 @@ pip install -e ".[all, vision]"
 
 !!! warning
 
-   Do not install multiple variations of Studio Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
+   Do not install multiple variations of Studio Lab into a single virtual environment. As this will override the `studio` CLI for each new variation that is installed.
 
 ## Refactoring the Template
 
