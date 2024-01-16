@@ -1,10 +1,10 @@
-# Lightning Lab
+# Studio Lab
 
 ## Overview
 
-Lightning Lab is a public template for artificial intelligence and machine learning research projects using Lightning AI's [PyTorch Lightning](https://lightning.ai/docs/pytorch/latest/). The best way to use Lightning Lab is in a [Studio](https://lightning.ai/studios).
+Studio Lab is a public template for artificial intelligence and machine learning research projects using Lightning AI's [PyTorch Lightning](https://lightning.ai/docs/pytorch/latest/). The best way to use Studio Lab is in a [Studio](https://lightning.ai/studios).
 
-The recommended way for Lightning Lab users to create new repos is with the [use this template](https://github.com/new?template_name=lightning-lab&template_owner=JustinGoheen) button.
+The recommended way for Studio Lab users to create new repos is with the [use this template](https://github.com/new?template_name=lightning-lab&template_owner=JustinGoheen) button.
 
 
 ## The Structure
@@ -47,7 +47,7 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 
 ## Installation
 
-Lightning Lab installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
+Studio Lab installs minimal requirements out of the box, and provides extras to make creating robust virtual environments easier. To view the requirements, in [setup.cfg](setup.cfg), see `install_requires` for the base requirements and `options.extras_require` for the available extras.
 
 The recommended install is as follows:
 
@@ -67,16 +67,16 @@ pip install -e ".[all, vision]"
 
 !!! warning
 
-   Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
+   Do not install multiple variations of Studio Lab into a single virtual environment. As this will override the `lab` CLI for each new variation that is installed.
 
 ## Refactoring the Template
 
-Lightning Lab is a great template for deep learning projects. Using the template will require some refactoring if you intend to rename `src/lightninglab` to something like `src/textlab`. You can refactor in a few simple steps in VS Code:
+Studio Lab is a great template for deep learning projects. Using the template will require some refactoring if you intend to rename `src/lightninglab` to something like `src/textlab`. You can refactor in a few simple steps in VS Code:
 
 1. Start by renaming the `src/lightninglab` to something like `src/textlab` or `src/imagenetlab`. Doing so will allow VS Code to refactor all instance of `lightninglab` that exists in any `.py` file.
 2. Open the search pane in VS Code and search for `lightniglab` in `tests/` and replace those occurences with whatever you have renamed the source module to.
 3. Next, search for `lightninglab` and replace those occurences in all `.toml` `.md` `cfg` files and string occurences in `.py` files.
-4. Next, search for Lightning Lab and change that to your repo name.
+4. Next, search for Studio Lab and change that to your repo name.
 5. Next, search for my name – `Justin Goheen` and replace that with either your name or GitHub username.
 6. Next, search once again for my name as `justingoheen` and do the following:
    - replace the occurences in `mkdocs.yml` with your GitHub username.

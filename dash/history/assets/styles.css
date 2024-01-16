@@ -1,0 +1,74 @@
+/* # Copyright Justin R. Goheen.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. */
+
+.pretty-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.metric-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 10px;
+    margin-top: 0%;
+    padding: 10px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.metric-card-text {
+    margin: 0px;
+    padding: 0px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray
+}
+
+.model-card-container {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.model-card-text {
+    margin: 0px;
+    padding: 1px;
+    font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: darkslategray;
+}
+
+.card-title {
+    margin: 0px;
+    padding: 0px;
+    font-family: Ucityweb, sans-serif;
+    font-weight: normal;
+}
+
+.app-title {
+    font-family: Montserrat, sans-serif
+}
+
+#left-fig .modebar {
+    margin-top: 10px;
+}
+
+#right-fig .modebar {
+    margin-top: 10px;
+}
