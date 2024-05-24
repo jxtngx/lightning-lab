@@ -23,7 +23,7 @@ line-length = 120
 
 [tool.isort]
 known_first_party = [
-    "studiolab",
+    "lab",
 ]
 profile = "black"
 line_length = 120
@@ -52,7 +52,7 @@ ignore-init-module-imports = true
 max-complexity = 10
 
 [tool.mypy]
-files = ["studiolab"]
+files = ["lab"]
 install_types = true
 non_interactive = true
 disallow_untyped_defs = true
@@ -71,10 +71,10 @@ warn_no_return = "False"
 # because lightning already defines types
 [[tool.mypy.overrides]]
 module = [
-    "studiolab.core.module",
-    "studiolab.cli.seed.core.module",
-    "studiolab.cli.seed.core.trainer",
-    "studiolab.cli.seed.pipeline.datamodule",
-    "studiolab.cli.seed.pipeline.dataset",
+    "lab.core.module",
+    "lab.cli.seed.core.module",
+    "lab.cli.seed.core.trainer",
+    "lab.cli.seed.pipeline.datamodule",
+    "lab.cli.seed.pipeline.dataset",
 ]
 ignore_errors = true

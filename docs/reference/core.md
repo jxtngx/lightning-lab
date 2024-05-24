@@ -1,10 +1,10 @@
-::: studiolab.core.LabTrainer
+::: lab.trainer.LabTrainer
     options:
       heading_level: 2
       show_root_heading: true
 
 
-::: studiolab.core.LabModule
+::: lab.module.LabModule
     options:
       heading_level: 2
       show_root_heading: true

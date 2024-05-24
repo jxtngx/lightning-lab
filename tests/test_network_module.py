@@ -14,7 +14,7 @@
 
 import torch
 
-from studiolab.core.module import LabModule
+from lab.core.module import LabModule
 
 
 def test_module_not_abstract():

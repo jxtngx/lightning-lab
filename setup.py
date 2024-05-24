@@ -14,13 +14,12 @@
 
 from pathlib import Path
 
-from setuptools import setup
-from setuptools import find_packages
+from setuptools import find_packages, setup
 
 rootdir = Path(__file__).parent
 long_description = (rootdir / "README.md").read_text()
 
-package_name = "studiolab"
+package_name = "lab"
 
 setup(
     name=package_name,

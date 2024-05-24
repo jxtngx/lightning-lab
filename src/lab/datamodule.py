@@ -5,7 +5,7 @@ from pathlib import Path
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
 
-from studiolab.pipeline.dataset import LabDataset
+from lab.pipeline.dataset import LabDataset
 
 filepath = Path(__file__)
 PROJECTPATH = os.getcwd()
