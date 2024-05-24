@@ -11,17 +11,19 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 
 ### Source Module
 
+`lab.components/` contains experiment utilities grouped by purpose for cohesion.
+
 `lab.cli` contains code for the command line interface built with [Typer](https://typer.tiangolo.com/).
 
-`lab.components` contains experiment utilities grouped by purpose for cohesion.
-
-`lab.core` contains code for the Lightning Module and Trainer.
-
-`lab.pipeline` contains code for data acquistion and preprocessing, and building a TorchDataset and LightningDataModule.
-
-`lab.serve` contains code for model serving APIs built with [FastAPI](https://fastapi.tiangolo.com/project-generation/#machine-learning-models-with-spacy-and-fastapi).
-
 `lab.config` assists with project, trainer, and sweep configurations.
+
+`lab.datamodule` contains code for th LightningDataModule.
+
+`lab.dataset` contains code for th LightningDataModule.
+
+`lab.module` contains code for the LightningModule.
+
+`lab.trainer` contains code for the Lightning Trainer.
 
 ### Project Root
 
