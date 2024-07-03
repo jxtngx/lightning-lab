@@ -17,9 +17,9 @@ The recommended way for Lightning Lab users to create new repos is with the [use
 
 `lab.config` assists with project, trainer, and sweep configurations.
 
-`lab.datamodule` contains code for th LightningDataModule.
+`lab.datamodule` contains code for the LightningDataModule.
 
-`lab.dataset` contains code for th LightningDataModule.
+`lab.dataset` contains code for the Torch Dataset.
 
 `lab.module` contains code for the LightningModule.
 
