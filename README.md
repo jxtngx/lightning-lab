@@ -4,6 +4,9 @@
 
 Lightning Lab is a public template for artificial intelligence and machine learning research projects using Lightning AI's [PyTorch Lightning](https://lightning.ai/docs/pytorch/latest/).
 
+> [!NOTE]
+> Lightning Lab was featured by Weights and Biases in [this community spotlight](https://wandb.ai/wandb_fc/repo-spotlight/reports/Community-Spotlight-Lightning-Pod-Series--Vmlldzo0MDI2OTc0)
+
 ## The Structure
 
 ### Source Module
