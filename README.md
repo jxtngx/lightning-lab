@@ -65,9 +65,8 @@ source .venv/bin/activate
 pip install -e ".[all, forecast]"
 ```
 
-!!! warning
-
-   Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `studio` CLI for each new variation that is installed.
+> [!NOTE]
+> Do not install multiple variations of Lightning Lab into a single virtual environment. As this will override the `studio` CLI for each new variation that is installed.
 
 ## Refactoring the Template
 
