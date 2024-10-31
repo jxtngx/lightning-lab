@@ -1,4 +1,9 @@
+# demo of a simple diffusion model
 # generated with Meta's Llama 70B Instruct variant using Hugging Chat
+# see the following repo for an in depth implementation
+# https://github.com/lucidrains/denoising-diffusion-pytorch
+# and also
+# https://github.com/labmlai/annotated_deep_learning_paper_implementations/tree/master/labml_nn/diffusion/ddpm
 
 import torch
 
