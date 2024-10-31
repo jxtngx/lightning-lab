@@ -4,7 +4,7 @@
 import torch
 import torch.nn as nn
 
-class SimpleStateSpaceModel(nn.Module):
+class StateSpaceModel(nn.Module):
     def __init__(self, state_dim, obs_dim, 
                  transition_matrix=None, observation_matrix=None,
                  process_noise_var=0.1, observation_noise_var=0.5):
@@ -18,7 +18,7 @@ class SimpleStateSpaceModel(nn.Module):
         :param process_noise_var: Variance of the process noise.
         :param observation_noise_var: Variance of the observation noise.
         """
-        super(SimpleStateSpaceModel, self).__init__()
+        super().__init__()
         
         self.state_dim = state_dim
         self.obs_dim = obs_dim
