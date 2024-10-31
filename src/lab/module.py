@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""empty Lightning Module to introduce basic overrides"""
+
 import pytorch_lightning as pl
 import torch.nn.functional as F  # noqa: F401
 import torchmetrics  # noqa: F401
